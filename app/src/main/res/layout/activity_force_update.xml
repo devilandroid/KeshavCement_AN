@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.forceUpdateAndMaintenance.ForceUpdateActivity">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin"
+        android:weightSum="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/h1"
+            android:layout_marginTop="@dimen/h1"
+            android:layout_marginEnd="@dimen/h1"
+            android:layout_marginBottom="@dimen/h1"
+            android:layout_weight="2"
+            android:src="@drawable/ic_launcher_background"
+            tools:ignore="UseAppTint" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="force_update.json"
+            app:lottie_loop="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/h4"
+                android:gravity="center"
+                android:text="Update is available for Fleetguard Humsafar"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_small_margin"
+                android:layout_marginTop="@dimen/h7"
+                android:layout_marginRight="@dimen/activity_vertical_small_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_vertical_small_margin"
+                android:text="By downloading the latest update you will get the latest features, improvements and bug fixes of Fleetguard Humsafar App"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/forceupdate"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|bottom"
+                android:layout_margin="@dimen/h3"
+                android:background="@color/white"
+                android:backgroundTint="@color/black"
+                android:text="Update now"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
