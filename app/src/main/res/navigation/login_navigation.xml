@@ -18,5 +18,29 @@
         android:id="@+id/loginFragment"
         android:name="com.loyaltyworks.keshavcement.ui.login.fragment.LoginFragment"
         android:label=""
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_activateFragment"
+            app:destination="@id/activateFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/activateFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.login.fragment.ActivateFragment"
+        android:label=""
+        tools:layout="@layout/fragment_activate" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.login.fragment.RegisterFragment"
+        android:label=""
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_activateFragment"
+            app:destination="@id/activateFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/registerFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

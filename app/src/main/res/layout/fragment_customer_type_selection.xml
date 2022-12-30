@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:text="Welcome!"
+                android:text="@string/welcome"
                 android:textSize="26sp"
                 android:textColor="@color/dark"
                 android:fontFamily="@font/poppins_semibold"/>
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:text="Please select your user type to Keshav Application."
+                android:text="@string/please_select_your_user_type"
                 android:textSize="12sp"
                 android:textColor="@color/dark"
                 android:fontFamily="@font/poppins_semibold"/>
@@ -92,7 +92,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Engineer"
+                        android:text="@string/engineer"
                         android:textColor="@color/dark"
                         android:fontFamily="@font/poppins_semibold"
                         android:textSize="14sp"/>
@@ -122,7 +122,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mason"
+                        android:text="@string/mason"
                         android:textColor="@color/dark"
                         android:fontFamily="@font/poppins_semibold"
                         android:textSize="14sp"/>
@@ -152,7 +152,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dealer"
+                        android:text="@string/dealer"
                         android:textColor="@color/dark"
                         android:fontFamily="@font/poppins_semibold"
                         android:textSize="14sp"/>
@@ -182,7 +182,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sub Dealer"
+                        android:text="@string/sub_dealer"
                         android:textColor="@color/dark"
                         android:fontFamily="@font/poppins_semibold"
                         android:textSize="14sp"/>
@@ -212,7 +212,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Support Executive"
+                        android:text="@string/support_executive"
                         android:textColor="@color/dark"
                         android:fontFamily="@font/poppins_semibold"
                         android:textSize="14sp"/>

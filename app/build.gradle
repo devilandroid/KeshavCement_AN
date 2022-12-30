@@ -39,6 +39,13 @@ android {
         jvmTarget = '1.8'
     }
 
+    //... Allow all language string files
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
     buildFeatures {
         viewBinding true
     }

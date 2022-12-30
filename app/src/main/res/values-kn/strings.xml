@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Sambandh-HRJ</string>
+
+    <string name="otp">OTP</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="enter_valid_mobile_no">Enter a valid mobile number</string>
+    <string name="welcome">ಸ್ವಾಗತ!</string>
+    <string name="please_select_your_user_type">ದಯವಿಟ್ಟು ಕೇಶವ್ ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ನಿಮ್ಮ ಬಳಕೆದಾರ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ.</string>
+    <string name="engineer">ಇಂಜಿನಿಯರ್</string>
+    <string name="mason">Mason</string>
+    <string name="dealer">ಡೀಲರ್</string>
+    <string name="sub_dealer">ಉಪ ಡೀಲರ್</string>
+    <string name="support_executive">Support Executive</string>
+</resources>
