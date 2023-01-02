@@ -11,4 +11,7 @@
     <string name="dealer">Dealer</string>
     <string name="sub_dealer">Sub Dealer</string>
     <string name="support_executive">Support Executive</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notification">Notification</string>
 </resources>

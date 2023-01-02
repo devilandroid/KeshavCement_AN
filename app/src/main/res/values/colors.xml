@@ -8,9 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="colorPrimary">#FDF21C</color>
+    <color name="colorPrimaryDark">#2B2B2B</color>
     <color name="light_black">#474646</color>
     <color name="dark">#2B2B2B</color>
-    <color name="yellow">#FDF21C</color>
     <color name="transparent">#00000000</color>
     <color name="colorAccent">#ffffff</color>
     <color name="red">#FF0000</color>
@@ -22,6 +23,9 @@
     <color name="color4">#33FFFFFF</color>
     <color name="color5">#FAFAFA</color>
     <color name="color6">#D92B2B2B</color>
+    <color name="color7">#FCFCFC</color>
+    <color name="color8">#FFFC8E</color>
+    <color name="color9">#E1F0FF</color>
 
 
 </resources>

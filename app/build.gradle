@@ -133,4 +133,7 @@ dependencies {
 
     // view to enter otp
     implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx'
+
+    // Image Slider
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
 }
