@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Keshav Cement</string>
+
+    <string name="otp">ओटीपी</string>
+    <string name="enter_mobile_number">मोबाइल नंबर दर्ज करें</string>
+    <string name="enter_valid_mobile_no">एक मान्य मोबाइल नंबर दर्ज करें</string>
+    <string name="welcome">स्वागत!</string>
+    <string name="please_select_your_user_type">कृपया केशव एप्लिकेशन के लिए अपना उपयोगकर्ता प्रकार चुनें।</string>
+    <string name="engineer">इंजीनियर</string>
+    <string name="mason">राजमिस्त्री</string>
+    <string name="dealer">डीलर</string>
+    <string name="sub_dealer">उप डीलर</string>
+    <string name="support_executive">समर्थन कार्यकारी</string>
+    <string name="notification">Notification</string>
+</resources>

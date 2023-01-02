@@ -1,0 +1,1254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="10"
+    android:orientation="vertical"
+    android:background="@color/colorAccent"
+    tools:context=".ui.login.fragment.ActivateFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <!--  Activate Header -->
+        <LinearLayout
+            android:id="@+id/login_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="7">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingEnd="5dp"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/logo1"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/logo2"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/spinner_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_gravity="center_vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/corner_bg_stroke">
+
+                    <Spinner
+                        android:id="@+id/customer_type_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:backgroundTint="@color/transparent"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:visibility="visible"
+                        android:src="@drawable/ic_arrow_down"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+      <!--  First layout -->
+        <LinearLayout
+            android:id="@+id/first_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6.5"
+                android:weightSum="10"
+                android:padding="20dp"
+                android:background="@drawable/group_1005"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="9.3"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Activate"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="26sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="Please Enter the given details to Register"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp"/>
+
+                    <!-- Mobile No  -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mobile No"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorAccent"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="5dp"
+                            android:elevation="5dp"
+                            app:cardCornerRadius="25dp"
+                            app:cardBackgroundColor="@color/color4">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+                                <EditText
+                                    android:id="@+id/otp_mobile_number"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="Mobile Number"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:maxLines="1"
+                                    android:maxLength="10"
+                                    android:paddingStart="20dp"
+                                    android:cursorVisible="true"
+                                    android:textCursorDrawable="@null"
+                                    android:singleLine="true"
+                                    android:background="@android:color/transparent"
+                                    android:textColorHint="@color/colorAccent"
+                                    android:textColor="@color/colorAccent"/>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <!-- OTP Layout -->
+                    <LinearLayout
+                        android:id="@+id/otp_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/otp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:textSize="12sp"
+                                android:textColor="@color/colorAccent" />
+
+
+                            <TextView
+                                android:id="@+id/timer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:text="00:23"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textSize="12sp"
+                                android:textColor="@color/colorAccent"/>
+
+
+                        </RelativeLayout>
+
+                        <in.aabhasjindal.otptextview.OtpTextView
+                            android:id="@+id/otp_view_activate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/colorAccent"
+                            app:bar_enabled="false"
+                            app:bar_height="2dp"
+                            app:height="50dp"
+                            app:length="6"
+                            app:otp_box_background="@drawable/stroke_bg"
+                            app:otp_text_size="20sp"
+                            app:width="40dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="OTP will receive at +91******4525"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/colorAccent"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:gravity="end">
+                                <TextView
+                                    android:id="@+id/resend_otp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="visible"
+                                    android:layout_gravity="end"
+                                    android:text="Resend OTP ?"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <!-- Submit Button -->
+                    <LinearLayout
+                        android:id="@+id/otp_submit_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:background="@drawable/corner_bg_black"
+                        android:backgroundTint="@color/colorAccent">
+                        <TextView
+                            android:id="@+id/otp_submit_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginEnd="25dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="7dp"
+                            android:text="Generate OTP"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/poppins_semibold"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Already Have an Account ? "
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorAccent"/>
+                        <TextView
+                            android:id="@+id/back_login_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Login"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+           <!-- Bottom Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"
+                android:weightSum="10"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/group_1001"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+       <!-- Form Layout -->
+        <LinearLayout
+            android:id="@+id/activate_form_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:visibility="gone"
+            android:background="@drawable/group_1006"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activate"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/colorAccent"
+                android:textSize="26sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please verify the given details to activate your account"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="10">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="8.8"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        app:cardCornerRadius="15dp"
+                        app:cardBackgroundColor="@color/colorAccent">
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:orientation="vertical">
+
+                              <!--  Customer Type -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Customer Type"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center_vertical"
+                                                android:paddingStart="20dp"
+                                                android:text="XXX"
+                                                android:fontFamily="@font/poppins_regular"
+                                                android:textSize="12sp"
+                                                android:textColor="@color/grey"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Member ID for Dealer Type -->
+                                <LinearLayout
+                                    android:id="@+id/member_id_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Member ID"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <EditText
+                                                android:id="@+id/member_id"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter Member ID"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="text"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Full Name -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Full Name"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <EditText
+                                                android:id="@+id/name"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter Full Name"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="text"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Firm Name -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Firm Name"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <EditText
+                                                android:id="@+id/firm_name"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter Firm Name"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="text"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Email -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Email"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <EditText
+                                                android:id="@+id/email"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter Email ID"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="text"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Mobile Number -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Mobile Number"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <EditText
+                                                android:id="@+id/mobile"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter Mobile Number"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="number"
+                                                android:maxLength="10"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Aadhar Number for Engineer & Mason-->
+                                <LinearLayout
+                                    android:id="@+id/aadhar_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Aadhar Number"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <EditText
+                                                android:id="@+id/aadhar_number"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter Aadhar Number"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="number"
+                                                android:maxLength="12"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  GST Number for Sub-Dealer-->
+                                <LinearLayout
+                                    android:id="@+id/gst_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="GST Number"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <EditText
+                                                android:id="@+id/gst_number"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter GST Number"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="text"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Address -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Address"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical">
+                                            <EditText
+                                                android:id="@+id/address"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter Address"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="text"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Pincode -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Pincode"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical"
+                                            android:elevation="5dp">
+                                            <EditText
+                                                android:id="@+id/pincode"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:hint="Enter Pincode"
+                                                android:textSize="12sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="number"
+                                                android:maxLength="6"
+                                                android:maxLines="1"
+                                                android:paddingStart="20dp"
+                                                android:singleLine="true"
+                                                android:background="@android:color/transparent"
+                                                android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  State -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="State"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical"
+                                            android:elevation="5dp">
+                                            <Spinner
+                                                android:id="@+id/state_spinner"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="10"
+                                                android:backgroundTint="@color/transparent"
+                                                android:spinnerMode="dropdown" />
+
+                                            <ImageView
+                                                android:layout_width="15dp"
+                                                android:layout_height="15dp"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_centerVertical="true"
+                                                android:layout_marginEnd="15dp"
+                                                android:visibility="visible"
+                                                android:src="@drawable/ic_arrow_down"/>
+                                        </RelativeLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  District -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="District"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical"
+                                            android:elevation="5dp">
+                                            <Spinner
+                                                android:id="@+id/district_spinner"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="10"
+                                                android:backgroundTint="@color/transparent"
+                                                android:spinnerMode="dropdown" />
+
+                                            <ImageView
+                                                android:layout_width="15dp"
+                                                android:layout_height="15dp"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_centerVertical="true"
+                                                android:layout_marginEnd="15dp"
+                                                android:visibility="visible"
+                                                android:src="@drawable/ic_arrow_down"/>
+                                        </RelativeLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Taluk -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Taluk"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical"
+                                            android:elevation="5dp">
+                                            <Spinner
+                                                android:id="@+id/taluk_spinner"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="10"
+                                                android:backgroundTint="@color/transparent"
+                                                android:spinnerMode="dropdown" />
+
+                                            <ImageView
+                                                android:layout_width="15dp"
+                                                android:layout_height="15dp"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_centerVertical="true"
+                                                android:layout_marginEnd="15dp"
+                                                android:visibility="visible"
+                                                android:src="@drawable/ic_arrow_down"/>
+                                        </RelativeLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </ScrollView>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.2"
+                    android:weightSum="10"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:id="@+id/back_to_login"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_arrow_right"
+                                app:tint="@color/colorAccent"
+                                android:rotation="180"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="7dp"
+                                android:text="Back to Login"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/activate_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@drawable/corner_bg_black"
+                            android:backgroundTint="@color/colorAccent">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="30dp"
+                                android:paddingEnd="30dp"
+                                android:paddingTop="7dp"
+                                android:paddingBottom="7dp"
+                                android:text="Activate"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:textColor="@color/dark"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

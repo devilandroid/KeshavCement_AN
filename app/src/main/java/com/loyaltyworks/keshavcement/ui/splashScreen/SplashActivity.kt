@@ -14,6 +14,7 @@ import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.baseClass.BaseActivity
 import com.loyaltyworks.keshavcement.ui.DashboardActivity
+import com.loyaltyworks.keshavcement.ui.lanuage.LanguageActivity
 import com.loyaltyworks.keshavcement.ui.login.LoginActivity
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 
@@ -59,7 +60,7 @@ class SplashActivity : BaseActivity() {
                             overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
                         }
                         else -> {
-                            startActivity(Intent(this, LoginActivity::class.java))
+                            startActivity(Intent(this, LanguageActivity::class.java))
                             overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
                         }
                     }

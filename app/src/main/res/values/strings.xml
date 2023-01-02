@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">Keshav Cement</string>
+
+    <string name="otp">OTP</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="enter_valid_mobile_no">Enter a valid mobile number</string>
+    <string name="welcome">Welcome!</string>
+    <string name="please_select_your_user_type">Please select your user type to Keshav Application.</string>
+    <string name="engineer">Engineer</string>
+    <string name="mason">Mason</string>
+    <string name="dealer">Dealer</string>
+    <string name="sub_dealer">Sub Dealer</string>
+    <string name="support_executive">Support Executive</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="otp">OTP</string>
+    <string name="notification">Notification</string>
 </resources>

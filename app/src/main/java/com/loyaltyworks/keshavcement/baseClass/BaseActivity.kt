@@ -1,6 +1,7 @@
 package com.loyaltyworks.keshavcement.baseClass
 
 import android.Manifest
+import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -16,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.loyaltyworks.keshavcement.utils.NoInternetDialog
 import com.loyaltyworks.keshavcement.utils.internet.ConnectivityReceiver
 import com.loyaltyworks.keshavcement.utils.internet.ConnectivityReceiverListener
+import com.loyaltyworks.keshavcement.utils.language_locale.LocaleManager
 
 abstract class BaseActivity : AppCompatActivity(), ConnectivityReceiverListener {
 
@@ -42,6 +44,9 @@ abstract class BaseActivity : AppCompatActivity(), ConnectivityReceiverListener 
         Log.d(TAG, "${this.localClassName} : Created Base Activity")
     }
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(LocaleManager.setLocale(base!!))
+    }
 
 
 
@@ -110,6 +115,26 @@ abstract class BaseActivity : AppCompatActivity(), ConnectivityReceiverListener 
     }
 
 
+    open fun setNewLocale(mContext: AppCompatActivity, @LocaleManager.LocaleDef language: kotlin.String?) {
+        LocaleManager.setNewLocale(this, language!!)
+        val intent = mContext.intent
+        intent.putExtra("Language", 1)
+
+        finish()
+        overridePendingTransition( 0, 0);
+        startActivity(getIntent());
+        overridePendingTransition( 0, 0);
+
+    }
+
+    open fun setNewLocaleWithoutRefresh(mContext: AppCompatActivity, @LocaleManager.LocaleDef language: kotlin.String?) {
+        LocaleManager.setNewLocale(this, language!!)
+        //        val intent = mContext.intent
+        //        intent.putExtra("Language", 1);
+        //        finish()
+        //        startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+    }
 
 
     // optional for display or hide no internet dialogue
