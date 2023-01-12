@@ -15,4 +15,84 @@
         android:name="com.loyaltyworks.keshavcement.ui.notification.HistoryNotificationFragment"
         android:label="@string/notification"
         tools:layout="@layout/fragment_history_notification" />
+    <fragment
+        android:id="@+id/referFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.referAndEarn.ReferFragment"
+        android:label="Refer and Earn"
+        tools:layout="@layout/fragment_refer" />
+    <fragment
+        android:id="@+id/myPurchaseClaimFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.myPurchaseClaim.MyPurchaseClaimFragment"
+        android:label="My Purchase Claim"
+        tools:layout="@layout/fragment_my_purchase_claim" />
+    <fragment
+        android:id="@+id/worksiteDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.worksiteDetails.WorksiteDetailsFragment"
+        android:label="Worksite Details"
+        tools:layout="@layout/fragment_worksite_details" />
+    <fragment
+        android:id="@+id/newWorksiteFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.worksiteDetails.NewWorksiteFragment"
+        android:label="Worksite"
+        tools:layout="@layout/fragment_new_worksite" />
+    <fragment
+        android:id="@+id/claimPurchaseFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.claimPurchase.ClaimPurchaseFragment"
+        android:label="Claim Purchase"
+        tools:layout="@layout/fragment_claim_purchase" />
+    <fragment
+        android:id="@+id/myEarningFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.myEarning.MyEarningFragment"
+        android:label="My Earnings"
+        tools:layout="@layout/fragment_my_earning" />
+    <fragment
+        android:id="@+id/myRedemptionFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.myRedemption.MyRedemptionFragment"
+        android:label="My Redemptions"
+        tools:layout="@layout/fragment_my_redemption" />
+    <fragment
+        android:id="@+id/promotionsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.offersAndPromotions.PromotionsFragment"
+        android:label="Offers and Promotions"
+        tools:layout="@layout/fragment_promotions" />
+    <fragment
+        android:id="@+id/queryListingFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.lodgeQuery.QueryListingFragment"
+        android:label="Query"
+        tools:layout="@layout/fragment_query_listing" />
+    <fragment
+        android:id="@+id/queryChatFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.lodgeQuery.QueryChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_query_chat" />
+    <fragment
+        android:id="@+id/newQueryFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.lodgeQuery.NewQueryFragment"
+        android:label="Query"
+        tools:layout="@layout/fragment_new_query"/>
+    <fragment
+        android:id="@+id/helplineFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.helpline.HelplineFragment"
+        android:label="Helpline"
+        tools:layout="@layout/fragment_helpline" />
+    <fragment
+        android:id="@+id/redemptionTypeFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.RedemptionTypeFragment"
+        android:label="Redemption Catalogue"
+        tools:layout="@layout/fragment_redemption_type" />
+    <fragment
+        android:id="@+id/cashTransferFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.CashTransferFragment"
+        android:label="Cash Transfer"
+        tools:layout="@layout/fragment_cash_transfer" />
+    <fragment
+        android:id="@+id/evouchersFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.EvouchersFragment"
+        android:label="E Vouchers"
+        tools:layout="@layout/fragment_evouchers" />
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.ProductFragment"
+        android:label="Products"
+        tools:layout="@layout/fragment_product" />
 </navigation>

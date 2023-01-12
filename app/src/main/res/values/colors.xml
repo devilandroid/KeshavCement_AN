@@ -15,7 +15,14 @@
     <color name="transparent">#00000000</color>
     <color name="colorAccent">#ffffff</color>
     <color name="red">#FF0000</color>
+    <color name="light_red">#FCE9E9</color>
     <color name="grey">#662B2B2B</color>
+    <color name="green">#00A32B</color>
+    <color name="light_green">#E1F3E3</color>
+    <color name="dark_blue">#1B4AB6</color>
+    <color name="medium_yellow">#FEFEF4</color>
+    <color name="pending_yellow">#F6F8E5</color>
+    <color name="pending_yellow1">#B6C910</color>
 
     <color name="color1">#ABF1D2FD</color>
     <color name="color2">#333232</color>
@@ -26,6 +33,10 @@
     <color name="color7">#FCFCFC</color>
     <color name="color8">#FFFC8E</color>
     <color name="color9">#E1F0FF</color>
+    <color name="color10">#555555</color>
+    <color name="color11">#F6F6F6</color>
+    <color name="color12">#464545</color>
+    <color name="color13">#F5F5F5</color>
 
 
 </resources>
