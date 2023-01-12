@@ -34,8 +34,10 @@
         android:theme="@style/Theme.KeshavCement"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".NotificationActivity"
-            android:exported="false" />
+            android:name=".ui.notification.NotificationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NoActionBar"/>
         <activity
             android:name=".ui.lanuage.LanguageActivity"
             android:exported="false"
@@ -60,7 +62,9 @@
             android:name=".ui.splashScreen.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.NoActionBar"></activity>
+            android:theme="@style/Theme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".ui.DashboardActivity"
             android:exported="true"

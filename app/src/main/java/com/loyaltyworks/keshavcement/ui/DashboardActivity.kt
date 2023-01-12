@@ -23,9 +23,10 @@ import com.loyaltyworks.keshavcement.baseClass.BaseActivity
 import com.loyaltyworks.keshavcement.databinding.ActivityDashboardBinding
 import com.loyaltyworks.keshavcement.utils.Count.Companion.setCounting
 import kotlinx.android.synthetic.main.appbar_main.view.*
+import kotlinx.android.synthetic.main.dashboard_menu.view.*
 import java.util.*
 
-class DashboardActivity : BaseActivity() {
+class DashboardActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDashboardBinding
 
     lateinit var navController: NavController
@@ -143,6 +144,20 @@ class DashboardActivity : BaseActivity() {
             }
         }
 
+        binding.root.mlogout.setOnClickListener(this)
+        binding.root.mEditProfile.setOnClickListener(this)
+        binding.root.mClaimPurchase.setOnClickListener(this)
+        binding.root.mMyPurchaseClaim.setOnClickListener(this)
+        binding.root.mRedemptionCatalogue.setOnClickListener(this)
+        binding.root.mMyRedemptions.setOnClickListener(this)
+        binding.root.mMyEarning.setOnClickListener(this)
+        binding.root.mWorkSiteDetails.setOnClickListener(this)
+        binding.root.mRefer.setOnClickListener(this)
+        binding.root.mHelpline.setOnClickListener(this)
+        binding.root.mOffers.setOnClickListener(this)
+        binding.root.mQuery.setOnClickListener(this)
+        binding.root.mTerms.setOnClickListener(this)
+
 
     }
 
@@ -205,6 +220,64 @@ class DashboardActivity : BaseActivity() {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onClick(p0: View?) {
+
+        when(p0!!.id){
+
+            R.id.mRefer -> {
+
+                navController.navigate(R.id.referFragment)
+
+            }
+
+            R.id.mMyPurchaseClaim -> {
+
+                navController.navigate(R.id.myPurchaseClaimFragment)
+            }
+
+            R.id.mWorkSiteDetails -> {
+
+                navController.navigate(R.id.worksiteDetailsFragment)
+            }
+
+            R.id.mClaimPurchase -> {
+
+                navController.navigate(R.id.claimPurchaseFragment)
+            }
+
+            R.id.mMyRedemptions -> {
+
+                navController.navigate(R.id.myRedemptionFragment)
+            }
+
+            R.id.mMyEarning -> {
+
+                navController.navigate(R.id.myEarningFragment)
+            }
+
+            R.id.mOffers -> {
+
+                navController.navigate(R.id.promotionsFragment)
+            }
+
+            R.id.mQuery -> {
+
+                navController.navigate(R.id.queryListingFragment)
+            }
+
+            R.id.mHelpline -> {
+
+                navController.navigate(R.id.helplineFragment)
+            }
+
+            R.id.mRedemptionCatalogue -> {
+
+                navController.navigate(R.id.redemptionTypeFragment)
+            }
+        }
+
     }
 
 }
