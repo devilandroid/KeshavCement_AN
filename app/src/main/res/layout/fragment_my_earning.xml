@@ -89,7 +89,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/my_earnings_filter"
-                android:textColor="@color/colorAccent" />
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/filterClose"
@@ -104,9 +105,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/date_range"
-            android:textColor="@color/color10" />
+            android:textSize="14sp"
+            android:textColor="@color/color18" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,7 +117,9 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
+           <!-- From Date -->
             <LinearLayout
+                android:id="@+id/from_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -136,14 +140,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/select_from_date"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/select_from_date"
                     android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/color19"
                     android:textSize="12sp" />
 
             </LinearLayout>
 
+            <!-- To Date -->
             <LinearLayout
+                android:id="@+id/to_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -165,8 +172,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/select_to_date"
+                    android:hint="@string/select_to_date"
                     android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/color19"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -191,7 +199,7 @@
                 android:paddingEnd="15dp"
                 android:text="@string/clear"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
+                android:textColor="@color/dark"
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -205,7 +213,7 @@
                 android:paddingEnd="15dp"
                 android:text="@string/apply_filter"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
+                android:textColor="@color/dark"
                 android:textSize="12sp" />
 
 

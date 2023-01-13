@@ -11,6 +11,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentMyPurchaseClaimBinding
+import com.loyaltyworks.keshavcement.ui.myPurchaseClaim.adapter.MyPurchaseClaimAdapter
 
 
 class MyPurchaseClaimFragment : Fragment(), View.OnClickListener {

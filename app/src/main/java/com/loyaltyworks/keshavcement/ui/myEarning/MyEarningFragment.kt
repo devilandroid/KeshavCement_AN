@@ -11,8 +11,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentMyEarningBinding
-import com.loyaltyworks.keshavcement.databinding.FragmentMyRedemptionBinding
-import com.loyaltyworks.keshavcement.ui.myRedemption.MyRedemptionAdapter
+import com.loyaltyworks.keshavcement.ui.myEarning.adapter.MyEarningAdapter
 
 
 class MyEarningFragment : Fragment(), View.OnClickListener {

@@ -10,9 +10,8 @@ import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.loyaltyworks.keshavcement.R
-import com.loyaltyworks.keshavcement.databinding.FragmentMyPurchaseClaimBinding
 import com.loyaltyworks.keshavcement.databinding.FragmentMyRedemptionBinding
-import com.loyaltyworks.keshavcement.ui.myPurchaseClaim.MyPurchaseClaimAdapter
+import com.loyaltyworks.keshavcement.ui.myRedemption.adapter.MyRedemptionAdapter
 
 
 class MyRedemptionFragment : Fragment(), View.OnClickListener {

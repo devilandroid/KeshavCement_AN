@@ -4,11 +4,16 @@
 
 
     <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_logout_support"
+        android:title="Notification"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/notification"
         android:icon="@drawable/ic_menu_notification"
         android:title="Notification"
         app:showAsAction="always"/>
-
 
 
 

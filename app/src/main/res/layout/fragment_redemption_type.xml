@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="@string/xxxxxx"
+                android:text="-"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
         </LinearLayout>

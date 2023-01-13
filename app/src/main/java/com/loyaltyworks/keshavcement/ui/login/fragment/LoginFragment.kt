@@ -1,5 +1,6 @@
 package com.loyaltyworks.keshavcement.ui.login.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -9,9 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentLoginBinding
+import com.loyaltyworks.keshavcement.ui.DashboardActivity
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
+import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 
 
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -63,6 +67,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         binding.forgotSubmitOtp.setOnClickListener(this)
         binding.resendOtp.setOnClickListener(this)
         binding.forgotBackButton.setOnClickListener(this)
+        binding.loginButton.setOnClickListener(this)
 
     }
 
@@ -156,6 +161,25 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 bundle.putSerializable("customerType", customerType)
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment,bundle)
                 requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            }
+
+            R.id.login_button ->{
+                if (BlockMultipleClick.click())return
+                if (customerType == "engineer"){
+                    PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType,"1")
+                }else if (customerType == "mason"){
+                    PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType,"2")
+                }else if (customerType == "dealer"){
+                    PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType,"3")
+                }else if (customerType == "subDealer"){
+                    PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType,"4")
+                }else if (customerType == "supportExecutive"){
+                    PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType,"5")
+                }
+
+                val intent = Intent(requireContext(), DashboardActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
 
         }

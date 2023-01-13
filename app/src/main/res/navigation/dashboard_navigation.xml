@@ -18,81 +18,102 @@
     <fragment
         android:id="@+id/referFragment"
         android:name="com.loyaltyworks.keshavcement.ui.referAndEarn.ReferFragment"
-        android:label="Refer and Earn"
+        android:label="@string/refer_and_earn"
         tools:layout="@layout/fragment_refer" />
     <fragment
         android:id="@+id/myPurchaseClaimFragment"
         android:name="com.loyaltyworks.keshavcement.ui.myPurchaseClaim.MyPurchaseClaimFragment"
-        android:label="My Purchase Claim"
+        android:label="@string/my_purchase_claim"
         tools:layout="@layout/fragment_my_purchase_claim" />
     <fragment
         android:id="@+id/worksiteDetailsFragment"
         android:name="com.loyaltyworks.keshavcement.ui.worksiteDetails.WorksiteDetailsFragment"
-        android:label="Worksite Details"
+        android:label="@string/worksite_details"
         tools:layout="@layout/fragment_worksite_details" />
     <fragment
         android:id="@+id/newWorksiteFragment"
         android:name="com.loyaltyworks.keshavcement.ui.worksiteDetails.NewWorksiteFragment"
-        android:label="Worksite"
+        android:label="@string/worksite"
         tools:layout="@layout/fragment_new_worksite" />
     <fragment
         android:id="@+id/claimPurchaseFragment"
         android:name="com.loyaltyworks.keshavcement.ui.claimPurchase.ClaimPurchaseFragment"
-        android:label="Claim Purchase"
+        android:label="@string/claim_purchase"
         tools:layout="@layout/fragment_claim_purchase" />
     <fragment
         android:id="@+id/myEarningFragment"
         android:name="com.loyaltyworks.keshavcement.ui.myEarning.MyEarningFragment"
-        android:label="My Earnings"
+        android:label="@string/my_earnings"
         tools:layout="@layout/fragment_my_earning" />
     <fragment
         android:id="@+id/myRedemptionFragment"
         android:name="com.loyaltyworks.keshavcement.ui.myRedemption.MyRedemptionFragment"
-        android:label="My Redemptions"
+        android:label="@string/my_redemptions"
         tools:layout="@layout/fragment_my_redemption" />
     <fragment
         android:id="@+id/promotionsFragment"
         android:name="com.loyaltyworks.keshavcement.ui.offersAndPromotions.PromotionsFragment"
-        android:label="Offers and Promotions"
-        tools:layout="@layout/fragment_promotions" />
+        android:label="@string/offers_and_promotions"
+        tools:layout="@layout/fragment_promotions" >
+        <action
+            android:id="@+id/action_promotionsFragment_to_promotionsDetailsFragment"
+            app:destination="@id/promotionsDetailsFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/queryListingFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.lodgeQuery.QueryListingFragment"
-        android:label="Query"
-        tools:layout="@layout/fragment_query_listing" />
+        android:id="@+id/supportFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.support.SupportFragment"
+        android:label="@string/query"
+        tools:layout="@layout/fragment_support" >
+        <action
+            android:id="@+id/action_supportFragment_to_queryChatFragment"
+            app:destination="@id/queryChatFragment" />
+        <action
+            android:id="@+id/action_supportFragment_to_newTicketFragment"
+            app:destination="@id/newTicketFragment" />
+    </fragment>
     <fragment
         android:id="@+id/queryChatFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.lodgeQuery.QueryChatFragment"
-        android:label="Chat"
+        android:name="com.loyaltyworks.keshavcement.ui.support.QueryChatFragment"
+        android:label="@string/chat"
         tools:layout="@layout/fragment_query_chat" />
     <fragment
-        android:id="@+id/newQueryFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.lodgeQuery.NewQueryFragment"
-        android:label="Query"
-        tools:layout="@layout/fragment_new_query"/>
+        android:id="@+id/newTicketFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.support.NewTicketFragment"
+        android:label="@string/query"
+        tools:layout="@layout/fragment_new_ticket"/>
     <fragment
         android:id="@+id/helplineFragment"
         android:name="com.loyaltyworks.keshavcement.ui.helpline.HelplineFragment"
-        android:label="Helpline"
+        android:label="@string/helpline"
         tools:layout="@layout/fragment_helpline" />
     <fragment
         android:id="@+id/redemptionTypeFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.RedemptionTypeFragment"
-        android:label="Redemption Catalogue"
+        android:label="@string/redemption_catalogue"
         tools:layout="@layout/fragment_redemption_type" />
     <fragment
         android:id="@+id/cashTransferFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.CashTransferFragment"
-        android:label="Cash Transfer"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferFragment"
+        android:label="@string/cash_transfer"
         tools:layout="@layout/fragment_cash_transfer" />
     <fragment
         android:id="@+id/evouchersFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.EvouchersFragment"
-        android:label="E Vouchers"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.voucher.EvouchersFragment"
+        android:label="@string/evoucher"
         tools:layout="@layout/fragment_evouchers" />
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.ProductFragment"
-        android:label="Products"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductFragment"
+        android:label="@string/products"
         tools:layout="@layout/fragment_product" />
+    <fragment
+        android:id="@+id/promotionsDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.offersAndPromotions.PromotionsDetailsFragment"
+        android:label="@string/offers"
+        tools:layout="@layout/fragment_promotions_details" />
+    <fragment
+        android:id="@+id/newSaleFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.newSale.NewSaleFragment"
+        android:label="@string/new_sale"
+        tools:layout="@layout/fragment_new_sale" />
 </navigation>

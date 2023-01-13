@@ -23,6 +23,12 @@ android {
         buildConfigField "String", "PLAY_STORE_LINK", "\"https://play.google.com/store/apps/details?id=com.loyaltyworks.keshavcement&hl=en\""
         buildConfigField "String", "PUSH_TOKEN", "\"PUSH_TOKEN\""
         buildConfigField "String", "IsLoggedIn", "\"IsLoggedIn\""
+        buildConfigField "String", "CustomerType", "\"CustomerType\""
+        buildConfigField "String", "Engineer", "\"1\""
+        buildConfigField "String", "Mason", "\"2\""
+        buildConfigField "String", "Dealer", "\"3\""
+        buildConfigField "String", "SubDealer", "\"4\""
+        buildConfigField "String", "SupportExecutive", "\"5\""
     }
 
     buildTypes {
@@ -141,4 +147,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
     implementation 'com.google.android.libraries.places:places:2.4.0'
+
+    implementation 'id.ss564.lib.slidingbutton:slidingbutton:2.0.0'
+    implementation 'com.github.DonMat:searchablespinner:v1.0.1'
 }

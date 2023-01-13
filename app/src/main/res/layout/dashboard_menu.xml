@@ -95,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/xxxxxx"
+                    android:text="-"
                     android:textColor="@color/dark"
                     android:textSize="11sp" />
 
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/xxxxxx"
+                    android:text="-"
                     android:textColor="@color/dark"
                     android:textSize="17sp" />
 
@@ -138,7 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/xxxxxx"
+                        android:text="-"
                         android:textColor="@color/dark"
                         android:textSize="13sp" />
 
@@ -180,7 +180,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="@string/xxxxxx"
+                            android:text="-"
                             android:textColor="@color/dark"
                             android:textSize="13sp" />
 
@@ -219,14 +219,140 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:id="@+id/mClaimPurchase"
+                <!-- Enrollment (for dealer & Sub-Dealer) -->
+                <LinearLayout
+                    android:id="@+id/dEnrollment"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="7dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/menu_enrollment" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="40dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/enrollment"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
+
+                <!-- Pending Claim Request (for dealer & Sub-Dealer) -->
+                <LinearLayout
+                    android:id="@+id/dPendingClaimRequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="7dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/finance" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="40dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/pending_claim_request"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+
+                </LinearLayout>
+
+                <!-- Cash Transfer Approval (for dealer & Sub-Dealer) -->
+                <LinearLayout
+                    android:id="@+id/dCashTransferApproval"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="7dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/menu_cash_transfer_approval" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="40dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/cash_transfer_approval"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
+
+               <!-- Claim Purchase (for Engineer & Mason)-->
+                <LinearLayout
+                    android:id="@+id/dClaimPurchase"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -252,24 +378,22 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- My Purchase Claim (for Engineer & Mason & Sub-Dealer)-->
+                <LinearLayout
+                    android:id="@+id/dMyPurchaseClaim"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mMyPurchaseClaim"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -294,24 +418,22 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- Catalogue (for All except Support-Executive)-->
+                <LinearLayout
+                    android:id="@+id/dRedemptionCatalogue"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mRedemptionCatalogue"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -337,24 +459,22 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- My Redemption (for All except Support-Executive)-->
+                <LinearLayout
+                    android:id="@+id/dMyRedemptions"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mMyRedemptions"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -380,24 +500,22 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- My Earning (for All except Support-Executive)-->
+                <LinearLayout
+                    android:id="@+id/dMyEarning"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mMyEarning"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -423,24 +541,170 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
+                <!-- My Activity (for dealer & Sub-Dealer)-->
+                <LinearLayout
+                    android:id="@+id/dMyActivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="7dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/menu_my_activity" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="40dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/my_activity"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/down_icon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
+
+                <!-- My Activity Down Layout (for dealer & Sub-Dealer)-->
+            <LinearLayout
+                android:id="@+id/my_activity_down_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/dClaimHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:gravity="end">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="8.7"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/menu_claim_history" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/claim_history"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end"
+                    android:weightSum="10">
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="8.7"
+                        android:background="@color/color14" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/dCashTransferHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:gravity="end">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="8.7"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/menu_claim_history" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/cash_transfer_history"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
+                    android:background="@color/color14" />
+            </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/mWorkSiteDetails"
+                <!-- Worksite Details (for Engineer & Mason)-->
+                <LinearLayout
+                    android:id="@+id/dWorkSiteDetails"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -466,24 +730,22 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- Refer & Earn (for All except Support-Executive)-->
+                <LinearLayout
+                    android:id="@+id/dRefer"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mRefer"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -508,24 +770,22 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- Helpline (for All except Support-Executive)-->
+                <LinearLayout
+                    android:id="@+id/dHelpline"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mHelpline"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -550,24 +810,22 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- Offers & Promotion (for All except Support-Executive)-->
+                <LinearLayout
+                    android:id="@+id/dOffers"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mOffers"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -592,24 +850,62 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- My Support Executive (for dealer & Sub-Dealer)-->
+                <LinearLayout
+                    android:id="@+id/dMySupportExecutive"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mQuery"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="7dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/menu_my_support_executive" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="40dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/my_support_executive"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
+
+                <!-- Lodge Query (for All except Support-Executive)-->
+                <LinearLayout
+                    android:id="@+id/dQuery"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
                         android:orientation="horizontal"
                         android:paddingStart="10dp"
                         android:paddingTop="7dp"
@@ -634,20 +930,18 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color14" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <View
+                <!-- Terms & Condition (for All except Support-Executive)-->
+                <LinearLayout
+                    android:id="@+id/dTerms"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#F6F6F6" />
-
-                <RelativeLayout
-                    android:id="@+id/mTerms"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -677,7 +971,7 @@
                     </RelativeLayout>
 
 
-                </RelativeLayout>
+                </LinearLayout>
 
 
             </LinearLayout>
