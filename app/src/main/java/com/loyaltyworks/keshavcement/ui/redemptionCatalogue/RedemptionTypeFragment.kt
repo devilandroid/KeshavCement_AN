@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentRedemptionTypeBinding
+import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.dialog.DeliveryTypeDialog
 
 
 class RedemptionTypeFragment : Fragment(), View.OnClickListener {
@@ -23,13 +26,19 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.products.setOnClickListener(this)
         binding.evouchers.setOnClickListener(this)
         binding.cashtransfer.setOnClickListener(this)
+
+        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
+            binding.cashTransferTxt.text = getString(R.string.cash_voucher)
+        }else{
+            binding.cashTransferTxt.text = getString(R.string.cash_transfer)
+        }
     }
+
 
     override fun onClick(p0: View?) {
 
@@ -37,16 +46,51 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
             R.id.products -> {
 
-                findNavController().navigate(R.id.productFragment)
+                if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer ||
+                    PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
+
+                    DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
+                        override fun forSelfClick() {
+                            findNavController().navigate(R.id.productFragment)
+                        }
+
+                        override fun forOthersClick() {
+                            val bundle = Bundle()
+                            bundle.putSerializable("directedFrom", "ProductClick")
+                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                        }
+
+                    })
+
+                }else{
+                    findNavController().navigate(R.id.productFragment)
+                }
             }
 
             R.id.evouchers -> {
+                if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer ||
+                    PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
 
-                findNavController().navigate(R.id.evouchersFragment)
+                    DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
+                        override fun forSelfClick() {
+                            findNavController().navigate(R.id.evouchersFragment)
+                        }
+
+                        override fun forOthersClick() {
+                            val bundle = Bundle()
+                            bundle.putSerializable("directedFrom", "VoucherClick")
+                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                        }
+
+                    })
+
+                }else{
+                    findNavController().navigate(R.id.evouchersFragment)
+                }
+
             }
 
             R.id.cashtransfer -> {
-
                 findNavController().navigate(R.id.cashTransferFragment)
             }
         }

@@ -115,21 +115,39 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
         binding.dashRaiseTicket.setOnClickListener(this)                //  All except Support-Executive
 
+        /*** HardCode Remove this after getting api ***/
+        setUi()
+    }
+
+    private fun setUi() {
+        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Engineer){
+            binding.custType.text = "Engineer"
+        }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Mason){
+            binding.custType.text = "Mason"
+        }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
+            binding.custType.text = "Dealer"
+        }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
+            binding.custType.text = "SubDealer"
+        }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
+            binding.custType.text = "SupportExecutive"
+        }
+
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
 
             R.id.dash_enrollment ->{
-
+                findNavController().navigate(R.id.enrollmentFragment)
             }
 
+            R.id.dash_pending_request,
             R.id.dash_pending_claim_request ->{
-
+                findNavController().navigate(R.id.pendingClaimRequestFragment)
             }
 
             R.id.dash_cash_transfer_approval ->{
-
+                findNavController().navigate(R.id.cashTransferApprovalFragment)
             }
 
             R.id.dash_my_purchase_claim ->{
@@ -164,12 +182,8 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(R.id.referFragment)
             }
 
-            R.id.dash_pending_request ->{
-
-            }
-
             R.id.dash_my_activity ->{
-
+                findNavController().navigate(R.id.myActivityFragment)
             }
 
             R.id.sale_and_earn ->{

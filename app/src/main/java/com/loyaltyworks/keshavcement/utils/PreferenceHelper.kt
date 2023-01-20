@@ -36,5 +36,9 @@ object PreferenceHelper {
     }
 
 
+    fun clear(context: Context){
+        val sharedPreferences = context.getSharedPreferences(PreferenceName, Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+    }
 
 }

@@ -23,6 +23,7 @@
     <color name="medium_yellow">#FEFEF4</color>
     <color name="pending_yellow">#F6F8E5</color>
     <color name="pending_yellow1">#B6C910</color>
+    <color name="greyss">#707070</color>
 
     <color name="color1">#ABF1D2FD</color>
     <color name="color2">#333232</color>
@@ -58,6 +59,27 @@
     <color name="color32">#1AFFFFFF</color>
     <color name="color33">#36FFFFFF</color>
     <color name="color34">#FFD138</color>
+    <color name="color35">#9A9A9A</color>
+    <color name="color36">#1C707070</color>
+    <color name="color37">#FC2222</color>
+    <color name="color38">#00BE06</color>
+    <color name="color39">#F0F0F0</color>
+    <color name="color40">#B32B2B2B</color>
+    <color name="color41">#26707070</color>
+    <color name="color42">#FFF7F7</color>
+    <color name="color43">#F8EFFD</color>
+    <color name="color44">#FEF5E4</color>
+    <color name="color45">#FFF300</color>
+    <color name="color46">#4D2B2B2B</color>
+    <color name="color47">#F8F7F7</color>
+    <color name="color48">#2B2B2B80</color>
+    <color name="color49">#FF725E</color>
+    <color name="color50">#F9F9F9</color>
+    <color name="color51">#F7F7F7</color>
+    <color name="color52">#F6F5F5</color>
+    <color name="color53">#B3FFFFFF</color>
+
+
 
 
 </resources>

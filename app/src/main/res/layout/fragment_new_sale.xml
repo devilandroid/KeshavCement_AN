@@ -208,8 +208,8 @@
                             android:gravity="center"
                             android:inputType="number"
                             android:text="0"
-                            android:textSize="16sp"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="35dp"

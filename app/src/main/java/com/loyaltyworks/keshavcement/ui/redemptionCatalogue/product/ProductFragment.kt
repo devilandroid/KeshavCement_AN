@@ -1,32 +1,37 @@
 package com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentProductBinding
+import com.loyaltyworks.keshavcement.model.PointRange
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.CategoryAdapter
+import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.PointRangeAdapter
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.ProductAdapter
 
 
-class ProductFragment : Fragment(), View.OnClickListener {
+class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnItemClickCallBack, ProductAdapter.OnItemClickCallBack {
 
     private lateinit var binding: FragmentProductBinding
 
-    var mSelectedCategory = "-1"
 
-    var mSelectedPointsRange = ""
+    var mSelectedCategory = -1
+    var mSelectedCategoryName = ""
 
-    var mSelectedSort = ""
+    var pointRange = ""
+    var LowToHigh = ""
 
-    var searchClicked = false
+    var isCategoryButtonClicked: Boolean = false
+    var isPointRangeButtonClicked: Boolean = false
+    var isHighToLowButtonClicked: Boolean = false
 
-    var categoryClicked = false
-
-    var pointsRangeClicked = false
-
+    var poitrangeList: ArrayList<PointRange> = ArrayList<PointRange>()
+    var mSelectedPointRange = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,24 +46,105 @@ class ProductFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (isHighToLowButtonClicked){
+            binding.hightoLowLowtoHight.setBackgroundResource(R.drawable.selected_filter)
+            binding.hightoLowLowtoHight.setTextColor(requireContext().resources.getColor(R.color.dark))
+
+            if (!LowToHigh.isNullOrEmpty()){
+                if (LowToHigh == "0"){
+                    binding.hightoLowLowtoHight.text = "High to Low"
+                }else if (LowToHigh == "1"){
+                    binding.hightoLowLowtoHight.text = "Low to High"
+                }
+            }
+
+        }
+
+        initialButtonSetup()
+
         binding.categoryRecycler.adapter = CategoryAdapter(/*it.objCatalogueCategoryListJson, mSelectedCategory, this*/)
-        binding.productRecycler.adapter = ProductAdapter()
+        binding.productRecycler.adapter = ProductAdapter(this)
 
         binding.searchButton.setOnClickListener(this)
         binding.categoryButton.setOnClickListener(this)
         binding.pointsRangeButton.setOnClickListener(this)
-        binding.allPoints.setOnClickListener(this)
-        binding.under1000.setOnClickListener(this)
-        binding.thousandTo4999.setOnClickListener(this)
-        binding.fiveThousandTo24999.setOnClickListener(this)
-        binding.twentyFiveThousandAndAbove.setOnClickListener(this)
-        binding.sortFilter.setOnClickListener(this)
+        binding.hightoLowLowtoHight.setOnClickListener(this)
 
-        setSelectedFilterTypeOnBackPress()
+        binding.backButton.setOnClickListener(this)
+        binding.cartButton.setOnClickListener(this)
 
-        setSelectedPointsRangeOnBackPress()
+        PointRangeSetUp()
 
-        setSelectedSortOnBackPress()
+    }
+
+    private fun PointRangeSetUp() {
+        poitrangeList.clear()
+
+        val defaultstatus = PointRange()
+        defaultstatus.id = -1
+        defaultstatus.name = "All Points"
+
+        val defaultstatus1 = PointRange()
+        defaultstatus1.id = 1
+        defaultstatus1.name = "Under 1000 pts"
+
+        val defaultstatus2 = PointRange()
+        defaultstatus2.id = 2
+        defaultstatus2.name = "1000 - 4999 pts"
+
+        val defaultstatus3 = PointRange()
+        defaultstatus3.id = 3
+        defaultstatus3.name = "5000 - 24999 pts"
+
+        val defaultstatus4 = PointRange()
+        defaultstatus4.id = 4
+        defaultstatus4.name = "25000 pts & Above"
+
+        poitrangeList.add(defaultstatus)
+        poitrangeList.add(defaultstatus1)
+        poitrangeList.add(defaultstatus2)
+        poitrangeList.add(defaultstatus3)
+        poitrangeList.add(defaultstatus4)
+
+        binding.pointRangeRecycler.adapter = PointRangeAdapter(poitrangeList,mSelectedPointRange,this)
+    }
+
+    private fun initialButtonSetup() {
+
+        if (isCategoryButtonClicked){
+            binding.searchLayout.visibility = View.GONE
+            binding.pointsRangeLayout.visibility = View.GONE
+            binding.categoryLayout.visibility = View.VISIBLE
+            binding.searchFilter.text.clear()
+            binding.categoryButton.setBackgroundResource(R.drawable.selected_filter)
+            binding.searchButton.setBackgroundResource(R.drawable.unselected_filter)
+            binding.pointsRangeButton.setBackgroundResource(R.drawable.unselected_filter)
+
+        }else if (isPointRangeButtonClicked){
+            binding.searchLayout.visibility = View.GONE
+            binding.categoryLayout.visibility = View.GONE
+            binding.pointsRangeLayout.visibility = View.VISIBLE
+            binding.searchFilter.text.clear()
+            binding.pointsRangeButton.setBackgroundResource(R.drawable.selected_filter)
+            binding.searchButton.setBackgroundResource(R.drawable.unselected_filter)
+            binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
+
+            if (mSelectedCategory != -1){
+                binding.selectedCategoryLayout.visibility = View.VISIBLE
+                binding.selectedCategory.text = mSelectedCategoryName
+            }else{
+                binding.selectedCategoryLayout.visibility = View.INVISIBLE
+            }
+        }else{
+            binding.searchLayout.visibility = View.VISIBLE
+            binding.categoryLayout.visibility = View.GONE
+            binding.pointsRangeLayout.visibility = View.GONE
+            binding.searchFilter.text.clear()
+            binding.searchButton.setBackgroundResource(R.drawable.selected_filter)
+            binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
+            binding.pointsRangeButton.setBackgroundResource(R.drawable.unselected_filter)
+
+        }
     }
 
     override fun onClick(p0: View?) {
@@ -66,33 +152,43 @@ class ProductFragment : Fragment(), View.OnClickListener {
         when (p0!!.id) {
 
             R.id.search_button -> {
-                searchClicked = true
-                pointsRangeClicked = false
-                categoryClicked = false
+                LowToHigh = ""
+                pointRange = ""
+                mSelectedCategory = -1
+                mSelectedPointRange = -1
+                isCategoryButtonClicked = false
+                isPointRangeButtonClicked = false
+                isHighToLowButtonClicked = false
+
+                binding.hightoLowLowtoHight.setBackgroundResource(R.drawable.unselected_category)
+
                 binding.categoryLayout.visibility = View.GONE
                 binding.pointsRangeLayout.visibility = View.GONE
                 binding.searchLayout.visibility = View.VISIBLE
-                binding.sortFilter.visibility = View.GONE
+                binding.hightoLowLowtoHight.visibility = View.GONE
+                binding.selectedCategoryLayout.visibility = View.INVISIBLE
+                binding.searchFilter.text.clear()
+
                 binding.searchButton.setBackgroundResource(R.drawable.selected_filter)
                 binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
                 binding.pointsRangeButton.setBackgroundResource(R.drawable.unselected_filter)
-                mSelectedSort = "0"
-                mSelectedCategory = "-1"
-                mSelectedPointsRange = ""
-                ProductListing(binding.searchFilter.text.toString())
-                CategoryApiCall()
-                setSelectedPointsRangeOnBackPress()
-                setSelectedSortOnBackPress()
+
             }
 
             R.id.category_button -> {
-                searchClicked = false
-                pointsRangeClicked = false
-                categoryClicked = true
+                LowToHigh = ""
+                pointRange = ""
+
+                binding.hightoLowLowtoHight.setBackgroundResource(R.drawable.unselected_category)
+                isCategoryButtonClicked = true
+                isPointRangeButtonClicked = false
+                isHighToLowButtonClicked = false
+
                 binding.searchLayout.visibility = View.GONE
                 binding.pointsRangeLayout.visibility = View.GONE
                 binding.categoryLayout.visibility = View.VISIBLE
-                binding.sortFilter.visibility = View.GONE
+                binding.hightoLowLowtoHight.visibility = View.GONE
+                binding.selectedCategoryLayout.visibility = View.INVISIBLE
                 binding.searchFilter.text.clear()
                 binding.categoryButton.setBackgroundResource(R.drawable.selected_filter)
                 binding.searchButton.setBackgroundResource(R.drawable.unselected_filter)
@@ -100,183 +196,81 @@ class ProductFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.points_range_button -> {
-                searchClicked = false
-                pointsRangeClicked = true
-                categoryClicked = false
+                isPointRangeButtonClicked = true
+                isCategoryButtonClicked = false
+
                 binding.searchLayout.visibility = View.GONE
                 binding.categoryLayout.visibility = View.GONE
                 binding.pointsRangeLayout.visibility = View.VISIBLE
-                binding.sortFilter.visibility = View.VISIBLE
+                binding.hightoLowLowtoHight.visibility = View.VISIBLE
                 binding.searchFilter.text.clear()
                 binding.pointsRangeButton.setBackgroundResource(R.drawable.selected_filter)
                 binding.searchButton.setBackgroundResource(R.drawable.unselected_filter)
                 binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
-            }
 
-            R.id.allPoints -> {
+                if (mSelectedCategory != -1){
+                    binding.selectedCategoryLayout.visibility = View.VISIBLE
+                    binding.selectedCategory.text = mSelectedCategoryName
+                }else{
+                    binding.selectedCategoryLayout.visibility = View.INVISIBLE
+                }
 
-                binding.allPoints.setBackgroundResource(R.drawable.selected_filter)
-                binding.under1000.setBackgroundResource(R.drawable.unselected_category)
-                binding.thousandTo4999.setBackgroundResource(R.drawable.unselected_category)
-                binding.fiveThousandTo24999.setBackgroundResource(R.drawable.unselected_category)
-                binding.twentyFiveThousandAndAbove.setBackgroundResource(R.drawable.unselected_category)
-
-                mSelectedPointsRange = "0-100000"
-
-                ProductListing("")
-
+                mSelectedPointRange = -1
+                PointRangeSetUp()
 
             }
 
-            R.id.under1000 -> {
-
-                binding.allPoints.setBackgroundResource(R.drawable.unselected_category)
-                binding.under1000.setBackgroundResource(R.drawable.selected_filter)
-                binding.thousandTo4999.setBackgroundResource(R.drawable.unselected_category)
-                binding.fiveThousandTo24999.setBackgroundResource(R.drawable.unselected_category)
-                binding.twentyFiveThousandAndAbove.setBackgroundResource(R.drawable.unselected_category)
-                mSelectedPointsRange = "0-999"
-
-                ProductListing("")
-
-
-            }
-
-            R.id.thousandTo4999 -> {
-
-                binding.allPoints.setBackgroundResource(R.drawable.unselected_category)
-                binding.under1000.setBackgroundResource(R.drawable.unselected_category)
-                binding.thousandTo4999.setBackgroundResource(R.drawable.selected_filter)
-                binding.fiveThousandTo24999.setBackgroundResource(R.drawable.unselected_category)
-                binding.twentyFiveThousandAndAbove.setBackgroundResource(R.drawable.unselected_category)
-                mSelectedPointsRange = "1000-4999"
-
-                ProductListing("")
-
-
-            }
-
-            R.id.fiveThousandTo24999 -> {
-
-                binding.allPoints.setBackgroundResource(R.drawable.unselected_category)
-                binding.under1000.setBackgroundResource(R.drawable.unselected_category)
-                binding.thousandTo4999.setBackgroundResource(R.drawable.unselected_category)
-                binding.fiveThousandTo24999.setBackgroundResource(R.drawable.selected_filter)
-                binding.twentyFiveThousandAndAbove.setBackgroundResource(R.drawable.unselected_category)
-                mSelectedPointsRange = "5000-24999"
-
-                ProductListing("")
-
-
-            }
-
-            R.id.twentyFiveThousandAndAbove -> {
-
-                binding.allPoints.setBackgroundResource(R.drawable.unselected_category)
-                binding.under1000.setBackgroundResource(R.drawable.unselected_category)
-                binding.thousandTo4999.setBackgroundResource(R.drawable.unselected_category)
-                binding.fiveThousandTo24999.setBackgroundResource(R.drawable.unselected_category)
-                binding.twentyFiveThousandAndAbove.setBackgroundResource(R.drawable.selected_filter)
-                mSelectedPointsRange = "25000-10000"
-
-                ProductListing("")
-
-
-            }
-
-            R.id.sortFilter -> {
-                if (binding.sortFilter.text.toString().contentEquals("High to Low")) {
-
-                    binding.sortFilter.text = "Low to High"
-                    mSelectedSort = "1"
-                    ProductListing("")
-
-
+            R.id.hightoLowLowtoHight -> {
+                isHighToLowButtonClicked = true
+                binding.hightoLowLowtoHight.setBackgroundResource(R.drawable.selected_filter)
+                binding.hightoLowLowtoHight.setTextColor(requireContext().resources.getColor(R.color.dark))
+                if (binding.hightoLowLowtoHight.text.toString() == "Low to High") {
+                    binding.hightoLowLowtoHight.text = "High to Low"
+                    LowToHigh = "0"
                 } else {
-                    binding.sortFilter.text = "High to Low"
-                    mSelectedSort = "0"
-                    ProductListing("")
-
+                    binding.hightoLowLowtoHight.text = "Low to High"
+                    LowToHigh = "1"
                 }
             }
 
+            R.id.cart_button ->{
+                findNavController().navigate(R.id.action_productFragment_to_cartFragment)
+            }
+
+            R.id.back_button ->{
+                findNavController().popBackStack()
+            }
+
+
         }
 
     }
 
-    private fun ProductListing(toString: String) {
-
-    }
-
-    private fun CategoryApiCall() {
-        
-    }
 
 
-    private fun setSelectedSortOnBackPress() {
 
-        if (mSelectedSort == "0") {
 
-            binding.sortFilter.text = "High to Low"
-        } else if (mSelectedSort == "1") {
+    override fun onPointRangeClickResponse(position: Int, pointRangess: PointRange) {
+        mSelectedPointRange = pointRangess.id!!
 
-            binding.sortFilter.text = "Low to high"
+        if (mSelectedPointRange == -1){
+            pointRange = ""
+        }else if (mSelectedPointRange == 1){
+            pointRange = "0-999"
+        }else if (mSelectedPointRange == 2){
+            pointRange = "1000-4999"
+        }else if (mSelectedPointRange == 3){
+            pointRange = "5000-24999"
+        }else if (mSelectedPointRange == 4){
+            pointRange = "25000-9999999"
         }
-
     }
 
-    private fun setSelectedPointsRangeOnBackPress() {
+    override fun onProductListItemClickResponse(itemView: View, position: Int) {
+//        val bundle = Bundle()
+//        bundle.putSerializable("CatalogueProduct", objCatalogue)
 
-        if (mSelectedPointsRange == "0-10000") {
-            binding.allPoints.setBackgroundResource(R.drawable.selected_filter)
-        } else if (mSelectedPointsRange == "0-999") {
-            binding.under1000.setBackgroundResource(R.drawable.selected_filter)
-        } else if (mSelectedPointsRange == "1000-4999") {
-            binding.thousandTo4999.setBackgroundResource(R.drawable.selected_filter)
-        } else if (mSelectedPointsRange == "5000-24999") {
-            binding.fiveThousandTo24999.setBackgroundResource(R.drawable.selected_filter)
-        } else if (mSelectedPointsRange == "25000-100000") {
-            binding.twentyFiveThousandAndAbove.setBackgroundResource(R.drawable.selected_filter)
-        } else {
-            binding.allPoints.setBackgroundResource(R.drawable.selected_filter)
-            binding.under1000.setBackgroundResource(R.drawable.unselected_category)
-            binding.thousandTo4999.setBackgroundResource(R.drawable.unselected_category)
-            binding.fiveThousandTo24999.setBackgroundResource(R.drawable.unselected_category)
-            binding.twentyFiveThousandAndAbove.setBackgroundResource(R.drawable.unselected_category)
-        }
-
-    }
-
-    private fun setSelectedFilterTypeOnBackPress() {
-
-        if (searchClicked) {
-
-            binding.searchButton.setBackgroundResource(R.drawable.selected_filter)
-            binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
-            binding.pointsRangeButton.setBackgroundResource(R.drawable.unselected_filter)
-            binding.categoryLayout.visibility = View.GONE
-            binding.pointsRangeLayout.visibility = View.GONE
-            binding.searchLayout.visibility = View.VISIBLE
-
-        } else if (categoryClicked) {
-
-            binding.searchButton.setBackgroundResource(R.drawable.unselected_filter)
-            binding.categoryButton.setBackgroundResource(R.drawable.selected_filter)
-            binding.pointsRangeButton.setBackgroundResource(R.drawable.unselected_filter)
-            binding.categoryLayout.visibility = View.VISIBLE
-            binding.pointsRangeLayout.visibility = View.GONE
-            binding.searchLayout.visibility = View.GONE
-
-        } else if (pointsRangeClicked) {
-            binding.searchButton.setBackgroundResource(R.drawable.unselected_filter)
-            binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
-            binding.pointsRangeButton.setBackgroundResource(R.drawable.selected_filter)
-            binding.pointsRangeLayout.visibility = View.VISIBLE
-            binding.categoryLayout.visibility = View.GONE
-            binding.searchLayout.visibility = View.GONE
-
-        }
-
+        findNavController().navigate(R.id.action_productFragment_to_productDetailsFragment, /*bundle*/)
     }
 
 

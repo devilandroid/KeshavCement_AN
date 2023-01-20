@@ -131,4 +131,17 @@
     <string name="cash_transfer_history">Cash Transfer History</string>
     <string name="new_sale">New Sale</string>
     <string name="customer_type">Customer Type</string>
+    <string name="claim_history_filter">Claim History Filter</string>
+    <string name="cash_transfer_name">Cash Transfer Name</string>
+    <string name="cash_history">Cash History</string>
+    <string name="create_support_executive">Create Support Executive</string>
+    <string name="my_activity_filter">My Activity Filter</string>
+    <string name="my_profile">My Profile</string>
+    <string name="cash_voucher">Cash Voucher</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="select_customer">Select Customer</string>
+    <string name="swipe_to_place_order">Swipe to Place Order</string>
+    <string name="my_cart">My Cart</string>
+    <string name="order_confirmation">Order Confirmation</string>
+    <string name="edit_address">Edit Address</string>
 </resources>

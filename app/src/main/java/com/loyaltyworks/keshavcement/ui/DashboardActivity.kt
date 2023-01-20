@@ -1,6 +1,7 @@
 package com.loyaltyworks.keshavcement.ui
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.LayerDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,7 @@ import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.baseClass.BaseActivity
 import com.loyaltyworks.keshavcement.databinding.ActivityDashboardBinding
+import com.loyaltyworks.keshavcement.ui.login.LoginActivity
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.Count.Companion.setCounting
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
@@ -109,16 +111,17 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
             when (destinationId) {
 
 
-                /* R.id.productFragment -> {
+                 R.id.productFragment,
+                 R.id.productDetailsFragment, -> {
 
                      // make visible only is condition passes
-                     *//*   if (this::notification.isInitialized)
-                           notification.isVisible = false*//*
+//                        if (this::notification.isInitialized)
+//                           notification.isVisible = false
 
                     binding.root.toolbar_parent.visibility = View.GONE
-                    binding.root.coordinator.visibility = View.GONE
+//                    binding.root.coordinator.visibility = View.GONE
                     binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                }*/
+                }
 
                 R.id.dashboardFragment, -> {
                     if (PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) != BuildConfig.SupportExecutive){
@@ -174,7 +177,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
         binding.root.my_activity_down_layout.visibility = View.GONE
 
         binding.root.mlogout.setOnClickListener(this)
-        binding.root.mEditProfile.setOnClickListener(this)
+        binding.root.dEditProfile.setOnClickListener(this)
         binding.root.dClaimPurchase.setOnClickListener(this)
         binding.root.dMyPurchaseClaim.setOnClickListener(this)
         binding.root.dRedemptionCatalogue.setOnClickListener(this)
@@ -189,6 +192,11 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
         binding.root.dMyActivity.setOnClickListener(this)
         binding.root.dClaimHistory.setOnClickListener(this)
         binding.root.dCashTransferHistory.setOnClickListener(this)
+        binding.root.dMySupportExecutive.setOnClickListener(this)
+        binding.root.dPendingClaimRequest.setOnClickListener(this)
+        binding.root.dCashTransferApproval.setOnClickListener(this)
+        binding.root.dEnrollment.setOnClickListener(this)
+        binding.root.mlogout.setOnClickListener(this)
 
 
         if (PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.Engineer ||
@@ -353,11 +361,44 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.dClaimHistory -> {
-
+                navController.navigate(R.id.claimHistoryFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
             }
 
             R.id.dCashTransferHistory -> {
+                navController.navigate(R.id.cashTransferHistoryFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
+            }
 
+            R.id.dMySupportExecutive -> {
+                navController.navigate(R.id.mySupportExecutiveFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
+            }
+
+            R.id.dPendingClaimRequest -> {
+                navController.navigate(R.id.pendingClaimRequestFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
+            }
+
+            R.id.dCashTransferApproval -> {
+                navController.navigate(R.id.cashTransferApprovalFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
+            }
+
+            R.id.dEditProfile -> {
+                navController.navigate(R.id.profileFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
+            }
+
+            R.id.dEnrollment -> {
+                navController.navigate(R.id.enrollmentFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
+            }
+
+            R.id.mlogout -> {
+                PreferenceHelper.clear(this)
+                startActivity(Intent(context, LoginActivity::class.java))
+                finish()
             }
         }
 

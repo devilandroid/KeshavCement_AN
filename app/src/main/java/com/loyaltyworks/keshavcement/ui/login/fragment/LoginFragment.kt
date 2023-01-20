@@ -177,6 +177,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType,"5")
                 }
 
+                PreferenceHelper.setBooleanValue(requireContext(), BuildConfig.IsLoggedIn, true)
+
                 val intent = Intent(requireContext(), DashboardActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

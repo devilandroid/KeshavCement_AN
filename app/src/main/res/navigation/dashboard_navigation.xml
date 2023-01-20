@@ -95,7 +95,11 @@
         android:id="@+id/cashTransferFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferFragment"
         android:label="@string/cash_transfer"
-        tools:layout="@layout/fragment_cash_transfer" />
+        tools:layout="@layout/fragment_cash_transfer" >
+        <action
+            android:id="@+id/action_cashTransferFragment_to_cashTransferDetailsFragment"
+            app:destination="@id/cashTransferDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/evouchersFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.voucher.EvouchersFragment"
@@ -104,8 +108,15 @@
     <fragment
         android:id="@+id/productFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductFragment"
-        android:label="@string/products"
-        tools:layout="@layout/fragment_product" />
+        android:label="@string/redemption_catalogue"
+        tools:layout="@layout/fragment_product" >
+        <action
+            android:id="@+id/action_productFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
     <fragment
         android:id="@+id/promotionsDetailsFragment"
         android:name="com.loyaltyworks.keshavcement.ui.offersAndPromotions.PromotionsDetailsFragment"
@@ -116,4 +127,109 @@
         android:name="com.loyaltyworks.keshavcement.ui.newSale.NewSaleFragment"
         android:label="@string/new_sale"
         tools:layout="@layout/fragment_new_sale" />
+    <fragment
+        android:id="@+id/claimHistoryFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.claimHistory.ClaimHistoryFragment"
+        android:label="@string/claim_history"
+        tools:layout="@layout/fragment_claim_history" />
+    <fragment
+        android:id="@+id/cashTransferHistoryFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.cashTransferHistory.CashTransferHistoryFragment"
+        android:label="@string/cash_history"
+        tools:layout="@layout/fragment_cash_transfer_history" />
+    <fragment
+        android:id="@+id/mySupportExecutiveFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.mySupportExecutive.MySupportExecutiveFragment"
+        android:label="@string/support_executive"
+        tools:layout="@layout/fragment_my_support_executive" >
+        <action
+            android:id="@+id/action_mySupportExecutiveFragment_to_newSupportExecutiveFragment"
+            app:destination="@id/newSupportExecutiveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newSupportExecutiveFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.mySupportExecutive.NewSupportExecutiveFragment"
+        android:label="@string/create_support_executive"
+        tools:layout="@layout/fragment_new_support_executive" />
+    <fragment
+        android:id="@+id/myActivityFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.myActivity.MyActivityFragment"
+        android:label="@string/my_activity"
+        tools:layout="@layout/fragment_my_activity" />
+    <fragment
+        android:id="@+id/enrollmentFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.enrollment.EnrollmentFragment"
+        android:label="@string/enrollment"
+        tools:layout="@layout/fragment_enrollment" >
+        <action
+            android:id="@+id/action_enrollmentFragment_to_newEnrollmentFragment"
+            app:destination="@id/newEnrollmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newEnrollmentFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.enrollment.NewEnrollmentFragment"
+        android:label="@string/enrollment"
+        tools:layout="@layout/fragment_new_enrollment" />
+    <fragment
+        android:id="@+id/pendingClaimRequestFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.pendingClaimRequest.PendingClaimRequestFragment"
+        android:label="@string/pending_claim_request"
+        tools:layout="@layout/fragment_pending_claim_request" />
+    <fragment
+        android:id="@+id/cashTransferApprovalFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.cashTransferApproval.CashTransferApprovalFragment"
+        android:label="@string/cash_transfer_approval"
+        tools:layout="@layout/fragment_cash_transfer_approval" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.profile.ProfileFragment"
+        android:label="@string/my_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/cashTransferDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferDetailsFragment"
+        android:label="@string/cash_transfer"
+        tools:layout="@layout/fragment_cash_transfer_details" />
+    <fragment
+        android:id="@+id/voucherDialogFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.voucher.VoucherDialogFragment"
+        android:label="@string/evoucher"
+        tools:layout="@layout/fragment_voucher_dialog_list_dialog"/>
+    <fragment
+        android:id="@+id/customerSelectionFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.customerSelection.CustomerSelectionFragment"
+        android:label="@string/select_customer"
+        tools:layout="@layout/fragment_customer_selection" />
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductDetailsFragment"
+        android:label="@string/redemption_catalogue"
+        tools:layout="@layout/fragment_product_details" >
+        <action
+            android:id="@+id/action_productDetailsFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.checkout.CartFragment"
+        android:label="@string/my_cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.checkout.AddressFragment"
+        android:label="@string/order_confirmation"
+        tools:layout="@layout/fragment_address" >
+        <action
+            android:id="@+id/action_addressFragment_to_editAddressFragment"
+            app:destination="@id/editAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editAddressFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.checkout.EditAddressFragment"
+        android:label="@string/edit_address"
+        tools:layout="@layout/fragment_edit_address" />
 </navigation>

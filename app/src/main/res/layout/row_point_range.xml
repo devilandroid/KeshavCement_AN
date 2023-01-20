@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/pointRangeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:gravity="center"
+        android:background="@drawable/unselected_category"
+        android:backgroundTint="@color/greyss">
+        <TextView
+            android:id="@+id/pointRangeName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="All Points"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
