@@ -17,12 +17,13 @@
         android:padding="15dp">
 
         <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/xx_xx_xxxx"
+            android:text="DD/MM/YYYY"
             android:textColor="@color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,11 +51,12 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/xxxxxx"
+                    android:text="-"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -67,7 +69,7 @@
                 android:background="@drawable/approved_bg"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
-                android:text="@string/xxxxxx"
+                android:text="-"
                 android:textColor="@color/green"
                 android:textSize="12sp" />
 
@@ -102,22 +104,39 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/xxxxxx_xxxxxx"
-                    android:textColor="@color/dark"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/catalogue_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="- / "
+                        android:textColor="@color/dark"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="-"
+                        android:textColor="@color/dark"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
 
                 <TextView
+                    android:id="@+id/product_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/xxxxxx"
+                    android:text="ABCD"
                     android:layout_marginTop="5dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/color15"
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -142,7 +161,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="@string/xxxxxx"
+                            android:text="-"
                             android:textColor="@color/dark"
                             android:textSize="16sp" />
 
@@ -166,7 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="@string/xxxxxx"
+                            android:text="-"
                             android:textColor="@color/dark"
                             android:textSize="16sp" />
 

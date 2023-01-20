@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@drawable/corner_three_side2"
-        android:layout_marginEnd="52dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginStart="4dp"
         android:elevation="1dp"
         android:padding="19.50dp"
@@ -70,7 +70,7 @@
         android:layout_marginRight="52dp"
         android:elevation="10.40dp"
         android:text="xx xxxx xxx"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/color28"
         android:textSize="12sp" />
 
     <LinearLayout
@@ -89,7 +89,7 @@
             android:layout_marginEnd="10dp"
             android:gravity="start|center_horizontal"
             android:text="xx xxx xx xx"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/color29"
             android:textSize="10sp"/>
     </LinearLayout>
 

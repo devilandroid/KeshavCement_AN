@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.loyaltyworks.keshavcement.R
+import com.loyaltyworks.keshavcement.databinding.FragmentHelplineBinding
 
 
 class HelplineFragment : Fragment() {
+    private lateinit var binding: FragmentHelplineBinding
 
 
     override fun onCreateView(
@@ -16,7 +18,13 @@ class HelplineFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_helpline, container, false)
+        binding = FragmentHelplineBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
 

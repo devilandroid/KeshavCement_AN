@@ -13,7 +13,7 @@
         android:fontFamily="@font/poppins_regular"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="@string/xx_xx_xxxx"
+        android:text="-"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:visibility="visible" />
@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/xxxxxx"
+                        android:text="-"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -72,7 +72,7 @@
                     android:background="@drawable/approved_bg"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
-                    android:text="@string/xxxxxx"
+                    android:text="-"
                     android:textColor="@color/green"
                     android:textSize="12sp" />
 
@@ -99,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/xxxxxx"
+                        android:text="-"
                         android:textColor="@color/dark"
                         android:textSize="16sp" />
 
@@ -107,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="@string/xxxxxx"
+                        android:text="-"
                         android:textColor="@color/dark"
                         android:textSize="12sp" />
 
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/xxxxxx"
+                        android:text="-"
                         android:textColor="@color/dark"
                         android:textSize="16sp" />
 
@@ -140,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="@string/xxxxxx"
+                        android:text="-"
                         android:textColor="@color/dark"
                         android:textSize="12sp" />
 
@@ -187,7 +187,7 @@
                     android:layout_weight="1.4"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
-                    android:text="@string/xxxxxx"
+                    android:text="-"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -215,7 +215,7 @@
                     android:layout_weight="1.4"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
-                    android:text="@string/xxxxxx"
+                    android:text="-"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -243,7 +243,7 @@
                     android:layout_weight="1.4"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
-                    android:text="@string/xxxxxx"
+                    android:text="-"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -266,7 +266,7 @@
                     android:layout_height="30dp"
                     android:fontFamily="@font/poppins_semibold"
                     android:gravity="center_vertical"
-                    android:text="@string/xxxxxx"
+                    android:text="-"
                     android:textColor="@color/dark"
                     android:textSize="16sp" />
 
