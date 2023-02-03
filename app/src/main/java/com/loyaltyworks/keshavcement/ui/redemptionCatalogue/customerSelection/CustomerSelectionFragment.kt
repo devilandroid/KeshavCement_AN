@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentCustomerSelectionBinding
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.CustomerSelectionAdapter
@@ -27,6 +28,14 @@ class CustomerSelectionFragment : Fragment(), CustomerSelectionAdapter.OnItemCli
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /** Firebase Analytics Tracker **/
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CatalogueCustomerSelectionView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CatalogueCustomerSelectionFragment")
+        //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+
+
         directedFrom = arguments?.getSerializable("directedFrom") as String
 
         binding.customerRecycler.adapter = CustomerSelectionAdapter(this)
