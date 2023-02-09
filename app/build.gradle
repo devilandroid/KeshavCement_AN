@@ -25,7 +25,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // Demo URL
-        buildConfigField "String", "BaseUrl", "\"https://keshavcmtdemo.loyltwo3ks.com/HRJOHN/Mobile/\""
+        buildConfigField "String", "BaseUrl", "\"https://keshavdemoserv.loyltwo3ks.com/Mobile/\""
         buildConfigField("String", "PROMO_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/\"")
         buildConfigField("String", "PROFILE_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/UploadFiles/CustomerImage/\"")
         buildConfigField("String", "CATALOGUE_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/UploadFiles/CatalogueImages/\"")
@@ -38,12 +38,14 @@ android {
         buildConfigField "String", "PLAY_STORE_LINK", "\"https://play.google.com/store/apps/details?id=com.loyaltyworks.keshavcement&hl=en\""
         buildConfigField "String", "PUSH_TOKEN", "\"PUSH_TOKEN\""
         buildConfigField "String", "IsLoggedIn", "\"IsLoggedIn\""
+        buildConfigField "String", "CountryID", "\"15\""
         buildConfigField "String", "CustomerType", "\"CustomerType\""
         buildConfigField "String", "Engineer", "\"1\""
         buildConfigField "String", "Mason", "\"2\""
         buildConfigField "String", "Dealer", "\"3\""
         buildConfigField "String", "SubDealer", "\"4\""
         buildConfigField "String", "SupportExecutive", "\"5\""
+        buildConfigField "String", "ForgotPasswordClicked", "\"ForgotPasswordClicked\""
     }
 
     buildTypes {
@@ -179,4 +181,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf:20.0.6'
 
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'rongi.rotate-layout:rotate-layout:3.0.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 }

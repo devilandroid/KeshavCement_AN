@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".ui.login.fragment.CustomerTypeSelectionFragment">
+    tools:context=".ui.customerType.CustomerTypeSelectionFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,7 +71,24 @@
                 android:textColor="@color/dark"
                 android:fontFamily="@font/poppins_semibold"/>
 
-           <!-- Engineer -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/customerType_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:clipToPadding="false"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/row_customer_type"/>
+
+            <include
+                android:id="@+id/no_data_fount"
+                layout="@layout/no_data_found_animation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+         <!--
+           &lt;!&ndash; Engineer &ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:id="@+id/engineer_card"
                 android:layout_width="match_parent"
@@ -101,7 +118,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Mason -->
+            &lt;!&ndash; Mason &ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:id="@+id/mason_card"
                 android:layout_width="match_parent"
@@ -131,7 +148,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Dealer -->
+            &lt;!&ndash; Dealer &ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:id="@+id/dealer_card"
                 android:layout_width="match_parent"
@@ -161,7 +178,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Sub Dealer -->
+            &lt;!&ndash; Sub Dealer &ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:id="@+id/sub_dealer_card"
                 android:layout_width="match_parent"
@@ -191,7 +208,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Support Executive -->
+            &lt;!&ndash; Support Executive &ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:id="@+id/support_executive_card"
                 android:layout_width="match_parent"
@@ -220,6 +237,7 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+-->
 
         </LinearLayout>
 
