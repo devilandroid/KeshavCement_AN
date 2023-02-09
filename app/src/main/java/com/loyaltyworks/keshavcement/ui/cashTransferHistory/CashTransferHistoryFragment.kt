@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentCashTransferHistoryBinding
@@ -33,6 +34,14 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         HandleOnBackPressed()
+
+        /** Firebase Analytics Tracker **/
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CashTransferHistoryView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CashTransferHistoryFragment")
+        //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+
 
         binding.cashTransferHistoryRecycler.adapter = CashTransferHistoryAdapter()
 

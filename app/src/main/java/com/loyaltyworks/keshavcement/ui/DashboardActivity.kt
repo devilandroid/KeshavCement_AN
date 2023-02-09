@@ -5,10 +5,8 @@ import android.content.Intent
 import android.graphics.drawable.LayerDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -24,6 +22,7 @@ import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.baseClass.BaseActivity
 import com.loyaltyworks.keshavcement.databinding.ActivityDashboardBinding
+import com.loyaltyworks.keshavcement.ui.lanuage.LanguageFragment
 import com.loyaltyworks.keshavcement.ui.login.LoginActivity
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.Count.Companion.setCounting
@@ -32,8 +31,8 @@ import kotlinx.android.synthetic.main.appbar_main.view.*
 import kotlinx.android.synthetic.main.dashboard_menu.view.*
 import java.util.*
 
-class DashboardActivity : BaseActivity(), View.OnClickListener {
-    private lateinit var binding: ActivityDashboardBinding
+class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment.LanguageListener {
+    lateinit var binding: ActivityDashboardBinding
 
     lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -42,6 +41,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
     var context: Context? = null
     lateinit var notification: MenuItem
     lateinit var logout: MenuItem
+    lateinit var language: MenuItem
     var isDashboard: Boolean = false
 
 
@@ -139,6 +139,9 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
                               notification.isVisible = destinationId == R.id.dashboardFragment2*/
                     if (::notification.isInitialized)
                         notification.isVisible = true
+
+                    if (::language.isInitialized)
+                        language.isVisible = true
                     if (PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
                         if (::logout.isInitialized)
                             logout.isVisible = true
@@ -160,6 +163,10 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
 
                     if (::logout.isInitialized)
                         logout.isVisible = false
+
+                    if (::language.isInitialized)
+                        language.isVisible = false
+
                     binding.root.toolbar_parent.visibility = View.VISIBLE
 
                     Objects.requireNonNull(supportActionBar)!!
@@ -246,9 +253,11 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
         menuInflater.inflate(R.menu.menu, menu)
         notification = menu.findItem(R.id.notification)
         logout = menu.findItem(R.id.logout)
+        language = menu.findItem(R.id.language)
 
         if (isDashboard){
             notification.isVisible = true
+            language.isVisible = true
             if (PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
                 logout.isVisible = true
             }else{
@@ -257,6 +266,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
 
         }else{
             notification.isVisible = false
+            language.isVisible = false
             logout.isVisible = false
         }
 
@@ -286,7 +296,15 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.logout ->{
-                Toast.makeText(this, "code not implemented", Toast.LENGTH_SHORT).show()
+                PreferenceHelper.clear(this)
+                startActivity(Intent(context, LoginActivity::class.java))
+                finish()
+            }
+
+            R.id.language ->{
+                navController.navigate(R.id.languageFragment2)
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+                return true
             }
 
 
@@ -402,6 +420,14 @@ class DashboardActivity : BaseActivity(), View.OnClickListener {
             }
         }
 
+    }
+
+    override fun onLanguageSelect(language: String) {
+        (this as BaseActivity).setNewLocale(context as AppCompatActivity, language)
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 
 }

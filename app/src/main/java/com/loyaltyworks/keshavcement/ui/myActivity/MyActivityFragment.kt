@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentMyActivityBinding
 import com.loyaltyworks.keshavcement.ui.myActivity.adapter.MyActivityAdapter
@@ -31,6 +32,13 @@ class MyActivityFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         HandleOnBackPressed()
+
+        /** Firebase Analytics Tracker **/
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MyActivityView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "MyActivityFragment")
+        //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
         binding.myActivityRecycler.adapter = MyActivityAdapter()
 

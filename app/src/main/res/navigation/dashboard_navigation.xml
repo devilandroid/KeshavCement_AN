@@ -232,4 +232,9 @@
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.checkout.EditAddressFragment"
         android:label="@string/edit_address"
         tools:layout="@layout/fragment_edit_address" />
+    <fragment
+        android:id="@+id/languageFragment2"
+        android:name="com.loyaltyworks.keshavcement.ui.lanuage.LanguageFragment"
+        android:label=""
+        tools:layout="@layout/fragment_language" />
 </navigation>

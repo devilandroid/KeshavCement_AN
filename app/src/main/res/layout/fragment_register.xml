@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mRegisterHost"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -278,7 +279,7 @@
                         </RelativeLayout>
 
                         <in.aabhasjindal.otptextview.OtpTextView
-                            android:id="@+id/otp_view_activate"
+                            android:id="@+id/otp_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -304,9 +305,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="7">
                                 <TextView
+                                    android:id="@+id/otp_sent_number"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="OTP will receive at +91******4525"
+                                    android:text="OTP will receive at -"
                                     android:fontFamily="@font/poppins_medium"
                                     android:textSize="12sp"
                                     android:textColor="@color/colorAccent"/>
@@ -752,11 +754,12 @@
                                             android:layout_height="40dp"
                                             android:orientation="vertical">
                                             <TextView
+                                                android:id="@+id/customer_type_name"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:gravity="center_vertical"
                                                 android:paddingStart="20dp"
-                                                android:text="XXX"
+                                                android:text=""
                                                 android:fontFamily="@font/poppins_regular"
                                                 android:textSize="12sp"
                                                 android:textColor="@color/grey"/>
@@ -1105,7 +1108,7 @@
 
                                 </LinearLayout>
 
-                                <!--  GST Number for Sub-Dealer-->
+                                <!--  GST Number for Dealer & Sub-Dealer-->
                                 <LinearLayout
                                     android:id="@+id/gst_layout"
                                     android:layout_width="match_parent"
@@ -1377,13 +1380,15 @@
                                             android:layout_height="40dp"
                                             android:orientation="vertical"
                                             android:elevation="5dp">
-                                            <Spinner
+
+                                            <pl.utkala.searchablespinner.SearchableSpinner
                                                 android:id="@+id/district_spinner"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="10"
-                                                android:backgroundTint="@color/transparent"
-                                                android:spinnerMode="dropdown" />
+                                                android:background="@color/transparent"
+                                                app:closeText="Close"
+                                                app:dialogTitle="Please select district" />
 
                                             <ImageView
                                                 android:layout_width="15dp"
@@ -1437,13 +1442,14 @@
                                             android:layout_height="40dp"
                                             android:orientation="vertical"
                                             android:elevation="5dp">
-                                            <Spinner
+                                            <pl.utkala.searchablespinner.SearchableSpinner
                                                 android:id="@+id/taluk_spinner"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="10"
-                                                android:backgroundTint="@color/transparent"
-                                                android:spinnerMode="dropdown" />
+                                                android:background="@color/transparent"
+                                                app:closeText="Close"
+                                                app:dialogTitle="Please select taluk" />
 
                                             <ImageView
                                                 android:layout_width="15dp"

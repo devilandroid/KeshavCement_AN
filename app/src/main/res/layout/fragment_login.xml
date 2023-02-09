@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mLoginHost"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:weightSum="10"
     android:orientation="vertical"
@@ -472,9 +473,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="7">
                             <TextView
+                                android:id="@+id/otp_sent_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="OTP will receive at +91******4525"
+                                android:text="OTP will receive at -"
                                 android:fontFamily="@font/poppins_medium"
                                 android:textSize="12sp"
                                 android:textColor="@color/colorAccent"/>
@@ -633,6 +635,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/bottom_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"

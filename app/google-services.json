@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "664588953578",
+    "project_id": "customer-app---android",
+    "storage_bucket": "customer-app---android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664588953578:android:222d0672c8f71f29a8b493",
+        "android_client_info": {
+          "package_name": "com.loyaltyworks.keshavcement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664588953578-uljb594en384p0chtehlthjo3479ro2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa2k5K8iayZlZ0MaaDpys92SyW07yRvcU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664588953578-uljb594en384p0chtehlthjo3479ro2d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

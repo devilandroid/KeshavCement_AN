@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentProductBinding
 import com.loyaltyworks.keshavcement.model.PointRange
@@ -45,6 +46,12 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /** Firebase Analytics Tracker **/
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "ProductView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "ProductFragment")
+        //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
         if (isHighToLowButtonClicked){
             binding.hightoLowLowtoHight.setBackgroundResource(R.drawable.selected_filter)

@@ -43,7 +43,7 @@
         android:elevation="20dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/mProfileImage"
+            android:id="@+id/menu_profileImage"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_centerInParent="true"
@@ -91,7 +91,7 @@
                 android:paddingEnd="15dp">
 
                 <TextView
-                    android:id="@+id/mMemberType"
+                    android:id="@+id/menu_memberType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -100,7 +100,7 @@
                     android:textSize="11sp" />
 
                 <TextView
-                    android:id="@+id/mMemberName"
+                    android:id="@+id/menu_memberName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
@@ -134,7 +134,7 @@
                         android:textSize="11sp" />
 
                     <TextView
-                        android:id="@+id/mMembershipId"
+                        android:id="@+id/menu_membershipId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
@@ -176,7 +176,7 @@
                             android:src="@drawable/coin" />
 
                         <TextView
-                            android:id="@+id/mPoints"
+                            android:id="@+id/menu_point_balance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
