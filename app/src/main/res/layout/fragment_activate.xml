@@ -530,6 +530,7 @@
                                                 android:inputType="text"
                                                 android:maxLines="1"
                                                 android:paddingStart="20dp"
+                                                android:enabled="false"
                                                 android:singleLine="true"
                                                 android:background="@android:color/transparent"
                                                 android:textColorHint="@color/grey"
@@ -643,6 +644,7 @@
                                                 android:imeOptions="actionNext"
                                                 android:inputType="text"
                                                 android:maxLines="1"
+                                                android:enabled="false"
                                                 android:paddingStart="20dp"
                                                 android:singleLine="true"
                                                 android:background="@android:color/transparent"
@@ -781,13 +783,13 @@
                                             android:fontFamily="@font/poppins_medium"
                                             android:textColor="@color/dark"
                                             android:textSize="12sp"/>
-                                        <TextView
+                                       <!-- <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="*"
                                             android:fontFamily="@font/poppins_medium"
                                             android:textColor="@color/red"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp"/>-->
                                     </LinearLayout>
 
                                     <androidx.cardview.widget.CardView
@@ -810,6 +812,7 @@
                                                 android:inputType="number"
                                                 android:maxLength="12"
                                                 android:maxLines="1"
+                                                android:enabled="false"
                                                 android:paddingStart="20dp"
                                                 android:singleLine="true"
                                                 android:background="@android:color/transparent"
@@ -840,13 +843,13 @@
                                             android:fontFamily="@font/poppins_medium"
                                             android:textColor="@color/dark"
                                             android:textSize="12sp"/>
-                                        <TextView
+                                        <!--<TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="*"
                                             android:fontFamily="@font/poppins_medium"
                                             android:textColor="@color/red"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp"/>-->
                                     </LinearLayout>
 
                                     <androidx.cardview.widget.CardView
@@ -868,6 +871,7 @@
                                                 android:imeOptions="actionNext"
                                                 android:inputType="text"
                                                 android:maxLines="1"
+                                                android:enabled="false"
                                                 android:paddingStart="20dp"
                                                 android:singleLine="true"
                                                 android:background="@android:color/transparent"
@@ -1028,28 +1032,21 @@
                                         app:cardCornerRadius="20dp"
                                         app:cardElevation="5dp"
                                         android:layout_margin="3dp">
-                                        <RelativeLayout
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="40dp"
-                                            android:orientation="vertical"
-                                            android:elevation="5dp">
-                                            <Spinner
-                                                android:id="@+id/state_spinner"
+                                            android:orientation="vertical">
+                                            <TextView
+                                                android:id="@+id/state"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:layout_weight="10"
-                                                android:backgroundTint="@color/transparent"
-                                                android:spinnerMode="dropdown" />
-
-                                            <ImageView
-                                                android:layout_width="15dp"
-                                                android:layout_height="15dp"
-                                                android:layout_alignParentEnd="true"
-                                                android:layout_centerVertical="true"
-                                                android:layout_marginEnd="15dp"
-                                                android:visibility="visible"
-                                                android:src="@drawable/ic_arrow_down"/>
-                                        </RelativeLayout>
+                                                android:gravity="center_vertical"
+                                                android:paddingStart="20dp"
+                                                android:text=""
+                                                android:fontFamily="@font/poppins_regular"
+                                                android:textSize="12sp"
+                                                android:textColor="@color/grey"/>
+                                        </LinearLayout>
                                     </androidx.cardview.widget.CardView>
 
 
@@ -1088,30 +1085,21 @@
                                         app:cardCornerRadius="20dp"
                                         app:cardElevation="5dp"
                                         android:layout_margin="3dp">
-                                        <RelativeLayout
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="40dp"
-                                            android:orientation="vertical"
-                                            android:elevation="5dp">
-
-                                            <pl.utkala.searchablespinner.SearchableSpinner
-                                                android:id="@+id/district_spinner"
+                                            android:orientation="vertical">
+                                            <TextView
+                                                android:id="@+id/district"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:layout_weight="10"
-                                                android:background="@color/transparent"
-                                                app:closeText="Close"
-                                                app:dialogTitle="Please select district" />
-
-                                            <ImageView
-                                                android:layout_width="15dp"
-                                                android:layout_height="15dp"
-                                                android:layout_alignParentEnd="true"
-                                                android:layout_centerVertical="true"
-                                                android:layout_marginEnd="15dp"
-                                                android:visibility="visible"
-                                                android:src="@drawable/ic_arrow_down"/>
-                                        </RelativeLayout>
+                                                android:gravity="center_vertical"
+                                                android:paddingStart="20dp"
+                                                android:text=""
+                                                android:fontFamily="@font/poppins_regular"
+                                                android:textSize="12sp"
+                                                android:textColor="@color/grey"/>
+                                        </LinearLayout>
                                     </androidx.cardview.widget.CardView>
 
 
@@ -1150,29 +1138,21 @@
                                         app:cardCornerRadius="20dp"
                                         app:cardElevation="5dp"
                                         android:layout_margin="3dp">
-                                        <RelativeLayout
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="40dp"
-                                            android:orientation="vertical"
-                                            android:elevation="5dp">
-                                            <pl.utkala.searchablespinner.SearchableSpinner
-                                                android:id="@+id/taluk_spinner"
+                                            android:orientation="vertical">
+                                            <TextView
+                                                android:id="@+id/taluk"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:layout_weight="10"
-                                                android:background="@color/transparent"
-                                                app:closeText="Close"
-                                                app:dialogTitle="Please select taluk" />
-
-                                            <ImageView
-                                                android:layout_width="15dp"
-                                                android:layout_height="15dp"
-                                                android:layout_alignParentEnd="true"
-                                                android:layout_centerVertical="true"
-                                                android:layout_marginEnd="15dp"
-                                                android:visibility="visible"
-                                                android:src="@drawable/ic_arrow_down"/>
-                                        </RelativeLayout>
+                                                android:gravity="center_vertical"
+                                                android:paddingStart="20dp"
+                                                android:text=""
+                                                android:fontFamily="@font/poppins_regular"
+                                                android:textSize="12sp"
+                                                android:textColor="@color/grey"/>
+                                        </LinearLayout>
                                     </androidx.cardview.widget.CardView>
 
 

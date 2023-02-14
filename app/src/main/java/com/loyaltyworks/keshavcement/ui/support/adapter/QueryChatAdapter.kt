@@ -1,20 +1,35 @@
 package com.loyaltyworks.keshavcement.ui.support.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.loyaltyworks.keshavcement.BuildConfig
+import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.RowLeftChatCellBinding
 import com.loyaltyworks.keshavcement.databinding.RowRightChatCellBinding
+import com.loyaltyworks.keshavcement.model.QueryChatElementResponse
+import com.loyaltyworks.keshavcement.utils.AppController
+import com.vmb.fileSelect.FileSelector
 import kotlinx.android.synthetic.main.row_left_chat_cell.view.*
 
-class QueryChatAdapter/*(var queryListingResponse: List<ObjQueryResponseJson>?, var chatImageDisplay: ChatImageDisplay)*/ : RecyclerView.Adapter<QueryChatAdapter.ViewHolder>() {
+class QueryChatAdapter(var queryListingResponse: QueryChatElementResponse,
+                       var chatImageDisplay: ChatImageDisplay,): RecyclerView.Adapter<QueryChatAdapter.ViewHolder>() {
+
+//    var leftItemView: View? = null
+//    var rightItemView: View? = null
 
     var leftItemView: RowLeftChatCellBinding? = null
     var rightItemView: RowRightChatCellBinding? = null
 
     val LEFT_CELL = 1
     val RIGHT_CELL = 2
+
 
     interface ChatImageDisplay {
         fun onClickChatImage(Url: String?)
@@ -29,11 +44,9 @@ class QueryChatAdapter/*(var queryListingResponse: List<ObjQueryResponseJson>?, 
         val chatImage = binding.root.chatImage
 
 
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         return if (viewType == LEFT_CELL) {
             leftItemView = RowLeftChatCellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             ViewHolder(leftItemView!!)
@@ -41,47 +54,43 @@ class QueryChatAdapter/*(var queryListingResponse: List<ObjQueryResponseJson>?, 
             rightItemView = RowRightChatCellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return ViewHolder(rightItemView!!)
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
-        /*return if (queryListingResponse!![position].userType.equals("CUSTOMER",true)) RIGHT_CELL else LEFT_CELL*/
-        return RIGHT_CELL
+        return if (queryListingResponse.objQueryResponseJsonList!![position].userType.equals("CUSTOMER",true)) RIGHT_CELL else LEFT_CELL
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        /*val lstQueryDetail = queryListingResponse!![position]
-
-        Log.d("jdjfkj",""+lstQueryDetail)
+        val lstQueryDetail = queryListingResponse.objQueryResponseJsonList!![position]
 
         holder.row_query_sender.text = lstQueryDetail.repliedBy.toString()
+
         holder.row_query_time?.text = AppController.dateAPIFormat(lstQueryDetail.jCreatedDate.toString())
-
         if (!lstQueryDetail.queryResponseInfo.isNullOrEmpty() || !lstQueryDetail.imageUrl.isNullOrEmpty()) {
-
             if (!lstQueryDetail.imageUrl.isNullOrEmpty()) {
 
-                if(lstQueryDetail.imageUrl.contains(".pdf") || lstQueryDetail.imageUrl.contains(".txt") || lstQueryDetail.imageUrl.contains(".txt") ) {
-
-                    val extension = lstQueryDetail.imageUrl.toString().substringAfterLast(".").toLowerCase()
-
+                if(lstQueryDetail.imageUrl.contains(".pdf") || lstQueryDetail.imageUrl.contains(".txt")
+                    || lstQueryDetail.imageUrl.contains(".txt") ) {
+                    val extension =
+                        lstQueryDetail.imageUrl.toString().substringAfterLast(".").toLowerCase()
                     if (!FileSelector.isImage(extension)) {
+
+                        Log.d("fjksdjfksdl", lstQueryDetail.imageUrl.toString())
 
                         holder.chatImage.visibility = View.GONE
                         holder.row_query_text_pdf.visibility = View.VISIBLE
-                        holder.row_query_text_pdf.text = lstQueryDetail.imageUrl.toString().substringAfterLast("/")
+
+//                    holder.chatImage.setImageBitmap(FileSelector.getThumbnail(holder.itemView.context, extension))
+
+                        holder.row_query_text_pdf.text =
+                            lstQueryDetail.imageUrl.toString().substringAfterLast("/")
 
                     }else{
-
                         holder.chatImage.visibility = View.VISIBLE
                         holder.row_query_text_pdf.visibility = View.GONE
 
                     }
-
                 }else{
-
                     holder.chatImage.visibility = View.VISIBLE
                     holder.row_query_text_pdf.visibility = View.GONE
 
@@ -90,15 +99,19 @@ class QueryChatAdapter/*(var queryListingResponse: List<ObjQueryResponseJson>?, 
 
 
                 if (!lstQueryDetail.queryResponseInfo.isNullOrEmpty()) {
-
                     holder.row_query_text.visibility = View.VISIBLE
                     holder.row_query_text.text = lstQueryDetail.queryResponseInfo.toString()
-
                 } else holder.row_query_text.visibility = View.GONE
-
                 holder.row_query_missed_call.visibility = View.GONE
+
+                Log.d("ihghjuhiuh","chatImage : "+ BuildConfig.PROMO_IMAGE_BASE + lstQueryDetail.imageUrl!!.replace("~","") )
                 Glide.with(holder.itemView)
-                    .load(BuildConfig.PROMO_IMAGE_BASE + lstQueryDetail.imageUrl!!.replace("~", ""))
+                    .load(
+                        BuildConfig.PROMO_IMAGE_BASE + lstQueryDetail.imageUrl!!.replace(
+                            "~",
+                            ""
+                        )
+                    )
                     .placeholder(R.drawable.ic_default_img)
                     .error(R.drawable.ic_error)
                     .apply(RequestOptions().transform(RoundedCorners(50)))
@@ -120,16 +133,11 @@ class QueryChatAdapter/*(var queryListingResponse: List<ObjQueryResponseJson>?, 
                 BuildConfig.PROMO_IMAGE_BASE + lstQueryDetail.imageUrl!!
                     .replace("~", "")
             )
-        })*/
-
-
-
+        })
     }
 
     override fun getItemCount(): Int {
-
-        /*return queryListingResponse!!.size*/
-        return 10
+        return queryListingResponse.objQueryResponseJsonList!!.size
     }
 
 }

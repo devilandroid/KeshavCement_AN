@@ -70,6 +70,7 @@
                         android:textSize="12sp" />
 
                     <Spinner
+                        android:id="@+id/help_topic_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_margin="6.5dp"

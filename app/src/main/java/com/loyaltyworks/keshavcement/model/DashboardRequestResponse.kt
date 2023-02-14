@@ -208,7 +208,13 @@ data class LstCustomerFeedBackJsonApi(
     @Json(name = "verifiedStatus")
     val verifiedStatus: Int? = null,
     @Json(name = "walletNumber")
-    val walletNumber: Any? = null
+    val walletNumber: Any? = null,
+    @Json(name = "mappedCustomerType")
+    val mappedCustomerType: String? = null,
+    @Json(name = "mappedCustomerId")
+    val mappedCustomerId: String? = null,
+    @Json(name = "mappedCustomerName")
+    val mappedCustomerName: String? = null
 )
 
 @JsonClass(generateAdapter = true)

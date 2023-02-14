@@ -53,6 +53,7 @@
                     android:textColor="@color/color20"/>
 
                 <TextView
+                    android:id="@+id/cust_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -91,8 +92,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
                     android:text="@string/product_name"
-                    android:textSize="12sp"
-                    android:textColor="@color/color21"/>
+                    android:textColor="@color/color21"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/prod_name"

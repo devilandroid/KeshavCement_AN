@@ -36,10 +36,10 @@
         android:label="@string/worksite"
         tools:layout="@layout/fragment_new_worksite" />
     <fragment
-        android:id="@+id/claimPurchaseFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.claimPurchase.ClaimPurchaseFragment"
-        android:label="@string/claim_purchase"
-        tools:layout="@layout/fragment_claim_purchase" />
+        android:id="@+id/purchaseRequestFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.purchaseRequest.PurchaseRequestFragment"
+        android:label="@string/purchase_request"
+        tools:layout="@layout/fragment_purchase_request" />
     <fragment
         android:id="@+id/myEarningFragment"
         android:name="com.loyaltyworks.keshavcement.ui.myEarning.MyEarningFragment"
@@ -108,7 +108,7 @@
     <fragment
         android:id="@+id/productFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductFragment"
-        android:label="@string/redemption_catalogue"
+        android:label="@string/product_catalogue"
         tools:layout="@layout/fragment_product" >
         <action
             android:id="@+id/action_productFragment_to_productDetailsFragment"
@@ -123,10 +123,10 @@
         android:label="@string/offers"
         tools:layout="@layout/fragment_promotions_details" />
     <fragment
-        android:id="@+id/newSaleFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.newSale.NewSaleFragment"
-        android:label="@string/new_sale"
-        tools:layout="@layout/fragment_new_sale" />
+        android:id="@+id/claimFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.claim.ClaimFragment"
+        android:label="@string/claim"
+        tools:layout="@layout/fragment_claim" />
     <fragment
         android:id="@+id/claimHistoryFragment"
         android:name="com.loyaltyworks.keshavcement.ui.claimHistory.ClaimHistoryFragment"
@@ -135,7 +135,7 @@
     <fragment
         android:id="@+id/cashTransferHistoryFragment"
         android:name="com.loyaltyworks.keshavcement.ui.cashTransferHistory.CashTransferHistoryFragment"
-        android:label="@string/cash_history"
+        android:label="@string/cash_transfer_history"
         tools:layout="@layout/fragment_cash_transfer_history" />
     <fragment
         android:id="@+id/mySupportExecutiveFragment"
@@ -203,7 +203,7 @@
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductDetailsFragment"
-        android:label="@string/redemption_catalogue"
+        android:label="@string/product_details"
         tools:layout="@layout/fragment_product_details" >
         <action
             android:id="@+id/action_productDetailsFragment_to_cartFragment"

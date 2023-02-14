@@ -45,6 +45,8 @@ android {
         buildConfigField "String", "Dealer", "\"3\""
         buildConfigField "String", "SubDealer", "\"4\""
         buildConfigField "String", "SupportExecutive", "\"5\""
+        buildConfigField "String", "MappedCustomerIdSE", "\"MappedCustomerIdSE\""
+        buildConfigField "String", "MappedCustomerNameSE", "\"MappedCustomerNameSE\""
         buildConfigField "String", "ForgotPasswordClicked", "\"ForgotPasswordClicked\""
     }
 
@@ -144,6 +146,7 @@ dependencies {
     implementation 'com.github.rommansabbir:NetworkX:2.2.0'
 
     implementation 'com.guolindev.permissionx:permissionx:1.5.1'
+    implementation 'com.github.prabhat1707:EasyWayLocation:2.2'
 
     // Animations
     implementation 'com.daimajia.easing:library:2.0@aar'
@@ -184,4 +187,6 @@ dependencies {
 
     implementation 'rongi.rotate-layout:rotate-layout:3.0.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    implementation 'com.github.vidheyMB:FileSelector:0.1.2'
 }

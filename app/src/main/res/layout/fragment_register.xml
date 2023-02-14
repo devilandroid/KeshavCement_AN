@@ -769,64 +769,6 @@
 
                                 </LinearLayout>
 
-                                <!--  Member ID for Dealer Type -->
-                                <LinearLayout
-                                    android:id="@+id/member_id_layout"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:orientation="vertical">
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:paddingStart="3dp"
-                                        android:orientation="horizontal">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Member ID"
-                                            android:fontFamily="@font/poppins_medium"
-                                            android:textColor="@color/dark"
-                                            android:textSize="12sp"/>
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="*"
-                                            android:fontFamily="@font/poppins_medium"
-                                            android:textColor="@color/red"
-                                            android:textSize="12sp"/>
-                                    </LinearLayout>
-
-                                    <androidx.cardview.widget.CardView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        app:cardCornerRadius="20dp"
-                                        app:cardElevation="5dp"
-                                        android:layout_margin="3dp">
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="40dp"
-                                            android:orientation="vertical">
-                                            <EditText
-                                                android:id="@+id/member_id"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:hint="Enter Member ID"
-                                                android:textSize="12sp"
-                                                android:imeOptions="actionNext"
-                                                android:inputType="text"
-                                                android:maxLines="1"
-                                                android:paddingStart="20dp"
-                                                android:singleLine="true"
-                                                android:background="@android:color/transparent"
-                                                android:textColorHint="@color/grey"
-                                                android:textColor="@color/dark"/>
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-
-
-                                </LinearLayout>
-
                                 <!--  Full Name -->
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -1068,13 +1010,13 @@
                                             android:fontFamily="@font/poppins_medium"
                                             android:textColor="@color/dark"
                                             android:textSize="12sp"/>
-                                        <TextView
+                                       <!-- <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="*"
                                             android:fontFamily="@font/poppins_medium"
                                             android:textColor="@color/red"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp"/>-->
                                     </LinearLayout>
 
                                     <androidx.cardview.widget.CardView
@@ -1127,13 +1069,13 @@
                                             android:fontFamily="@font/poppins_medium"
                                             android:textColor="@color/dark"
                                             android:textSize="12sp"/>
-                                        <TextView
+                                        <!--<TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="*"
                                             android:fontFamily="@font/poppins_medium"
                                             android:textColor="@color/red"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp"/>-->
                                     </LinearLayout>
 
                                     <androidx.cardview.widget.CardView

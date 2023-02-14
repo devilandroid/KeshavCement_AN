@@ -1,17 +1,23 @@
 package com.loyaltyworks.keshavcement.ui.notification
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.loyaltyworks.keshavcement.BuildConfig
-import com.loyaltyworks.keshavcement.databinding.ActivityNotificationBinding
+import com.loyaltyworks.keshavcement.R
+import com.loyaltyworks.keshavcement.databinding.FragmentNotificationBinding
 import com.loyaltyworks.keshavcement.ui.DashboardActivity
 import com.loyaltyworks.keshavcement.ui.splashScreen.SplashActivity
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 
-class NotificationActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityNotificationBinding
+
+class NotificationFragment : Fragment() {
+    private lateinit var _binding: FragmentNotificationBinding
+    private val binding get() = _binding!!
 
     /* ELEMENTS NEEDY TO PUSH NOTIFICATIONS */
     var PUSH_TOKEN = "PUSH_TOKEN"
@@ -46,67 +52,72 @@ class NotificationActivity : AppCompatActivity() {
     var mUserActionId = 0
     var mPushCatId = 0
 
-    var context: Context? = null
 
     val PROMOTION_ACTION_TYPE = 101
     val CATALOGUE_ACTION_TYPE = 100
     val Query_TYPE = 103
     val HistoryNotification_TYPE = 102
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentNotificationBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
-        val iin = intent
-        context = this
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val iin = requireActivity().intent
         if (iin != null) {
             page = iin.getStringExtra(SCREENING)!!.toInt()
             mUserActionId = iin.getStringExtra(PUSH_USER_ACTION_ID)!!.toInt()
             mPushCatId = iin.getStringExtra(ID)!!.toInt()
         }
 
-        if (PreferenceHelper.getBooleanValue(this, BuildConfig.IsLoggedIn)) {
+        if (PreferenceHelper.getBooleanValue(requireContext(), BuildConfig.IsLoggedIn)) {
             when (page) {
                 Query_TYPE -> openQueryChat()
 //                PROMOTION_ACTION_TYPE -> openPromotionModel()
 //                CATALOGUE_ACTION_TYPE -> openProductCatalogueModel()
 //                HistoryNotification_TYPE -> openHistoryNotification()
                 else -> {
-                    startActivity(Intent(this, DashboardActivity::class.java))
-                    finish()
+                    startActivity(Intent(requireActivity(), DashboardActivity::class.java))
+                    requireActivity().finish()
                 }
             }
         } else {
-            startActivity(Intent(this, SplashActivity::class.java))
-            finish()
+            startActivity(Intent(requireActivity(), SplashActivity::class.java))
+            requireActivity().finish()
         }
-
-
     }
 
     private fun openQueryChat() {
         when (mUserActionId) {
             OPEN_APP -> {
-                val intent = Intent(this, DashboardActivity::class.java)
+                val intent = Intent(requireActivity(), DashboardActivity::class.java)
                 intent.putExtra(DashBoardFragment, DashBoard)
                 startActivity(intent)
-                finish()
+                requireActivity().finish()
             }
             OPEN_LIST -> {
-                val intent = Intent(this, DashboardActivity::class.java)
-                // val intent = Intent(this, HistoryNotificationActivity::class.java)
-                intent.putExtra(DashBoardFragment, Support)
-                startActivity(intent)
-                finish()
+                findNavController().navigate(R.id.historyNotificationFragment)
+//                val intent = Intent(this, HistoryNotificationActivity::class.java)
+//                intent.putExtra(DashBoardFragment, Support)
+//                startActivity(intent)
+//                finish()
             }
             OPEN_DETAILS -> {
-                val intent = Intent(this, DashboardActivity::class.java)
+                val intent = Intent(requireActivity(), DashboardActivity::class.java)
                 intent.putExtra(DashBoardFragment, ChatPage)
                 intent.putExtra(ChatID, mPushCatId)
                 startActivity (intent)
-                finish ()
+                requireActivity().finish ()
             }
         }
     }
+
 
 }

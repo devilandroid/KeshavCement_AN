@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.claimPurchase.ClaimPurchaseFragment">
+    tools:context=".ui.purchaseRequest.PurchaseRequestFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,16 +80,14 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/corner_bg2">
 
-                <EditText
+                <pl.utkala.searchablespinner.SearchableSpinner
+                    android:id="@+id/dealer_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="20dp"
-                    android:text="-"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="12sp" />
+                    android:layout_weight="10"
+                    android:background="@color/transparent"
+                    app:closeText="Close"
+                    app:dialogTitle="Please select name" />
 
                 <ImageView
                     android:layout_width="15dp"
@@ -135,7 +133,7 @@
                     android:layout_weight="10"
                     android:background="@color/transparent"
                     app:closeText="Close"
-                    app:dialogTitle="Select Color" />
+                    app:dialogTitle="Please select product" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -160,7 +158,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.7"
                 android:gravity="center_vertical"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/enter_quantity"
@@ -170,11 +168,11 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.3"
                 android:gravity="center|end">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="130dp"
+                    android:layout_width="170dp"
                     android:layout_height="45dp"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="0dp"
@@ -185,6 +183,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/qty_minus"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:text="-"
@@ -196,28 +195,31 @@
                             android:layout_marginStart="5dp"/>
 
                         <EditText
-                            android:layout_width="40dp"
+                            android:id="@+id/qty_textview"
+                            android:layout_width="80dp"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
                             android:backgroundTint="@color/color33"
                             android:fontFamily="@font/poppins_semibold"
                             android:gravity="center"
                             android:inputType="number"
-                            android:text="0"
+                            android:text=""
+                            android:maxLength="6"
                             android:textSize="16sp"
                             android:textColor="@color/white" />
 
                         <TextView
+                            android:id="@+id/qty_plus"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
-                            android:text="+"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/poppins_bold"
-                            android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
-                            android:gravity="center"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="5dp"
                             android:background="@drawable/quantity_bg"
-                            android:layout_marginEnd="5dp"/>
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@color/white" />
 
 
                     </RelativeLayout>

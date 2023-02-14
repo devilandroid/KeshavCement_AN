@@ -129,6 +129,7 @@
                     android:textSize="12sp" />
 
                 <ImageView
+                    android:id="@+id/site_image"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
@@ -136,6 +137,7 @@
                     android:background="@drawable/dotted_bg" />
 
                 <TextView
+                    android:id="@+id/change_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -162,16 +164,21 @@
                 android:padding="15dp">
 
                 <com.google.android.gms.maps.MapView
-                    android:id="@+id/mapview"
+                    android:id="@+id/mapView"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_margin="2dp"
-                    android:backgroundTint="@color/colorAccent"
                     android:enabled="true"
                     android:isScrollContainer="true"
                     android:scrollbars="vertical" />
 
+                <!--<fragment
+                    android:id="@+id/mapView"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />-->
                 <LinearLayout
+                    android:id="@+id/capture_loc"
                     android:layout_width="220dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
@@ -244,6 +251,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/owner_name"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
@@ -253,6 +261,8 @@
                     android:background="@drawable/edit_profile_bg"
                     android:backgroundTint="@color/white"
                     android:elevation="5dp"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp" />
 
@@ -267,12 +277,17 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/owner_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:maxLines="1"
                     android:background="@drawable/edit_profile_bg"
                     android:backgroundTint="@color/white"
                     android:elevation="5dp"
@@ -290,6 +305,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/owner_addr"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
@@ -298,6 +314,8 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_profile_bg"
                     android:backgroundTint="@color/white"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:elevation="5dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp" />
@@ -339,6 +357,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/engineer_name"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
@@ -347,6 +366,8 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_profile_bg"
                     android:backgroundTint="@color/white"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:elevation="5dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp" />
@@ -362,6 +383,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/engineer_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
@@ -370,6 +392,8 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_profile_bg"
                     android:backgroundTint="@color/white"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:elevation="5dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp" />
@@ -422,6 +446,7 @@
                     android:textSize="12sp" />
 
                 <Spinner
+                    android:id="@+id/level_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
@@ -444,6 +469,7 @@
                     android:textSize="12sp" />
 
                 <LinearLayout
+                    android:id="@+id/tentative_date"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
@@ -453,6 +479,7 @@
                     android:background="@drawable/edit_profile_bg"
                     android:backgroundTint="@color/white"
                     android:elevation="5dp"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp">
@@ -462,6 +489,18 @@
                         android:layout_height="18dp"
                         android:src="@drawable/calendar"
                         app:tint="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tentative_date_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text=""
+                        android:hint=""
+                        android:textSize="12sp" />
+
 
 
                 </LinearLayout>
@@ -477,6 +516,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/remarks"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"

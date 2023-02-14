@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="@string/redemption_catalogue"
+                android:text="@string/product_details"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:singleLine="true"

@@ -25,6 +25,7 @@
     <color name="pending_yellow1">#B6C910</color>
     <color name="greyss">#707070</color>
     <color name="transparent_dark">#6B040404</color>
+    <color name="green1">#5AB236</color>
 
     <color name="color1">#ABF1D2FD</color>
     <color name="color2">#333232</color>
@@ -79,6 +80,8 @@
     <color name="color51">#F7F7F7</color>
     <color name="color52">#F6F5F5</color>
     <color name="color53">#B3FFFFFF</color>
+    <color name="color54">#0FEA1616</color>
+    <color name="color55">#EA1616</color>
 
 
 

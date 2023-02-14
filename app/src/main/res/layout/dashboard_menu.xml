@@ -371,7 +371,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="40dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="@string/claim_purchase"
+                            android:text="@string/purchase_request"
                             android:textColor="@color/dark"
                             android:textSize="14sp" />
 

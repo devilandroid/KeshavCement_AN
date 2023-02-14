@@ -70,7 +70,6 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     var identityType: String = ""
     var aadharNo: String = ""
     var gstNo: String = ""
-    var memberID: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -125,17 +124,14 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     private fun initialSetup() {
         if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
             PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) {
-            binding.memberIdLayout.visibility = View.GONE
             binding.gstLayout.visibility = View.GONE
             binding.aadharLayout.visibility = View.VISIBLE
 
         } else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer) {
-            binding.memberIdLayout.visibility = View.VISIBLE
             binding.gstLayout.visibility = View.VISIBLE
             binding.aadharLayout.visibility = View.GONE
 
         } else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) {
-            binding.memberIdLayout.visibility = View.GONE
             binding.gstLayout.visibility = View.VISIBLE
             binding.aadharLayout.visibility = View.GONE
 
@@ -261,12 +257,6 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 if (binding.customerTypeName.text.toString().isNullOrBlank()){
                     Toast.makeText(requireContext(), "Customer Type should not be empty", Toast.LENGTH_SHORT).show()
 
-                }else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer &&
-                    binding.memberId.text.toString().isNullOrBlank()){
-
-                    binding.memberId.error = getString(R.string.enter_member_id)
-                    binding.memberId.requestFocus()
-
                 }else if (binding.name.text.toString().isNullOrBlank()){
                     binding.name.error = getString(R.string.enter_your_name)
                     binding.name.requestFocus()
@@ -287,28 +277,28 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     binding.mobile.error = getString(R.string.enter_valid_mobile_no)
                     binding.mobile.requestFocus()
 
-                }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
+                }/*else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) &&
                     binding.aadharNumber.text.toString().isNullOrBlank()){
 
                     binding.aadharNumber.error = getString(R.string.enter_aadhar_number)
                     binding.aadharNumber.requestFocus()
 
-                }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
+                }*/else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) &&
                     !binding.aadharNumber.text.toString().isNullOrBlank() && binding.aadharNumber.text.toString().length < 12){
 
                     binding.aadharNumber.error = getString(R.string.enter_valid_aadhar_number)
                     binding.aadharNumber.requestFocus()
 
-                }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
+                }/*else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) &&
                     binding.gstNumber.text.toString().isNullOrBlank()){
 
                     binding.gstNumber.error = getString(R.string.enter_gst_number)
                     binding.gstNumber.requestFocus()
 
-                }else if (binding.address.text.toString().isNullOrBlank()){
+                }*/else if (binding.address.text.toString().isNullOrBlank()){
                     binding.address.error = getString(R.string.enter_your_address)
                     binding.address.requestFocus()
 
@@ -805,7 +795,6 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
         } else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer) {
             gstNo = binding.gstNumber.text.toString()
-            memberID = binding.memberId.text.toString()
 
         } else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) {
             gstNo = binding.gstNumber.text.toString()
@@ -838,7 +827,7 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 ),
                 ObjCustomerOfficalInfoRegister(
                     companyName = binding.firmName.text.toString(),
-                    sAPCode = memberID,
+//                    sAPCode = memberID,
                     officialGSTNumber = gstNo
                 )
             )

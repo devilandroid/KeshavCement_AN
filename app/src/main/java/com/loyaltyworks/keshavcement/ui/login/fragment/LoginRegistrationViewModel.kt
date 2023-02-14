@@ -72,4 +72,30 @@ class LoginRegistrationViewModel: BaseViewModel() {
             _loginDetails.postValue(apiRepository.getLoginData(loginRequest))
         }
     }
+
+    /*** GetProfleDetails  ***/
+    private val _getProfileResponse = MutableLiveData<ProfileResponse>()
+    val getProfileResponse: LiveData<ProfileResponse> = _getProfileResponse
+
+    fun setProfileRequest(profileReqeust: ProfileRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _getProfileResponse.postValue(apiRepository.getProfileData(profileReqeust))
+        }
+    }
+
+    /*** Activate Customer ViewModel  ***/
+    private val _activateCustomerLiveData = MutableLiveData<ActivateCustomerResponse>()
+    val activateCustomerLiveData: LiveData<ActivateCustomerResponse> = _activateCustomerLiveData
+
+    fun activateCustomerData(activateCustomerRequest: ActivateCustomerRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _activateCustomerLiveData.postValue(apiRepository.activateCustomerData(activateCustomerRequest))
+        }
+    }
 }

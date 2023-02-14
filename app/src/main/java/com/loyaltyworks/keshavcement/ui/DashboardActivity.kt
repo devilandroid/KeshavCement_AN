@@ -332,7 +332,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
             }
 
             R.id.dClaimPurchase -> {
-                navController.navigate(R.id.claimPurchaseFragment)
+                navController.navigate(R.id.purchaseRequestFragment)
                 binding.drawerLayout.closeDrawer(Gravity.LEFT)
             }
 

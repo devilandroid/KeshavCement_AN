@@ -3,9 +3,12 @@ package com.loyaltyworks.keshavcement.ui.login.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -84,6 +87,27 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+        binding.password.setOnTouchListener(View.OnTouchListener { view, event ->
+            val DRAWABLE_LEFT = 0
+            val DRAWABLE_TOP = 1
+            val DRAWABLE_RIGHT = 2
+            val DRAWABLE_BOTTOM = 3
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= binding.password.right - binding.password.compoundDrawables[DRAWABLE_RIGHT].bounds.width()
+                ) {
+                    if (binding.password.transformationMethod == PasswordTransformationMethod.getInstance()){
+                        binding.password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_pass_view, 0)
+                        binding.password.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    }else{
+                        binding.password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_passw, 0)
+                        binding.password.transformationMethod = PasswordTransformationMethod.getInstance()
+                    }
+                    return@OnTouchListener true
+                }
+            }
+            false
+        })
 
         binding.customerTypeSpinner.onItemSelectedListener = this
 
@@ -467,12 +491,12 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     binding.userName.error = getString(R.string.enter_mobile_number_membership_id)
                     binding.userName.requestFocus()
                     return
-                }else if(binding.userName.text.toString().isNotEmpty() && binding.userName.text.toString().length < 10){
+                }/*else if(binding.userName.text.toString().isNotEmpty() && binding.userName.text.toString().length < 10){
                     binding.userName.text!!.clear()
                     binding.userName.error = getString(R.string.enter_valid_mobile_number_membership_id)
                     binding.userName.requestFocus()
                     return
-                }else if (binding.password.text.toString().isEmpty()) {
+                }*/else if (binding.password.text.toString().isEmpty()) {
                     binding.password.error = getString(R.string.prompt_password)
                     binding.password.requestFocus()
                     return
