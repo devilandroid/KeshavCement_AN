@@ -66,6 +66,8 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
     var sucessMsg: String = ""
 
+    var ActorId: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,6 +88,12 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
+        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
+            ActorId = PreferenceHelper.getStringValue(requireContext(), BuildConfig.MappedCustomerIdSE)
+        }else{
+            ActorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
+        }
+
         binding.custTypeSpinner.onItemSelectedListener = this
         binding.customerNameSpinner.onItemSelectedListener = this
         binding.productSpinner.onItemSelectedListener = this
@@ -96,6 +104,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
         binding.qtyPlus.setOnClickListener(this)
         binding.qtyMinus.setOnClickListener(this)
 
+        Log.d("efburhbfr","fjrf : " + PreferenceHelper.getStringValue(requireContext(), BuildConfig.MappedCustomerNameSE))
         userTypeSpinner()
 
         binding.qtyTextview.addTextChangedListener(object : TextWatcher {
@@ -135,12 +144,12 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
             userTypeList.add( CommonSpinner(name = "Sub Dealer", id = 4))
         }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
 
-            if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType).equals("Dealer",true)){
+            if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.MappedCustomerNameSE).equals("Dealer",true)){
                 userTypeList.add( CommonSpinner(name = "Select Customer Type", id = -1))
                 userTypeList.add( CommonSpinner(name = "Engineer", id = 1))
                 userTypeList.add( CommonSpinner(name = "Mason", id = 2))
                 userTypeList.add( CommonSpinner(name = "Sub Dealer", id = 4))
-            }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType).equals("Sub Dealer",true)){
+            }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.MappedCustomerNameSE).equals("Sub Dealer",true)){
                 userTypeList.add( CommonSpinner(name = "Select Customer Type", id = -1))
                 userTypeList.add( CommonSpinner(name = "Engineer", id = 1))
                 userTypeList.add( CommonSpinner(name = "Mason", id = 2))
@@ -279,11 +288,11 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
     private fun SendOTPRequest() {
         loginViewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
-                MerchantUserName = BuildConfig.MerchantName,
-                UserName = "",
-                UserId = -1,
-                MobileNo = selectedCustomerMobile,
-                OTPType = "Enrollment"
+                merchantUserName = BuildConfig.MerchantName,
+                userName = "",
+                userId = "-1",
+                mobileNo = selectedCustomerMobile,
+                oTPType = "Enrollment"
             )
         )
 
@@ -299,11 +308,11 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                 ritailerId = dealerSubDealerId,
                 sourceDevice = 1,
                 tranDate = LocalDate.now().toString(),
+                approvalStatus = status,
                 productSaveDetailList = listOf(
                     ProductSaveDetail(
                         productCode = productCode,
-                        quantity = binding.qtyTextview.text.toString(),
-                        approvalStatus = status
+                        quantity = binding.qtyTextview.text.toString()
                     )
                 )
 
@@ -323,7 +332,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     viewModel.getDealerSubDealerListData(
                         DealerSubDealerListRequest(
                             actionType = 16,
-                            actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
+                            actorId = ActorId,
                             searchText = userTypeId.toString()
                         )
                     )

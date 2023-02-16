@@ -160,4 +160,61 @@ interface ApiInterface {
     @POST("SaveCustomerRegistrationDetailsMobileApp")
     fun getEnrollmentAsync(@Body enrollmentRequest: EnrollmentRequest):  Deferred<Response<EnrollmentResponse>>
 
+    /*  User Active Or Not api call*/
+    @POST("UserActiveOrInActive")
+    fun getUserActivityOrNot(@Body userActiveOrNotRequest: UserActiveOrNotRequest): Deferred<Response<UserActiveOrNotResponse>>
+
+    /*  Save Catalogue Redemption details api call*/
+    @POST("SaveCatalogueRedemptionDetails")
+    fun getSaveCatalogueRedemptionDetails(@Body saveCatalogueRedemptionRequest: SaveCatalogueRedemptionRequest): Deferred<Response<SaveCatalogueRedemptionResponse>>
+
+    /* Send Catalogue Redemption Mobile Alert  */
+    @POST("SendCatalogueRedemptionAlertMobileApp")
+    fun getSendCatalogueRedeemAlert(@Body saveCatalogueRedemptionRequest: SaveCatalogueRedemptionRequest): Deferred<Response<SaveCatalogueRedemptionResponse>>
+
+    /* Send success sms to user */
+    @POST("SendSMSForSuccessfulRedemptionMobileApp")
+    fun getSendSuccssSMStoUser(@Body saveCatalogueRedemptionRequest: SendSMSForSucessRedemReq): Deferred<Response<Boolean>>
+
+    // Catalogue api call
+    @POST("GetCatalogueDetails")
+    fun fetchCatalogueAsync(@Body profileRequest: GatCatalogueRequest): Deferred<Response<GetCatalogueResponse>>
+
+    // Catalogue Category api call
+    @POST("GetCatalogueCategoryDetails")
+    fun fetchCatalogueCategoryAsync(@Body catalogueCategoryRequest: CatalogueCategoryRequest): Deferred<Response<CatalogueCategoryResponse>>
+
+    // Cart api call
+    @POST("GetCatalogueCartDetailsMobile")
+    fun fetchCartAsync(@Body cartResponse: CartRequest): Deferred<Response<CartResponse>>
+
+    // Add to Cart api call
+    @POST("SaveCatalogueCartDetailsMobile")
+    fun fetchAddToCartAsync(@Body cartResponse: AddToCartRequest): Deferred<Response<AddToCartResponse>>
+
+    /* Cart Count call*/
+    @POST("GetCatalogueCartDetailsMobile")
+    fun getCartCountData(@Body cartCountRequest: CartCountRequest): Deferred<Response<CartCountResponse>>
+
+    /* Planner  Add call*/
+    @POST("GetCatalogueDetails")
+    fun getAddPlannerData(@Body plannerAddRequest: PlannerAddRequest): Deferred<Response<PlannerAddResponse>>
+
+    /* Cart Count Update api call */
+    @POST("UpdateCustomerCart")
+    fun getCartUpdate(@Body cartListingRequest: UpdateQuantityRequest?): Deferred<Response<UpdateQuantityResponse>>
+
+    /* Cart Item Remove api call*/
+    @POST("UpdateCustomerCart")
+    fun getCartItemRemove(@Body removeCartProductRequest: RemoveCartProductRequest): Deferred<Response<RemoveCartProductResponse>>
+
+    // Redemption Planner List api call
+    @POST("GetRedemptionPlannerDetails")
+    fun fetchPlannerAsync(@Body plannerRequest: PlannerRequest): Deferred<Response<PlannerResponse>>
+
+    /* Planner Remove api call*/
+    @POST("GetPlannerAddedOrNot")
+    fun getPlannerRemove(@Body removePlannerRequest: RemovePlannerRequest): Deferred<Response<RemovePlannerResponse>>
+
+
 }

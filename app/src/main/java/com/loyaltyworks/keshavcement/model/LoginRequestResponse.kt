@@ -24,11 +24,20 @@ data class Location(
 /*** SaveAndGetOTPDetails Request ***/
 @JsonClass(generateAdapter = true)
 data class SaveAndGetOTPDetailsRequest(
-    val MerchantUserName: String,
-    val MobileNo: String,
-    val OTPType: String,
-    val UserId: Int,
-    val UserName: String
+    @Json(name = "MerchantUserName")
+    val merchantUserName: String? = null,
+    @Json(name = "MobileNo")
+    val mobileNo: String? = null,
+    @Json(name = "OTPType")
+    val oTPType: String? = null,
+    @Json(name = "EmailID")
+    val emailID: String? = null,
+    @Json(name = "UserId")
+    val userId: String? = null,
+    @Json(name = "UserName")
+    val userName: String? = null,
+    @Json(name = "Name")
+    val name: String? = null
 )
 
 /*** SaveAndGetOTPDetails Response ***/

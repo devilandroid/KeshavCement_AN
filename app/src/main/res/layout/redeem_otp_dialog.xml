@@ -66,14 +66,14 @@
 
 
                     <TextView
-                        android:id="@+id/timer"
+                        android:id="@+id/timer_dialog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="00:23"
                         android:fontFamily="@font/poppins_regular"
-                        android:textSize="12sp"
-                        android:textColor="@color/dark"/>
+                        android:text="00:23"
+                        android:textColor="@color/dark"
+                        android:textSize="12sp" />
 
 
                 </RelativeLayout>
@@ -108,7 +108,7 @@
                             android:id="@+id/otp_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="OTP will receive at +91******4525"
+                            android:text="OTP will receive at -"
                             android:fontFamily="@font/poppins_medium"
                             android:textSize="12sp"
                             android:textColor="@color/dark"/>

@@ -160,6 +160,11 @@
                 tools:listitem="@layout/row_confirm_product"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+            <include
+                android:id="@+id/no_data_fount"
+                layout="@layout/no_data_found_animation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
     </LinearLayout>
@@ -194,7 +199,7 @@
                 android:src="@drawable/coin"/>
 
             <TextView
-                android:id="@+id/points"
+                android:id="@+id/total_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -227,7 +232,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:layout_marginTop="3dp"
-            android:text="Point balance XXXXXX after this purchase"
+            android:text="-"
             android:fontFamily="@font/poppins_medium"
             android:textSize="10sp"
             android:textColor="@color/colorAccent"/>

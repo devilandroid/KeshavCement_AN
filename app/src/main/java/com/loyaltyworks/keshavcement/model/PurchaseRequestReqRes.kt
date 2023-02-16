@@ -177,7 +177,9 @@ data class SubmitPurchaseRequest(
     @Json(name = "SourceDevice")
     val sourceDevice: Int? = null,
     @Json(name = "TranDate")
-    val tranDate: String? = null
+    val tranDate: String? = null,
+    @Json(name = "Approval_Status")
+    val approvalStatus: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -185,9 +187,7 @@ data class ProductSaveDetail(
     @Json(name = "ProductCode")
     val productCode: String? = null,
     @Json(name = "Quantity")
-    val quantity: String? = null,
-    @Json(name = "ApprovalStatus")
-    val approvalStatus: String? = null
+    val quantity: String? = null
 )
 
 /*** Submit Purchase Response ***/

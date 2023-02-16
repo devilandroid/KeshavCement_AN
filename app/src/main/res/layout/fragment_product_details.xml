@@ -23,7 +23,7 @@
             android:layout_weight="7.5"
             android:orientation="horizontal">
             <ImageView
-                android:id="@+id/back_button"
+                android:id="@+id/back_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -51,7 +51,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/cart_button"
+                android:id="@+id/cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
@@ -114,15 +114,15 @@
         android:gravity="center_vertical"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/category"
+            android:id="@+id/catetogry_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Evoucher / Amazon"
+            android:text="-"
             android:fontFamily="@font/poppins_regular"
             android:textSize="10sp"
             android:textColor="@color/dark"/>
         <TextView
-            android:id="@+id/prod_name"
+            android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="XXXXXX"
@@ -242,7 +242,8 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="5"
+                            android:layout_weight="4"
+                            android:layout_gravity="center_vertical"
                             android:orientation="vertical">
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -276,34 +277,23 @@
                                     android:textColor="@color/color40"/>
                             </LinearLayout>
 
-
-                            <TextView
-                                android:id="@+id/remaining_balance"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:text="XXXXXXX"
-                                android:fontFamily="@font/poppins_medium"
-                                android:textSize="10sp"
-                                android:textColor="@color/color20"/>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="5"
+                            android:layout_weight="6"
                             android:gravity="end">
 
                             <LinearLayout
-                                android:id="@+id/addCartBtn"
+                                android:id="@+id/add_cart_btn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 android:paddingStart="26dp"
                                 android:paddingEnd="26dp"
-                                android:background="@drawable/corner_bg4"
-                                android:backgroundTint="@color/colorPrimaryDark">
+                                android:background="@drawable/product_corner_bg_dark">
 
                                 <ImageView
                                     android:layout_width="15dp"

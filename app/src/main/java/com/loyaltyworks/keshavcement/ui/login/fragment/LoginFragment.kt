@@ -357,11 +357,11 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
     private fun SendOTPRequest() {
         viewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
-                MerchantUserName = BuildConfig.MerchantName,
-                UserName = "",
-                UserId = -1,
-                MobileNo = binding.forgotUserName.text.toString(),
-                OTPType = "Enrollment"
+                merchantUserName = BuildConfig.MerchantName,
+                userName = "",
+                userId = "-1",
+                mobileNo = binding.forgotUserName.text.toString(),
+                oTPType = "Enrollment"
             )
         )
 

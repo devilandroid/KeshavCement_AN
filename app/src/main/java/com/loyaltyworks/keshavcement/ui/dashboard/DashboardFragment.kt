@@ -298,7 +298,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                         binding.createdByName.text = it.lstCustomerFeedBackJsonApi[0].mappedCustomerName
                         /*** Support Executive Mapped ID ***/
                         PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerIdSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerId!!)
-                        PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerNameSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerName!!)
+                        PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerNameSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerType!!)
                     }
 
                     if (it.lstCustomerFeedBackJsonApi[0].customerImage.toString() != "null") {

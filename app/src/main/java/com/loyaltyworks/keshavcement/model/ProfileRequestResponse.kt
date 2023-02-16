@@ -2,6 +2,7 @@ package com.loyaltyworks.keshavcement.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class ProfileRequest(
@@ -66,7 +67,7 @@ data class LstCustomerJson(
     @Json(name = "acountHolderName")
     val acountHolderName: Any? = null,
     @Json(name = "address1")
-    val address1: String? = null,
+    var address1: String? = null,
     @Json(name = "address2")
     val address2: String? = null,
     @Json(name = "addressId")
@@ -178,15 +179,15 @@ data class LstCustomerJson(
     @Json(name = "district")
     val district: String? = null,
     @Json(name = "districtId")
-    val districtId: Int? = null,
+    var districtId: Int? = null,
     @Json(name = "districtName")
-    val districtName: String? = null,
+    var districtName: String? = null,
     @Json(name = "dob")
     val dob: Any? = null,
     @Json(name = "domain")
     val domain: Any? = null,
     @Json(name = "email")
-    val email: String? = null,
+    var email: String? = null,
     @Json(name = "emailStatus")
     val emailStatus: Int? = null,
     @Json(name = "engineNumber")
@@ -204,7 +205,7 @@ data class LstCustomerJson(
     @Json(name = "familyMemberName")
     val familyMemberName: Any? = null,
     @Json(name = "firstName")
-    val firstName: String? = null,
+    var firstName: String? = null,
     @Json(name = "gender")
     val gender: Any? = null,
     @Json(name = "ibanNumber")
@@ -292,7 +293,7 @@ data class LstCustomerJson(
     @Json(name = "merchantId")
     val merchantId: Int? = null,
     @Json(name = "mobile")
-    val mobile: String? = null,
+    var mobile: String? = null,
     @Json(name = "mobileNumberLimitation")
     val mobileNumberLimitation: Int? = null,
     @Json(name = "mobilePrefix")
@@ -354,9 +355,9 @@ data class LstCustomerJson(
     @Json(name = "remarks")
     val remarks: Any? = null,
     @Json(name = "stateId")
-    val stateId: Int? = null,
+    var stateId: Int? = null,
     @Json(name = "stateName")
-    val stateName: String? = null,
+    var stateName: String? = null,
     @Json(name = "talukId")
     val talukId: Int? = null,
     @Json(name = "talukName")
@@ -390,8 +391,8 @@ data class LstCustomerJson(
     @Json(name = "whatsAppNumber")
     val whatsAppNumber: Any? = null,
     @Json(name = "zip")
-    val zip: String? = null
-)
+    var zip: String? = null
+): Serializable
 
 @JsonClass(generateAdapter = true)
 data class LstCustomerOfficalInfoJson(

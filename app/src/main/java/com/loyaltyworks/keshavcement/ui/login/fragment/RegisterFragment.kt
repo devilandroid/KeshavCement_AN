@@ -641,11 +641,11 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     private fun SendOTPRequest() {
         viewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
-                MerchantUserName = BuildConfig.MerchantName,
-                UserName = "",
-                UserId = -1,
-                MobileNo = binding.otpMobileNumber.text.toString(),
-                OTPType = "Enrollment"
+                merchantUserName = BuildConfig.MerchantName,
+                userName = "",
+                userId = "-1",
+                mobileNo = binding.otpMobileNumber.text.toString(),
+                oTPType = "Enrollment"
             )
         )
 

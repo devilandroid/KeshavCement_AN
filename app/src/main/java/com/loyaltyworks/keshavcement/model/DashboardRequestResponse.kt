@@ -610,7 +610,7 @@ data class ObjCustomerDashboard(
     @Json(name = "redeemableEncashBalance")
     val redeemableEncashBalance: Int? = null,
     @Json(name = "redeemablePointsBalance")
-    val redeemablePointsBalance: Double? = null,
+    val redeemablePointsBalance: Int? = null,
     @Json(name = "referralBonusPoints")
     val referralBonusPoints: Int? = null,
     @Json(name = "referralCount")
@@ -642,7 +642,7 @@ data class ObjCustomerDashboard(
     @Json(name = "totalMappedSubDealers")
     val totalMappedSubDealers: Int? = null,
     @Json(name = "totalRedeemed")
-    val totalRedeemed: Double? = null,
+    val totalRedeemed: Int? = null,
     @Json(name = "totalRows")
     val totalRows: Int? = null,
     @Json(name = "totalWithDrawl")

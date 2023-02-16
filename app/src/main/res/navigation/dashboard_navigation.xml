@@ -231,10 +231,37 @@
         android:id="@+id/editAddressFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.checkout.EditAddressFragment"
         android:label="@string/edit_address"
-        tools:layout="@layout/fragment_edit_address" />
+        tools:layout="@layout/fragment_edit_address" >
+        <action
+            android:id="@+id/action_editAddressFragment_to_addressFragment"
+            app:destination="@id/addressFragment"
+            app:popUpTo="@id/addressFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/languageFragment2"
         android:name="com.loyaltyworks.keshavcement.ui.lanuage.LanguageFragment"
         android:label=""
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.wishlist.WishlistFragment"
+        android:label="@string/wishlist"
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_wishlistFragment_to_wishlistDetailsFragment"
+            app:destination="@id/wishlistDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wishlistDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.wishlist.WishlistDetailsFragment"
+        android:label="@string/wishlist_details"
+        tools:layout="@layout/fragment_wishlist_details" >
+        <action
+            android:id="@+id/action_wishlistDetailsFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/plannerDetailsFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

@@ -91,7 +91,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/claim_history_filter"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/filterClose"
@@ -117,12 +117,11 @@
             android:layout_marginTop="5dp">
 
             <TextView
-                android:id="@+id/subDealer"
+                android:id="@+id/filter_subDealer"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/edit_profile_bg"
-                android:backgroundTint="@color/color10"
+                android:background="@drawable/unselected_filter2"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:text="Sub Dealer"
@@ -130,11 +129,10 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/engineer"
+                android:id="@+id/filter_engineer"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:background="@drawable/edit_profile_bg"
-                android:backgroundTint="@color/color10"
+                android:background="@drawable/unselected_filter2"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:text="Engineer"
@@ -142,12 +140,11 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/Mason"
+                android:id="@+id/filter_Mason"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/edit_profile_bg"
-                android:backgroundTint="@color/color10"
+                android:background="@drawable/unselected_filter2"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:text="Mason"
@@ -172,11 +169,10 @@
             android:layout_marginTop="5dp">
 
             <TextView
-                android:id="@+id/approved"
+                android:id="@+id/filter_approved"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:background="@drawable/edit_profile_bg"
-                android:backgroundTint="@color/color10"
+                android:background="@drawable/unselected_filter2"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:text="@string/approved"
@@ -185,12 +181,11 @@
 
 
             <TextView
-                android:id="@+id/rejected"
+                android:id="@+id/filter_rejected"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/edit_profile_bg"
-                android:backgroundTint="@color/color10"
+                android:background="@drawable/unselected_filter2"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:text="@string/rejected"
@@ -236,6 +231,7 @@
                     android:src="@drawable/calendar" />
 
                 <TextView
+                    android:id="@+id/from_date_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -267,6 +263,7 @@
                     android:src="@drawable/calendar" />
 
                 <TextView
+                    android:id="@+id/to_date_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"

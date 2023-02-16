@@ -249,6 +249,10 @@ class MyPurchaseClaimFragment : Fragment(), View.OnClickListener {
                 binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
                 binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
 
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
                 selectedStatusId = "1"
             }
 
@@ -256,6 +260,10 @@ class MyPurchaseClaimFragment : Fragment(), View.OnClickListener {
                 binding.filterPending.setBackgroundResource(R.drawable.selected_filter)
                 binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
                 binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
 
                 selectedStatusId = "0"
             }
@@ -265,6 +273,10 @@ class MyPurchaseClaimFragment : Fragment(), View.OnClickListener {
                 binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
                 binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
 
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
                 selectedStatusId = "-1"
             }
 
@@ -272,6 +284,10 @@ class MyPurchaseClaimFragment : Fragment(), View.OnClickListener {
                 binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
                 binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
                 binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
 
                 selectedStatusId = "-3"
                 FromDate = ""

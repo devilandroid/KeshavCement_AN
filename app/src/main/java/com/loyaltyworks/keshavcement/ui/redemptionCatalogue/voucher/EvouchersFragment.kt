@@ -49,15 +49,20 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
 
             }
 
-            override fun onRedeemClick() {
+            override fun onRedeemClick(otp: String) {
                 ClaimSuccessDialog.showClaimSuccessDialog(requireContext(),true,"Successfully!","You have redeemed your product"
-                ,object :ClaimSuccessDialog.ClaimSuccessDialogCallBack{
+                    ,object :ClaimSuccessDialog.ClaimSuccessDialogCallBack{
                         override fun onOk() {
 
                         }
 
                     })
             }
+
+            override fun resendOTP() {
+
+            }
+
 
         })
 

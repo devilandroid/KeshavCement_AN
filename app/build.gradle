@@ -48,6 +48,9 @@ android {
         buildConfigField "String", "MappedCustomerIdSE", "\"MappedCustomerIdSE\""
         buildConfigField "String", "MappedCustomerNameSE", "\"MappedCustomerNameSE\""
         buildConfigField "String", "ForgotPasswordClicked", "\"ForgotPasswordClicked\""
+        buildConfigField "String", "RedeemablePointsBalance", "\"RedeemablePointsBalance\""
+        buildConfigField "String", "SelectedCustomerMobile", "\"SelectedCustomerMobile\""
+        buildConfigField "String", "SelectedCustomerName", "\"SelectedCustomerName\""
     }
 
     buildTypes {

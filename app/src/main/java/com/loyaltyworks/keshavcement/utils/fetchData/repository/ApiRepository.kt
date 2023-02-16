@@ -381,4 +381,146 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
             error = "Error Enrollment Trigger"
         )
     }
+
+    // User Activie or not api call
+    suspend fun getUserActivieOrNot(userActiviornot: UserActiveOrNotRequest): UserActiveOrNotResponse? {
+        return safeApiCall(
+            //await the result of deferred type
+            call = {
+                apiInterface.getUserActivityOrNot(userActiviornot).await()
+            },
+            error = "Error fetching Active or not"
+            //convert to mutable list
+        )
+    }
+
+    // Save catalogue redemption api call
+    suspend fun getSaveCatalogueRedemption(saveCatalogueRedemptionRequest: SaveCatalogueRedemptionRequest): SaveCatalogueRedemptionResponse? {
+        return safeApiCall(
+            //await the result of deferred type
+            call = { apiInterface.getSaveCatalogueRedemptionDetails(saveCatalogueRedemptionRequest).await() },
+            error = "Error fetching Catalogue Redemption"
+            //convert to mutable list
+        )
+    }
+
+    // Send Catalogue Redemption Mobile Alert  sendSuccessSMSToMerchant
+    suspend fun getCatalogueMobileAlert(saveCatalogueRedemptionRequest: SaveCatalogueRedemptionRequest): SaveCatalogueRedemptionResponse? {
+        return safeApiCall(
+            //await the result of deferred type
+            call = { apiInterface.getSendCatalogueRedeemAlert(saveCatalogueRedemptionRequest).await() },
+            error = "Error fetching Redemption mobile alert"
+            //convert to mutable list
+        )
+    }
+
+    // Send success sms user
+    suspend fun getSendSuccessSMS(saveCatalogueRedemptionRequest: SendSMSForSucessRedemReq): Boolean? {
+        return safeApiCall(
+            //await the result of deferred type
+            call = { apiInterface.getSendSuccssSMStoUser(saveCatalogueRedemptionRequest).await() },
+            error = "Error fetching Send Success sms"
+            //convert to mutable list
+        )
+    }
+
+    /* Catalouge Request callback*/
+    suspend fun getCatalogueData(getCatalogueRequest: GatCatalogueRequest): GetCatalogueResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchCatalogueAsync(getCatalogueRequest).await()
+            },
+            error = "Error Catalouge Trigger"
+        )
+    }
+
+    /* Catalouge Category callback*/
+    suspend fun getCatalogueCategoryData(getCatalogueRequest: CatalogueCategoryRequest): CatalogueCategoryResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchCatalogueCategoryAsync(getCatalogueRequest).await()
+            },
+            error = "Error Catalouge Category Trigger"
+        )
+    }
+
+    /* Cart List Request callback*/
+    suspend fun getCartData(cartRequest: CartRequest): CartResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchCartAsync(cartRequest).await()
+            },
+            error = "Error Cart Trigger"
+        )
+    }
+
+    /* Add to  Cart Request callback*/
+    suspend fun getAddToCartData(cartRequest: AddToCartRequest): AddToCartResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchAddToCartAsync(cartRequest).await()
+            },
+            error = "Error Add To Cart Trigger"
+        )
+    }
+
+    /*  Cart Count callback*/
+    suspend fun getCartCountData(cartCountRequest: CartCountRequest): CartCountResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCartCountData(cartCountRequest).await()
+            },
+            error = "Error cart count Trigger"
+        )
+    }
+
+    /*  Add Planner callback*/
+    suspend fun getAddPlannerData(plannerAddRequest: PlannerAddRequest): PlannerAddResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getAddPlannerData(plannerAddRequest).await()
+            },
+            error = "Error Add Planner  Trigger"
+        )
+    }
+
+    /* Cart Count Update callback*/
+    suspend fun getCartUpdate(updateQuantityRequest: UpdateQuantityRequest): UpdateQuantityResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCartUpdate(updateQuantityRequest).await()
+            },
+            error = "Error Cart Update Trigger"
+        )
+    }
+
+    /* Cart Item Remove callback*/
+    suspend fun getCartItemRemove(removeCartProductRequest: RemoveCartProductRequest): RemoveCartProductResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCartItemRemove(removeCartProductRequest).await()
+            },
+            error = "Error Cart Item Remove Trigger"
+        )
+    }
+
+    /* Planner List Request callback*/
+    suspend fun getPlannerData(plannerRequest: PlannerRequest): PlannerResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchPlannerAsync(plannerRequest).await()
+            },
+            error = "Error Planner List Trigger"
+        )
+    }
+
+    /* Planner Remove callback*/
+    suspend fun getPlannerRemove(removePlannerRequest: RemovePlannerRequest): RemovePlannerResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getPlannerRemove(removePlannerRequest).await()
+            },
+            error = "Error Planner Remove Trigger"
+        )
+    }
 }

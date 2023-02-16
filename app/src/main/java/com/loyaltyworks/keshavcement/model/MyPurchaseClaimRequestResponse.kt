@@ -20,7 +20,9 @@ data class MyPurchaseClaimRequest(
     @Json(name = "StartIndex")
     val startIndex: Int? = null,
     @Json(name = "ToDate")
-    val toDate: String? = null
+    val toDate: String? = null,
+    @Json(name = "CustomerTypeId")
+    val customerTypeId: String? = null
 )
 
 /*** My Purchase Claim List Response ***/

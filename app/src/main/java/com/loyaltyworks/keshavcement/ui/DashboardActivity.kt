@@ -381,11 +381,17 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
             R.id.dClaimHistory -> {
                 navController.navigate(R.id.claimHistoryFragment)
                 binding.drawerLayout.closeDrawer(Gravity.LEFT)
+
+                binding.root.my_activity_down_layout.visibility = View.GONE
+                binding.root.down_icon.rotation = 0f
             }
 
             R.id.dCashTransferHistory -> {
                 navController.navigate(R.id.cashTransferHistoryFragment)
                 binding.drawerLayout.closeDrawer(Gravity.LEFT)
+
+                binding.root.my_activity_down_layout.visibility = View.GONE
+                binding.root.down_icon.rotation = 0f
             }
 
             R.id.dMySupportExecutive -> {
