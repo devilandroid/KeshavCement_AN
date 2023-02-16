@@ -56,4 +56,165 @@ interface ApiInterface {
     @POST("BindLandingImageList")
     fun setBannerImageRequestAsync(@Body bannerImageRequest: BannerImageRequest): Deferred<Response<BannerImageResponse>>
 
+    // Profile api call
+    @POST("GetCustomerDetailsMobileApp")
+    fun fetchProfileAsync(@Body profileRequest: ProfileRequest): Deferred<Response<ProfileResponse>>
+
+    // My Support Executive List api call
+    @POST("GetCustParentChildMappingDetails")
+    fun fetchSupportExecutiveListAsync(@Body supportExecutiveRequest: MySupportExecutiveRequest): Deferred<Response<MySupportExecutiveResponse>>
+
+    // Create Support Executive api call
+    @POST("SaveCustomerRegistrationDetailsMobileApp")
+    fun fetchCreateSupportExecutiveAsync(@Body createSupportExecutiveRequest: CreateSupportExecutiveRequest): Deferred<Response<CreateSupportExecutiveResponse>>
+
+    // Activate Customer api call
+    @POST("SaveCustomerDetails")
+    fun fetchActivateCustomerAsync(@Body activateCustomerRequest: ActivateCustomerRequest): Deferred<Response<ActivateCustomerResponse>>
+
+    /* Update Profile api call*/
+    @POST("UpdateCustomerProfileMobileApp")
+    fun getProfileImageUpdateAsync(@Body profileImageUpdateRequest: ProfileImageUpdateRequest): Deferred<Response<ProfileImageUpdateResponse>>
+
+    /* Product Dropdown api call*/
+    @POST("GetAttributeDetails")
+    fun getProductDropdownAsync(@Body productDropdownRequest: ProductDropdownRequest): Deferred<Response<ProductDropdownResponse>>
+
+    /* Dealer SubDealer List api call*/
+    @POST("GetCustParentChildMappingDetails")
+    fun getDealerSubDealerListAsync(@Body dealerSubDealerListRequest: DealerSubDealerListRequest): Deferred<Response<DealerSubDealerListResponse>>
+
+    /* Submit Purchase Request api call*/
+    @POST("SavePurchaseRequest")
+    fun getPurchaseSubmitAsync(@Body submitPurchaseRequest: SubmitPurchaseRequest): Deferred<Response<SubmitPurchaseResponse>>
+
+    /* My Purchase Claim List api call*/
+    @POST("BindAssessmentRequestDetails")
+    fun getMyPurchaseClaimListAsync(@Body myPurchaseClaimRequest: MyPurchaseClaimRequest): Deferred<Response<MyPurchaseClaimResponse>>
+
+    /* Worksite List api call*/
+    @POST("GetWorkSiteDetails")
+    fun getWorksiteListAsync(@Body worksiteListRequest: WorksiteListRequest): Deferred<Response<WorksiteListResponse>>
+
+    /* Save Worksite api call*/
+    @POST("SaveWorkSiteInfo")
+    fun getSaveWorksiteAsync(@Body saveWorksiteRequest: SaveWorksiteRequest): Deferred<Response<SaveWorksiteResponse>>
+
+    /* Activate/Deactivate Support Executive api call*/
+    @POST("ApproveRejectDeleteRequest")
+    fun getActivateDeactivateSupportExecutiveAsync(@Body activateDeactivateExecutiveRequest: ActivateDeactivateExecutiveRequest): Deferred<Response<ActivateDeactivateExecutiveResponse>>
+
+    //Query listing api call
+    @POST("SaveCustomerQueryTicket")
+    fun qetQueryListingQueryResponse(@Body queryListingRequest: QueryListingRequest): Deferred<Response<QueryListingResponse>>
+
+    //QueryChat api call
+    @POST("GetQueryResponseInformation")
+    fun getQueryChatElementResponse(@Body queryChatElementRequest: QueryChatElementRequest?): Deferred<Response<QueryChatElementResponse>>
+
+    //PostReplyQueryChatStatus api call
+    @POST("SaveCustomerQueryTicket")
+    fun getPostReplyHelpTopicStatus(@Body queryChatElementRequest: PostChatStatusRequest?): Deferred<Response<PostChatStatusResponse>>
+
+    //Help Topic listing api call
+    @POST("GetHelpTopics")
+    fun getHelpTopicList(@Body helpTopicRequest: HelpTopicRequest): Deferred<Response<HelpTopicResponse>>
+
+    //save new ticket api call
+    @POST("SaveCustomerQueryTicket")
+    fun getSaveNewTicketQueryResponse(@Body saveNewTicketQueryRequest: SaveNewTicketQueryRequest?): Deferred<Response<SaveNewTicketQueryResponse>>
+
+    /*MyRedemption Histrory Lisitng */
+    @POST("GetCatalogueDetails")
+    fun getMyRedemptionListing(@Body getRedemptionRequest: MyRedemptionRequest?):  Deferred<Response<MyRedemptionResponse>>
+
+    // Promotion List api call
+    @POST("GetPromotionDetailsMobileApp")
+    fun fetchPromotionListAsync(@Body promotionListRequest: PromotionListRequest): Deferred<Response<PromotionListResponse>>
+
+    // Promotion Details api call
+    @POST("GetCustomerPromotionDetailsByPromotionID")
+    fun fetchPromotionDetailsAsync(@Body promotionDetailsRequest: PromotionDetailsRequest): Deferred<Response<PromotionDetailsResponse>>
+
+    /*History Notification List by Id api call */
+    @POST("GetPushHistoryDetails")
+    fun getHistoryNotifiation(@Body historyNotificationRequest: HistoryNotificationRequest?): Deferred<Response<HistoryNotificationResponse>>
+
+    /*History Notification Details by Id api call */
+    @POST("GetPushHistoryDetails")
+    fun getHistoryNotifiationDetailByID(@Body historyNotificationDetailByIDRequest: HistoryNotificationDetailsRequest?): Deferred<Response<HistoryNotificationResponse>>
+
+    /*History Notification Delete by Id api call */
+    @POST("GetPushHistoryDetails")
+    fun getHistoryNotifiationDeleteByID(@Body historyNotificationDetailByIDRequest: HistoryNotificationDetailsRequest?):  Deferred<Response<HistoryNotificationDeleteResponse>>
+
+    /* Pending Claim List api call */
+    @POST("GetPurchaseRequestDetailsList")
+    fun getPendingClaimListAsync(@Body pendingClaimListRequest: PendingClaimListRequest):  Deferred<Response<PendingClaimListResponse>>
+
+    /* Customer List api call */
+    @POST("GetCustParentChildMappingDetails")
+    fun getCustomerListAsync(@Body customerListingRequest: CustomerListingRequest):  Deferred<Response<CustomerListingResponse>>
+
+    /* Enrollment api call */
+    @POST("SaveCustomerRegistrationDetailsMobileApp")
+    fun getEnrollmentAsync(@Body enrollmentRequest: EnrollmentRequest):  Deferred<Response<EnrollmentResponse>>
+
+    /*  User Active Or Not api call*/
+    @POST("UserActiveOrInActive")
+    fun getUserActivityOrNot(@Body userActiveOrNotRequest: UserActiveOrNotRequest): Deferred<Response<UserActiveOrNotResponse>>
+
+    /*  Save Catalogue Redemption details api call*/
+    @POST("SaveCatalogueRedemptionDetails")
+    fun getSaveCatalogueRedemptionDetails(@Body saveCatalogueRedemptionRequest: SaveCatalogueRedemptionRequest): Deferred<Response<SaveCatalogueRedemptionResponse>>
+
+    /* Send Catalogue Redemption Mobile Alert  */
+    @POST("SendCatalogueRedemptionAlertMobileApp")
+    fun getSendCatalogueRedeemAlert(@Body saveCatalogueRedemptionRequest: SaveCatalogueRedemptionRequest): Deferred<Response<SaveCatalogueRedemptionResponse>>
+
+    /* Send success sms to user */
+    @POST("SendSMSForSuccessfulRedemptionMobileApp")
+    fun getSendSuccssSMStoUser(@Body saveCatalogueRedemptionRequest: SendSMSForSucessRedemReq): Deferred<Response<Boolean>>
+
+    // Catalogue api call
+    @POST("GetCatalogueDetails")
+    fun fetchCatalogueAsync(@Body profileRequest: GatCatalogueRequest): Deferred<Response<GetCatalogueResponse>>
+
+    // Catalogue Category api call
+    @POST("GetCatalogueCategoryDetails")
+    fun fetchCatalogueCategoryAsync(@Body catalogueCategoryRequest: CatalogueCategoryRequest): Deferred<Response<CatalogueCategoryResponse>>
+
+    // Cart api call
+    @POST("GetCatalogueCartDetailsMobile")
+    fun fetchCartAsync(@Body cartResponse: CartRequest): Deferred<Response<CartResponse>>
+
+    // Add to Cart api call
+    @POST("SaveCatalogueCartDetailsMobile")
+    fun fetchAddToCartAsync(@Body cartResponse: AddToCartRequest): Deferred<Response<AddToCartResponse>>
+
+    /* Cart Count call*/
+    @POST("GetCatalogueCartDetailsMobile")
+    fun getCartCountData(@Body cartCountRequest: CartCountRequest): Deferred<Response<CartCountResponse>>
+
+    /* Planner  Add call*/
+    @POST("GetCatalogueDetails")
+    fun getAddPlannerData(@Body plannerAddRequest: PlannerAddRequest): Deferred<Response<PlannerAddResponse>>
+
+    /* Cart Count Update api call */
+    @POST("UpdateCustomerCart")
+    fun getCartUpdate(@Body cartListingRequest: UpdateQuantityRequest?): Deferred<Response<UpdateQuantityResponse>>
+
+    /* Cart Item Remove api call*/
+    @POST("UpdateCustomerCart")
+    fun getCartItemRemove(@Body removeCartProductRequest: RemoveCartProductRequest): Deferred<Response<RemoveCartProductResponse>>
+
+    // Redemption Planner List api call
+    @POST("GetRedemptionPlannerDetails")
+    fun fetchPlannerAsync(@Body plannerRequest: PlannerRequest): Deferred<Response<PlannerResponse>>
+
+    /* Planner Remove api call*/
+    @POST("GetPlannerAddedOrNot")
+    fun getPlannerRemove(@Body removePlannerRequest: RemovePlannerRequest): Deferred<Response<RemovePlannerResponse>>
+
+
 }

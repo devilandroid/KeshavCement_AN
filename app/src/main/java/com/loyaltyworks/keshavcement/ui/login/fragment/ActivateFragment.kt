@@ -27,10 +27,12 @@ import com.loyaltyworks.keshavcement.ui.CommonViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.Keyboard
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
+import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
 
 
-class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
+class ActivateFragment : Fragment(), View.OnClickListener{
 
     private lateinit var binding: FragmentActivateBinding
     private lateinit var viewModel: LoginRegistrationViewModel
@@ -43,22 +45,12 @@ class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     var token: String? = null
     var OTP: String = ""
 
-    var stateList = mutableListOf<State>()
-    var mSelectedState: State? = null
+    var _lstCustomerJson: List<LstCustomerJson>? = null
+    var _lstCustomerOfficalInfoJson: List<LstCustomerOfficalInfoJson>? = null
 
-    var _districtList = mutableListOf<LstDistrict>()
-    var districtListAdapter: ArrayAdapter<String>? = null
-    var districtId: String = "-1"
-
-    var _talukList = mutableListOf<LstTaluk>()
-    var talukListAdapter: ArrayAdapter<String>? = null
-    var talukId: String = "-1"
-
-    var identityNo: String = ""
-    var identityType: String = ""
     var aadharNo: String = ""
     var gstNo: String = ""
-    var memberID: String = ""
+    var sapCode: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,9 +84,6 @@ class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
         initialSetup()
 
-        binding.stateSpinner.onItemSelectedListener = this
-        binding.districtSpinner.onItemSelectedListener = this
-        binding.talukSpinner.onItemSelectedListener = this
 
         binding.otpSubmitButton.setOnClickListener(this)
         binding.backLoginBtn.setOnClickListener(this)
@@ -173,7 +162,7 @@ class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                         binding.mobile.isEnabled = false
 
                         setCustomerTypeName()
-                        StateRequest()
+                        customerDataFetchApi()
                         timers.cancel()
 
                     }else{
@@ -196,56 +185,48 @@ class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 val email: String = binding.email.text.toString()
 
                 if (binding.customerTypeName.text.toString().isNullOrBlank()){
-                    Toast.makeText(requireContext(), "Customer Type should not be empty", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.customer_type_mandatory), Toast.LENGTH_SHORT).show()
 
                 }else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer &&
                     binding.memberId.text.toString().isNullOrBlank()){
-
-                    binding.memberId.error = getString(R.string.enter_member_id)
-                    binding.memberId.requestFocus()
+                    Toast.makeText(requireContext(), getString(R.string.member_id_mandatory), Toast.LENGTH_SHORT).show()
 
                 }else if (binding.name.text.toString().isNullOrBlank()){
                     binding.name.error = getString(R.string.enter_your_name)
                     binding.name.requestFocus()
 
                 }else if (binding.firmName.text.toString().isNullOrBlank()){
-                    binding.firmName.error = getString(R.string.enter_firm_name)
-                    binding.firmName.requestFocus()
+
+                    Toast.makeText(requireContext(), getString(R.string.firm_name_mandatory), Toast.LENGTH_SHORT).show()
 
                 }else if (!email.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     binding.email.error = requireContext().resources.getString(R.string.enter_valid_emailid)
 
                 }else if (binding.mobile.text.toString().isNullOrBlank()){
-                    binding.mobile.error = getString(R.string.enter_mobile_number)
-                    binding.mobile.requestFocus()
+                    Toast.makeText(requireContext(), getString(R.string.mobile_number_mandatory), Toast.LENGTH_SHORT).show()
 
                 }else if (binding.mobile.text.toString().length < 10){
-                    binding.mobile.text.clear()
-                    binding.mobile.error = getString(R.string.enter_valid_mobile_no)
-                    binding.mobile.requestFocus()
+                    Toast.makeText(requireContext(), getString(R.string.invalid_mobile_number), Toast.LENGTH_SHORT).show()
 
-                }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
+                }/*else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) &&
                     binding.aadharNumber.text.toString().isNullOrBlank()){
 
-                    binding.aadharNumber.error = getString(R.string.enter_aadhar_number)
-                    binding.aadharNumber.requestFocus()
+                    Toast.makeText(requireContext(), getString(R.string.aadhar_number_mandatory), Toast.LENGTH_SHORT).show()
 
                 }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
                             PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) &&
                     !binding.aadharNumber.text.toString().isNullOrBlank() && binding.aadharNumber.text.toString().length < 12){
 
-                    binding.aadharNumber.error = getString(R.string.enter_valid_aadhar_number)
-                    binding.aadharNumber.requestFocus()
+                    Toast.makeText(requireContext(), getString(R.string.invalid_aadhar_number), Toast.LENGTH_SHORT).show()
 
                 }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) &&
                     binding.gstNumber.text.toString().isNullOrBlank()){
 
-                    binding.gstNumber.error = getString(R.string.enter_gst_number)
-                    binding.gstNumber.requestFocus()
+                    Toast.makeText(requireContext(), getString(R.string.gst_number_mandatory), Toast.LENGTH_SHORT).show()
 
-                }else if (binding.address.text.toString().isNullOrBlank()){
+                }*/else if (binding.address.text.toString().isNullOrBlank()){
                     binding.address.error = getString(R.string.enter_your_address)
                     binding.address.requestFocus()
 
@@ -258,13 +239,13 @@ class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     binding.pincode.error = getString(R.string.invalid_pin_code)
                     binding.pincode.requestFocus()
 
-                }else if (mSelectedState!!.stateId == -1){
+                }else if (_lstCustomerJson!![0].stateId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_state), Toast.LENGTH_SHORT).show()
 
-                }else if (districtId == "-1"){
+                }else if (_lstCustomerJson!![0].districtId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_district), Toast.LENGTH_SHORT).show()
 
-                }else if (talukId == "-1"){
+                }else if (_lstCustomerJson!![0].talukId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_taluk), Toast.LENGTH_SHORT).show()
 
                 }else{
@@ -275,8 +256,58 @@ class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         }
     }
 
+    private fun customerDataFetchApi() {
+        viewModel.setProfileRequest(
+            ProfileRequest(
+                ActionType = "6",
+                MerchantID = "1",
+                MobileNumber = binding.otpMobileNumber.text.toString()
+            )
+        )
+    }
+
     private fun activateCustomer() {
-        Toast.makeText(requireContext(), "not imple.", Toast.LENGTH_SHORT).show()
+
+        if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
+            PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) {
+            aadharNo = binding.aadharNumber.text.toString()
+
+        } else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer) {
+            gstNo = binding.gstNumber.text.toString()
+            sapCode = binding.memberId.text.toString()
+
+
+        } else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) {
+            gstNo = binding.gstNumber.text.toString()
+
+        }
+
+        viewModel.activateCustomerData(
+            ActivateCustomerRequest(
+                actionType = "262",
+                actorId = _lstCustomerJson!![0].userId.toString(),
+                ObjCustomerJsonActivate(
+                    address1 = binding.address.text.toString(),
+                    stateId = _lstCustomerJson!![0].stateId.toString(),
+                    customerId = _lstCustomerJson!![0].customerId.toString(),
+                    firstName = binding.name.text.toString(),
+                    mobile = _lstCustomerJson!![0].mobile,
+                    zip = _lstCustomerJson!![0].zip,
+                    districtId = _lstCustomerJson!![0].districtId.toString(),
+                    talukId = _lstCustomerJson!![0].talukId.toString(),
+                    email = binding.email.text.toString(),
+                    rELATEDPROJECTTYPE = "KESHAV_CEMENT",
+                    addressId = _lstCustomerJson!![0].addressId.toString(),
+                ),
+                ObjCustomerOfficalInfoActivate(
+                    companyName = _lstCustomerOfficalInfoJson!![0].companyName,
+                    sapNo = sapCode,
+                    gSTNumber = gstNo,
+                    aadharNumber = aadharNo
+                )
+            )
+        )
+
     }
 
     private fun setCustomerTypeName() {
@@ -359,168 +390,149 @@ class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
         })
 
-        /***  state list observer  ***/
-        commonViewModel.stateLiveData.observe(viewLifecycleOwner, Observer {
-            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
-                if (it != null && !it.stateList.isNullOrEmpty()) {
-                    stateList.clear()
+        /*** Customer Data Observer ***/
+        viewModel.getProfileResponse.observe(viewLifecycleOwner, Observer {
 
-                    stateList.addAll(it.stateList!!)
-                    stateList.add(0, State(
-                        stateName = "Select State",
-                        stateId = -1
-                    )
-                    )
+            if (it != null && !it.lstCustomerJson.isNullOrEmpty()) {
 
-                    binding.stateSpinner.adapter = StateAdapter(requireContext(),android.R.layout.simple_spinner_item,stateList)
 
+                _lstCustomerJson = it.lstCustomerJson
+                _lstCustomerOfficalInfoJson = it.lstCustomerOfficalInfoJson
+
+                if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == _lstCustomerJson!![0].customerTypeID.toString()) {
+
+
+                    if (it.lstCustomerJson[0].isVerified == 1) {
+
+                        RegisterSuccessDialog.showRegisterSuccessDialog(requireContext(),false,"",getString(R.string.customer_already_activated),
+                            object : RegisterSuccessDialog.RegisterSuccessDialogCallBack{
+                            override fun onOk() {
+                                findNavController().popBackStack()
+                            }
+
+                        })
+
+                    }else if (it.lstCustomerJson[0].isVerified == 4) {
+                        RegisterSuccessDialog.showRegisterSuccessDialog(requireContext(),false,"",getString(R.string.your_account_is_in_pending_kindly_contact_your_administrator),
+                            object : RegisterSuccessDialog.RegisterSuccessDialogCallBack{
+                                override fun onOk() {
+                                    findNavController().popBackStack()
+                                }
+
+                            })
+
+                    }else if (it.lstCustomerJson[0].isVerified == 0 && it.lstCustomerJson[0].isActive == 0) {
+                        RegisterSuccessDialog.showRegisterSuccessDialog(requireContext(),false,"",getString(R.string.your_account_has_been_deactivated),
+                            object : RegisterSuccessDialog.RegisterSuccessDialogCallBack{
+                                override fun onOk() {
+                                    findNavController().popBackStack()
+                                }
+
+                            })
+                    } else if (it.lstCustomerJson[0].customerType.equals("Dealer", true) && it.lstCustomerJson[0].customerCategoryId == 1) {
+
+                        RegisterSuccessDialog.showRegisterSuccessDialog(requireContext(),false,"",getString(R.string.you_are_not_eligible_to_activate_your_account),
+                            object : RegisterSuccessDialog.RegisterSuccessDialogCallBack{
+                                override fun onOk() {
+                                    findNavController().popBackStack()
+                                }
+
+                            })
+                    } else {
+                        if (it.lstCustomerJson[0].customerType != null)
+                            binding.customerTypeName.text = it.lstCustomerJson[0].customerType
+
+                        if (it.lstCustomerJson[0].loyaltyId != null)
+                            binding.memberId.setText(it.lstCustomerJson[0].loyaltyId)
+
+
+                        if (it.lstCustomerJson[0].firstName != null)
+                            binding.name.setText(it.lstCustomerJson[0].firstName)
+
+                        if (it.lstCustomerJson[0].email != null)
+                            binding.email.setText(it.lstCustomerJson[0].email)
+
+                        if (it.lstCustomerJson[0].mobile != null)
+                            binding.mobile.setText(it.lstCustomerJson[0].mobile)
+
+                        if (it.lstCustomerJson[0].address1 != null)
+                            binding.address.setText(it.lstCustomerJson[0].address1)
+
+                        if (it.lstCustomerJson[0].zip != null)
+                            binding.pincode.setText(it.lstCustomerJson[0].zip)
+
+                        if (it.lstCustomerJson[0].stateName != null)
+                            binding.state.text = it.lstCustomerJson[0].stateName
+
+                        if (it.lstCustomerJson[0].districtName != null)
+                            binding.district.text = it.lstCustomerJson[0].districtName
+
+                        if (it.lstCustomerJson[0].talukName != null)
+                            binding.taluk.text = it.lstCustomerJson[0].talukName
+
+                        if (!it.lstCustomerOfficalInfoJson.isNullOrEmpty()){
+                            if (it.lstCustomerOfficalInfoJson[0].companyName != null)
+                                binding.firmName.setText(it.lstCustomerOfficalInfoJson[0].companyName)
+
+                            if (it.lstCustomerOfficalInfoJson[0].gstNumber != null)
+                                binding.gstNumber.setText(it.lstCustomerOfficalInfoJson[0].gstNumber)
+
+                        }
+
+                    }
+
+
+                } else {
+                    RegisterSuccessDialog.showRegisterSuccessDialog(requireContext(),false,"",getString(R.string.incorrect_account_type),
+                        object : RegisterSuccessDialog.RegisterSuccessDialogCallBack{
+                            override fun onOk() {
+                                findNavController().popBackStack()
+                            }
+
+                        })
+
+                }
+
+
+            }
+
+
+        })
+
+        /*** Activate Account Observer ***/
+        viewModel.activateCustomerLiveData.observe(viewLifecycleOwner, Observer {
+            if (it != null && !it.returnMessage.isNullOrEmpty()){
+                if (it.returnMessage == "1"){
+
+                    ClaimSuccessDialog.showClaimSuccessDialog(requireContext(),true,"Successfully!",getString(R.string.your_account_has_been_activated_successfully),
+                        object : ClaimSuccessDialog.ClaimSuccessDialogCallBack{
+                            override fun onOk() {
+                                findNavController().popBackStack()
+                            }
+
+                        })
                 }else{
-                    stateList.add(0, State(
-                        stateName = "Select State",
-                        stateId = -1
-                    )
-                    )
-
-                    binding.stateSpinner.adapter = StateAdapter(
-                        requireContext(),
-                        android.R.layout.simple_spinner_item,stateList)
+                    Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
                 }
-
-            }
-
-        })
-
-        /*** District List Observer ***/
-        commonViewModel.districtLiveData.observe(viewLifecycleOwner, Observer {
-            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
-                if (it != null && !it.lstDistrict.isNullOrEmpty()){
-                    val districtLists: MutableList<LstDistrict> = it.lstDistrict!!.toMutableList()
-                    _districtList = districtLists
-
-                    val districtListName = ArrayList<String>()
-
-                    for (commonSpinner in districtLists) {
-                        districtListName.add(commonSpinner.districtName!!)
-                    }
-
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select District"
-                    commonSpinner.id = -1
-                    districtListName.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstDistrict()
-                    custlist1.districtName = "Select District"
-                    custlist1.districtId = -1
-                    _districtList.add(0,custlist1)
-
-                    districtListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, districtListName)
-                    districtListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.districtSpinner.adapter = districtListAdapter
-
-                }else {
-                    val districtListNames = ArrayList<String>()
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select District"
-                    commonSpinner.id = -1
-                    districtListNames.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstDistrict()
-                    custlist1.districtName = "Select District"
-                    custlist1.districtId = -1
-                    _districtList.add(0,custlist1)
-
-                    districtListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, districtListNames)
-                    districtListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.districtSpinner.adapter = districtListAdapter
-                }
+            }else{
+                Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
             }
         })
-
-        /*** Taluk List Observer ***/
-        commonViewModel.talukLiveData.observe(viewLifecycleOwner, Observer {
-            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
-                if (it != null && !it.lstTaluk.isNullOrEmpty()){
-                    val talukLists: MutableList<LstTaluk> = it.lstTaluk!!.toMutableList()
-                    _talukList = talukLists
-
-                    val talukListName = ArrayList<String>()
-
-                    for (commonSpinner in talukLists) {
-                        talukListName.add(commonSpinner.talukName!!)
-                    }
-
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select Taluk"
-                    commonSpinner.id = -1
-                    talukListName.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstTaluk()
-                    custlist1.talukName = "Select Taluk"
-                    custlist1.talukId = -1
-                    _talukList.add(0,custlist1)
-
-                    talukListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, talukListName)
-                    talukListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.talukSpinner.adapter = talukListAdapter
-
-                }else {
-                    val talukListNames = ArrayList<String>()
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select Taluk"
-                    commonSpinner.id = -1
-                    talukListNames.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstTaluk()
-                    custlist1.talukName = "Select Taluk"
-                    custlist1.talukId = -1
-                    _talukList.add(0,custlist1)
-
-                    talukListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, talukListNames)
-                    talukListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.talukSpinner.adapter = talukListAdapter
-                }
-            }
-        })
-
-
     }
 
     private fun SendOTPRequest() {
         viewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
-                MerchantUserName = BuildConfig.MerchantName,
-                UserName = "",
-                UserId = -1,
-                MobileNo = binding.otpMobileNumber.text.toString(),
-                OTPType = "Enrollment"
+                merchantUserName = BuildConfig.MerchantName,
+                userName = "",
+                userId = "-1",
+                mobileNo = binding.otpMobileNumber.text.toString(),
+                oTPType = "Enrollment"
             )
         )
 
     }
 
-    private fun StateRequest() {
-        commonViewModel.getStateData(
-            StateListRequest(
-                actionType = "2",
-                isActive = "true",
-                sortColumn = "STATE_NAME",
-                sortOrder = "ASC",
-                startIndex = "1",
-                countryID = BuildConfig.CountryID
-            )
-        )
-    }
-
-    private fun talukRequest(distictId: String) {
-        commonViewModel.getTalukData(
-            TalukListRequest(
-                actionType = "1",
-                districtId = distictId
-            )
-
-        )
-
-    }
 
     private fun checkCustomerExistancy() {
         LoadingDialogue.showDialog(requireContext())
@@ -567,73 +579,4 @@ class ActivateFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        when ((parent as Spinner).id) {
-
-            R.id.state_spinner -> {
-                mSelectedState = parent.getItemAtPosition(position) as State
-
-                if (mSelectedState!!.stateId!! > 0) {
-                    /*** District Api call ***/
-                    commonViewModel.getDistrictData(
-                        DistrictListRequest(
-                            stateId = mSelectedState!!.stateId.toString()
-                        )
-                    )
-
-                }else{
-                    val districtListNames = ArrayList<String>()
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select District"
-                    commonSpinner.id = -1
-                    districtListNames.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstDistrict()
-                    custlist1.districtName = "Select District"
-                    custlist1.districtId = -1
-                    _districtList.add(0,custlist1)
-
-                    districtListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, districtListNames)
-                    districtListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.districtSpinner.adapter = districtListAdapter
-                }
-
-            }
-
-            R.id.district_spinner -> {
-                districtId = _districtList[position].districtId.toString()
-                Log.d("bhbrfhrb","district ID : " + districtId)
-                if (districtId != "-1"){
-                    /*** Taluk Api call ***/
-                    talukRequest(districtId)
-
-                }else{
-                    val talukListNames = ArrayList<String>()
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select Taluk"
-                    commonSpinner.id = -1
-                    talukListNames.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstTaluk()
-                    custlist1.talukName = "Select Taluk"
-                    custlist1.talukId = -1
-                    _talukList.add(0,custlist1)
-
-                    talukListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, talukListNames)
-                    talukListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.talukSpinner.adapter = talukListAdapter
-                }
-            }
-
-            R.id.taluk_spinner -> {
-                talukId = _talukList[position].talukId.toString()
-                Log.d("bhbrfhrb","taluk ID : " + talukId)
-            }
-
-        }
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-    }
 }

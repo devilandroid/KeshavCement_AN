@@ -28,7 +28,11 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.redeemPoints.text = PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].redeemablePointsBalance.toString()
+
         binding.products.setOnClickListener(this)
+        binding.wishlist.setOnClickListener(this)
         binding.evouchers.setOnClickListener(this)
         binding.cashtransfer.setOnClickListener(this)
 
@@ -37,6 +41,17 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
         }else{
             binding.cashTransferTxt.text = getString(R.string.cash_transfer)
         }
+
+        /*** Set PointBalance & Mobile & Name to Preference ***/
+        PreferenceHelper.setStringValue(requireContext(),BuildConfig.RedeemablePointsBalance,
+            PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].redeemablePointsBalance.toString())
+
+        PreferenceHelper.setStringValue(requireContext(),BuildConfig.SelectedCustomerMobile,
+            PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString())
+
+        PreferenceHelper.setStringValue(requireContext(),BuildConfig.SelectedCustomerName,
+            PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].firstName.toString())
+
     }
 
 
@@ -64,6 +79,29 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
                 }else{
                     findNavController().navigate(R.id.productFragment)
+                }
+            }
+
+            R.id.wishlist -> {
+
+                if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer ||
+                    PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
+
+                    DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
+                        override fun forSelfClick() {
+                            findNavController().navigate(R.id.wishlistFragment)
+                        }
+
+                        override fun forOthersClick() {
+                            val bundle = Bundle()
+                            bundle.putSerializable("directedFrom", "WishlistClick")
+                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                        }
+
+                    })
+
+                }else{
+                    findNavController().navigate(R.id.wishlistFragment)
                 }
             }
 

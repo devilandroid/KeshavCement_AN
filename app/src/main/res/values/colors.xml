@@ -25,6 +25,8 @@
     <color name="pending_yellow1">#B6C910</color>
     <color name="greyss">#707070</color>
     <color name="transparent_dark">#6B040404</color>
+    <color name="green1">#5AB236</color>
+    <color name="greysss">#a9a9a9</color>
 
     <color name="color1">#ABF1D2FD</color>
     <color name="color2">#333232</color>
@@ -79,8 +81,15 @@
     <color name="color51">#F7F7F7</color>
     <color name="color52">#F6F5F5</color>
     <color name="color53">#B3FFFFFF</color>
-
-
+    <color name="color54">#0FEA1616</color>
+    <color name="color55">#EA1616</color>
+    <color name="color56">#83EAF1</color>
+    <color name="color57">#63A4FF</color>
+    <color name="color58">#98DE5B</color>
+    <color name="color59">#08E1AE</color>
+    <color name="color60">#F8DE7E</color>
+    <color name="color61">#D99058</color>
+    <color name="color62">#EBFEFF</color>
 
 
 </resources>

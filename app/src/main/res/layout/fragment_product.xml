@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="@string/redemption_catalogue"
+                android:text="@string/product_catalogue"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:singleLine="true"
@@ -105,9 +105,10 @@
                 android:textSize="12sp"
                 android:textColor="@color/colorAccent"/>
             <TextView
+                android:id="@+id/redeemable_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="XXXXX"
+                android:text="-"
                 android:fontFamily="@font/poppins_semibold"
                 android:textSize="16sp"
                 android:textColor="@color/color45"/>

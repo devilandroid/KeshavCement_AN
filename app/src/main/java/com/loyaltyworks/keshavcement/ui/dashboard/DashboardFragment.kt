@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -77,6 +78,9 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.helpLayout.visibility = View.VISIBLE
             binding.supportExecutiveLayout.visibility = View.GONE
 
+            binding.pointBalanceLayout.visibility = View.VISIBLE
+            binding.createdByLayout.visibility = View.GONE
+
         }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
             binding.dashMyPurchaseClaim.visibility = View.GONE
             binding.dashWorksite.visibility = View.GONE
@@ -92,6 +96,9 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.helpLayout.visibility = View.VISIBLE
             binding.supportExecutiveLayout.visibility = View.GONE
 
+            binding.pointBalanceLayout.visibility = View.VISIBLE
+            binding.createdByLayout.visibility = View.GONE
+
         }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
             binding.dashMyPurchaseClaim.visibility = View.GONE
             binding.dashWorksite.visibility = View.GONE
@@ -105,6 +112,9 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
             binding.helpLayout.visibility = View.VISIBLE
             binding.supportExecutiveLayout.visibility = View.GONE
+
+            binding.pointBalanceLayout.visibility = View.VISIBLE
+            binding.createdByLayout.visibility = View.GONE
 
         }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
             binding.dashMyPurchaseClaim.visibility = View.GONE
@@ -125,6 +135,9 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
             binding.helpLayout.visibility = View.GONE
             binding.supportExecutiveLayout.visibility = View.VISIBLE
+
+            binding.pointBalanceLayout.visibility = View.GONE
+            binding.createdByLayout.visibility = View.VISIBLE
 
         }
 
@@ -218,28 +231,31 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
         /*** Change Password Request ***/
         viewModel.changePasswordLiveData.observe(viewLifecycleOwner, Observer {
-            LoadingDialogue.dismissDialog()
-            if (it != null && !it.userList.isNullOrEmpty()) {
-                val result: String = when (it.userList?.get(0)?.result) {
+            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
+                LoadingDialogue.dismissDialog()
+                if (it != null && !it.userList.isNullOrEmpty()) {
+                    val result: String = when (it.userList?.get(0)?.result) {
 
-                    1 -> {
+                        1 -> {
 
-                        NewPasswordDialog.dismissChangePasswDialog()
-                        PreferenceHelper.setBooleanValue(requireContext(),BuildConfig.ForgotPasswordClicked,false)
-                        // Change password message display
-                        getString(R.string.password_changed_successfully)
+                            NewPasswordDialog.dismissChangePasswDialog()
+                            PreferenceHelper.setBooleanValue(requireContext(),BuildConfig.ForgotPasswordClicked,false)
+                            // Change password message display
+                            getString(R.string.password_changed_successfully)
 
+                        }
+
+                        else -> {
+                            getString(R.string.something_went_wrong_please_try_again_later)
+                        }
                     }
+                    (activity as DashboardActivity).snackBar(result, R.color.dark_blue)
+                }else{
+                    (activity as DashboardActivity).snackBar(getString(R.string.something_went_wrong_please_try_again_later), R.color.dark_blue)
 
-                    else -> {
-                        getString(R.string.something_went_wrong_please_try_again_later)
-                    }
                 }
-                (activity as DashboardActivity).snackBar(result, R.color.dark_blue)
-            }else{
-                (activity as DashboardActivity).snackBar(getString(R.string.something_went_wrong_please_try_again_later), R.color.dark_blue)
-
             }
+
         })
 
 
@@ -276,6 +292,14 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     (activity as DashboardActivity).binding.root.menu_memberType.text = it.lstCustomerFeedBackJsonApi[0].customerType
                     (activity as DashboardActivity).binding.root.menu_memberName.text = it.lstCustomerFeedBackJsonApi[0].firstName
                     (activity as DashboardActivity).binding.root.menu_membershipId.text = it.lstCustomerFeedBackJsonApi[0].loyaltyId
+
+                    if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
+                        binding.createdByType.text = "( " +  it.lstCustomerFeedBackJsonApi[0].mappedCustomerType + " )"
+                        binding.createdByName.text = it.lstCustomerFeedBackJsonApi[0].mappedCustomerName
+                        /*** Support Executive Mapped ID ***/
+                        PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerIdSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerId!!)
+                        PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerNameSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerType!!)
+                    }
 
                     if (it.lstCustomerFeedBackJsonApi[0].customerImage.toString() != "null") {
 
@@ -369,7 +393,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.dash_claim_purchase ->{
-                findNavController().navigate(R.id.claimPurchaseFragment)
+                findNavController().navigate(R.id.purchaseRequestFragment)
             }
 
             R.id.dash_catalogue ->{
@@ -401,15 +425,15 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.sale_and_earn ->{
-                findNavController().navigate(R.id.newSaleFragment)
+                findNavController().navigate(R.id.claimFragment)
             }
 
             R.id.new_sale ->{
-                findNavController().navigate(R.id.newSaleFragment)
+                findNavController().navigate(R.id.claimFragment)
             }
 
             R.id.dash_earn_point_claim_purchase ->{
-                findNavController().navigate(R.id.claimPurchaseFragment)
+                findNavController().navigate(R.id.purchaseRequestFragment)
             }
 
             R.id.dash_raise_ticket ->{

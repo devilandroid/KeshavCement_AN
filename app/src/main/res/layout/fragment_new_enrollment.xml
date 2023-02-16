@@ -480,13 +480,14 @@
                             android:layout_margin="3dp"
                             android:background="@drawable/corner_bg5"
                             android:elevation="5dp">
-                            <Spinner
+                            <pl.utkala.searchablespinner.SearchableSpinner
                                 android:id="@+id/district_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="10"
-                                android:backgroundTint="@color/transparent"
-                                android:spinnerMode="dropdown" />
+                                android:background="@color/transparent"
+                                app:closeText="Close"
+                                app:dialogTitle="Please select district" />
                             <ImageView
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
@@ -533,13 +534,16 @@
                             android:layout_margin="3dp"
                             android:background="@drawable/corner_bg5"
                             android:elevation="5dp">
-                            <Spinner
+
+                            <pl.utkala.searchablespinner.SearchableSpinner
                                 android:id="@+id/taluk_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="10"
-                                android:backgroundTint="@color/transparent"
-                                android:spinnerMode="dropdown" />
+                                android:background="@color/transparent"
+                                app:closeText="Close"
+                                app:dialogTitle="Please select taluk" />
+
                             <ImageView
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
@@ -568,7 +572,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/submit"
+            android:id="@+id/submit_enrollment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

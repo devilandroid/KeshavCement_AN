@@ -1,0 +1,333 @@
+package com.loyaltyworks.keshavcement.model
+import com.squareup.moshi.JsonClass
+
+import com.squareup.moshi.Json
+import java.io.Serializable
+
+
+@JsonClass(generateAdapter = true)
+data class PromotionListRequest(
+    @Json(name = "ActionType")
+    val actionType: String? = null,
+    @Json(name = "ActorId")
+    val actorId: String? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class PromotionListResponse(
+    @Json(name = "lstPromotionJsonList")
+    val lstPromotionJsonList: List<LstPromotionJson>? = null,
+    @Json(name = "lstPromotionList")
+    val lstPromotionList: Any? = null,
+    @Json(name = "lstPromotionUserActionDetails")
+    val lstPromotionUserActionDetails: Any? = null,
+    @Json(name = "lstPromotionView")
+    val lstPromotionView: Any? = null,
+    @Json(name = "returnMessage")
+    val returnMessage: Any? = null,
+    @Json(name = "returnValue")
+    val returnValue: Int? = null,
+    @Json(name = "totalRecords")
+    val totalRecords: Int? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class LstPromotionJson(
+    @Json(name = "actionUrl")
+    val actionUrl: Any? = null,
+    @Json(name = "albumImageID")
+    val albumImageID: Int? = null,
+    @Json(name = "allowUnReserve")
+    val allowUnReserve: Boolean? = null,
+    @Json(name = "approvalStatus")
+    val approvalStatus: Any? = null,
+    @Json(name = "approvalStatusID")
+    val approvalStatusID: Int? = null,
+    @Json(name = "canClaim")
+    val canClaim: Boolean? = null,
+    @Json(name = "canComment")
+    val canComment: Boolean? = null,
+    @Json(name = "canReverse")
+    val canReverse: Boolean? = null,
+    @Json(name = "canView")
+    val canView: Boolean? = null,
+    @Json(name = "categoryId")
+    val categoryId: Int? = null,
+    @Json(name = "categoryName")
+    val categoryName: Any? = null,
+    @Json(name = "claim")
+    val claim: Any? = null,
+    @Json(name = "cliamIdUsageStatus")
+    val cliamIdUsageStatus: Boolean? = null,
+    @Json(name = "comment")
+    val comment: Any? = null,
+    @Json(name = "emailID")
+    val emailID: Any? = null,
+    @Json(name = "firstName")
+    val firstName: Any? = null,
+    @Json(name = "footer")
+    val footer: String? = null,
+    @Json(name = "fullName")
+    val fullName: Any? = null,
+    @Json(name = "is_Active")
+    val isActive: Boolean? = null,
+    @Json(name = "isApprovable")
+    val isApprovable: Boolean? = null,
+    @Json(name = "isClaimed")
+    val isClaimed: Boolean? = null,
+    @Json(name = "is_Expired")
+    val isExpired: Boolean? = null,
+    @Json(name = "isReservable")
+    val isReservable: Boolean? = null,
+    @Json(name = "isReserved")
+    val isReserved: Boolean? = null,
+    @Json(name = "lastName")
+    val lastName: Any? = null,
+    @Json(name = "memberId")
+    val memberId: Any? = null,
+    @Json(name = "memberName")
+    val memberName: Any? = null,
+    @Json(name = "mobileNo")
+    val mobileNo: Any? = null,
+    @Json(name = "outletName")
+    val outletName: Any? = null,
+    @Json(name = "pointBalance")
+    val pointBalance: Int? = null,
+    @Json(name = "proImage")
+    val proImage: String? = null,
+    @Json(name = "proLongDesc")
+    val proLongDesc: String? = null,
+    @Json(name = "proShortDesc")
+    val proShortDesc: String? = null,
+    @Json(name = "promotionId")
+    val promotionId: Int? = null,
+    @Json(name = "promotionName")
+    val promotionName: String? = null,
+    @Json(name = "promotion_Type")
+    val promotionType: Int? = null,
+    @Json(name = "promotionTypeName")
+    val promotionTypeName: Any? = null,
+    @Json(name = "pushUserActionID")
+    val pushUserActionID: Int? = null,
+    @Json(name = "redeemLocationAll")
+    val redeemLocationAll: Boolean? = null,
+    @Json(name = "remarks")
+    val remarks: Any? = null,
+    @Json(name = "reserve")
+    val reserve: Any? = null,
+    @Json(name = "targetCustomers")
+    val targetCustomers: Int? = null,
+    @Json(name = "title")
+    val title: Any? = null,
+    @Json(name = "totalBlocks")
+    val totalBlocks: Int? = null,
+    @Json(name = "totalClaims")
+    val totalClaims: Int? = null,
+    @Json(name = "totalComment")
+    val totalComment: Int? = null,
+    @Json(name = "totalRecords")
+    val totalRecords: Int? = null,
+    @Json(name = "totalResponses")
+    val totalResponses: Int? = null,
+    @Json(name = "totalViews")
+    val totalViews: Int? = null,
+    @Json(name = "url")
+    val url: String? = null,
+    @Json(name = "validFrom")
+    val validFrom: Any? = null,
+    @Json(name = "validTo")
+    val validTo: String? = null,
+    @Json(name = "validity")
+    val validity: Any? = null,
+    @Json(name = "view")
+    val view: Any? = null,
+    @Json(name = "views")
+    val views: Int? = null
+) : Serializable
+
+
+@JsonClass(generateAdapter = true)
+data class PromotionDetailsRequest(
+    @Json(name = "ActorId")
+    val actorId: String? = null,
+    @Json(name = "PromotionId")
+    val promotionId: String? = null
+)
+
+
+
+@JsonClass(generateAdapter = true)
+data class PromotionDetailsResponse(
+    @Json(name = "lstPromotionJsonList")
+    val lstPromotionJsonList: List<LstPromotionJsons>? = null,
+    @Json(name = "lstPromotionList")
+    val lstPromotionList: Any? = null,
+    @Json(name = "lstPromotionUserActionDetails")
+    val lstPromotionUserActionDetails: List<LstPromotionUserActionDetail>? = null,
+    @Json(name = "lstPromotionView")
+    val lstPromotionView: Any? = null,
+    @Json(name = "returnMessage")
+    val returnMessage: Any? = null,
+    @Json(name = "returnValue")
+    val returnValue: Int? = null,
+    @Json(name = "totalRecords")
+    val totalRecords: Int? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class LstPromotionJsons(
+    @Json(name = "actionUrl")
+    val actionUrl: Any? = null,
+    @Json(name = "albumImageID")
+    val albumImageID: Int? = null,
+    @Json(name = "allowUnReserve")
+    val allowUnReserve: Boolean? = null,
+    @Json(name = "approvalStatus")
+    val approvalStatus: Any? = null,
+    @Json(name = "approvalStatusID")
+    val approvalStatusID: Int? = null,
+    @Json(name = "canClaim")
+    val canClaim: Boolean? = null,
+    @Json(name = "canComment")
+    val canComment: Boolean? = null,
+    @Json(name = "canReverse")
+    val canReverse: Boolean? = null,
+    @Json(name = "canView")
+    val canView: Boolean? = null,
+    @Json(name = "categoryId")
+    val categoryId: Int? = null,
+    @Json(name = "categoryName")
+    val categoryName: Any? = null,
+    @Json(name = "claim")
+    val claim: Any? = null,
+    @Json(name = "cliamIdUsageStatus")
+    val cliamIdUsageStatus: Boolean? = null,
+    @Json(name = "comment")
+    val comment: Any? = null,
+    @Json(name = "emailID")
+    val emailID: Any? = null,
+    @Json(name = "firstName")
+    val firstName: String? = null,
+    @Json(name = "footer")
+    val footer: Any? = null,
+    @Json(name = "fullName")
+    val fullName: String? = null,
+    @Json(name = "is_Active")
+    val isActive: Boolean? = null,
+    @Json(name = "isApprovable")
+    val isApprovable: Boolean? = null,
+    @Json(name = "isClaimed")
+    val isClaimed: Boolean? = null,
+    @Json(name = "is_Expired")
+    val isExpired: Boolean? = null,
+    @Json(name = "isReservable")
+    val isReservable: Boolean? = null,
+    @Json(name = "isReserved")
+    val isReserved: Boolean? = null,
+    @Json(name = "lastName")
+    val lastName: String? = null,
+    @Json(name = "memberId")
+    val memberId: String? = null,
+    @Json(name = "memberName")
+    val memberName: Any? = null,
+    @Json(name = "mobileNo")
+    val mobileNo: Any? = null,
+    @Json(name = "outletName")
+    val outletName: Any? = null,
+    @Json(name = "pointBalance")
+    val pointBalance: Int? = null,
+    @Json(name = "proImage")
+    val proImage: String? = null,
+    @Json(name = "proLongDesc")
+    val proLongDesc: String? = null,
+    @Json(name = "proShortDesc")
+    val proShortDesc: String? = null,
+    @Json(name = "promotionId")
+    val promotionId: Int? = null,
+    @Json(name = "promotionName")
+    val promotionName: String? = null,
+    @Json(name = "promotion_Type")
+    val promotionType: Int? = null,
+    @Json(name = "promotionTypeName")
+    val promotionTypeName: Any? = null,
+    @Json(name = "pushUserActionID")
+    val pushUserActionID: Int? = null,
+    @Json(name = "redeemLocationAll")
+    val redeemLocationAll: Boolean? = null,
+    @Json(name = "remarks")
+    val remarks: Any? = null,
+    @Json(name = "reserve")
+    val reserve: Any? = null,
+    @Json(name = "targetCustomers")
+    val targetCustomers: Int? = null,
+    @Json(name = "title")
+    val title: String? = null,
+    @Json(name = "totalBlocks")
+    val totalBlocks: Int? = null,
+    @Json(name = "totalClaims")
+    val totalClaims: Int? = null,
+    @Json(name = "totalComment")
+    val totalComment: Int? = null,
+    @Json(name = "totalRecords")
+    val totalRecords: Int? = null,
+    @Json(name = "totalResponses")
+    val totalResponses: Int? = null,
+    @Json(name = "totalViews")
+    val totalViews: Int? = null,
+    @Json(name = "url")
+    val url: Any? = null,
+    @Json(name = "validFrom")
+    val validFrom: Any? = null,
+    @Json(name = "validTo")
+    val validTo: Any? = null,
+    @Json(name = "validity")
+    val validity: Any? = null,
+    @Json(name = "view")
+    val view: Any? = null,
+    @Json(name = "views")
+    val views: Int? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class LstPromotionUserActionDetail(
+    @Json(name = "allowUnReserve")
+    val allowUnReserve: Int? = null,
+    @Json(name = "blockReserve")
+    val blockReserve: Int? = null,
+    @Json(name = "canClaim")
+    val canClaim: Boolean? = null,
+    @Json(name = "canComment")
+    val canComment: Boolean? = null,
+    @Json(name = "canReverse")
+    val canReverse: Boolean? = null,
+    @Json(name = "canView")
+    val canView: Boolean? = null,
+    @Json(name = "claimType")
+    val claimType: Int? = null,
+    @Json(name = "claimedPromotion")
+    val claimedPromotion: Int? = null,
+    @Json(name = "hasClaimOpt")
+    val hasClaimOpt: Boolean? = null,
+    @Json(name = "hasData")
+    val hasData: Boolean? = null,
+    @Json(name = "hasReserveOpt")
+    val hasReserveOpt: Boolean? = null,
+    @Json(name = "hideReserve")
+    val hideReserve: Int? = null,
+    @Json(name = "maxBlock")
+    val maxBlock: Int? = null,
+    @Json(name = "maxClaims")
+    val maxClaims: Int? = null,
+    @Json(name = "promotionId")
+    val promotionId: Int? = null,
+    @Json(name = "totalClaimAndReserved")
+    val totalClaimAndReserved: Int? = null,
+    @Json(name = "totalClaimNow")
+    val totalClaimNow: Int? = null,
+    @Json(name = "totalReservNow")
+    val totalReservNow: Int? = null,
+    @Json(name = "totalViewsNow")
+    val totalViewsNow: Int? = null
+)
+
+

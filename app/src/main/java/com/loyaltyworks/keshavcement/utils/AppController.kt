@@ -16,15 +16,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.app.Activity
 import android.graphics.Bitmap
+import android.location.Geocoder
 import android.util.Base64
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.github.rongi.rotate_layout.layout.RotateLayout
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.model.ObjImageGalleryList
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 
 
 object AppController {
@@ -257,5 +260,33 @@ object AppController {
 
     }
 
+    fun getAddress(context: Context, lat: Double, lng: Double): String? {
+        val context = context
+        val geocoder = Geocoder(context, Locale.getDefault())
+        var add = ""
+        try {
+            val addresses = geocoder.getFromLocation(lat, lng, 1)
+            if(addresses.isNotEmpty()) {
+                val obj = addresses[0]
+                add = obj.getAddressLine(0)
+                //            add = add + "\n" + obj.getCountryName();
+//            add = add + "\n" + obj.getCountryCode();
+//            add = add + "\n" + obj.getAdminArea();
+//            add = add + "\n" + obj.getPostalCode();
+//            add = add + "\n" + obj.getSubAdminArea();
+//            add = add + "\n" + obj.getLocality();
+//            add = add + "\n" + obj.getSubThoroughfare();
+                Log.v("IGA", "Address$add")
+                // Toast.makeText(this, "Address=>" + add,
+                // Toast.LENGTH_SHORT).show();
 
+                // TennisAppActivity.showDialog(add);
+            }
+        } catch (e: IOException) {
+            // TODO Auto-generated catch block
+            e.printStackTrace()
+            Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+        }
+        return add
+    }
 }

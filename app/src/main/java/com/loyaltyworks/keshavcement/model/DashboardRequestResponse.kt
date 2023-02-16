@@ -208,7 +208,13 @@ data class LstCustomerFeedBackJsonApi(
     @Json(name = "verifiedStatus")
     val verifiedStatus: Int? = null,
     @Json(name = "walletNumber")
-    val walletNumber: Any? = null
+    val walletNumber: Any? = null,
+    @Json(name = "mappedCustomerType")
+    val mappedCustomerType: String? = null,
+    @Json(name = "mappedCustomerId")
+    val mappedCustomerId: String? = null,
+    @Json(name = "mappedCustomerName")
+    val mappedCustomerName: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -604,7 +610,7 @@ data class ObjCustomerDashboard(
     @Json(name = "redeemableEncashBalance")
     val redeemableEncashBalance: Int? = null,
     @Json(name = "redeemablePointsBalance")
-    val redeemablePointsBalance: Double? = null,
+    val redeemablePointsBalance: Int? = null,
     @Json(name = "referralBonusPoints")
     val referralBonusPoints: Int? = null,
     @Json(name = "referralCount")
@@ -636,7 +642,7 @@ data class ObjCustomerDashboard(
     @Json(name = "totalMappedSubDealers")
     val totalMappedSubDealers: Int? = null,
     @Json(name = "totalRedeemed")
-    val totalRedeemed: Double? = null,
+    val totalRedeemed: Int? = null,
     @Json(name = "totalRows")
     val totalRows: Int? = null,
     @Json(name = "totalWithDrawl")

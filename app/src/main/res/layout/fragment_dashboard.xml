@@ -130,26 +130,81 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="5"
-                                android:gravity="end"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Point Balance"
-                                    android:textSize="12sp"
-                                    android:fontFamily="@font/poppins_regular"
-                                    android:textColor="@color/colorAccent"/>
 
-                                <TextView
-                                    android:id="@+id/point_balance"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textSize="14sp"
-                                    android:drawableStart="@drawable/ic_coin"
-                                    android:drawablePadding="5dp"
-                                    android:fontFamily="@font/poppins_semibold"
-                                    android:textColor="@color/colorAccent"/>
+                                android:orientation="vertical">
+
+                               <!-- Point Balance Layout (for all except Support Executive ) -->
+                                <LinearLayout
+                                    android:id="@+id/point_balance_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Point Balance"
+                                        android:textSize="12sp"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textColor="@color/colorAccent"/>
+
+                                    <TextView
+                                        android:id="@+id/point_balance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="-"
+                                        android:textSize="14sp"
+                                        android:drawableStart="@drawable/ic_coin"
+                                        android:drawablePadding="5dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:textColor="@color/colorAccent"/>
+                                </LinearLayout>
+
+                                <!-- Created BY Layout (only for Support Executive ) -->
+                                <LinearLayout
+                                    android:id="@+id/created_by_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Created By"
+                                        android:textSize="12sp"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textColor="@color/colorAccent"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="end"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:id="@+id/createdBy_type"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="-"
+                                            android:textSize="11sp"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:textColor="@color/colorAccent"/>
+
+                                        <TextView
+                                            android:id="@+id/createdBy_name"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="3dp"
+                                            android:text="-"
+                                            android:textSize="14sp"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:textColor="@color/colorAccent"/>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
                             </LinearLayout>
                         </LinearLayout>
 
@@ -364,7 +419,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
-                                        android:text="Claim\nPurchase"
+                                        android:text="Purchase\nRequest"
                                         android:fontFamily="@font/poppins_regular"
                                         android:textSize="12sp"
                                         android:textColor="@color/dark"/>
@@ -1129,7 +1184,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/click_to_new_sale"
+                            android:text="@string/click_here"
                             android:fontFamily="@font/poppins_medium"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp"/>

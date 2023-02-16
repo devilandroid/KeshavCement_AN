@@ -24,11 +24,20 @@ data class Location(
 /*** SaveAndGetOTPDetails Request ***/
 @JsonClass(generateAdapter = true)
 data class SaveAndGetOTPDetailsRequest(
-    val MerchantUserName: String,
-    val MobileNo: String,
-    val OTPType: String,
-    val UserId: Int,
-    val UserName: String
+    @Json(name = "MerchantUserName")
+    val merchantUserName: String? = null,
+    @Json(name = "MobileNo")
+    val mobileNo: String? = null,
+    @Json(name = "OTPType")
+    val oTPType: String? = null,
+    @Json(name = "EmailID")
+    val emailID: String? = null,
+    @Json(name = "UserId")
+    val userId: String? = null,
+    @Json(name = "UserName")
+    val userName: String? = null,
+    @Json(name = "Name")
+    val name: String? = null
 )
 
 /*** SaveAndGetOTPDetails Response ***/
@@ -268,4 +277,68 @@ data class User(
     val userType: String? = null,
     @Json(name = "verifiedStatus")
     val verifiedStatus: Int? = null
+)
+
+/*** Activate Account Request ***/
+@JsonClass(generateAdapter = true)
+data class ActivateCustomerRequest(
+    @Json(name = "ActionType")
+    val actionType: String? = null,
+    @Json(name = "ActorId")
+    val actorId: String? = null,
+    @Json(name = "ObjCustomerJson")
+    val objCustomerJson: ObjCustomerJsonActivate? = null,
+    @Json(name = "ObjCustomerOfficalInfo")
+    val objCustomerOfficalInfo: ObjCustomerOfficalInfoActivate? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class ObjCustomerJsonActivate(
+    @Json(name = "Address1")
+    val address1: String? = null,
+    @Json(name = "AddressId")
+    val addressId: String? = null,
+    @Json(name = "CityId")
+    val cityId: String? = null,
+    @Json(name = "CustomerId")
+    val customerId: String? = null,
+    @Json(name = "DistrictId")
+    val districtId: String? = null,
+    @Json(name = "Email")
+    val email: String? = null,
+    @Json(name = "FirstName")
+    val firstName: String? = null,
+    @Json(name = "Mobile")
+    val mobile: String? = null,
+    @Json(name = "RELATED_PROJECT_TYPE")
+    val rELATEDPROJECTTYPE: String? = null,
+    @Json(name = "StateId")
+    val stateId: String? = null,
+    @Json(name = "TalukId")
+    val talukId: String? = null,
+    @Json(name = "Zip")
+    val zip: String? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class ObjCustomerOfficalInfoActivate(
+    @Json(name = "CompanyName")
+    val companyName: String? = null,
+    @Json(name = "GSTNumber")
+    val gSTNumber: String? = null,
+    @Json(name = "SapNo")
+    val sapNo: String? = null,
+    @Json(name = "AadharNumber")
+    val aadharNumber: String? = null
+)
+
+/*** Activate Account Response ***/
+@JsonClass(generateAdapter = true)
+data class ActivateCustomerResponse(
+    @Json(name = "returnMessage")
+    val returnMessage: String? = null,
+    @Json(name = "returnValue")
+    val returnValue: Int? = null,
+    @Json(name = "totalRecords")
+    val totalRecords: Int? = null
 )
