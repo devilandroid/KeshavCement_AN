@@ -523,4 +523,44 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
             error = "Error Planner Remove Trigger"
         )
     }
+
+    /* My Earning Request callback*/
+    suspend fun getEarningListData(myEarningRequest: MyEarningRequest): MyEarningResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchEarningListAsync(myEarningRequest).await()
+            },
+            error = "Error Earning List Trigger"
+        )
+    }
+
+    /* Dream Gift List Request callback*/
+    suspend fun getDreamGiftData(dreamGiftRequest: DreamGiftRequest): DreamGiftResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchDreamGiftAsync(dreamGiftRequest).await()
+            },
+            error = "Error Dream Gift Trigger"
+        )
+    }
+
+    /* Dream Gift Details Request callback*/
+    suspend fun getDreamGiftDetailsData(dreamGiftDetailRequest: DreamGiftDetailRequest): DreamGiftDetailResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchDreamGiftDetailAsync(dreamGiftDetailRequest).await()
+            },
+            error = "Error Dream Gift Details Trigger"
+        )
+    }
+
+    /* Dream Gift Remove callback*/
+    suspend fun getDreamGiftRemove(dreamGiftRemoveRequest: DreamGiftRemoveRequest): DreamGiftRemoveResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getDreamGiftRemove(dreamGiftRemoveRequest).await()
+            },
+            error = "Error Dream Gift Remove Trigger"
+        )
+    }
 }

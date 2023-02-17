@@ -37,6 +37,7 @@ class WishlistDetailsFragment : Fragment(), View.OnClickListener {
 
     var actorID = ""
     var loyaltyId = ""
+    var partyLoyaltyID = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +57,7 @@ class WishlistDetailsFragment : Fragment(), View.OnClickListener {
         if (bundle != null) {
             actorID = requireArguments().getString("SelectedCustomerUserID").toString()
             loyaltyId = requireArguments().getString("SelectedCustomerLoyltyID").toString()
+            partyLoyaltyID = requireArguments().getString("SelectedCustomerPartyLoyaltyID").toString()
             objCatalogues = arguments?.getSerializable("plannerDetails") as ObjCatalogues
         }
 
@@ -95,6 +97,12 @@ class WishlistDetailsFragment : Fragment(), View.OnClickListener {
             binding.plannerRedeemBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
         }
 
+        if (objCatalogues.isRedeemable == 1){
+            binding.plannerRedeemBtn.visibility = View.VISIBLE
+        }else{
+            binding.plannerRedeemBtn.visibility = View.GONE
+        }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -126,6 +134,7 @@ class WishlistDetailsFragment : Fragment(), View.OnClickListener {
                     val bundle = Bundle()
                     bundle.putString("SelectedCustomerUserID",actorID)
                     bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+                    bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                     findNavController().navigate(R.id.action_wishlistDetailsFragment_to_cartFragment,bundle)
                 }else {
                     Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
@@ -180,6 +189,7 @@ class WishlistDetailsFragment : Fragment(), View.OnClickListener {
                 actorId = actorID,
                 merchantId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.merchantId!!.toString(),
                 loyaltyID = loyaltyId,
+                partyLoyaltyID = partyLoyaltyID,
                 catalogueSaveCartDetailListRequest = catalogueSaveCartDetialsList
 
             )
@@ -192,8 +202,8 @@ class WishlistDetailsFragment : Fragment(), View.OnClickListener {
             RemovePlannerRequest(
                 actionType = 17,
                 actorId = actorID,
-
-                redemptionPlannerId = redemptionPlannerId
+                redemptionPlannerId = redemptionPlannerId,
+                partyLoyaltyID = partyLoyaltyID
             )
         )
     }

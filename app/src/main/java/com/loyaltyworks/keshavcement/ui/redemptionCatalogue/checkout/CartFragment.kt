@@ -33,6 +33,9 @@ class CartFragment : Fragment(), View.OnClickListener, CartAdapter.DeleteProduct
 
     var actorID = ""
     var loyaltyId = ""
+    var partyLoyaltyID = ""
+
+    var isRedeemable : Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +59,7 @@ class CartFragment : Fragment(), View.OnClickListener, CartAdapter.DeleteProduct
         if (arguments != null){
             actorID = requireArguments().getString("SelectedCustomerUserID").toString()
             loyaltyId = requireArguments().getString("SelectedCustomerLoyltyID").toString()
+            partyLoyaltyID = requireArguments().getString("SelectedCustomerPartyLoyaltyID").toString()
         }
 
         binding.checkoutBtn.setOnClickListener(this)
@@ -84,6 +88,16 @@ class CartFragment : Fragment(), View.OnClickListener, CartAdapter.DeleteProduct
 
                     sumofTotalPointsRequired = it.catalogueSaveCartDetailListResponse[0].sumofTotalPointsRequired!!.floatToInt()
                     binding.totalPoints.setText(sumofTotalPointsRequired.toString())
+
+                    if (it.catalogueSaveCartDetailListResponse[0].isRedeemable != null){
+                        isRedeemable = it.catalogueSaveCartDetailListResponse[0].isRedeemable!!
+                    }
+
+                    if (it.catalogueSaveCartDetailListResponse[0].isRedeemable == 1){
+                        binding.checkoutBtn.visibility = View.VISIBLE
+                    }else{
+                        binding.checkoutBtn.visibility = View.GONE
+                    }
 
 
                 } else {
@@ -138,7 +152,9 @@ class CartFragment : Fragment(), View.OnClickListener, CartAdapter.DeleteProduct
         viewModel.getCartListData(
             CartRequest(
                 actionType = "2",
-                loyaltyID = loyaltyId
+                loyaltyID = loyaltyId,
+                domain = "KESHAV_CEMENT",
+                partyLoyaltyID = partyLoyaltyID
             )
         )
     }
@@ -147,20 +163,26 @@ class CartFragment : Fragment(), View.OnClickListener, CartAdapter.DeleteProduct
         when(v!!.id){
             R.id.checkout_btn ->{
 
-                Log.d("sdvhiqdi","ehbifhew : " + PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].verifiedStatus )
-                if (PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].verifiedStatus == 1) {
-                    if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.RedeemablePointsBalance).toInt() >= sumofTotalPointsRequired){
-                        val bundle = Bundle()
-                        bundle.putString("SelectedCustomerUserID",actorID)
-                        bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
-                        bundle.putSerializable("CartDataList", _catalogueSaveCartDetailListResponse as Serializable)
-                        findNavController().navigate(R.id.action_cartFragment_to_addressFragment, bundle)
-                    }else{
-                        Toast.makeText(requireContext(), getString(R.string.insufficient_point_balance_to_redeem), Toast.LENGTH_SHORT).show()
+                if (isRedeemable == 1){
+                    Log.d("sdvhiqdi","ehbifhew : " + PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].verifiedStatus )
+                    if (PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].verifiedStatus == 1) {
+                        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.RedeemablePointsBalance).toInt() >= sumofTotalPointsRequired){
+                            val bundle = Bundle()
+                            bundle.putString("SelectedCustomerUserID",actorID)
+                            bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+                            bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
+                            bundle.putSerializable("CartDataList", _catalogueSaveCartDetailListResponse as Serializable)
+                            findNavController().navigate(R.id.action_cartFragment_to_addressFragment, bundle)
+                        }else{
+                            Toast.makeText(requireContext(), getString(R.string.insufficient_point_balance_to_redeem), Toast.LENGTH_SHORT).show()
+                        }
+                    }else {
+                        Toast.makeText(requireContext(), getString(R.string.not_allowed_to_redeem_contact_administrator), Toast.LENGTH_SHORT).show()
                     }
-                }else {
+                }else{
                     Toast.makeText(requireContext(), getString(R.string.not_allowed_to_redeem_contact_administrator), Toast.LENGTH_SHORT).show()
                 }
+
             }
         }
     }
@@ -186,6 +208,7 @@ class CartFragment : Fragment(), View.OnClickListener, CartAdapter.DeleteProduct
                 UpdateQuantityRequest(
                     ActionType = "3",
                     ActorId = actorID,
+                    PartyLoyaltyID = partyLoyaltyID,
 
                     CustomerCartId = catalogueCartList.customerCartId.toString(),
                     CustomerCartList = customerList.toList()
@@ -207,7 +230,8 @@ class CartFragment : Fragment(), View.OnClickListener, CartAdapter.DeleteProduct
             RemoveCartProductRequest(
                 ActionType = "4",
                 ActorId = actorID,
-                CustomerCartId = cartList.customerCartId.toString()
+                CustomerCartId = cartList.customerCartId.toString(),
+                PartyLoyaltyID = partyLoyaltyID
             )
         )
     }

@@ -46,6 +46,7 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
 
     var actorID = ""
     var loyaltyId = ""
+    var partyLoyaltyID = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,9 +65,11 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
         if (arguments != null){
             actorID = requireArguments().getString("SelectedCustomerUserID").toString()
             loyaltyId = requireArguments().getString("SelectedCustomerLoyltyID").toString()
+            partyLoyaltyID = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].loyaltyId.toString()
         }else{
             actorID = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
             loyaltyId = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].loyaltyId.toString()
+            partyLoyaltyID = ""
         }
 
         binding.addPlannerBtn.setOnClickListener(this)
@@ -121,7 +124,9 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
                 actionType = "6",
                 actorId = actorID,
                 startIndex = startIndex,
-                pageSize = limit
+                pageSize = limit,
+                partyLoyaltyID = partyLoyaltyID,
+                domain = "KESHAV_CEMENT"
 
             )
         )
@@ -209,6 +214,7 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
                     val bundle = Bundle()
                     bundle.putString("SelectedCustomerUserID",actorID)
                     bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+                    bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                     findNavController().navigate(R.id.cartFragment,bundle)
                 }else {
                     Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
@@ -222,6 +228,7 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
         val bundle = Bundle()
         bundle.putString("SelectedCustomerUserID",actorID)
         bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+        bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
         bundle.putSerializable("plannerDetails", objCatalogues)
         itemView.findNavController().navigate(R.id.action_wishlistFragment_to_wishlistDetailsFragment,bundle)
 
@@ -238,7 +245,8 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
             RemovePlannerRequest(
                 actionType = 17,
                 actorId = actorID,
-                redemptionPlannerId =plannerId
+                redemptionPlannerId =plannerId,
+                partyLoyaltyID = partyLoyaltyID
             )
         )
     }
@@ -269,6 +277,7 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
                 actorId = actorID,
                 merchantId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.merchantId!!.toString(),
                 loyaltyID = loyaltyId,
+                partyLoyaltyID = partyLoyaltyID,
                 catalogueSaveCartDetailListRequest = catalogueSaveCartDetialsList
 
             )
@@ -282,6 +291,7 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
                 val bundle = Bundle()
                 bundle.putString("SelectedCustomerUserID",actorID)
                 bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+                bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                 findNavController().navigate(R.id.productFragment,bundle)
             }
         }

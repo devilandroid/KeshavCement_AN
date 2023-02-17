@@ -42,6 +42,8 @@ data class SaveCatalogueRedemptionRequest(
     val actorId: Int? = null,
     @Json(name = "MemberName")
     val memberName: String? = null,
+    @Json(name = "DealerLoyaltyId")
+    val dealerLoyaltyId: String? = null,
     @Json(name = "UserName")
     val userName: String? = null,
     @Json(name = "TotalPointsRedeemed")

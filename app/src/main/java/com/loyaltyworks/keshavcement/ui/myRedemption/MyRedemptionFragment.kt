@@ -24,6 +24,8 @@ import com.loyaltyworks.keshavcement.model.ObjCatalogueDetails
 import com.loyaltyworks.keshavcement.model.ObjCatalogueRedemReq
 import com.loyaltyworks.keshavcement.ui.enrollment.EnrollmentViewModel
 import com.loyaltyworks.keshavcement.ui.myRedemption.adapter.MyRedemptionAdapter
+import com.loyaltyworks.keshavcement.utils.AppController
+import com.loyaltyworks.keshavcement.utils.DatePickerBox
 import com.loyaltyworks.keshavcement.utils.EndlessRecyclerViewScrollListener
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
@@ -36,8 +38,9 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
 
     var userID: Int = -1
 
-    private var fromDate: String = ""
-    private var toDate: String =""
+    var selectedStatusId = "-1"
+    private var FromDate: String = ""
+    private var ToDate: String =""
 
     var catalogeTypeList = mutableListOf<CommonStatusSpinner>()
     private lateinit var mSelectedCatalogueTYpe:CommonStatusSpinner
@@ -84,6 +87,13 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
 
         binding.filterOpen.setOnClickListener(this)
         binding.filterClose.setOnClickListener(this)
+        binding.filterApproved.setOnClickListener(this)
+        binding.filterPending.setOnClickListener(this)
+        binding.filterRejected.setOnClickListener(this)
+        binding.clearBtn.setOnClickListener(this)
+        binding.filterOkBtn.setOnClickListener(this)
+        binding.fromDate.setOnClickListener(this)
+        binding.toDate.setOnClickListener(this)
 
 
         userID = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toInt()
@@ -143,12 +153,12 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
         myRedemptionRequest.noOfRows = limit
 
         val objCatalogueDetails = ObjCatalogueDetails()
-        objCatalogueDetails.selectedStatus = -1
+        objCatalogueDetails.selectedStatus = selectedStatusId
         objCatalogueDetails.redemptionTypeId = statusId
 
-        if (fromDate.isNotEmpty() && toDate.isNotEmpty()){
-            objCatalogueDetails.jFromDate = fromDate
-            objCatalogueDetails.jToDate = toDate
+        if (FromDate.isNotEmpty() && ToDate.isNotEmpty()){
+            objCatalogueDetails.jFromDate = AppController.dateAPIFormats(FromDate)
+            objCatalogueDetails.jToDate = AppController.dateAPIFormats(ToDate)
         }
 
         myRedemptionRequest.objCatalogueDetails = objCatalogueDetails
@@ -219,6 +229,101 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.filterClose -> {
+
+                binding.filterLayout.visibility = View.GONE
+                binding.filterLayout.animation = AnimationUtils.loadAnimation(requireContext(),R.anim.slide_down_dialog)
+            }
+
+            R.id.from_date ->{
+                DatePickerBox.date(1, activity) {
+                    binding.fromDateTxt.text = it.toString()
+                    FromDate = it
+                    try {
+                        DatePickerBox.dateCompare(activity, FromDate, ToDate) {
+                            if (!it) {
+                                FromDate = ""
+                                binding.fromDateTxt.text = ""
+                            }
+                        }
+                    } catch (e: Exception) {
+                    }
+                }
+            }
+
+            R.id.to_date ->{
+                DatePickerBox.date(1, activity) {
+                    binding.toDateTxt.text = it.toString()
+                    ToDate = it
+                    DatePickerBox.dateCompare(activity, FromDate, ToDate) {
+                        if (!it) {
+                            ToDate = ""
+                            binding.toDateTxt.text = ""
+                        }
+                    }
+                }
+            }
+
+            R.id.filter_approved ->{
+                binding.filterApproved.setBackgroundResource(R.drawable.selected_filter)
+                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
+                selectedStatusId = "4"
+            }
+
+            R.id.filter_pending ->{
+                binding.filterPending.setBackgroundResource(R.drawable.selected_filter)
+                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
+                selectedStatusId = "0"
+            }
+
+            R.id.filter_rejected ->{
+                binding.filterRejected.setBackgroundResource(R.drawable.selected_filter)
+                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
+                selectedStatusId = "5"
+            }
+
+            R.id.clear_btn ->{
+                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
+                selectedStatusId = "-1"
+                FromDate = ""
+                ToDate = ""
+                binding.fromDateTxt.text = ""
+                binding.toDateTxt.text = ""
+                binding.fromDateTxt.hint = getString(R.string.select_from_date)
+                binding.toDateTxt.hint = getString(R.string.select_to_date)
+                callApi(1)
+
+                binding.filterLayout.visibility = View.GONE
+                binding.filterLayout.animation = AnimationUtils.loadAnimation(requireContext(),R.anim.slide_down_dialog)
+            }
+
+            R.id.filter_ok_btn ->{
+                currentList.clear()
+                callApi(1)
 
                 binding.filterLayout.visibility = View.GONE
                 binding.filterLayout.animation = AnimationUtils.loadAnimation(requireContext(),R.anim.slide_down_dialog)

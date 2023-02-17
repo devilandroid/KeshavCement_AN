@@ -26,7 +26,7 @@ import com.loyaltyworks.keshavcement.ui.CommonViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import java.io.Serializable
 
-class EditAddressFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
+class EditAddressFragment : Fragment(),  AdapterView.OnItemSelectedListener {
     private lateinit var binding: FragmentEditAddressBinding
     private lateinit var commonViewModel: CommonViewModel
 
@@ -47,6 +47,7 @@ class EditAddressFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
 
     var actorID = ""
     var loyaltyId = ""
+    var partyLoyaltyID = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +72,7 @@ class EditAddressFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
         if (this.arguments != null) {
             actorID = requireArguments().getString("SelectedCustomerUserID").toString()
             loyaltyId = requireArguments().getString("SelectedCustomerLoyltyID").toString()
+            partyLoyaltyID = requireArguments().getString("SelectedCustomerPartyLoyaltyID").toString()
 
             _lstCustomerJson = requireArguments().getSerializable("CustomerProfileData") as LstCustomerJson
         }
@@ -78,7 +80,6 @@ class EditAddressFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
         binding.stateSpinner.onItemSelectedListener = this
         binding.districtSpinner.onItemSelectedListener = this
 
-        binding.editProceed.setOnClickListener(this)
 
         binding.NameTxt.setText(_lstCustomerJson.firstName)
         binding.mobileEdt.setText(_lstCustomerJson.mobile)
@@ -102,6 +103,7 @@ class EditAddressFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 val bundle =Bundle()
                 bundle.putString("SelectedCustomerUserID",actorID)
                 bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+                bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                 bundle.putSerializable("CustomerProfileData", _lstCustomerJson)
 //                bundle.putSerializable("CartDataList2", catalogueSaveCartDetailListResponse as Serializable)
                 _lstCustomerJson.firstName = binding.NameTxt.text.toString()
@@ -134,14 +136,6 @@ class EditAddressFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
         )
     }
 
-    override fun onClick(v: View?) {
-        when(v!!.id){
-            R.id.edit_proceed ->{
-                findNavController().popBackStack()
-            }
-        }
-
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

@@ -81,30 +81,36 @@ class ProductAdapter(val objCatalogueList: List<ObjCataloguee>, var onItemClickL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val objCatalogue = objCatalogueList[position]
 
-        if (objCatalogue.pointsRequired!!.toInt() <= PreferenceHelper.getStringValue(holder.itemView.context,BuildConfig.RedeemablePointsBalance).toInt()) {
+        if (objCatalogue.isRedeemable == 1){
+            holder.addToCartLayout.visibility = View.VISIBLE
+            if (objCatalogue.pointsRequired!!.toInt() <= PreferenceHelper.getStringValue(holder.itemView.context,BuildConfig.RedeemablePointsBalance).toInt()) {
 
-            if (objCatalogue.catalogueIdExist == "1") {
-                holder.addToCartButton.text = holder.itemView.context.getString(R.string.added_to_cart)
-                holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_grey)
-            } else if (objCatalogue.catalogueIdExist == "0") {
-                holder.addToCartButton.text = holder.itemView.context.getString(R.string.add_to_cart)
-                holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_dark)
-            }
-
-        } else {
-
-            if (objCatalogue.isPlanner == true) {
-                holder.addToCartLayout.visibility = View.VISIBLE
-
-                holder.addToCartButton.text = holder.itemView.context.getString(R.string.add_to_planner)
-
-                if (objCatalogue.isAddPlanner == true) {
+                if (objCatalogue.catalogueIdExist == "1") {
+                    holder.addToCartButton.text = holder.itemView.context.getString(R.string.added_to_cart)
                     holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_grey)
-                    holder.addToCartButton.text = holder.itemView.context.getString(R.string.added_to_planner)
+                } else if (objCatalogue.catalogueIdExist == "0") {
+                    holder.addToCartButton.text = holder.itemView.context.getString(R.string.add_to_cart)
+                    holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_dark)
                 }
-            } else
-                holder.addToCartLayout.visibility = View.GONE
+
+            } else {
+
+                if (objCatalogue.isPlanner == true) {
+                    holder.addToCartLayout.visibility = View.VISIBLE
+
+                    holder.addToCartButton.text = holder.itemView.context.getString(R.string.add_to_planner)
+
+                    if (objCatalogue.isAddPlanner == true) {
+                        holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_grey)
+                        holder.addToCartButton.text = holder.itemView.context.getString(R.string.added_to_planner)
+                    }
+                } else
+                    holder.addToCartLayout.visibility = View.GONE
+            }
+        }else{
+            holder.addToCartLayout.visibility = View.GONE
         }
+
 
         holder.prodName.text = objCatalogue.productName
         holder.pointValue.text = objCatalogue.pointsRequired.toString()
@@ -116,36 +122,43 @@ class ProductAdapter(val objCatalogueList: List<ObjCataloguee>, var onItemClickL
             .into(holder.prodImage)
 
         holder.addToCartLayout.setOnClickListener {
+            if (objCatalogue.isRedeemable == 1){
 
-            if (objCatalogue.pointsRequired!!.toInt() <= PreferenceHelper.getStringValue(holder.itemView.context,BuildConfig.RedeemablePointsBalance).toInt()) {
-                var abc: String =
-                    PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].verifiedStatus.toString()
-                Log.d("dhjbhf", " a " + abc)
-                if (objCatalogue.catalogueIdExist == "0") {
-                    if (PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].verifiedStatus == 1) {
+                if (objCatalogue.pointsRequired!!.toInt() <= PreferenceHelper.getStringValue(holder.itemView.context,BuildConfig.RedeemablePointsBalance).toInt()) {
+                    var abc: String =
+                        PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].verifiedStatus.toString()
+                    Log.d("dhjbhf", " a " + abc)
+                    if (objCatalogue.catalogueIdExist == "0") {
+                        if (PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].verifiedStatus == 1) {
 
-                        onItemClickListener.onAddToCart(objCatalogue)
-                        objCatalogue.catalogueIdExist = "1"
-                        holder.addToCartButton.text = holder.itemView.context.getString(R.string.added_to_cart)
-                        holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_grey)
+                            onItemClickListener.onAddToCart(objCatalogue)
+                            objCatalogue.catalogueIdExist = "1"
+                            holder.addToCartButton.text = holder.itemView.context.getString(R.string.added_to_cart)
+                            holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_grey)
+
+                        } else {
+
+                            onItemClickListener.onHoldAddtoCart()
+
+
+                        }
 
                     } else {
-
-                        onItemClickListener.onHoldAddtoCart()
-
-
+                        Toast.makeText(holder.itemView.context, holder.itemView.context.getString(R.string.already_added_in_cart), Toast.LENGTH_SHORT).show()
                     }
-
                 } else {
-                    Toast.makeText(holder.itemView.context, holder.itemView.context.getString(R.string.already_added_in_cart), Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                onItemClickListener.onAddPlannerListener(objCatalogue.catalogueId!!)
-                objCatalogue.isAddPlanner = true
-                holder.addToCartButton.text = holder.itemView.context.getString(R.string.added_to_planner)
-                holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_grey)
+                    onItemClickListener.onAddPlannerListener(objCatalogue.catalogueId!!)
+                    objCatalogue.isAddPlanner = true
+                    holder.addToCartButton.text = holder.itemView.context.getString(R.string.added_to_planner)
+                    holder.addToCartLayout.background = holder.itemView.context.getDrawable(R.drawable.product_corner_bg_grey)
 
+                }
+
+            }else{
+                Toast.makeText(holder.itemView.context, holder.itemView.context.getString(R.string.not_allowed_to_redeem_contact_administrator), Toast.LENGTH_SHORT).show()
             }
+
+
         }
 
         holder.itemView.setOnClickListener { v ->

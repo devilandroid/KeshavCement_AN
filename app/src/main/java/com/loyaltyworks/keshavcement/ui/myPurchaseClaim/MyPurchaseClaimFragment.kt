@@ -292,6 +292,8 @@ class MyPurchaseClaimFragment : Fragment(), View.OnClickListener {
                 selectedStatusId = "-3"
                 FromDate = ""
                 ToDate = ""
+                binding.fromDateTxt.text = ""
+                binding.toDateTxt.text = ""
                 binding.fromDateTxt.hint = getString(R.string.select_from_date)
                 binding.toDateTxt.hint = getString(R.string.select_to_date)
                 callApi(1)

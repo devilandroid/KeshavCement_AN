@@ -264,4 +264,38 @@
             app:popUpTo="@+id/plannerDetailsFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/dreamGiftFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.dreamGift.DreamGiftFragment"
+        android:label="@string/dream_gift"
+        tools:layout="@layout/fragment_dream_gift" >
+        <action
+            android:id="@+id/action_dreamGiftFragment_to_dreamGiftDetailsFragment"
+            app:destination="@id/dreamGiftDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dreamGiftDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.dreamGift.DreamGiftDetailsFragment"
+        android:label="@string/dream_gift"
+        tools:layout="@layout/fragment_dream_gift_details" />
+    <fragment
+        android:id="@+id/dreamGiftAddressFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.dreamGift.dreamCheckout.DreamGiftAddressFragment"
+        android:label="@string/order_confirmation"
+        tools:layout="@layout/fragment_dream_gift_address" >
+        <action
+            android:id="@+id/action_dreamGiftAddressFragment_to_dreamGiftEditAddressFragment"
+            app:destination="@id/dreamGiftEditAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dreamGiftEditAddressFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.dreamGift.dreamCheckout.DreamGiftEditAddressFragment"
+        android:label="@string/edit_address"
+        tools:layout="@layout/fragment_dream_gift_edit_address" >
+        <action
+            android:id="@+id/action_dreamGiftEditAddressFragment_to_dreamGiftAddressFragment"
+            app:destination="@id/dreamGiftAddressFragment"
+            app:popUpTo="@id/dreamGiftAddressFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

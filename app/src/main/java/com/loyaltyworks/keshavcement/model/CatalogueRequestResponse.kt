@@ -21,7 +21,9 @@ data class GatCatalogueRequest(
     @Json(name = "NoOfRows")
     val noOfRows: Int? = null,
     @Json(name = "Sort")
-    val sort: String? = null
+    val sort: String? = null,
+    @Json(name = "Domain")
+    val domain: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -281,7 +283,9 @@ data class ObjCataloguee(
     @Json(name = "vendorId")
     val vendorId: Int? = null,
     @Json(name = "vendorName")
-    val vendorName: String? = null
+    val vendorName: String? = null,
+    @Json(name = "is_Redeemable")
+    val isRedeemable: Int? = null
 ) : Serializable
 
 /*  Get Catalogue Category request */
@@ -365,7 +369,9 @@ data class AddToCartRequest(
     @Json(name = "LoyaltyID")
     val loyaltyID: String? = null,
     @Json(name = "MerchantId")
-    val merchantId: String? = null
+    val merchantId: String? = null,
+    @Json(name = "PartyLoyaltyID")
+    val partyLoyaltyID: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -401,7 +407,11 @@ data class CartRequest(
     @Json(name = "ActionType")
     val actionType: String? = null,
     @Json(name = "LoyaltyID")
-    val loyaltyID: String? = null
+    val loyaltyID: String? = null,
+    @Json(name = "Domain")
+    val domain: String? = null,
+    @Json(name = "PartyLoyaltyID")
+    val partyLoyaltyID: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -637,7 +647,9 @@ data class CatalogueSaveCartDetailResponse(
     @Json(name = "sumOfTotalPointsRequired")
     val sumofTotalPointsRequired: String? = null,
     @Json(name = "vendorName")
-    val vendorName: String? = null
+    val vendorName: String? = null,
+    @Json(name = "is_CartRedeemable")
+    val isRedeemable: Int? = null
 ) : Serializable
 
  /*  Cart Count Update Request   */
@@ -647,6 +659,7 @@ data class UpdateQuantityRequest(
     var ActionType: String? = null,
     var ActorId: String? = null,
     var CustomerCartId: String? = null,
+    var PartyLoyaltyID: String? = null,
     var CustomerCartList: List<CustomerCart>? = null
 )
 
@@ -668,7 +681,8 @@ data class UpdateQuantityResponse(
 data class RemoveCartProductRequest(
     val ActionType: String? = null,
     val ActorId: String? = null,
-    val CustomerCartId: String? = null
+    val CustomerCartId: String? = null,
+    val PartyLoyaltyID: String? = null
 )
 
 /* Remove Cart Item  Response */
@@ -686,6 +700,8 @@ data class PlannerAddRequest(
     val actionType: Int? = null,
     @Json(name = "ActorId")
     val actorId: String? = null,
+    @Json(name = "PartyLoyaltyID")
+    val partyLoyaltyID: String? = null,
     @Json(name = "ObjCatalogueDetails")
     val objCatalogueDetails: ObjCatalogueDetailsy? = null
 )
@@ -729,7 +745,9 @@ data class CartCountRequest(
     @Json(name = "ActionType")
     val actionType: String? = null,
     @Json(name = "LoyaltyID")
-    val loyaltyID: String? = null
+    val loyaltyID: String? = null,
+    @Json(name = "PartyLoyaltyID")
+    val partyLoyaltyID: String? = null
 )
 
 /* Cart Count Response */

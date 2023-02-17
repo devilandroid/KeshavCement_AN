@@ -27,7 +27,7 @@ data class ObjCatalogueDetails(
     @Json(name = "JToDate")
     var jToDate: String? = null,
     @Json(name = "SelectedStatus")
-    var selectedStatus: Int? = null,
+    var selectedStatus: String? = null,
     @Json(name = "RedemptionTypeId")
     var redemptionTypeId: Int? = null,
     @Json(name = "RedemptionId")

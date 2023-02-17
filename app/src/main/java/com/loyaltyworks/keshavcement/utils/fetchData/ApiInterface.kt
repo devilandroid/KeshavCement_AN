@@ -216,5 +216,21 @@ interface ApiInterface {
     @POST("GetPlannerAddedOrNot")
     fun getPlannerRemove(@Body removePlannerRequest: RemovePlannerRequest): Deferred<Response<RemovePlannerResponse>>
 
+    // My Earning List api call
+    @POST("GetRewardTransactionDetailsMobileApp")
+    fun fetchEarningListAsync(@Body myEarningRequest: MyEarningRequest): Deferred<Response<MyEarningResponse>>
+
+    // Dream Gift List api call
+    @POST("GetDreamGiftDetails")
+    fun fetchDreamGiftAsync(@Body dreamGiftRequest: DreamGiftRequest): Deferred<Response<DreamGiftResponse>>
+
+    // Dream Gift Details api call
+    @POST("GetDreamGiftDetails")
+    fun fetchDreamGiftDetailAsync(@Body dreamGiftDetailRequest: DreamGiftDetailRequest): Deferred<Response<DreamGiftDetailResponse>>
+
+    /* Dream Gift Remove api call*/
+    @POST("SaveOrUpdateDreamGiftDetails")
+    fun getDreamGiftRemove(@Body dreamGiftRemoveRequest: DreamGiftRemoveRequest): Deferred<Response<DreamGiftRemoveResponse>>
+
 
 }

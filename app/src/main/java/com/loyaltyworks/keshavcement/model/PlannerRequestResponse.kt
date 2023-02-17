@@ -14,7 +14,11 @@ data class PlannerRequest(
     @Json(name = "StartIndex")
     val startIndex: Int? = null,
     @Json(name = "PageSize")
-    val pageSize: Int? = null
+    val pageSize: Int? = null,
+    @Json(name = "PartyLoyaltyID")
+    val partyLoyaltyID: String? = null,
+    @Json(name = "Domain")
+    val domain: String? = null
 )
 
 /*Redemption Planner Response*/
@@ -239,7 +243,9 @@ data class ObjCatalogues(
     @Json(name = "vendorId")
     val vendorId: Int? = null,
     @Json(name = "vendorName")
-    val vendorName: String? = null
+    val vendorName: String? = null,
+    @Json(name = "is_Redeemable")
+    val isRedeemable: Int? = null
 ): Serializable
 
 /* Remove Planner Request  */
@@ -250,7 +256,9 @@ data class RemovePlannerRequest(
     @Json(name = "ActorId")
     val actorId: String? = null,
     @Json(name = "RedemptionPlannerId")
-    val redemptionPlannerId: Int? = null
+    val redemptionPlannerId: Int? = null,
+    @Json(name = "PartyLoyaltyID")
+    val partyLoyaltyID: String? = null
 )
 
 /* Remove Planner Response  */

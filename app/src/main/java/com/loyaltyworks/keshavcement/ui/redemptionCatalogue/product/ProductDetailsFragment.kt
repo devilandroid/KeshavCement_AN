@@ -31,6 +31,7 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
 
     var actorID = ""
     var loyaltyId = ""
+    var partyLoyaltyID = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +57,7 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
             objCataloguee = arguments?.getSerializable("CatalogueProduct") as ObjCataloguee
             actorID = requireArguments().getString("SelectedCustomerUserID").toString()
             loyaltyId = requireArguments().getString("SelectedCustomerLoyltyID").toString()
+            partyLoyaltyID = requireArguments().getString("SelectedCustomerPartyLoyaltyID").toString()
         }
 
         binding.addCartBtn.setOnClickListener(this)
@@ -134,40 +136,47 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
          binding.viewCartPoints.text = objCataloguee.pointsRequired.toString()
          binding.viewCartQuantity.text = objCataloguee.noOfQuantity.toString()*/
 
+        if (objCataloguee.isRedeemable == 1){
+            binding.addCartBtn.visibility = View.VISIBLE
 
-        if (objCataloguee.pointsRequired!!.toInt() <=  PreferenceHelper.getStringValue(requireContext(),BuildConfig.RedeemablePointsBalance).toInt() ) {
+            if (objCataloguee.pointsRequired!!.toInt() <=  PreferenceHelper.getStringValue(requireContext(),BuildConfig.RedeemablePointsBalance).toInt() ) {
 
-            if (objCataloguee.catalogueIdExist == "1") {
-                binding.addCartText.text = getString(R.string.added_to_cart)
-                binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
+                if (objCataloguee.catalogueIdExist == "1") {
+                    binding.addCartText.text = getString(R.string.added_to_cart)
+                    binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
 
 //                binding.viewCartLayout.visibility = View.VISIBLE
 
-            } else if (objCataloguee.catalogueIdExist == "0") {
-                binding.addCartText.text = getString(R.string.add_to_cart)
-                binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_dark)
-
-            }
-
-        }else {
-
-            if (objCataloguee.isPlanner == true){
-                binding.addCartBtn.visibility = View.VISIBLE
-
-
-                if (objCataloguee.isAddPlanner == true) {
-                    binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
-                    binding.addCartText.text = getString(R.string.added_to_planner)
-                }else{
+                } else if (objCataloguee.catalogueIdExist == "0") {
+                    binding.addCartText.text = getString(R.string.add_to_cart)
                     binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_dark)
-                    binding.addCartText.text = getString(R.string.add_to_planner)
+
                 }
 
-            }else{
-                binding.addCartBtn.visibility = View.INVISIBLE
+            }else {
+
+                if (objCataloguee.isPlanner == true){
+                    binding.addCartBtn.visibility = View.VISIBLE
+
+
+                    if (objCataloguee.isAddPlanner == true) {
+                        binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
+                        binding.addCartText.text = getString(R.string.added_to_planner)
+                    }else{
+                        binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_dark)
+                        binding.addCartText.text = getString(R.string.add_to_planner)
+                    }
+
+                }else{
+                    binding.addCartBtn.visibility = View.INVISIBLE
+                }
+
             }
 
+        }else{
+            binding.addCartBtn.visibility = View.INVISIBLE
         }
+
     }
 
     private fun CartCountApi() {
@@ -175,7 +184,8 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
         viewModel.getCartCountData(
             CartCountRequest(
                 actionType = "1",
-                loyaltyID = loyaltyId
+                loyaltyID = loyaltyId,
+                partyLoyaltyID = partyLoyaltyID
 
             )
         )
@@ -194,6 +204,7 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
                 val bundle = Bundle()
                 bundle.putString("SelectedCustomerUserID",actorID)
                 bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+                bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                 findNavController().navigate(R.id.action_productDetailsFragment_to_cartFragment,bundle)
             }
 
@@ -204,32 +215,37 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun onAddToCartClick() {
-        if (objCataloguee.pointsRequired!!.toInt() <=  PreferenceHelper.getStringValue(requireContext(),BuildConfig.RedeemablePointsBalance).toInt() ) {
+        if (objCataloguee.isRedeemable == 1){
+            if (objCataloguee.pointsRequired!!.toInt() <=  PreferenceHelper.getStringValue(requireContext(),BuildConfig.RedeemablePointsBalance).toInt() ) {
 
 
-            if (objCataloguee.catalogueIdExist == "0") {
-                if (PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].verificationStatus != 6) {
+                if (objCataloguee.catalogueIdExist == "0") {
+                    if (PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].verificationStatus != 6) {
 
-                    addToCartApi()
-                    objCataloguee.catalogueIdExist = "1"
-                    binding.addCartText.text = getString(R.string.added_to_cart)
-                    binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
+                        addToCartApi()
+                        objCataloguee.catalogueIdExist = "1"
+                        binding.addCartText.text = getString(R.string.added_to_cart)
+                        binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
 
-                }else {
-                    onHoldAddtoCart()
+                    }else {
+                        onHoldAddtoCart()
 
+                    }
+
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.already_added_in_cart), Toast.LENGTH_SHORT).show()
                 }
 
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.already_added_in_cart), Toast.LENGTH_SHORT).show()
+            }else {
+                onAddPlannerListener()
+                binding.addCartText.text = getString(R.string.added_to_planner)
+                binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
+
             }
-
-        }else {
-            onAddPlannerListener()
-            binding.addCartText.text = getString(R.string.added_to_planner)
-            binding.addCartBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
-
+        }else{
+            Toast.makeText(requireContext(), getString(R.string.not_allowed_to_redeem_contact_administrator), Toast.LENGTH_SHORT).show()
         }
+
     }
 
     private fun addToCartApi() {
@@ -255,6 +271,7 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
                 actorId = actorID,
                 merchantId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.merchantId!!.toString(),
                 loyaltyID = loyaltyId,
+                partyLoyaltyID = partyLoyaltyID,
 
                 catalogueSaveCartDetailListRequest = catalogueSaveCartDetialsList
             )
@@ -269,6 +286,7 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
             PlannerAddRequest(
                 actionType = 0,
                 actorId = actorID,
+                partyLoyaltyID = partyLoyaltyID,
 
                 ObjCatalogueDetailsy(
                     catalogueId =objCataloguee.catalogueId
