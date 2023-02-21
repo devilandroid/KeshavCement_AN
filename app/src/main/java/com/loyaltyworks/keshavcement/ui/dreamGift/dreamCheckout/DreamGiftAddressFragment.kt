@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentDreamGiftAddressBinding
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.ui.login.fragment.LoginRegistrationViewModel
-import com.loyaltyworks.keshavcement.ui.profile.ProfileViewModel
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductCatalogueViewModel
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
@@ -38,6 +38,8 @@ class DreamGiftAddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        viewModel = ViewModelProvider(this).get(LoginRegistrationViewModel::class.java)
+        viewModelProductCataloge = ViewModelProvider(this).get(ProductCatalogueViewModel::class.java)
         binding = FragmentDreamGiftAddressBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -57,6 +59,13 @@ class DreamGiftAddressFragment : Fragment() {
 
         }
 
+        Log.d("bfhrbfuhr","redeemable balance : " + PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].redeemablePointsBalance!!.toInt())
+        Log.d("bfhrbfuhr","points required : " + lstDreamGift.pointsRequired)
+        binding.totalPoints.text = lstDreamGift.pointsRequired.toString()
+        var remainBalance = PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].redeemablePointsBalance!!.toInt() - lstDreamGift.pointsRequired!!
+        binding.remainingBalance.text = "Point balance " + remainBalance +" after this purchase"
+
+
         SetUpObserver()
 
         binding.editBtn.setOnClickListener {
@@ -66,6 +75,7 @@ class DreamGiftAddressFragment : Fragment() {
 //                bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
 //                bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                 bundle.putSerializable("CustomerProfileData", _lstCustomerJson[0])
+                bundle.putSerializable("DreamGift", lstDreamGift)
                 findNavController().navigate(R.id.action_dreamGiftAddressFragment_to_dreamGiftEditAddressFragment, bundle)
             }else {
                 Toast.makeText(requireContext(),getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
@@ -252,7 +262,7 @@ class DreamGiftAddressFragment : Fragment() {
 
 
                     sendSuccessSMSToUser()
-
+                    updateDreamGift()
 //                    Handler(Looper.getMainLooper()).postDelayed({
                     LoadingDialogue.dismissDialog()
 //                    }, 3000)
@@ -305,6 +315,28 @@ class DreamGiftAddressFragment : Fragment() {
             }
         })
 
+        /***  Update dream gift observer  ***/
+        viewModelProductCataloge.dreamGiftRemoveLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it?.returnValue != null) {
+                if (it.returnValue > 0) {
+                    Log.d("updateDreamGift","Success")
+                }else {
+                    Log.d("updateDreamGift","Failed")
+                }
+            }
+        })
+
+    }
+
+    private fun updateDreamGift() {
+        viewModelProductCataloge.getDreamGiftRemoveData(
+            DreamGiftRemoveRequest(
+                actionType = 4,
+                dreamGiftId = lstDreamGift.dreamGiftId,
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!,
+                giftStatusId = 5
+            )
+        )
     }
 
     private fun callAddressApi() {
@@ -376,10 +408,10 @@ class DreamGiftAddressFragment : Fragment() {
                 countryId =_lstCustomerJson[0].countryId,
                 stateId =_lstCustomerJson[0].stateId,
                 stateName =_lstCustomerJson[0].stateName,
-                zip = _lstCustomerJson[0].zip!!.toInt(),
-                email = _lstCustomerJson[0].email!!,
+                zip = _lstCustomerJson[0].zip,
+                email = _lstCustomerJson[0].email,
                 fullName = _lstCustomerJson[0].firstName,
-                mobile = _lstCustomerJson[0].mobile!!.toLong(),
+                mobile = _lstCustomerJson[0].mobile,
             ),
             sourceMode = 6
 

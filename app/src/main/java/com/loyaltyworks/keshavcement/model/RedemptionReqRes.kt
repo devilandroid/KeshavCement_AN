@@ -121,13 +121,13 @@ data class ObjCustShippingAddressDetails(
     @Json(name = "FullName")
     val fullName: String? = null,
     @Json(name = "Mobile")
-    val mobile: Long? = null,
+    val mobile: String? = null,
     @Json(name = "StateId")
     val stateId: Int? = null,
     @Json(name = "StateName")
     val stateName: String? = null,
     @Json(name = "Zip")
-    val zip: Int? = null
+    val zip: String? = null
 )
 
 

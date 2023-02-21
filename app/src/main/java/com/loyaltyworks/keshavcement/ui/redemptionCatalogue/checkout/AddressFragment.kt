@@ -455,10 +455,10 @@ class AddressFragment : Fragment() {
                 countryId =_lstCustomerJson[0].countryId,
                 stateId =_lstCustomerJson[0].stateId,
                 stateName =_lstCustomerJson[0].stateName,
-                zip = _lstCustomerJson[0].zip!!.toInt(),
-                email = _lstCustomerJson[0].email!!,
+                zip = _lstCustomerJson[0].zip,
+                email = _lstCustomerJson[0].email,
                 fullName = _lstCustomerJson[0].firstName,
-                mobile = _lstCustomerJson[0].mobile!!.toLong(),
+                mobile = _lstCustomerJson[0].mobile,
             ),
             sourceMode = 6
 

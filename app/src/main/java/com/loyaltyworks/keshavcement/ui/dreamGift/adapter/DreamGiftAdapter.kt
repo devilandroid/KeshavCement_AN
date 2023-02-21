@@ -95,7 +95,7 @@ class DreamGiftAdapter(var lstDreamGift: List<LstDreamGift>, var onItemClickList
 
         holder.redeemBtn.setOnClickListener {
             if(BlockMultipleClick.click()) return@setOnClickListener
-            if (data.is_DreamGiftRedeemable == 1){
+            if (data.isRedeemable == 1){
                 if (PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].verifiedStatus == 6 ||
                     PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].verifiedStatus == 0 ||
                     PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].verifiedStatus == 2 ||

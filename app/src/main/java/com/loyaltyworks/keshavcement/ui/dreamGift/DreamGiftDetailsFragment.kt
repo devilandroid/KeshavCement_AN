@@ -65,7 +65,8 @@ class DreamGiftDetailsFragment : Fragment(), View.OnClickListener {
                 actionType = "243",
                 actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 dreamGiftId = lstDreamGift.dreamGiftId.toString(),
-                loyaltyId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userName.toString()
+                loyaltyId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userName.toString(),
+                domain = "KESHAV_CEMENT"
             )
         )
     }
@@ -87,16 +88,16 @@ class DreamGiftDetailsFragment : Fragment(), View.OnClickListener {
         val points: Int = lstDreamGift.pointsRequired!!.toInt() /*+ lstDreamGift.tdsPoints!!.toDouble().toInt()*/
         val currentPoint: Int = PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].redeemablePointsBalance!!.toInt()
 
-        if (currentPoint == 0){
-            binding.redeemBtn.visibility = View.GONE
-        }else{
-            if (isRedeemable == 1 ){
-                binding.redeemBtn.visibility = View.VISIBLE
-            }else{
-                binding.redeemBtn.visibility = View.GONE
-            }
-
-        }
+//        if (currentPoint == 0){
+//            binding.redeemBtn.visibility = View.GONE
+//        }else{
+//            if (isRedeemable == 1 ){
+//                binding.redeemBtn.visibility = View.VISIBLE
+//            }else{
+//                binding.redeemBtn.visibility = View.GONE
+//            }
+//
+//        }
 
         if (/*lstDreamGift.isRedeemable == 1*/ currentPoint >= points){
             binding.redeemBtn.isEnabled = true
@@ -117,7 +118,20 @@ class DreamGiftDetailsFragment : Fragment(), View.OnClickListener {
             LoadingDialogue.dismissDialog()
             if (!it.lstDreamGift.isNullOrEmpty()){
 
-                isRedeemable = it.lstDreamGift[0].is_DreamGiftRedeemable!!
+                isRedeemable = it.lstDreamGift[0].isRedeemable!!
+
+                val currentPoint: Int = PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].redeemablePointsBalance!!.toInt()
+
+                if (currentPoint == 0){
+                    binding.redeemBtn.visibility = View.GONE
+                }else{
+                    if (isRedeemable == 1 ){
+                        binding.redeemBtn.visibility = View.VISIBLE
+                    }else{
+                        binding.redeemBtn.visibility = View.GONE
+                    }
+
+                }
 
                 binding.dreamGiftNameTv.text = it.lstDreamGift[0].dreamGiftName.toString()
                 binding.createdDate.text = it.lstDreamGift[0].jCreatedDate.toString().split(" ")[0]

@@ -28,11 +28,13 @@ data class PendingClaimListResponse(
     @Json(name = "lstCustOrderDeliveryDetails")
     val lstCustOrderDeliveryDetails: Any? = null,
     @Json(name = "lstTransactionApprovalDetails")
-    val lstTransactionApprovalDetails: List<LstTransactionApprovalDetail>? = null,
+    val lstTransactionApprovalDetails: List<LstTransactionApprovalDetail?>? = null,
     @Json(name = "returnMessage")
     val returnMessage: Any? = null,
     @Json(name = "returnValue")
     val returnValue: Int? = null,
+    @Json(name = "rewardPoints")
+    val rewardPoints: Double? = null,
     @Json(name = "totalRecords")
     val totalRecords: Int? = null
 )
@@ -197,4 +199,42 @@ data class LstTransactionApprovalDetail(
     val userRoleID: Int? = null,
     @Json(name = "userType")
     val userType: Any? = null
+)
+
+/*** Pending Claim Approve/Reject Request ***/
+@JsonClass(generateAdapter = true)
+data class PendingClaimApproveRejectRequest(
+    @Json(name = "ActorId")
+    val actorId: Int? = null,
+    @Json(name = "ApprovalRemarks")
+    val approvalRemarks: String? = null,
+    @Json(name = "ApprovalStatusID")
+    val approvalStatusID: Int? = null,
+    @Json(name = "lstTransactionApprovals")
+    val lstTransactionApprovals: List<LstTransactionApproval>? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class LstTransactionApproval(
+    @Json(name = "LtyTranTempID")
+    val ltyTranTempID: String? = null,
+    @Json(name = "Quantity")
+    val quantity: String? = null
+)
+
+/*** Pending Claim Approve/Reject Response ***/
+@JsonClass(generateAdapter = true)
+data class PendingClaimApproveRejectResponse(
+    @Json(name = "lstCustOrderDeliveryDetails")
+    val lstCustOrderDeliveryDetails: Any? = null,
+    @Json(name = "lstTransactionApprovalDetails")
+    val lstTransactionApprovalDetails: List<Any?>? = null,
+    @Json(name = "returnMessage")
+    val returnMessage: String? = null,
+    @Json(name = "returnValue")
+    val returnValue: Int? = null,
+    @Json(name = "rewardPoints")
+    val rewardPoints: Double? = null,
+    @Json(name = "totalRecords")
+    val totalRecords: Int? = null
 )

@@ -101,7 +101,7 @@ interface ApiInterface {
     fun getSaveWorksiteAsync(@Body saveWorksiteRequest: SaveWorksiteRequest): Deferred<Response<SaveWorksiteResponse>>
 
     /* Activate/Deactivate Support Executive api call*/
-    @POST("ApproveRejectDeleteRequest")
+    @POST("CustomerAccountDelete")
     fun getActivateDeactivateSupportExecutiveAsync(@Body activateDeactivateExecutiveRequest: ActivateDeactivateExecutiveRequest): Deferred<Response<ActivateDeactivateExecutiveResponse>>
 
     //Query listing api call
@@ -231,6 +231,27 @@ interface ApiInterface {
     /* Dream Gift Remove api call*/
     @POST("SaveOrUpdateDreamGiftDetails")
     fun getDreamGiftRemove(@Body dreamGiftRemoveRequest: DreamGiftRemoveRequest): Deferred<Response<DreamGiftRemoveResponse>>
+
+    /* Voucher api call*/
+    @POST("GetCatalogueDetails")
+    fun getRedeemGiftAsync(@Body redeemGiftRequest: RedeemGiftRequest?): Deferred<Response<RedeemGiftResponse>>
+
+    /*RedeemGiftVoucher*/
+    @POST("SaveCatalogueRedemptionDetails")
+    fun getRedeemGiftVoucherAsync(@Body redeemGiftVoucherRequest: RedeemGiftVoucherRequest?): Deferred<Response<RedeemGiftVoucherResponse>>
+
+    /* Level List api call */
+    @POST("GetAttributeDetails")
+    fun getLevelListAsync(@Body levelListRequest: LevelListRequest): Deferred<Response<LevelListResponse>>
+
+    // Refer Friend api call
+    @POST("SaveReferralDetails")
+    fun fetchReferAsync(@Body referRequest: ReferRequest): Deferred<Response<ReferResponse>>
+
+    /* Pending Claim Approve/Reject api call */
+    @POST("SaveApprovePurchaseRequestDetail")
+    fun getPendingClaimApproveRejactAsync(@Body pendingClaimApproveRejectRequest: PendingClaimApproveRejectRequest):  Deferred<Response<PendingClaimApproveRejectResponse>>
+
 
 
 }

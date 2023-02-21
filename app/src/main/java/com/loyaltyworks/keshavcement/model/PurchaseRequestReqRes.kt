@@ -122,7 +122,7 @@ data class LstCustParentChildMappingDealer(
     @Json(name = "lastName")
     val lastName: Any? = null,
     @Json(name = "loyaltyID")
-    val loyaltyID: Any? = null,
+    val loyaltyID: String? = null,
     @Json(name = "masterCustomerUser")
     val masterCustomerUser: Any? = null,
     @Json(name = "masterCustomerUserId")

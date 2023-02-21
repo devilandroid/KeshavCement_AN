@@ -10,19 +10,29 @@
     tools:context=".ui.redemptionCatalogue.cashTransfer.CashTransferDetailsFragment">
 
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp">
-        <ImageView
-            android:id="@+id/productImage"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_default_img"/>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:background="@color/color51"
+            android:padding="20dp">
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_default_img"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,16 +43,18 @@
         android:gravity="center_vertical"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/catetogryType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cash Transfer / 1000 Cash Transfer"
+            android:text="-"
             android:fontFamily="@font/poppins_regular"
             android:textSize="10sp"
             android:textColor="@color/dark"/>
         <TextView
+            android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="₹ 1000 Cash Transfer"
+            android:text="-"
             android:fontFamily="@font/poppins_semibold"
             android:textSize="18sp"
             android:textColor="@color/dark"/>
@@ -161,7 +173,7 @@
                             android:layout_weight="6">
 
                             <TextView
-                                android:id="@+id/points"
+                                android:id="@+id/value"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:gravity="center_vertical"
@@ -190,8 +202,7 @@
                                 android:paddingEnd="30dp"
                                 android:gravity="center"
                                 android:orientation="vertical"
-                                android:background="@drawable/corner_bg4"
-                                android:backgroundTint="@color/colorPrimaryDark">
+                                android:background="@drawable/product_corner_bg_dark">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

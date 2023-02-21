@@ -2,7 +2,6 @@ package com.loyaltyworks.keshavcement.utils.fetchData.repository
 
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.utils.fetchData.ApiInterface
-import com.loyaltyworks.walkaroo.utils.fetchData.repository.BaseRepository
 
 class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
 
@@ -563,4 +562,55 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
             error = "Error Dream Gift Remove Trigger"
         )
     }
+
+    /* Voucher Call back*/
+    suspend fun getRedeemGiftData(redeemGiftRequest: RedeemGiftRequest): RedeemGiftResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getRedeemGiftAsync(redeemGiftRequest).await()
+            },
+            error = "Error RedeemGiftRequest Trigger"
+        )
+    }
+
+    /*RedeemGiftVoucher Request*/
+    suspend fun getRedeemGiftVoucherRequest(redeemGiftVoucherRequest: RedeemGiftVoucherRequest): RedeemGiftVoucherResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getRedeemGiftVoucherAsync(redeemGiftVoucherRequest).await()
+            },
+            error = "Error RedeemGiftRequest Trigger"
+        )
+    }
+
+    /* Level List Request*/
+    suspend fun getLevelListData(levelListRequest: LevelListRequest): LevelListResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getLevelListAsync(levelListRequest).await()
+            },
+            error = "Error Level List Trigger"
+        )
+    }
+
+    /* Refer Request callback*/
+    suspend fun getReferData(referRequest: ReferRequest): ReferResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchReferAsync(referRequest).await()
+            },
+            error = "Error Refer Friend Trigger"
+        )
+    }
+
+    /* Pending Claim Approve/Reject  callback*/
+    suspend fun getApproveRejectPendingClaimData(pendingClaimApproveRejectRequest: PendingClaimApproveRejectRequest): PendingClaimApproveRejectResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getPendingClaimApproveRejactAsync(pendingClaimApproveRejectRequest).await()
+            },
+            error = "Error Pending Claim Approve/Reject Trigger"
+        )
+    }
+
 }

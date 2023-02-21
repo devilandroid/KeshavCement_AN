@@ -58,7 +58,8 @@ class DreamGiftFragment : Fragment() ,DreamGiftAdapter.OnGiftItemCallBack{
                 actionType = "1",
                 actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!,
                 status = "2",
-                loyaltyId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userName.toString()
+                loyaltyId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userName.toString(),
+                domain = "KESHAV_CEMENT"
             )
         )
     }
@@ -116,8 +117,6 @@ class DreamGiftFragment : Fragment() ,DreamGiftAdapter.OnGiftItemCallBack{
     }
 
     override fun onRedeemCallback(lstDreamGift: LstDreamGift) {
-        Toast.makeText(requireContext(), "Code not imple.", Toast.LENGTH_SHORT).show()
-
         val bundle = Bundle()
         bundle.putSerializable("DreamGift",lstDreamGift)
         findNavController().navigate(R.id.dreamGiftAddressFragment,bundle)

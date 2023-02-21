@@ -189,7 +189,7 @@ class MySupportExecutiveFragment : Fragment(), View.OnClickListener, MySupportEx
         viewModel.getActivateDeactivateSupportExecutiveData(
             ActivateDeactivateExecutiveRequest(
                 actionType = "5",
-                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
+                userid = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 customerId = lstCustParentChildMapping.userID.toString(),
                 isActive = status
             )

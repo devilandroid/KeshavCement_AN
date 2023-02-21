@@ -17,7 +17,7 @@ import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 class ProductAdapter(val objCatalogueList: List<ObjCataloguee>, var onItemClickListener: OnItemClickCallBack) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     interface OnItemClickCallBack {
-        fun onProductListItemClickResponse(itemView: View, position: Int, objCatalogue: ObjCataloguee, )
+        fun onProductListItemClickResponse(itemView: View, position: Int, objCatalogue: ObjCataloguee)
         fun onAddToCart(objCatalogue: ObjCataloguee)
         fun onAddPlannerListener(catalogueId: Int)
         fun onHoldAddtoCart()

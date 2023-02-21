@@ -36,7 +36,7 @@ class PendingClaimRequestFragment : Fragment() {
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
-        binding.pendingClaimRecycler.adapter = PendingClaimRequestAdapter()
+
     }
 
 }

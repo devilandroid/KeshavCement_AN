@@ -78,10 +78,10 @@ class MySupportExecutiveAdapter(val lstCustParentChildMapping: List<LstCustParen
 
             if (data.isActive == 1){
                 /*** For Deactivate ***/
-                onItemClickListener.onActivateDeactivateClickResponse(v,"0", data)
+                onItemClickListener.onActivateDeactivateClickResponse(v,"false", data)
             }else{
                 /*** For Activate ***/
-                onItemClickListener.onActivateDeactivateClickResponse(v,"1", data)
+                onItemClickListener.onActivateDeactivateClickResponse(v,"true", data)
             }
 
         }

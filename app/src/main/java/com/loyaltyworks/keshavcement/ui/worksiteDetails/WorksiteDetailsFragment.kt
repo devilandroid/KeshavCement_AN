@@ -27,6 +27,7 @@ import com.loyaltyworks.keshavcement.ui.myPurchaseClaim.MyPurchaseClaimViewModel
 import com.loyaltyworks.keshavcement.ui.myPurchaseClaim.adapter.MyPurchaseClaimAdapter
 import com.loyaltyworks.keshavcement.ui.worksiteDetails.adapter.WorksiteDetailsAdapter
 import com.loyaltyworks.keshavcement.utils.AppController
+import com.loyaltyworks.keshavcement.utils.DatePickerBox
 import com.loyaltyworks.keshavcement.utils.EndlessRecyclerViewScrollListener
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
@@ -50,9 +51,7 @@ class WorksiteDetailsFragment : Fragment(), View.OnClickListener {
     var mWorksiteLayoutManager: LinearLayoutManager? = null
     var worksiteAdapter: RecyclerView.Adapter<*>? = null
 
-    var selectedStatusId = "-3"
-    var FromDate = ""
-    var ToDate = ""
+    var selectedStatusId = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,8 +87,6 @@ class WorksiteDetailsFragment : Fragment(), View.OnClickListener {
         binding.filterRejected.setOnClickListener(this)
         binding.clearBtn.setOnClickListener(this)
         binding.filterOkBtn.setOnClickListener(this)
-        binding.fromDate.setOnClickListener(this)
-        binding.toDate.setOnClickListener(this)
 
         // use a linear layout manager
         mWorksiteLayoutManager = LinearLayoutManager(requireContext())
@@ -176,9 +173,7 @@ class WorksiteDetailsFragment : Fragment(), View.OnClickListener {
                 customerID = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 verificationStatus = selectedStatusId,
                 pageSize = limit,
-                startIndex = startIndex,
-                fromDate = AppController.dateAPIFormats(FromDate),
-                toDate = AppController.dateAPIFormats(ToDate)
+                startIndex = startIndex
             )
         )
     }
@@ -249,6 +244,67 @@ class WorksiteDetailsFragment : Fragment(), View.OnClickListener {
                 binding.filterLayout.visibility = View.GONE
                 binding.filterLayout.animation =
                     AnimationUtils.loadAnimation(requireContext(), R.anim.slide_down_dialog)
+            }
+
+            R.id.filter_approved ->{
+                binding.filterApproved.setBackgroundResource(R.drawable.selected_filter)
+                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
+                selectedStatusId = "2"
+            }
+
+            R.id.filter_pending ->{
+                binding.filterPending.setBackgroundResource(R.drawable.selected_filter)
+                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
+                selectedStatusId = "1"
+            }
+
+            R.id.filter_rejected ->{
+                binding.filterRejected.setBackgroundResource(R.drawable.selected_filter)
+                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.dark))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
+                selectedStatusId = "3"
+            }
+
+            R.id.clear_btn ->{
+                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
+                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
+
+                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
+
+                selectedStatusId = ""
+
+                callApi(1)
+
+                binding.filterLayout.visibility = View.GONE
+                binding.filterLayout.animation = AnimationUtils.loadAnimation(requireContext(),R.anim.slide_down_dialog)
+            }
+
+            R.id.filter_ok_btn ->{
+                currentList.clear()
+                callApi(1)
+
+                binding.filterLayout.visibility = View.GONE
+                binding.filterLayout.animation = AnimationUtils.loadAnimation(requireContext(),R.anim.slide_down_dialog)
             }
 
             R.id.createNew -> {

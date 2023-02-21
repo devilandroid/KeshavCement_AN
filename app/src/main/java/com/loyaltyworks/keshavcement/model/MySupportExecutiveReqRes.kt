@@ -178,8 +178,8 @@ data class CreateSupportExecutiveResponse(
 data class ActivateDeactivateExecutiveRequest(
     @Json(name = "ActionType")
     val actionType: String? = null,
-    @Json(name = "ActorId")
-    val actorId: String? = null,
+    @Json(name = "userid")
+    val userid: String? = null,
     @Json(name = "CustomerId")
     val customerId: String? = null,
     @Json(name = "IsActive")

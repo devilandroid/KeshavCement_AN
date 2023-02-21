@@ -14,7 +14,9 @@ data class DreamGiftRequest(
     @Json(name = "LoyaltyId")
     val loyaltyId: String? = null,
     @Json(name = "Status")
-    val status: String? = null
+    val status: String? = null,
+    @Json(name = "Domain")
+    val domain: String? = null
 )
 /*Dream Gift List Response*/
 @JsonClass(generateAdapter = true)
@@ -101,7 +103,9 @@ data class DreamGiftDetailRequest(
     @Json(name = "DreamGiftId")
     val dreamGiftId: String? = null,
     @Json(name = "LoyaltyId")
-    val loyaltyId: String? = null
+    val loyaltyId: String? = null,
+    @Json(name = "Domain")
+    val domain: String? = null
 )
 
 /*Dream Gift Details Response*/

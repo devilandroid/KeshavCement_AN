@@ -223,7 +223,7 @@ data class ObjCataloguee(
     @Json(name = "pointsPerUnit")
     val pointsPerUnit: Int? = null,
     @Json(name = "pointsRequired")
-    val pointsRequired: Int? = null,
+    val pointsRequired: String? = null,
     @Json(name = "productCode")
     val productCode: String? = null,
     @Json(name = "productDesc")
@@ -255,7 +255,7 @@ data class ObjCataloguee(
     @Json(name = "redemptionPlannerId")
     val redemptionPlannerId: Int? = null,
     @Json(name = "redemptionRefno")
-    val redemptionRefno: Any? = null,
+    val redemptionRefno: String? = null,
     @Json(name = "redemptionStatus")
     val redemptionStatus: Any? = null,
     @Json(name = "redemptionTypeId")
@@ -285,7 +285,9 @@ data class ObjCataloguee(
     @Json(name = "vendorName")
     val vendorName: String? = null,
     @Json(name = "is_Redeemable")
-    val isRedeemable: Int? = null
+    val isRedeemable: Int? = null,
+    @Json(name = "mrp")
+    val mrp: String? = null
 ) : Serializable
 
 /*  Get Catalogue Category request */

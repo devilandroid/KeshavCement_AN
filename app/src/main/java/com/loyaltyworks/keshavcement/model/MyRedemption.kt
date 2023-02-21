@@ -16,6 +16,8 @@ data class MyRedemptionRequest(
     var startIndex: Int? = null,
     @Json(name = "NoOfRows")
     var noOfRows: Int? = null,
+    @Json(name = "CustomerTypeID")
+    var customerTypeID: String? = null,
     @Json(name = "ObjCatalogueDetails")
     var objCatalogueDetails: ObjCatalogueDetails? = null
 )
@@ -31,7 +33,9 @@ data class ObjCatalogueDetails(
     @Json(name = "RedemptionTypeId")
     var redemptionTypeId: Int? = null,
     @Json(name = "RedemptionId")
-    val redemptionId: String? = null
+    val redemptionId: String? = null,
+    @Json(name = "CatogoryId")
+    var catogoryId: String? = null
 )
 
 /* My Redemption Response */
@@ -203,7 +207,11 @@ data class ObjCatalogueRedemReq(
     @Json(name = "walletNumber")
     val walletNumber: Any? = null,
     @Json(name = "zip")
-    val zip: String? = null
+    val zip: String? = null,
+    @Json(name = "remarks")
+    val remarks: String? = null,
+    @Json(name = "membertype")
+    val membertype: String? = null
 ): Serializable
 
   /* My Redemption Details Request */

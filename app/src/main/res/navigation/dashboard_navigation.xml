@@ -298,4 +298,9 @@
             app:popUpTo="@id/dreamGiftAddressFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+    <dialog
+        android:id="@+id/cashTransferDialogFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferDialogFragment"
+        android:label=""
+        tools:layout="@layout/fragment_cash_transfer_dialog" />
 </navigation>

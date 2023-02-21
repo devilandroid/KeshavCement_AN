@@ -41,6 +41,7 @@ class DreamGiftEditAddressFragment : Fragment(),AdapterView.OnItemSelectedListen
     var error = ""
 
     lateinit var _lstCustomerJson: LstCustomerJson
+    lateinit var lstDreamGift: LstDreamGift
 
     var isFirstLoad : Boolean = true
 
@@ -62,6 +63,7 @@ class DreamGiftEditAddressFragment : Fragment(),AdapterView.OnItemSelectedListen
 //            loyaltyId = requireArguments().getString("SelectedCustomerLoyltyID").toString()
 //            partyLoyaltyID = requireArguments().getString("SelectedCustomerPartyLoyaltyID").toString()
 
+            lstDreamGift = requireArguments().getSerializable("DreamGift") as LstDreamGift
             _lstCustomerJson = requireArguments().getSerializable("CustomerProfileData") as LstCustomerJson
         }
 
@@ -95,6 +97,7 @@ class DreamGiftEditAddressFragment : Fragment(),AdapterView.OnItemSelectedListen
 //                bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
 //                bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                 bundle.putSerializable("CustomerProfileData", _lstCustomerJson)
+                bundle.putSerializable("DreamGift", lstDreamGift)
 //                bundle.putSerializable("CartDataList2", catalogueSaveCartDetailListResponse as Serializable)
                 _lstCustomerJson.firstName = binding.NameTxt.text.toString()
                 _lstCustomerJson.mobile = binding.mobileEdt.text.toString()

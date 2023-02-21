@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.loyaltyworks.keshavcement.baseClass.BaseViewModel
 import com.loyaltyworks.keshavcement.model.*
+import com.vmb.fileSelect.FileSelector
 import kotlinx.coroutines.launch
 
 class ProductCatalogueViewModel: BaseViewModel() {
@@ -142,6 +143,19 @@ class ProductCatalogueViewModel: BaseViewModel() {
 
             //post the value inside live data
             _cartCountLiveData.postValue(apiRepository.getCartCountData(cartCountRequest))
+        }
+    }
+
+    /* Dream Gift Remove View Model */
+    private val _dreamGiftRemoveLiveData = MutableLiveData<DreamGiftRemoveResponse>()
+    val dreamGiftRemoveLiveData: LiveData<DreamGiftRemoveResponse> = _dreamGiftRemoveLiveData
+
+    fun getDreamGiftRemoveData(dreamGiftRemoveRequest: DreamGiftRemoveRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _dreamGiftRemoveLiveData.postValue(apiRepository.getDreamGiftRemove(dreamGiftRemoveRequest))
         }
     }
 
