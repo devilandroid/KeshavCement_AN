@@ -12,12 +12,16 @@ data class MyRedemptionRequest(
     var actionType: String? = null,
     @Json(name = "ActorId")
     var actorId: String? = null,
+    @Json(name = "PartyLoyaltyID")
+    var partyLoyaltyID: String? = null,
     @Json(name = "StartIndex")
     var startIndex: Int? = null,
     @Json(name = "NoOfRows")
     var noOfRows: Int? = null,
     @Json(name = "CustomerTypeID")
     var customerTypeID: String? = null,
+    @Json(name = "SearchText")
+    var searchText: String? = null,
     @Json(name = "ObjCatalogueDetails")
     var objCatalogueDetails: ObjCatalogueDetails? = null
 )
@@ -211,7 +215,10 @@ data class ObjCatalogueRedemReq(
     @Json(name = "remarks")
     val remarks: String? = null,
     @Json(name = "membertype")
-    val membertype: String? = null
+    val membertype: String? = null,
+    @Json(name = "districtName")
+    val districtName: String? = null,
+    var enteredRemarks: String = ""
 ): Serializable
 
   /* My Redemption Details Request */

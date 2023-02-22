@@ -613,4 +613,14 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
         )
     }
 
+    /* Cash Transfer Approve/Reject  callback*/
+    suspend fun getCashTransferApproveReject(cashTransferApproveRejectRequest: CashTransferApproveRejectRequest): CashTransferApproveRejectResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCashTransferApproveRejectAsync(cashTransferApproveRejectRequest).await()
+            },
+            error = "Error Cash Transfer Approve/Reject Trigger"
+        )
+    }
+
 }

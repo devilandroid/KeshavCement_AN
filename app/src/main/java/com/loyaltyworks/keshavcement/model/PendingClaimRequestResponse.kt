@@ -28,7 +28,7 @@ data class PendingClaimListResponse(
     @Json(name = "lstCustOrderDeliveryDetails")
     val lstCustOrderDeliveryDetails: Any? = null,
     @Json(name = "lstTransactionApprovalDetails")
-    val lstTransactionApprovalDetails: List<LstTransactionApprovalDetail?>? = null,
+    val lstTransactionApprovalDetails: List<LstTransactionApprovalDetail>? = null,
     @Json(name = "returnMessage")
     val returnMessage: Any? = null,
     @Json(name = "returnValue")
@@ -96,7 +96,7 @@ data class LstTransactionApprovalDetail(
     @Json(name = "locationID")
     val locationID: Int? = null,
     @Json(name = "locationName")
-    val locationName: Any? = null,
+    val locationName: String? = null,
     @Json(name = "loyaltyBehaviour")
     val loyaltyBehaviour: Any? = null,
     @Json(name = "loyaltyId")
@@ -134,7 +134,7 @@ data class LstTransactionApprovalDetail(
     @Json(name = "prodDescription")
     val prodDescription: Any? = null,
     @Json(name = "prodName")
-    val prodName: Any? = null,
+    val prodName: String? = null,
     @Json(name = "prodVideoLink")
     val prodVideoLink: Any? = null,
     @Json(name = "productId")
@@ -142,11 +142,11 @@ data class LstTransactionApprovalDetail(
     @Json(name = "productImage")
     val productImage: Any? = null,
     @Json(name = "qty")
-    val qty: Double? = null,
+    val qty: Int? = null,
     @Json(name = "quantity")
-    val quantity: Double? = null,
+    val quantity: Int? = null,
     @Json(name = "remarks")
-    val remarks: Any? = null,
+    val remarks: String? = null,
     @Json(name = "retailerApprovedDate")
     val retailerApprovedDate: Any? = null,
     @Json(name = "retailerApprovedStatus")
@@ -198,7 +198,9 @@ data class LstTransactionApprovalDetail(
     @Json(name = "userRoleID")
     val userRoleID: Int? = null,
     @Json(name = "userType")
-    val userType: Any? = null
+    val userType: Any? = null,
+    var updatedQuantity: Int = 0,
+    var enteredRemarks: String = ""
 )
 
 /*** Pending Claim Approve/Reject Request ***/
@@ -209,7 +211,7 @@ data class PendingClaimApproveRejectRequest(
     @Json(name = "ApprovalRemarks")
     val approvalRemarks: String? = null,
     @Json(name = "ApprovalStatusID")
-    val approvalStatusID: Int? = null,
+    val approvalStatusID: String? = null,
     @Json(name = "lstTransactionApprovals")
     val lstTransactionApprovals: List<LstTransactionApproval>? = null
 )
@@ -217,9 +219,9 @@ data class PendingClaimApproveRejectRequest(
 @JsonClass(generateAdapter = true)
 data class LstTransactionApproval(
     @Json(name = "LtyTranTempID")
-    val ltyTranTempID: String? = null,
+    val ltyTranTempID: Int? = null,
     @Json(name = "Quantity")
-    val quantity: String? = null
+    val quantity: Int? = null
 )
 
 /*** Pending Claim Approve/Reject Response ***/

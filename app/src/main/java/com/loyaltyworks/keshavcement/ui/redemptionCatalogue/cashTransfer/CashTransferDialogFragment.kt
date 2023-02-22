@@ -313,7 +313,7 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
         catalogue.redemptionTypeId = 1
         catalogue.status = 0
         catalogue.customerCartId = objCataloguee.customerCartId
-        catalogue.catogoryId = objCataloguee.categoryID
+        catalogue.catogoryId = objCataloguee.catogoryId
         catalogue.termsCondition = objCataloguee.termsCondition
         catalogue.totalCash = objCataloguee.totalCash
         catalogue.vendorId = objCataloguee.vendorId

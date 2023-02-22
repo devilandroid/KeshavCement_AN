@@ -53,7 +53,7 @@
                     android:id="@+id/cust_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Engineer"
+                    android:text="-"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
                     android:textSize="12sp"/>
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="Azhar Dasgupta"
+                    android:text="-"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
                     android:textSize="16sp"/>
@@ -84,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Jharkhand"
+                    android:text="-"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
                     android:textSize="10sp"/>
@@ -104,7 +104,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="4"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="XXXXXX"
+                    android:text="-"
                     android:textColor="@color/dark"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -126,7 +126,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="6"
                 android:orientation="vertical"
                 android:gravity="center|end">
 
@@ -140,8 +140,8 @@
                     android:textSize="12sp" />
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:layout_width="170dp"
+                    android:layout_height="45dp"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="@color/color39">
@@ -157,8 +157,8 @@
 
                         <TextView
                             android:id="@+id/qty_minus"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:gravity="center"
                             android:text="-"
                             android:fontFamily="@font/poppins_medium"
@@ -169,12 +169,12 @@
 
                         <EditText
                             android:id="@+id/qty_textview"
-                            android:layout_width="40dp"
+                            android:layout_width="80dp"
                             android:layout_height="match_parent"
-                            android:background="@color/transparent"
+                            android:background="@color/color33"
+                            android:maxLength="6"
                             android:gravity="center"
                             android:textCursorDrawable="@drawable/cursor_clor"
-                            android:hint="0"
                             android:inputType="number"
                             android:text=""
                             android:fontFamily="@font/poppins_semibold"
@@ -184,8 +184,8 @@
 
                         <TextView
                             android:id="@+id/qty_plus"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:gravity="center"
                             android:text="+"
                             android:fontFamily="@font/poppins_medium"
@@ -203,7 +203,7 @@
 
         </LinearLayout>
 
-       <!-- Remarks -->
+        <!-- Remarks -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -218,17 +218,21 @@
                 android:textSize="12sp"
                 android:textColor="@color/color16"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/remarks"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
                 android:gravity="center_vertical"
                 android:background="@drawable/refer_edttxt_bg"
                 android:backgroundTint="@color/color13"
+                android:textCursorDrawable="@drawable/cursor_clor"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="-"
+                android:maxLength="500"
+                android:text=""
+                android:hint="@string/enter_remarks"
                 android:textColor="@color/dark"
                 android:textSize="12sp" />
 
@@ -242,7 +246,7 @@
             android:layout_marginBottom="15dp"
             android:background="@color/color36"/>
 
-      <!--  Buttons -->
+        <!--  Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

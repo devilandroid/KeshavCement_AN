@@ -252,6 +252,10 @@ interface ApiInterface {
     @POST("SaveApprovePurchaseRequestDetail")
     fun getPendingClaimApproveRejactAsync(@Body pendingClaimApproveRejectRequest: PendingClaimApproveRejectRequest):  Deferred<Response<PendingClaimApproveRejectResponse>>
 
+    /* Pending Claim Approve/Reject api call */
+    @POST("GetCatalogueDetails")
+    fun getCashTransferApproveRejectAsync(@Body cashTransferApproveRejectRequest: CashTransferApproveRejectRequest):  Deferred<Response<CashTransferApproveRejectResponse>>
+
 
 
 }

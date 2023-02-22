@@ -271,8 +271,6 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
             logout.isVisible = false
         }
 
-        /*** Hard Code ***/
-            setBadgeCount("6")
 
         return true
     }

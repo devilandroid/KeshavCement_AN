@@ -141,6 +141,7 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
         if (page == 1)
             scrollListener!!.resetState()
 
+        LoadingDialogue.showDialog(requireContext())
         /* Get Product details list  */
         viewModel.getCatalogueData(
             GatCatalogueRequest(

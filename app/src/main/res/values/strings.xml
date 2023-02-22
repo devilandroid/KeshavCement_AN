@@ -271,4 +271,9 @@
     <string name="cash_transfer_history_filter">Cash Transfer History Filter</string>
     <string name="cash_voucher_history">Cash Voucher History</string>
     <string name="cash_voucher_history_filter">Cash Voucher History Filter</string>
+    <string name="enter_remarks">Enter remarks</string>
+    <string name="approved_the_purchase">Approved the purchase.</string>
+    <string name="rejected_the_purchase">Rejected the purchase.</string>
+    <string name="cash_voucher_approved">Cash voucher approved</string>
+    <string name="cash_voucher_rejected">Cash voucher rejected</string>
 </resources>

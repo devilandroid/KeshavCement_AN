@@ -34,12 +34,12 @@
             android:focusableInTouchMode="true"
             android:textCursorDrawable="@drawable/cursor_clor"
             android:gravity="center_vertical"
-            android:hint="Search by Name / Mobile Number"
+            android:hint="Search by Name"
             android:textColorHint="@color/color3"
             android:background="@drawable/corner_bg6"
             android:textSize="12sp"
             android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/black"/>
+            android:textColor="@color/colorAccent"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

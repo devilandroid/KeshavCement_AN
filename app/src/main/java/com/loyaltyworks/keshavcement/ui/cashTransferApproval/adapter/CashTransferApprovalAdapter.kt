@@ -1,26 +1,108 @@
 package com.loyaltyworks.keshavcement.ui.cashTransferApproval.adapter
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.loyaltyworks.keshavcement.BuildConfig
+import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.RowCashTransferApprovalBinding
+import com.loyaltyworks.keshavcement.model.ObjCatalogueRedemReq
+import com.loyaltyworks.keshavcement.utils.AppController
+import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 
-class CashTransferApprovalAdapter: RecyclerView.Adapter<CashTransferApprovalAdapter.ViewHolder>() {
+class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemReq>,var onItemClickListener: OnItemClickCallBack): RecyclerView.Adapter<CashTransferApprovalAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding: RowCashTransferApprovalBinding): RecyclerView.ViewHolder(binding.root) {
+    interface OnItemClickCallBack {
+        fun onApproveClickResponse(itemView: View, position: Int, status: String, objCatalogueRedemReqList: ObjCatalogueRedemReq)
+        fun onRejectClickResponse(itemView: View, position: Int, status: String, objCatalogueRedemReqList: ObjCatalogueRedemReq)
+    }
 
+
+    inner class ViewHolder(val binding: RowCashTransferApprovalBinding,val pos: Int): RecyclerView.ViewHolder(binding.root) {
+        val date = binding.date
+        val custImage = binding.custImage
+        val custType = binding.custType
+        val custName = binding.custName
+        val location = binding.location
+        val voucherName = binding.voucherName
+        val points = binding.points
+        val remarks = binding.remarks
+
+        val rejectBtn = binding.rejectBtn
+        val approveBtn = binding.approveBtn
+
+        init {
+
+            remarks.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                    if (remarks.hasFocus()){
+                    objCatalogueRedemReqList[pos].enteredRemarks = p0.toString()
+//                    }
+                }
+                override fun afterTextChanged(p0: Editable?) {}
+
+            })
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = RowCashTransferApprovalBinding.inflate(LayoutInflater.from(parent.context),parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding,viewType)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val data = objCatalogueRedemReqList[position]
+
+        holder.remarks.setText("")
+
+        Glide.with(holder.itemView.context).asBitmap()
+            .error(R.drawable.ic_default_img)
+            .load(BuildConfig.CATALOGUE_IMAGE_BASE + data.productImage)
+            .into(holder.custImage)
+
+        if (!data.jRedemptionDate.isNullOrEmpty()){
+            holder.date.text = AppController.dateAPIFormat(data.jRedemptionDate.toString().split(" ")[0])
+        }else{
+            holder.date.text = "DD/MM/YYYY"
+        }
+
+        holder.location.text = data.districtName
+        holder.custType.text = data.membertype
+        holder.custName.text = data.fullName
+        holder.voucherName.text = data.productName
+        holder.points.text = data.redemptionPoints.toString()
+
+
+        holder.approveBtn.setOnClickListener { v ->
+            if(BlockMultipleClick.click()) return@setOnClickListener
+
+            onItemClickListener.onApproveClickResponse(v,position,"1",data)
+        }
+
+        holder.rejectBtn.setOnClickListener { v ->
+            if(BlockMultipleClick.click()) return@setOnClickListener
+
+            if (!data.enteredRemarks.isNullOrEmpty()){
+                onItemClickListener.onRejectClickResponse(v,position,"5",data)
+            }else{
+                Toast.makeText(holder.itemView.context, holder.itemView.context.getString(R.string.enter_remarks), Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     override fun getItemCount(): Int {
-        return 10
+        return objCatalogueRedemReqList.size
     }
 }

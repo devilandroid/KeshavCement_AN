@@ -38,7 +38,13 @@ class CashTransferHistoryAdapter(val objCatalogueRedemReqList: List<ObjCatalogue
         holder.points.text = rewardTransDetails.redemptionPoints.toString()
         holder.customerName.text = rewardTransDetails.fullName.toString()
         holder.customerType.text = rewardTransDetails.membertype.toString()
-        holder.remarks.text = rewardTransDetails.remarks.toString()
+
+
+        if (rewardTransDetails.remarks.isNullOrEmpty()){
+            holder.remarks.text = rewardTransDetails.remarks
+        }else{
+            holder.remarks.text = "-"
+        }
 
         if (rewardTransDetails.status == 1) {
             holder.status.text = "Approved"
