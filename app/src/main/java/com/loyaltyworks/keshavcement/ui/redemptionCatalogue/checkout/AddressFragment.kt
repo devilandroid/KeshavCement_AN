@@ -46,6 +46,7 @@ class AddressFragment : Fragment() {
 
     var actorID = ""
     var loyaltyId = ""
+    var partyLoyaltyID = ""
 
     private lateinit var OTPNumber: String
 
@@ -76,6 +77,7 @@ class AddressFragment : Fragment() {
 
             actorID = requireArguments().getString("SelectedCustomerUserID").toString()
             loyaltyId = requireArguments().getString("SelectedCustomerLoyltyID").toString()
+            partyLoyaltyID = requireArguments().getString("SelectedCustomerPartyLoyaltyID").toString()
 
             if( requireArguments().getSerializable("CustomerProfileData") != null){
                 _lstCustomerJson = listOf(requireArguments().getSerializable("CustomerProfileData") as LstCustomerJson)
@@ -97,6 +99,7 @@ class AddressFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putString("SelectedCustomerUserID",actorID)
                 bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+                bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                 bundle.putSerializable("CustomerProfileData", _lstCustomerJson[0])
                 findNavController().navigate(R.id.action_addressFragment_to_editAddressFragment, bundle)
             }else {
@@ -381,7 +384,9 @@ class AddressFragment : Fragment() {
         cartViewModel.getCartListData(
             CartRequest(
                 actionType = "2",
-                loyaltyID = loyaltyId
+                loyaltyID = loyaltyId,
+                domain = "KESHAV_CEMENT",
+                partyLoyaltyID = partyLoyaltyID
             )
         )
     }
@@ -426,7 +431,7 @@ class AddressFragment : Fragment() {
             catalogue.redemptionId = 0
             catalogue.redemptionRefno = catalogueSaveCart.redemptionRefno
             catalogue.redemptionTypeId = 1
-            catalogue.status = 13
+            catalogue.status = 0
             catalogue.customerCartId = catalogueSaveCart.customerCartId
             catalogue.catogoryId = catalogueSaveCart.categoryID
             catalogue.termsCondition = catalogueSaveCart.termsCondition
@@ -441,18 +446,19 @@ class AddressFragment : Fragment() {
             actionType = 51,
             actorId = actorID.toInt(),
             memberName = PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerName),
+            dealerLoyaltyId = partyLoyaltyID,
             objCatalogueList = catalogueList,
             objCustShippingAddressDetails = ObjCustShippingAddressDetails(
                 address1 =_lstCustomerJson[0].address1,
-                cityId =_lstCustomerJson[0].cityId,
+                cityId =_lstCustomerJson[0].districtId,
                 cityName =_lstCustomerJson[0].districtName,
                 countryId =_lstCustomerJson[0].countryId,
                 stateId =_lstCustomerJson[0].stateId,
                 stateName =_lstCustomerJson[0].stateName,
-                zip = _lstCustomerJson[0].zip!!.toInt(),
-                email = _lstCustomerJson[0].email!!,
+                zip = _lstCustomerJson[0].zip,
+                email = _lstCustomerJson[0].email,
                 fullName = _lstCustomerJson[0].firstName,
-                mobile = _lstCustomerJson[0].mobile!!.toLong(),
+                mobile = _lstCustomerJson[0].mobile,
             ),
             sourceMode = 6
 

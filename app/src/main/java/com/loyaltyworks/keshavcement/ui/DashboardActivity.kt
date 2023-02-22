@@ -188,6 +188,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
         binding.root.dClaimPurchase.setOnClickListener(this)
         binding.root.dMyPurchaseClaim.setOnClickListener(this)
         binding.root.dRedemptionCatalogue.setOnClickListener(this)
+        binding.root.dDreamGift.setOnClickListener(this)
         binding.root.dMyRedemptions.setOnClickListener(this)
         binding.root.dMyEarning.setOnClickListener(this)
         binding.root.dWorkSiteDetails.setOnClickListener(this)
@@ -270,8 +271,6 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
             logout.isVisible = false
         }
 
-        /*** Hard Code ***/
-            setBadgeCount("6")
 
         return true
     }
@@ -363,6 +362,11 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
 
             R.id.dRedemptionCatalogue -> {
                 navController.navigate(R.id.redemptionTypeFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
+            }
+
+            R.id.dDreamGift -> {
+                navController.navigate(R.id.dreamGiftFragment)
                 binding.drawerLayout.closeDrawer(Gravity.LEFT)
             }
 

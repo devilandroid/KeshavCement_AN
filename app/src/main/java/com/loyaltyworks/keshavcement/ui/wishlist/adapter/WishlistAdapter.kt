@@ -39,14 +39,20 @@ class WishlistAdapter(var objCatalogues: List<ObjCatalogues>, var onItemClickLis
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = objCatalogues[position]
 
-        if (data.pointReqToAcheiveProduct!! <= 0 && data.redeemablePointBalance!! >= data.pointsRequired!!){
+        if (data.isRedeemable == 1){
+            holder.redeemBtn.visibility = View.VISIBLE
+            if (data.pointReqToAcheiveProduct!! <= 0 && data.redeemablePointBalance!! >= data.pointsRequired!!){
 
-            holder.redeemBtn.isEnabled = true
-            holder.redeemBtn.setBackgroundResource(R.drawable.product_corner_bg_dark)
+                holder.redeemBtn.isEnabled = true
+                holder.redeemBtn.setBackgroundResource(R.drawable.product_corner_bg_dark)
+            }else{
+                holder.redeemBtn.isEnabled = false
+                holder.redeemBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
+            }
         }else{
-            holder.redeemBtn.isEnabled = false
-            holder.redeemBtn.setBackgroundResource(R.drawable.product_corner_bg_grey)
+            holder.redeemBtn.visibility = View.GONE
         }
+
 
         holder.prodName.text = data.productName
         holder.redeemDate.text = data.actualRedemptionDate.toString()

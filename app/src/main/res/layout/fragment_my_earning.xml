@@ -48,7 +48,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/myEarningRV"
+            android:id="@+id/earning_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -137,6 +137,7 @@
                     android:src="@drawable/calendar" />
 
                 <TextView
+                    android:id="@+id/from_date_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -168,6 +169,7 @@
                     android:src="@drawable/calendar" />
 
                 <TextView
+                    android:id="@+id/to_date_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -190,6 +192,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/clear_btn"
                 android:layout_width="123dp"
                 android:layout_height="35dp"
                 android:background="@drawable/edit_profile_bg"
@@ -203,6 +206,7 @@
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/filter_ok_btn"
                 android:layout_width="123dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="10dp"

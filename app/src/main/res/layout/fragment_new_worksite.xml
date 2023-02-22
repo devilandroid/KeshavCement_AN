@@ -143,7 +143,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/change_image"
+                    android:text="@string/upload_image"
                     android:textColor="@color/dark_blue"
                     android:textSize="12sp" />
 
@@ -393,6 +393,8 @@
                     android:background="@drawable/edit_profile_bg"
                     android:backgroundTint="@color/white"
                     android:maxLines="1"
+                    android:maxLength="10"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:elevation="5dp"
                     android:paddingStart="20dp"

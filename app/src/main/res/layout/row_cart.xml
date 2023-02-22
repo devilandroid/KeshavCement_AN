@@ -22,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:src="@drawable/close"
-            app:tint="@color/colorPrimary" />
+            app:tint="@color/red" />
     </RelativeLayout>
 
     <LinearLayout

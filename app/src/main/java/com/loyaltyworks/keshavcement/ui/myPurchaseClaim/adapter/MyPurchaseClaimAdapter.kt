@@ -63,7 +63,7 @@ class MyPurchaseClaimAdapter(val customerBasicInfoListJson: List<CustomerBasicIn
             holder.status.setTextColor(Color.parseColor("#02B013"))
 
         }else if (data.status.equals("Rejected",true)){
-            holder.approvedQuantityLayout.visibility = View.VISIBLE
+            holder.approvedQuantityLayout.visibility = View.GONE
             holder.status.setBackgroundResource(R.drawable.rejected_bg)
             holder.status.setTextColor(Color.parseColor("#F71111"))
 

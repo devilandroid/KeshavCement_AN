@@ -320,6 +320,8 @@ class ClaimHistoryFragment : Fragment(), View.OnClickListener {
                 selectedCustTypeId = "-1"
                 FromDate = ""
                 ToDate = ""
+                binding.fromDateTxt.text = ""
+                binding.toDateTxt.text = ""
                 binding.fromDateTxt.hint = getString(R.string.select_from_date)
                 binding.toDateTxt.hint = getString(R.string.select_to_date)
                 callApi(1)

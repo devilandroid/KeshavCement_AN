@@ -153,8 +153,8 @@ data class SaveWorksiteRequest(
     val verification: String? = null,
     @Json(name = "Worklevel")
     val worklevel: Int? = null,
-    @Json(name = "Locationname")
-    val locationname: String? = null
+    @Json(name = "SiteName")
+    val siteName: String? = null
 )
 
 /*** Save Worksite Response ***/
@@ -165,7 +165,45 @@ data class SaveWorksiteResponse(
     @Json(name = "returnMessage")
     val returnMessage: String? = null,
     @Json(name = "returnValue")
-    val returnValue: Int? = null,
+    val returnValue: String? = null,
     @Json(name = "totalRecords")
     val totalRecords: Int? = null
+)
+
+/*** Level List Request ***/
+@JsonClass(generateAdapter = true)
+data class LevelListRequest(
+    @Json(name = "ActionType")
+    val actionType: String? = null
+)
+
+/*** Level List Response ***/
+@JsonClass(generateAdapter = true)
+data class LevelListResponse(
+    @Json(name = "actionType")
+    val actionType: Int? = null,
+    @Json(name = "lstAttributesDetails")
+    val lstAttributesDetails: List<LstAttributesDetailLevel>? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class LstAttributesDetailLevel(
+    @Json(name = "attributeContents")
+    val attributeContents: Any? = null,
+    @Json(name = "attributeCurrencyId")
+    val attributeCurrencyId: Any? = null,
+    @Json(name = "attributeId")
+    val attributeId: Int? = null,
+    @Json(name = "attributeNames")
+    val attributeNames: Any? = null,
+    @Json(name = "attributeType")
+    val attributeType: String? = null,
+    @Json(name = "attributeValue")
+    val attributeValue: String? = null,
+    @Json(name = "categoryCode")
+    val categoryCode: Any? = null,
+    @Json(name = "imageUrl")
+    val imageUrl: Any? = null,
+    @Json(name = "totalEarning")
+    val totalEarning: Double? = null
 )

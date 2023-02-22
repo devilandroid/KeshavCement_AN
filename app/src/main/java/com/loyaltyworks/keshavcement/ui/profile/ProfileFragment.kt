@@ -1,12 +1,16 @@
 package com.loyaltyworks.keshavcement.ui.profile
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,6 +25,7 @@ import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
+import com.permissionx.guolindev.PermissionX
 import com.vmb.fileSelect.FileSelector
 import com.vmb.fileSelect.FileSelectorCallBack
 import com.vmb.fileSelect.FileSelectorData
@@ -91,20 +96,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         when(v!!.id){
             R.id.change_profile_image ->{
                 LoadingDialogue.dismissDialog()
+                askPermission()
                 // Browse Image or Files
-                FileSelector.requiredFileTypes(FileType.IMAGES).open(requireActivity(), object :
-                    FileSelectorCallBack {
-                    override fun onResponse(fileSelectorData: FileSelectorData) {
-                        mProfileImagePath = fileSelectorData.responseInBase64!!
-//                        fileExtenstion = fileSelectorData.extension!!
 
-                        Log.d("gfdhrgfi", "jf " + mProfileImagePath.toString())
-
-                        binding.mProfileImage.setImageBitmap(fileSelectorData.thumbnail)
-
-                        profileImageUpdateApi(mProfileImagePath)
-                    }
-                })
             }
 
             R.id.update_profile ->{
@@ -156,6 +150,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
         }
     }
+
+
 
     private fun UpdateProfile() {
         LoadingDialogue.showDialog(requireContext())
@@ -340,6 +336,51 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+
+    private fun askPermission() {
+
+        PermissionX.init(this)
+            .permissions(
+                Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+            .explainReasonBeforeRequest()
+            .onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(deniedList,
+                    "Allow permission to access the location and camera to Keshav Cement",
+                    "OK",
+                    "Cancel")
+            }
+            .onForwardToSettings { scope, deniedList ->
+                scope.showForwardToSettingsDialog(deniedList,
+                    "You need to allow necessary permissions in Settings manually",
+                    "OK",
+                    "Cancel")
+            }
+            .request { allGranted, grantedList, deniedList ->
+                if (allGranted) {
+                    FileSelector.requiredFileTypes(FileType.IMAGES).open(requireActivity(), object :
+                        FileSelectorCallBack {
+                        override fun onResponse(fileSelectorData: FileSelectorData) {
+                            mProfileImagePath = fileSelectorData.responseInBase64!!
+//                        fileExtenstion = fileSelectorData.extension!!
+
+                            Log.d("gfdhrgfi", "jf " + mProfileImagePath.toString())
+
+                            binding.mProfileImage.setImageBitmap(fileSelectorData.thumbnail)
+
+                            profileImageUpdateApi(mProfileImagePath)
+                        }
+                    })
+
+                } else {
+                    // when permission denied
+//                    findNavController().popBackStack()
+                }
+            }
+
     }
 
 }

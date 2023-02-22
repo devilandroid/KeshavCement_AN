@@ -34,9 +34,10 @@
                 android:textSize="12sp"
                 android:textColor="@color/colorAccent"/>
             <TextView
+                android:id="@+id/redeemable_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="XXXXX"
+                android:text="-"
                 android:fontFamily="@font/poppins_semibold"
                 android:textSize="16sp"
                 android:textColor="@color/color45"/>
@@ -65,8 +66,7 @@
             android:id="@+id/no_data_fount"
             layout="@layout/no_data_found_animation_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 </LinearLayout>

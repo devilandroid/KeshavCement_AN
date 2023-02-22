@@ -9,21 +9,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentReferBinding
+import com.loyaltyworks.keshavcement.model.ObjContactCenterDetails
+import com.loyaltyworks.keshavcement.model.ReferRequest
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
+import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 
 
 class ReferFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentReferBinding
-
+    private lateinit var viewModel: ReferViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        viewModel = ViewModelProvider(this).get(ReferViewModel::class.java)
         binding = FragmentReferBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -38,6 +45,7 @@ class ReferFragment : Fragment(), View.OnClickListener {
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
         binding.referButton.setOnClickListener(this)
+        binding.refralCodeTxt.text = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].referralCode
 
         //  copy codd from clipboard
         binding.copyCode.setOnClickListener {
@@ -46,6 +54,30 @@ class ReferFragment : Fragment(), View.OnClickListener {
             clipboardManager.setPrimaryClip(clip)
             Toast.makeText(requireContext(),"Copied", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        /*** Refer Observer ***/
+        viewModel.referLiveData.observe(viewLifecycleOwner, Observer {
+            LoadingDialogue.dismissDialog()
+            if (it != null && !it.returnMessage.isNullOrEmpty()){
+                if (it.returnMessage == "1"){
+                    binding.mobileNumber.setText("")
+                    binding.customerName.setText("")
+                    Toast.makeText(requireContext(), getString(R.string.refered_successfully), Toast.LENGTH_SHORT).show()
+                }else if (it.returnMessage!!.split("~")[0] == "2"){
+                    Toast.makeText(requireContext(), getString(R.string.already_refered_to_this_no), Toast.LENGTH_SHORT).show()
+                } else{
+                    Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+            }
+
+
+        })
     }
 
     override fun onClick(v: View?) {
@@ -66,8 +98,20 @@ class ReferFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun referFriendApi() {
-        Toast.makeText(requireContext(), "Api not working", Toast.LENGTH_SHORT).show()
-    }
 
+
+    private fun referFriendApi() {
+        LoadingDialogue.showDialog(requireContext())
+        viewModel.getReferData(
+            ReferRequest(
+                actionType = "2",
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
+                objContactCenterDetails = ObjContactCenterDetails(
+                    refereeMobileNo = binding.mobileNumber.text.toString(),
+                    refereeName = binding.customerName.text.toString()
+                )
+
+            )
+        )
+    }
 }

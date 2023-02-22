@@ -101,7 +101,7 @@ interface ApiInterface {
     fun getSaveWorksiteAsync(@Body saveWorksiteRequest: SaveWorksiteRequest): Deferred<Response<SaveWorksiteResponse>>
 
     /* Activate/Deactivate Support Executive api call*/
-    @POST("ApproveRejectDeleteRequest")
+    @POST("CustomerAccountDelete")
     fun getActivateDeactivateSupportExecutiveAsync(@Body activateDeactivateExecutiveRequest: ActivateDeactivateExecutiveRequest): Deferred<Response<ActivateDeactivateExecutiveResponse>>
 
     //Query listing api call
@@ -215,6 +215,47 @@ interface ApiInterface {
     /* Planner Remove api call*/
     @POST("GetPlannerAddedOrNot")
     fun getPlannerRemove(@Body removePlannerRequest: RemovePlannerRequest): Deferred<Response<RemovePlannerResponse>>
+
+    // My Earning List api call
+    @POST("GetRewardTransactionDetailsMobileApp")
+    fun fetchEarningListAsync(@Body myEarningRequest: MyEarningRequest): Deferred<Response<MyEarningResponse>>
+
+    // Dream Gift List api call
+    @POST("GetDreamGiftDetails")
+    fun fetchDreamGiftAsync(@Body dreamGiftRequest: DreamGiftRequest): Deferred<Response<DreamGiftResponse>>
+
+    // Dream Gift Details api call
+    @POST("GetDreamGiftDetails")
+    fun fetchDreamGiftDetailAsync(@Body dreamGiftDetailRequest: DreamGiftDetailRequest): Deferred<Response<DreamGiftDetailResponse>>
+
+    /* Dream Gift Remove api call*/
+    @POST("SaveOrUpdateDreamGiftDetails")
+    fun getDreamGiftRemove(@Body dreamGiftRemoveRequest: DreamGiftRemoveRequest): Deferred<Response<DreamGiftRemoveResponse>>
+
+    /* Voucher api call*/
+    @POST("GetCatalogueDetails")
+    fun getRedeemGiftAsync(@Body redeemGiftRequest: RedeemGiftRequest?): Deferred<Response<RedeemGiftResponse>>
+
+    /*RedeemGiftVoucher*/
+    @POST("SaveCatalogueRedemptionDetails")
+    fun getRedeemGiftVoucherAsync(@Body redeemGiftVoucherRequest: RedeemGiftVoucherRequest?): Deferred<Response<RedeemGiftVoucherResponse>>
+
+    /* Level List api call */
+    @POST("GetAttributeDetails")
+    fun getLevelListAsync(@Body levelListRequest: LevelListRequest): Deferred<Response<LevelListResponse>>
+
+    // Refer Friend api call
+    @POST("SaveReferralDetails")
+    fun fetchReferAsync(@Body referRequest: ReferRequest): Deferred<Response<ReferResponse>>
+
+    /* Pending Claim Approve/Reject api call */
+    @POST("SaveApprovePurchaseRequestDetail")
+    fun getPendingClaimApproveRejactAsync(@Body pendingClaimApproveRejectRequest: PendingClaimApproveRejectRequest):  Deferred<Response<PendingClaimApproveRejectResponse>>
+
+    /* Pending Claim Approve/Reject api call */
+    @POST("GetCatalogueDetails")
+    fun getCashTransferApproveRejectAsync(@Body cashTransferApproveRejectRequest: CashTransferApproveRejectRequest):  Deferred<Response<CashTransferApproveRejectResponse>>
+
 
 
 }

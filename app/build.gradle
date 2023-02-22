@@ -192,4 +192,6 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     implementation 'com.github.vidheyMB:FileSelector:0.1.2'
+
+    implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
 }

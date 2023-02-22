@@ -42,6 +42,8 @@ data class SaveCatalogueRedemptionRequest(
     val actorId: Int? = null,
     @Json(name = "MemberName")
     val memberName: String? = null,
+    @Json(name = "DealerLoyaltyId")
+    val dealerLoyaltyId: String? = null,
     @Json(name = "UserName")
     val userName: String? = null,
     @Json(name = "TotalPointsRedeemed")
@@ -119,13 +121,13 @@ data class ObjCustShippingAddressDetails(
     @Json(name = "FullName")
     val fullName: String? = null,
     @Json(name = "Mobile")
-    val mobile: Long? = null,
+    val mobile: String? = null,
     @Json(name = "StateId")
     val stateId: Int? = null,
     @Json(name = "StateName")
     val stateName: String? = null,
     @Json(name = "Zip")
-    val zip: Int? = null
+    val zip: String? = null
 )
 
 

@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
@@ -24,10 +25,14 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentNewWorksiteBinding
-import com.loyaltyworks.keshavcement.model.SaveWorksiteRequest
+import com.loyaltyworks.keshavcement.model.*
+import com.loyaltyworks.keshavcement.model.adapter.CustomerTypeSpinnerAdapter
+import com.loyaltyworks.keshavcement.model.adapter.LevelListSpinnerAdapter
 import com.loyaltyworks.keshavcement.utils.AppController
+import com.loyaltyworks.keshavcement.utils.DatePickerBox
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
@@ -57,7 +62,11 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
     var captureLocation:Boolean = false
 
     var tentativeDate = ""
+
+
+    var mSelectedLevel: LstAttributesDetailLevel? = null
     var selectedLevelId = -1
+    var levelList = mutableListOf<LstAttributesDetailLevel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -81,6 +90,8 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
 
         binding.next.setOnClickListener(this)
         binding.changeImage.setOnClickListener(this)
+        binding.tentativeDate.setOnClickListener(this)
+        binding.levelSpinner.onItemSelectedListener = this
 
         askPermission()
         if (this::easyWayLocation.isInitialized)
@@ -241,6 +252,13 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
                 })
             }
 
+            R.id.tentative_date ->{
+                DatePickerBox.date(1, activity) {
+                    binding.tentativeDateTxt.text = it.toString()
+                    tentativeDate = it
+                }
+            }
+
             R.id.next -> {
 
                 if(binding.siteLocationLayout.visibility == View.VISIBLE){
@@ -270,6 +288,7 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
                             }else{
                                 if (!binding.ownerAddr.text.toString().isNullOrEmpty()){
 
+                                    callLevelApi()
                                     binding.userDetailsLayout.visibility = View.GONE
                                     binding.workDetailsLayout.visibility = View.VISIBLE
                                     binding.workDetailsProgress.setBackgroundColor(requireContext().resources.getColor(R.color.colorPrimary))
@@ -318,6 +337,14 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
 
     }
 
+    private fun callLevelApi() {
+        viewModel.getLevelListData(
+            LevelListRequest(
+                actionType = "164"
+            )
+        )
+    }
+
     private fun createWorksiteApi() {
         LoadingDialogue.showDialog(requireContext())
         viewModel.getSaveWorksiteData(
@@ -332,12 +359,12 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
                 contactNumber = binding.ownerMobile.text.toString(),
                 contactPersonName = binding.ownerName.text.toString(),
                 address = binding.ownerAddr.text.toString(),
-                contactPersonName1 = binding.engineerMobile.text.toString(),
-                contactNumber1 = binding.engineerName.text.toString(),
+                contactPersonName1 = binding.engineerName.text.toString(),
+                contactNumber1 = binding.engineerMobile.text.toString(),
                 worklevel = selectedLevelId,
-                tentativeDate = binding.tentativeDateTxt.text.toString(),
+                tentativeDate = AppController.dateAPIFormats(tentativeDate),
                 remarks = binding.remarks.text.toString(),
-                locationname = AppController.getAddress(requireContext(), latitude, longitude)
+                siteName = AppController.getAddress(requireContext(), latitude, longitude)
             )
         )
 
@@ -346,9 +373,10 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        /*** Save Worksite Observer ***/
         viewModel.saveWorksiteLiveData.observe(viewLifecycleOwner, Observer {
-            if (it != null && !it.returnMessage.isNullOrEmpty()){
-                if (it.returnMessage == "1"){
+            if (it != null && !it.returnValue.isNullOrEmpty()){
+                if (it.returnValue == "1"){
                     ClaimSuccessDialog.showClaimSuccessDialog(requireContext(),true,"Successfully!","Created new worksite",
                         object : ClaimSuccessDialog.ClaimSuccessDialogCallBack{
                             override fun onOk() {
@@ -357,13 +385,36 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
 
                         })
                 }else{
-                    Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.failed_to_save_worksite_details), Toast.LENGTH_SHORT).show()
                 }
 
             }else{
                 Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
             }
         })
+
+        /*** Level List Observer ***/
+        viewModel.levelListLiveData.observe(viewLifecycleOwner, Observer {
+            if (it != null && !it.lstAttributesDetails.isNullOrEmpty()){
+                if (levelList.size > 0) {
+                    levelList.clear()
+                }
+                levelList.addAll(it.lstAttributesDetails)
+                levelList.add(0, LstAttributesDetailLevel(
+                    attributeValue = "Select Level",
+                    attributeId = -1
+                ))
+
+                binding.levelSpinner.adapter = LevelListSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item,levelList)
+            }else{
+                levelList.add(0, LstAttributesDetailLevel(
+                    attributeValue = "Select Level",
+                    attributeId = -1
+                ))
+                binding.levelSpinner.adapter = LevelListSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item,levelList)
+            }
+        })
+
 
     }
 
@@ -434,7 +485,13 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+        when ((parent as Spinner).id) {
+            R.id.level_spinner ->{
+                mSelectedLevel = parent.getItemAtPosition(position) as LstAttributesDetailLevel
+                selectedLevelId = mSelectedLevel!!.attributeId!!
+                Log.d("rg3gggggs","level id : " + selectedLevelId)
+            }
+        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

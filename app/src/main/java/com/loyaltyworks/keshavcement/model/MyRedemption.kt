@@ -12,10 +12,16 @@ data class MyRedemptionRequest(
     var actionType: String? = null,
     @Json(name = "ActorId")
     var actorId: String? = null,
+    @Json(name = "PartyLoyaltyID")
+    var partyLoyaltyID: String? = null,
     @Json(name = "StartIndex")
     var startIndex: Int? = null,
     @Json(name = "NoOfRows")
     var noOfRows: Int? = null,
+    @Json(name = "CustomerTypeID")
+    var customerTypeID: String? = null,
+    @Json(name = "SearchText")
+    var searchText: String? = null,
     @Json(name = "ObjCatalogueDetails")
     var objCatalogueDetails: ObjCatalogueDetails? = null
 )
@@ -27,11 +33,13 @@ data class ObjCatalogueDetails(
     @Json(name = "JToDate")
     var jToDate: String? = null,
     @Json(name = "SelectedStatus")
-    var selectedStatus: Int? = null,
+    var selectedStatus: String? = null,
     @Json(name = "RedemptionTypeId")
     var redemptionTypeId: Int? = null,
     @Json(name = "RedemptionId")
-    val redemptionId: String? = null
+    val redemptionId: String? = null,
+    @Json(name = "CatogoryId")
+    var catogoryId: String? = null
 )
 
 /* My Redemption Response */
@@ -203,7 +211,14 @@ data class ObjCatalogueRedemReq(
     @Json(name = "walletNumber")
     val walletNumber: Any? = null,
     @Json(name = "zip")
-    val zip: String? = null
+    val zip: String? = null,
+    @Json(name = "remarks")
+    val remarks: String? = null,
+    @Json(name = "membertype")
+    val membertype: String? = null,
+    @Json(name = "districtName")
+    val districtName: String? = null,
+    var enteredRemarks: String = ""
 ): Serializable
 
   /* My Redemption Details Request */

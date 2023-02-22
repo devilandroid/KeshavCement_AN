@@ -164,17 +164,21 @@
                 android:textSize="12sp"
                 android:textColor="@color/color16"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/remarks"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
                 android:gravity="center_vertical"
                 android:background="@drawable/refer_edttxt_bg"
                 android:backgroundTint="@color/color13"
+                android:textCursorDrawable="@drawable/cursor_clor"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="-"
+                android:maxLength="500"
+                android:text=""
+                android:hint="@string/enter_remarks"
                 android:textColor="@color/dark"
                 android:textSize="12sp" />
 

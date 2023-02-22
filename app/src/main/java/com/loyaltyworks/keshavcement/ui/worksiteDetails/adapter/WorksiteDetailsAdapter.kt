@@ -37,15 +37,15 @@ class WorksiteDetailsAdapter(val lstWorkSiteInfo: List<LstWorkSiteInfo>) : Recyc
         val data = lstWorkSiteInfo[position]
 
         holder.date.text = data.createdDate
-        holder.locationName.text = data.locationname
+        holder.locationName.text = data.siteName
         holder.ownerName.text = data.contactPersonName
         holder.ownerMobile.text = data.contactNumber
         holder.ownerAddress.text = data.address
         holder.engineerName.text = data.contactPersonName1
         holder.engineerMobile.text = data.contactNumber1
-        holder.workLevel.text = data.worklevel
-        holder.tentativeDate.text = data.tentativeDate
-        holder.remarks.text = data.remarks
+        holder.workLevel.text = "- " + data.worklevel
+        holder.tentativeDate.text = "- " + data.tentativeDate
+        holder.remarks.text = "- " + data.remarks
 
 
 

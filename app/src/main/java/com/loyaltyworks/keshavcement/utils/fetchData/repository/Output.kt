@@ -1,4 +1,4 @@
-package com.loyaltyworks.walkaroo.utils.fetchData.repository
+package com.loyaltyworks.keshavcement.utils.fetchData.repository
 
 sealed class Output<out T : Any>{
     data class Success<out T : Any>(val output : T) : Output<T>()

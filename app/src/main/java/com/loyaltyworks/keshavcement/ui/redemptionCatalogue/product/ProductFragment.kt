@@ -68,6 +68,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
 
     var actorID = ""
     var loyaltyId = ""
+    var partyLoyaltyID = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,9 +93,11 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         if (arguments != null){
             actorID = requireArguments().getString("SelectedCustomerUserID").toString()
             loyaltyId = requireArguments().getString("SelectedCustomerLoyltyID").toString()
+            partyLoyaltyID = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].loyaltyId.toString()
         }else{
             actorID = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
             loyaltyId = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].loyaltyId.toString()
+            partyLoyaltyID = ""
         }
 
         if (isHighToLowButtonClicked){
@@ -383,7 +386,8 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         viewModel.getCartCountData(
             CartCountRequest(
                 actionType = "1",
-                loyaltyID = loyaltyId
+                loyaltyID = loyaltyId,
+                partyLoyaltyID = partyLoyaltyID
 
             )
         )
@@ -422,7 +426,8 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
                 searchText = src,
                 startIndex = startIndex,
                 noOfRows = limit,
-                sort = sort
+                sort = sort,
+                domain = "KESHAV_CEMENT"
             )
         )
 
@@ -440,6 +445,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         bundle.putSerializable("CatalogueProduct", objCatalogue)
         bundle.putString("SelectedCustomerUserID",actorID)
         bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+        bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
         itemView.findNavController().navigate(R.id.productDetailsFragment, bundle)
     }
 
@@ -466,6 +472,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
                 actorId = actorID,
                 merchantId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.merchantId!!.toString(),
                 loyaltyID = loyaltyId,
+                partyLoyaltyID = partyLoyaltyID,
 
                 catalogueSaveCartDetailListRequest = catalogueSaveCartDetialsList
             )
@@ -480,6 +487,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
             PlannerAddRequest(
                 actionType = 0,
                 actorId = actorID,
+                partyLoyaltyID =partyLoyaltyID,
                 ObjCatalogueDetailsy(
                     catalogueId =catalogueId
                 )
@@ -503,6 +511,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
                 val bundle = Bundle()
                 bundle.putString("SelectedCustomerUserID",actorID)
                 bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
+                bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
                 findNavController().navigate(R.id.action_productFragment_to_cartFragment,bundle)
             }
 
