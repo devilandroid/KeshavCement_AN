@@ -152,6 +152,7 @@
                 android:background="@drawable/corner_bg4"
                 android:backgroundTint="@color/colorPrimaryDark">
                 <TextView
+                    android:id="@+id/button_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Redeem"

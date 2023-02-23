@@ -34,7 +34,8 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1.5"
                 android:background="@drawable/refer_edttxt_bg"

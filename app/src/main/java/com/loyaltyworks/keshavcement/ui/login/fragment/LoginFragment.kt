@@ -126,7 +126,7 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
     private fun initialSetup() {
         if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
             binding.activateLayout.visibility = View.GONE
-            binding.forgotPassword.visibility = View.GONE
+            binding.forgotPassword.visibility = View.VISIBLE
             binding.registerLayout.visibility = View.GONE
             binding.bottomImg.setImageResource(R.drawable.group_1022)
         }else{
@@ -305,6 +305,11 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                         }
 
                     }
+
+                    -2 ->{
+                        getString(R.string.your_account_has_been_deactivated)
+                    }
+
                     6 -> {
                         "Invalid username Id"
                     }

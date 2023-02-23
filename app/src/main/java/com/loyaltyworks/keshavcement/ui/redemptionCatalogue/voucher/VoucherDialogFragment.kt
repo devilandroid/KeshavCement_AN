@@ -168,7 +168,7 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
     private fun RedeemVoucher(amountss: String) {
         SendOtpRequest()
         RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getStringValue(requireContext(), BuildConfig.SelectedCustomerMobile)
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+            ,"Redeem",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
 
                 }

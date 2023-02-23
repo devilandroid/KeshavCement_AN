@@ -210,8 +210,8 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
 
         SendOtpRequest()
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString(),
+            "Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
 
@@ -247,8 +247,8 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
     ) {
         SendOtpRequest()
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString(),
+            "Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
 

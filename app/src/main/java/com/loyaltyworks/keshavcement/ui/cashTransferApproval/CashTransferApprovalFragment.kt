@@ -230,7 +230,7 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
         SendOtpRequest()
 
         RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+            ,"Submit" ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
 
@@ -264,7 +264,7 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
         SendOtpRequest()
 
         RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+            ,"Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
 

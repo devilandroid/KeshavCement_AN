@@ -30,7 +30,6 @@
             android:imeOptions="actionSearch"
             android:maxLines="1"
             android:inputType="text"
-            android:maxLength="12"
             android:focusableInTouchMode="true"
             android:textCursorDrawable="@drawable/cursor_clor"
             android:gravity="center_vertical"

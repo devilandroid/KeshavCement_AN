@@ -26,9 +26,11 @@ import com.loyaltyworks.keshavcement.databinding.FragmentDashboardBinding
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.ui.DashboardActivity
 import com.loyaltyworks.keshavcement.ui.login.LoginActivity
+import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductCatalogueViewModel
 import com.loyaltyworks.keshavcement.ui.splashScreen.SplashScreenViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import com.loyaltyworks.keshavcement.utils.dialog.NewPasswordDialog
 import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
@@ -39,6 +41,7 @@ import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 class DashboardFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var viewModel: DashboardViewModel
+    private lateinit var viewModelProductCataloge: ProductCatalogueViewModel
     private lateinit var splashScreenViewModel: SplashScreenViewModel
 
     override fun onCreateView(
@@ -46,6 +49,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        viewModelProductCataloge = ViewModelProvider(this).get(ProductCatalogueViewModel::class.java)
         splashScreenViewModel = ViewModelProvider(this).get(SplashScreenViewModel::class.java)
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding = FragmentDashboardBinding.inflate(layoutInflater)
@@ -174,7 +178,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             })
         }
 
-        callApi()
+
         getBanner()
     }
 
@@ -212,6 +216,11 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
 
+        /*** User Active/Deactive Check ***/
+        viewModelProductCataloge.getUserActiveOrNotData(UserActiveOrNotRequest(
+            PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
+        ))
+
         val packageInfo: PackageInfo = requireActivity().packageManager!!.getPackageInfo(requireActivity().packageName, 0)
         Log.d("hfjshjrf", packageInfo.versionCode.toString())
 
@@ -228,6 +237,28 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        /***  user active or not Bberser ***/
+        viewModelProductCataloge.userActiveOrNotData.observe(viewLifecycleOwner, Observer {
+
+            if (it != null) {
+                if (it.isActive == false) {
+                    ClaimSuccessDialog.showClaimSuccessDialog(requireContext(),false,"Account Deactivated!",
+                        getString(R.string.your_account_has_been_deactivated),object :
+                            ClaimSuccessDialog.ClaimSuccessDialogCallBack{
+                            override fun onOk() {
+                                PreferenceHelper.clear(requireContext())
+                                startActivity(Intent(context, LoginActivity::class.java))
+                                requireActivity().finish()
+                            }
+                        })
+                }else{
+                    callApi()
+                }
+            }
+
+        })
+
 
         /*** Change Password Request ***/
         viewModel.changePasswordLiveData.observe(viewLifecycleOwner, Observer {

@@ -161,7 +161,7 @@ class AddressFragment : Fragment() {
 
                         SendOtpRequest()
                         RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerMobile)
-                            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+                            ,"Redeem",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                             override fun onOk() {
                                 binding.redeemSwapBtn.changeState(false,true)
                             }
