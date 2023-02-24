@@ -1,5 +1,7 @@
 package com.loyaltyworks.keshavcement.ui.enrollment.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -44,6 +46,15 @@ class EnrollmentAdapter(val lstCustParentChildMapping: List<LstCustParentChildMa
                 .thumbnail(0.1f)
                 .load(BuildConfig.CATALOGUE_IMAGE_BASE + data.customerImage.toString())
                 .into(holder.custImage)
+        }
+
+        holder.mobileNo.setOnClickListener { v ->
+            holder.itemView.context.startActivity(
+                Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.fromParts("tel", data.mobile, null)
+                )
+            )
         }
 
     }

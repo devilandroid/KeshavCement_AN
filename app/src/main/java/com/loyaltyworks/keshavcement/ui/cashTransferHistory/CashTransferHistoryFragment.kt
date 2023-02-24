@@ -37,10 +37,9 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
     private lateinit var binding: FragmentCashTransferHistoryBinding
     private lateinit var myRedemptionViewModel: MyRedemptionViewModel
 
-    var categoryId = ""
 
-    var selectedStatusId = "-1"
-    var selectedCustTypeId = ""
+    var selectedStatusId = "100"
+    var selectedCustTypeId = "-1"
     var FromDate = ""
     var ToDate = ""
 
@@ -81,13 +80,6 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
 
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
             binding.filterSubDealer.visibility = View.GONE
-            categoryId = "8"
-            requireActivity().toolbar.title = getString(R.string.cash_transfer_history)
-            binding.filterTitle.text = getString(R.string.cash_transfer_history_filter)
-        }else{
-            categoryId = "9"
-            requireActivity().toolbar.title = getString(R.string.cash_voucher_history)
-            binding.filterTitle.text = getString(R.string.cash_voucher_history_filter)
         }
 
 
@@ -157,14 +149,16 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
         val  myRedemptionRequest = MyRedemptionRequest()
 
         myRedemptionRequest.actionType = "52"
-        myRedemptionRequest.actorId =  PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
+//        myRedemptionRequest.actorId =  PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
         myRedemptionRequest.startIndex = startIndex
         myRedemptionRequest.noOfRows = limit
         myRedemptionRequest.customerTypeID = selectedCustTypeId
+        myRedemptionRequest.partyLoyaltyID = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].loyaltyId.toString()
+        myRedemptionRequest.domain = "KESHAV_CEMENT"
 
         val objCatalogueDetails = ObjCatalogueDetails()
         objCatalogueDetails.selectedStatus = selectedStatusId
-        objCatalogueDetails.catogoryId = categoryId
+        objCatalogueDetails.catogoryId = "8"
         objCatalogueDetails.redemptionTypeId = -1
 
         if (FromDate.isNotEmpty() && ToDate.isNotEmpty()){
@@ -342,7 +336,7 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
                 binding.filterEngineer.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
                 binding.filterMason.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
 
-                selectedStatusId = "-1"
+                selectedStatusId = "100"
                 selectedCustTypeId = "-1"
                 FromDate = ""
                 ToDate = ""

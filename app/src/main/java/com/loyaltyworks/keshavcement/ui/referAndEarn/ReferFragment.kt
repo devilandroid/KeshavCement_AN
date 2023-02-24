@@ -18,6 +18,8 @@ import com.loyaltyworks.keshavcement.model.ObjContactCenterDetails
 import com.loyaltyworks.keshavcement.model.ReferRequest
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
+import com.loyaltyworks.keshavcement.utils.dialog.CommonSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 
 
@@ -66,7 +68,12 @@ class ReferFragment : Fragment(), View.OnClickListener {
                 if (it.returnMessage == "1"){
                     binding.mobileNumber.setText("")
                     binding.customerName.setText("")
-                    Toast.makeText(requireContext(), getString(R.string.refered_successfully), Toast.LENGTH_SHORT).show()
+                    CommonSuccessDialog.showCommonSuccessDialog(requireContext(),false,"Successfully !",
+                        getString(R.string.you_have_successfully_referred_to_your_friend),object :
+                            CommonSuccessDialog.CommonSuccessDialogCallBack{
+                            override fun onOk() {
+                            }
+                        })
                 }else if (it.returnMessage!!.split("~")[0] == "2"){
                     Toast.makeText(requireContext(), getString(R.string.already_refered_to_this_no), Toast.LENGTH_SHORT).show()
                 } else{

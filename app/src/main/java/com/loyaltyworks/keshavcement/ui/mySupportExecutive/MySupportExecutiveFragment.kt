@@ -201,25 +201,28 @@ class MySupportExecutiveFragment : Fragment(), View.OnClickListener, MySupportEx
         super.onActivityCreated(savedInstanceState)
 
         viewModel.activateDeactivateSupportExecutiveLiveData.observe(viewLifecycleOwner, Observer {
-            LoadingDialogue.dismissDialog()
-            if (it != null && !it.returnMessage.isNullOrEmpty()){
-                if (it.returnMessage == "1"){
-                    ClaimSuccessDialog.showClaimSuccessDialog(requireContext(),true,"Successfully!","Status updated ",
-                        object : ClaimSuccessDialog.ClaimSuccessDialogCallBack{
-                            override fun onOk() {
-                                currentList.clear()
-                                callApi( 1)
-                            }
+            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
+                LoadingDialogue.dismissDialog()
+                if (it != null && !it.returnMessage.isNullOrEmpty()){
+                    if (it.returnMessage == "1"){
+                        ClaimSuccessDialog.showClaimSuccessDialog(requireContext(),true,"Successfully!","Status updated ",
+                            object : ClaimSuccessDialog.ClaimSuccessDialogCallBack{
+                                override fun onOk() {
+                                    currentList.clear()
+                                    callApi( 1)
+                                }
 
-                        })
+                            })
+
+                    }else{
+                        Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+                    }
 
                 }else{
                     Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
                 }
-
-            }else{
-                Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
             }
+
         })
     }
 }

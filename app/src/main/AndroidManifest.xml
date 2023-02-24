@@ -36,11 +36,6 @@
         android:theme="@style/Theme.KeshavCement"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.notification.NotificationActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.NoActionBar"/>
-        <activity
             android:name=".ui.lanuage.LanguageActivity"
             android:exported="false"
             android:screenOrientation="portrait"

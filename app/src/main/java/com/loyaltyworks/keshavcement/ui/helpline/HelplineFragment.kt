@@ -1,5 +1,7 @@
 package com.loyaltyworks.keshavcement.ui.helpline
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +12,7 @@ import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentHelplineBinding
 
 
-class HelplineFragment : Fragment() {
+class HelplineFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentHelplineBinding
 
 
@@ -33,6 +35,18 @@ class HelplineFragment : Fragment() {
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
+        binding.callLayout.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when(v!!.id){
+            R.id.call_layout -> {
+                val i = Intent(Intent.ACTION_DIAL)
+                i.data = Uri.parse("tel:8875509444")
+                startActivity(i)
+
+            }
+        }
     }
 
 

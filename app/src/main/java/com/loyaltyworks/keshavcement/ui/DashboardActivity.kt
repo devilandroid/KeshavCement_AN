@@ -423,6 +423,11 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
                 binding.drawerLayout.closeDrawer(Gravity.LEFT)
             }
 
+            R.id.dTerms -> {
+                navController.navigate(R.id.termsAndConditionFragment)
+                binding.drawerLayout.closeDrawer(Gravity.LEFT)
+            }
+
             R.id.mlogout -> {
                 PreferenceHelper.clear(this)
                 startActivity(Intent(context, LoginActivity::class.java))

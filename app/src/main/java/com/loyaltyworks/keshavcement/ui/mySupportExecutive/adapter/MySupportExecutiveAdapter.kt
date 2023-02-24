@@ -1,6 +1,8 @@
 package com.loyaltyworks.keshavcement.ui.mySupportExecutive.adapter
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,6 +86,15 @@ class MySupportExecutiveAdapter(val lstCustParentChildMapping: List<LstCustParen
                 onItemClickListener.onActivateDeactivateClickResponse(v,"true", data)
             }
 
+        }
+
+        holder.mobileNumber.setOnClickListener { v ->
+            holder.itemView.context.startActivity(
+                Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.fromParts("tel", data.mobile, null)
+                )
+            )
         }
     }
 

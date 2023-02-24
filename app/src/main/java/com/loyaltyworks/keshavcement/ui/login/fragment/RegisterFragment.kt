@@ -389,18 +389,6 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                 binding.customerTypeSpinner.adapter = CustomerTypeSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item,customerTypeList)
 
-                /*if (isFirstLoad){
-                    customerTypeList.forEach { lstAttributesDetail ->
-                        if (lstAttributesDetail.attributeId == PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType)){
-                            binding.customerTypeSpinner.setSelection(i)
-                            isFirstLoad = false
-                            i=0
-                            return@forEach
-                        }
-                        i++
-                    }
-                }*/
-
                 customerTypeList.forEachIndexed { index, lstAttributesDetail ->
                     if (lstAttributesDetail.attributeId == PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType)){
                         binding.customerTypeSpinner.setSelection(index)
@@ -805,10 +793,12 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         viewModel.getRegisterRequest(
             RegisterRequest(
                 actionType = "0",
-                LstIdentityInfo(
-                    identityNo = identityNo,
-                    identityType = identityType,
-                    identityID = aadharNo
+                listOf(
+                    LstIdentityInfo(
+                        identityNo = aadharNo,
+                        identityType = identityType,
+                        identityID = identityNo
+                    )
                 ),
                 ObjCustomer(
                     firstName = binding.name.text.toString(),

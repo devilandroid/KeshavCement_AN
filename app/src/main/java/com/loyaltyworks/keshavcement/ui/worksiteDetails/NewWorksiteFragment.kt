@@ -116,7 +116,7 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
             //                CameraUpdate zoom=CameraUpdateFactory.zoomTo(20);
             googleMap.moveCamera(center)
             //                googleMap.animateCamera(zoom);
-            googleMap.setMyLocationEnabled(true)
+            googleMap.setMyLocationEnabled(false)
             /* googleMap.setMinZoomPreference(6.0f);
                 googleMap.setMaxZoomPreference(20.0f);*/googleMap.getUiSettings()
             .setScrollGesturesEnabled(false)

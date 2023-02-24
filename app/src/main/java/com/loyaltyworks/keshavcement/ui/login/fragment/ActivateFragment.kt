@@ -298,12 +298,12 @@ class ActivateFragment : Fragment(), View.OnClickListener{
                     email = binding.email.text.toString(),
                     rELATEDPROJECTTYPE = "KESHAV_CEMENT",
                     addressId = _lstCustomerJson!![0].addressId.toString(),
+                    aadharNumber = aadharNo
                 ),
                 ObjCustomerOfficalInfoActivate(
                     companyName = _lstCustomerOfficalInfoJson!![0].companyName,
                     sapNo = sapCode,
-                    gSTNumber = gstNo,
-                    aadharNumber = aadharNo
+                    gSTNumber = gstNo
                 )
             )
         )

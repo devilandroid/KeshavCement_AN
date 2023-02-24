@@ -23,7 +23,7 @@ data class ProfileResponse(
     @Json(name = "hierarchyMapDetails")
     val hierarchyMapDetails: Any? = null,
     @Json(name = "lstCustomerIdentityInfo")
-    val lstCustomerIdentityInfo: Any? = null,
+    val lstCustomerIdentityInfo: List<LstCustomerIdentityInfo>? = null,
     @Json(name = "lstCustomerJson")
     val lstCustomerJson: List<LstCustomerJson>? = null,
     @Json(name = "lstCustomerOfficalInfoJson")
@@ -51,9 +51,27 @@ data class ProfileResponse(
 )
 
 @JsonClass(generateAdapter = true)
+data class LstCustomerIdentityInfo(
+    @Json(name = "identityDocument")
+    val identityDocument: String? = null,
+    @Json(name = "identityID")
+    val identityID: String? = null,
+    @Json(name = "identityName")
+    val identityName: Any? = null,
+    @Json(name = "identityNo")
+    val identityNo: String? = null,
+    @Json(name = "identityType")
+    val identityType: String? = null,
+    @Json(name = "identityTypeID")
+    val identityTypeID: Int? = null,
+    @Json(name = "isNewIdentity")
+    val isNewIdentity: Boolean? = null
+)
+
+@JsonClass(generateAdapter = true)
 data class LstCustomerJson(
     @Json(name = "aadharNumber")
-    val aadharNumber: String? = null,
+    val aadharNumber: Any? = null,
     @Json(name = "accountComStatus")
     val accountComStatus: Int? = null,
     @Json(name = "accountNumber")
@@ -131,7 +149,7 @@ data class LstCustomerJson(
     @Json(name = "countryId")
     val countryId: Int? = null,
     @Json(name = "countryName")
-    val countryName: Any? = null,
+    val countryName: String? = null,
     @Json(name = "createdBy")
     val createdBy: Any? = null,
     @Json(name = "createdDate")
@@ -329,7 +347,7 @@ data class LstCustomerJson(
     @Json(name = "professionId")
     val professionId: Int? = null,
     @Json(name = "profilePicture")
-    val profilePicture: String? = null,
+    val profilePicture: Any? = null,
     @Json(name = "recipientPhonenumber")
     val recipientPhonenumber: Any? = null,
     @Json(name = "recipientType")
@@ -385,7 +403,7 @@ data class LstCustomerJson(
     @Json(name = "village")
     val village: String? = null,
     @Json(name = "walletNumber")
-    val walletNumber: String? = null,
+    val walletNumber: Any? = null,
     @Json(name = "walletVerifiedStatus")
     val walletVerifiedStatus: Boolean? = null,
     @Json(name = "whatsAppNumber")
@@ -447,7 +465,7 @@ data class LstCustomerOfficalInfoJson(
     @Json(name = "phoneResidence")
     val phoneResidence: Any? = null,
     @Json(name = "sapCode")
-    val sapCode: String? = null,
+    val sapCode: Any? = null,
     @Json(name = "stateId")
     val stateId: Int? = null,
     @Json(name = "stateName")

@@ -38,7 +38,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
     private lateinit var binding: FragmentProductBinding
     private lateinit var viewModel: ProductCatalogueViewModel
 
-    var mSelectedCategory = -1
+    var mSelectedCategory = 100
     var mSelectedCategoryName = ""
 
     var pointRange = ""
@@ -320,12 +320,12 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         /***  Get Product Catagory Observer ***/
         viewModel.catalogueCategoryLiveData.observe(viewLifecycleOwner, Observer {
             if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
-                if (!it.objCatalogueCategoryListJson.isNullOrEmpty()) {
+                if (it != null && !it.objCatalogueCategoryListJson.isNullOrEmpty()) {
                     categoryList.clear()
 
                     categoryList.add(0,ObjCatalogueCategoryJson(
                         catogoryName = "All",
-                        catogoryId = -1
+                        catogoryId = 100
                     ) )
                     categoryList.addAll(it.objCatalogueCategoryListJson!!)
 
@@ -398,7 +398,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         /* Get Product Category list*/
         viewModel.getCatalogueCategoryData(
             CatalogueCategoryRequest(
-                actionType = "1",
+                actionType = "204",
                 actorId = actorID,
                 isActive = 1
             )
@@ -522,7 +522,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
             R.id.search_button -> {
                 LowToHigh = ""
                 pointRange = ""
-                mSelectedCategory = -1
+                mSelectedCategory = 100
                 mSelectedPointRange = -1
                 isCategoryButtonClicked = false
                 isPointRangeButtonClicked = false

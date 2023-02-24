@@ -171,12 +171,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     email = binding.emailEdt.text.toString(),
                     rELATEDPROJECTTYPE = "KESHAV_CEMENT",
                     addressId = _lstCustomerJson!![0].addressId.toString(),
+                    aadharNumber = binding.aadharNOEdt.text.toString()
                 ),
                 ObjCustomerOfficalInfoActivate(
                     companyName = binding.firmNameEdt.text.toString(),
                     sapNo = _lstCustomerOfficalInfoJson!![0].sapCode.toString(),
-                    gSTNumber = binding.gstNoEdt.text.toString(),
-                    aadharNumber = binding.aadharNOEdt.text.toString()
+                    gSTNumber = binding.gstNoEdt.text.toString()
                 )
             )
         )
@@ -203,9 +203,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         viewModel.profileImageUpdateLiveData.observe(viewLifecycleOwner, Observer {
             LoadingDialogue.dismissDialog()
             if (it != null && it.returnMessage == "1"){
-                Toast.makeText(requireContext(), resources.getString(R.string.your_profile_update_successfully), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), resources.getString(R.string.your_profile_image_update_successfully), Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(requireContext(), resources.getString(R.string.failure_to_update_your_profile), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), resources.getString(R.string.failure_to_update_your_profile_image), Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -278,11 +278,14 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         binding.taluka.text = ""
                     }
 
-                    if (!data.aadharNumber.isNullOrEmpty()){
-                        binding.aadharNOEdt.setText(data.aadharNumber.toString())
-                    }else{
-                        binding.aadharNOEdt.setText("")
+                    if (!it.lstCustomerIdentityInfo.isNullOrEmpty()){
+                        if (!it.lstCustomerIdentityInfo[0].identityNo.isNullOrEmpty()){
+                            binding.aadharNOEdt.setText(it.lstCustomerIdentityInfo[0].identityNo)
+                        }else{
+                            binding.aadharNOEdt.setText("")
+                        }
                     }
+
 
                     Log.d("hijhgbifdbgub", "hifbi " + BuildConfig.PROMO_IMAGE_BASE + data.profilePicture.toString().replace("~", ""))
 
@@ -300,7 +303,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                             binding.firmNameEdt.setText("")
                         }
 
-                        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer ||
+                        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer ||
                             PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer ){
                             if (!it.lstCustomerOfficalInfoJson[0].gstNumber.isNullOrEmpty()){
                                 binding.gstNoEdt.setText(it.lstCustomerOfficalInfoJson[0].gstNumber.toString())

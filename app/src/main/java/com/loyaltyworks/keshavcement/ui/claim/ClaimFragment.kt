@@ -545,6 +545,8 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                             }
 
                         })
+                }else if (it.returnMessage == "2"){
+                    Toast.makeText(requireContext(), getString(R.string.insuffcient_quantity), Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
                 }

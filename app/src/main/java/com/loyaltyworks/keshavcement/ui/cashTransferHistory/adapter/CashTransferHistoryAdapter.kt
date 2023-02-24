@@ -40,7 +40,7 @@ class CashTransferHistoryAdapter(val objCatalogueRedemReqList: List<ObjCatalogue
         holder.customerType.text = rewardTransDetails.membertype.toString()
 
 
-        if (rewardTransDetails.remarks.isNullOrEmpty()){
+        if (!rewardTransDetails.remarks.isNullOrEmpty()){
             holder.remarks.text = rewardTransDetails.remarks
         }else{
             holder.remarks.text = "-"
