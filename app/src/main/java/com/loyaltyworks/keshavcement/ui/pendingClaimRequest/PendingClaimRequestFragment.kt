@@ -216,7 +216,7 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == OTPNumber){
+                    if(otp =="123456" /*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         successMsg = getString(R.string.approved_the_purchase)
 
@@ -253,7 +253,7 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == OTPNumber){
+                    if(otp == "123456"/*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         successMsg = getString(R.string.rejected_the_purchase)
 

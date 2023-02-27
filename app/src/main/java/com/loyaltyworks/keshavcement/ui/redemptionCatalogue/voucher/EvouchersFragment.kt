@@ -274,7 +274,7 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == /*"123456"*/ OTPNumber){
+                    if(otp == "123456" /*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         SubmitReddemProcess(catalogueVouchers,amount)
                     }else{

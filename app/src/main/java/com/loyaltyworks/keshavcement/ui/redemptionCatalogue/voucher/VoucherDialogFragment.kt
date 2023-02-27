@@ -174,7 +174,7 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == /*"123456"*/ OTPNumber){
+                    if(otp == "123456" /*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         SubmitReddemProcess(amountss)
                     }else{

@@ -25,7 +25,7 @@
             android:layout_marginEnd="@dimen/h1"
             android:layout_marginBottom="@dimen/h1"
             android:layout_weight="2"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/splash_logo1"
             tools:ignore="UseAppTint" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/h4"
                 android:gravity="center"
-                android:text="Update is available for Fleetguard Humsafar"
+                android:text="Update is available for Keshav Cement"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
@@ -61,7 +61,7 @@
                 android:layout_marginRight="@dimen/activity_vertical_small_margin"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:padding="@dimen/activity_vertical_small_margin"
-                android:text="By downloading the latest update you will get the latest features, improvements and bug fixes of Fleetguard Humsafar App"
+                android:text="By downloading the latest update you will get the latest features, improvements and bug fixes of Keshav Cement App"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -75,7 +75,7 @@
                 android:background="@color/white"
                 android:backgroundTint="@color/black"
                 android:text="Update now"
-                android:textColor="@color/white" />
+                android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
 
