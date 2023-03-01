@@ -149,7 +149,7 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
 
         viewModel.getPurchaseSubmitData(
             SubmitPurchaseRequest(
-                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!,
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 ritailerId = dealerSubDealerId,
                 sourceDevice = 1,
                 tranDate = LocalDate.now().toString(),

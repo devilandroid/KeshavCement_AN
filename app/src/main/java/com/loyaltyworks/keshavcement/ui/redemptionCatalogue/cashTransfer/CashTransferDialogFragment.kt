@@ -91,7 +91,11 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
 
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) != BuildConfig.Dealer){
             binding.userLayout.visibility = View.VISIBLE
+            binding.userLayoutTitle.text = getString(R.string.cash_transfer)
+            binding.otpLayoutTitle.text = getString(R.string.cash_transfer)
         }else{
+//            binding.userLayoutTitle.text = getString(R.string.cash_transfer)
+            binding.otpLayoutTitle.text = getString(R.string.cash_voucher)
             binding.userLayout.visibility = View.GONE
             binding.otpLayout.visibility = View.VISIBLE
             binding.otpSentNumber.text = "OTP will receive at " + PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile
@@ -298,7 +302,7 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
     private fun redeemProcess() {
         val catalogue = ObjCatalogueList()
 
-        catalogue.catalogueId = objCataloguee.catogoryId
+        catalogue.catalogueId = objCataloguee.catalogueId
         catalogue.deliveryType = "In Store"
         catalogue.hasPartialPayment = false
         catalogue.noOfPointsDebit = objCataloguee.pointsRequired

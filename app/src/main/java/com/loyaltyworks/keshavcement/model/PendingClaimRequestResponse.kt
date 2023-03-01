@@ -140,7 +140,7 @@ data class LstTransactionApprovalDetail(
     @Json(name = "productId")
     val productId: Int? = null,
     @Json(name = "productImage")
-    val productImage: Any? = null,
+    val productImage: String? = null,
     @Json(name = "qty")
     val qty: Int? = null,
     @Json(name = "quantity")

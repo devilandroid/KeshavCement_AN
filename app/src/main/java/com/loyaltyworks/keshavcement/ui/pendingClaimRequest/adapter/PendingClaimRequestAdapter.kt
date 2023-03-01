@@ -133,10 +133,13 @@ class PendingClaimRequestAdapter(val lstTransactionApprovalDetails: List<LstTran
         data.updatedQuantity = data.quantity!!
         holder.remarks.setText("")
 
-        Glide.with(holder.itemView.context).asBitmap()
-            .error(R.drawable.ic_default_img)
-            .load(BuildConfig.CATALOGUE_IMAGE_BASE + data.productImage)
-            .into(holder.custImage)
+        if (!data.productImage.isNullOrEmpty()){
+            Glide.with(holder.itemView.context).asBitmap()
+                .error(R.drawable.ic_default_img)
+                .load(BuildConfig.PROMO_IMAGE_BASE + data.productImage.toString().split("~")[1])
+                .into(holder.custImage)
+        }
+
 
         if (!data.tranDate.isNullOrEmpty()){
             holder.date.text = AppController.dateAPIFormat(data.tranDate.toString().split(" ")[0])

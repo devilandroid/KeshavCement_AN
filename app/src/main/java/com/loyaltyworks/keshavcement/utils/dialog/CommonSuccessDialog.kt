@@ -47,7 +47,7 @@ object CommonSuccessDialog {
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        dialog?.setContentView(R.layout.claim_success_dialog)
+        dialog?.setContentView(R.layout.common_success_dialog)
         dialog?.show()
 
         val hint_text1 = dialog?.findViewById<View>(R.id.result_hints1) as TextView

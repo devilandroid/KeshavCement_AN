@@ -17,6 +17,7 @@ import com.loyaltyworks.keshavcement.model.ObjCataloguee
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import kotlinx.android.synthetic.main.appbar_main.*
 import java.io.Serializable
 
 
@@ -49,10 +50,17 @@ class CashTransferDetailsFragment : Fragment(), View.OnClickListener {
             _lstCustomerJson = arguments?.getSerializable("CustomerAddress") as List<LstCustomerJson>
         }
 
+        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
+            requireActivity().toolbar.title = getString(R.string.cash_voucher)
+        }else{
+            requireActivity().toolbar.title = getString(R.string.cash_transfer)
+        }
+
         binding.redeemBtn.setOnClickListener(this)
 
         SetUpUi()
     }
+
 
     private fun SetUpUi() {
 

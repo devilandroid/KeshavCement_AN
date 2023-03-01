@@ -169,7 +169,7 @@ data class LstCustParentChildMappingDealer(
 @JsonClass(generateAdapter = true)
 data class SubmitPurchaseRequest(
     @Json(name = "ActorId")
-    val actorId: Int? = null,
+    val actorId: String? = null,
     @Json(name = "ProductSaveDetailList")
     val productSaveDetailList: List<ProductSaveDetail>? = null,
     @Json(name = "RitailerId")

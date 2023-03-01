@@ -43,11 +43,11 @@ class CustomerSelectionAdapter(val lstCustParentChildMapping: List<LstCustParent
         holder.mobileNo.text = data.mobile
         holder.memId.text = data.loyaltyID
 
-        if (data.customerImage.isNullOrEmpty()){
+        if (!data.customerImage.isNullOrEmpty()){
             Glide.with(holder.itemView.context).asBitmap()
                 .error(R.drawable.ic_default_img)
                 .thumbnail(0.1f)
-                .load(BuildConfig.CATALOGUE_IMAGE_BASE + data.customerImage.toString())
+                .load(BuildConfig.PROMO_IMAGE_BASE + data.customerImage.toString().split("~")[1])
                 .into(holder.custImage)
         }
 

@@ -304,8 +304,8 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
         viewModel.getPurchaseSubmitData(
             SubmitPurchaseRequest(
-                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!,
-                ritailerId = dealerSubDealerId,
+                actorId = dealerSubDealerId,
+                ritailerId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 sourceDevice = 1,
                 tranDate = LocalDate.now().toString(),
                 approvalStatus = status,

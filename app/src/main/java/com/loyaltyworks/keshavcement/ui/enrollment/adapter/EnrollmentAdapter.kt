@@ -40,11 +40,11 @@ class EnrollmentAdapter(val lstCustParentChildMapping: List<LstCustParentChildMa
         holder.lastPurchaseDate.text = data.lastPurchaseDate
         holder.lastRedemptionDate.text = data.lastRedemptionDate
 
-        if (data.customerImage.isNullOrEmpty()){
+        if (!data.customerImage.isNullOrEmpty()){
             Glide.with(holder.itemView.context).asBitmap()
                 .error(R.drawable.ic_default_img)
                 .thumbnail(0.1f)
-                .load(BuildConfig.CATALOGUE_IMAGE_BASE + data.customerImage.toString())
+                .load(BuildConfig.PROMO_IMAGE_BASE + data.customerImage.toString().split("~")[1])
                 .into(holder.custImage)
         }
 

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -351,6 +352,15 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
             }
 
             R.id.filter_ok_btn ->{
+
+                if (FromDate.isNotEmpty() && ToDate.isEmpty()) {
+                    Toast.makeText(requireContext(), "To date should not be empty", Toast.LENGTH_SHORT).show()
+                    return
+                } else if (FromDate.isEmpty() && ToDate.isNotEmpty()) {
+                    Toast.makeText(requireContext(), "From date should not be empty", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 currentList.clear()
                 callApi(1)
 
