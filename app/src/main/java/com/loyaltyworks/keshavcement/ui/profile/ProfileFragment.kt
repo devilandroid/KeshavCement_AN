@@ -21,6 +21,7 @@ import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentProfileBinding
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.ui.login.fragment.LoginRegistrationViewModel
+import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
@@ -171,7 +172,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     email = binding.emailEdt.text.toString(),
                     rELATEDPROJECTTYPE = "KESHAV_CEMENT",
                     addressId = _lstCustomerJson!![0].addressId.toString(),
-                    aadharNumber = binding.aadharNOEdt.text.toString()
+                    aadharNumber = binding.aadharNOEdt.text.toString(),
+                    dob = AppController.dateAPIFormats(binding.birthDate.text.toString())
                 ),
                 ObjCustomerOfficalInfoActivate(
                     companyName = binding.firmNameEdt.text.toString(),
@@ -276,6 +278,18 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         binding.taluka.text = data.talukName.toString()
                     }else{
                         binding.taluka.text = ""
+                    }
+
+                    if (!data.jdob.isNullOrEmpty()){
+                        binding.birthDate.text = AppController.dateAPIFormat(data.jdob.split(" ")[0])
+                    }else{
+                        binding.birthDate.text = ""
+                    }
+
+                    if (!data.anniversary.isNullOrEmpty()){
+                        binding.anniversaryDate.text = AppController.dateAPIFormat(data.anniversary.split(" ")[0])
+                    }else{
+                        binding.anniversaryDate.text = ""
                     }
 
                     if (!it.lstCustomerIdentityInfo.isNullOrEmpty()){

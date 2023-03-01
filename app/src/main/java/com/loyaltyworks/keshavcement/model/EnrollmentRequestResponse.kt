@@ -177,7 +177,11 @@ data class ObjCustomerEnrollment(
     @Json(name = "RegistrationSource")
     val registrationSource: String? = null,
     @Json(name = "TalukId")
-    val talukId: String? = null
+    val talukId: String? = null,
+    @Json(name = "Anniversary")
+    val anniversary: String? = null,
+    @Json(name = "DOB")
+    val dob: String? = null
 )
 
 @JsonClass(generateAdapter = true)

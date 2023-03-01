@@ -97,7 +97,7 @@ data class LstCustomerJson(
     @Json(name = "ageGroupId")
     val ageGroupId: Int? = null,
     @Json(name = "anniversary")
-    val anniversary: Any? = null,
+    val anniversary: String? = null,
     @Json(name = "areaId")
     val areaId: Int? = null,
     @Json(name = "areaName")
@@ -279,7 +279,7 @@ data class LstCustomerJson(
     @Json(name = "jPolicyDate")
     val jPolicyDate: Any? = null,
     @Json(name = "jdob")
-    val jdob: Any? = null,
+    val jdob: String? = null,
     @Json(name = "jjD_InvoiceDate")
     val jjDInvoiceDate: Any? = null,
     @Json(name = "lIdentificationType")

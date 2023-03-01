@@ -279,4 +279,7 @@
     <string name="your_profile_image_update_successfully">Your profile image updated successfully.</string>
     <string name="failure_to_update_your_profile_image">Failure to update your profile image</string>
     <string name="insuffcient_quantity">Insuffcient Quantity!</string>
+    <string name="select_dob">Select Birth Date</string>
+    <string name="select_anniversary_date">Select Anniversary Date</string>
+    <string name="your_entered_mobile_already_exist">Your Entered Mobile Number is already exist, please try with new number</string>
 </resources>

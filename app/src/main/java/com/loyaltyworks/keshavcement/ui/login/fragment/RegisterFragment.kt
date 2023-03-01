@@ -1,5 +1,6 @@
 package com.loyaltyworks.keshavcement.ui.login.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,12 +28,11 @@ import com.loyaltyworks.keshavcement.model.adapter.CustomerTypeSpinnerAdapter
 import com.loyaltyworks.keshavcement.model.adapter.StateAdapter
 import com.loyaltyworks.keshavcement.ui.CommonViewModel
 import com.loyaltyworks.keshavcement.ui.customerType.CustomerTypeViewModel
-import com.loyaltyworks.keshavcement.utils.AppController
-import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
-import com.loyaltyworks.keshavcement.utils.Keyboard
-import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.*
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
+import java.time.LocalDate
+import java.time.Period
 
 
 class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -70,6 +71,9 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     var identityType: String = ""
     var aadharNo: String = ""
     var gstNo: String = ""
+
+    var anniversaryDate = ""
+    var birthdate = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -117,6 +121,9 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
         binding.backToLogin.setOnClickListener(this)
         binding.registerSubmitBtn.setOnClickListener(this)
+
+        binding.birthDate.setOnClickListener(this)
+        binding.anniversaryDate.setOnClickListener(this)
 
         customoerTypeSpinnerApi()
     }
@@ -249,6 +256,29 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 backButtonClicked()
             }
 
+            R.id.birth_date ->{
+                DatePickerBox.date(1, activity) {
+                    val year = Integer.parseInt(it.split("/")[2])
+                    val month = Integer.parseInt(it.split("/")[1])
+                    val day = Integer.parseInt(it.split("/")[0])
+
+                    if(getAge(year,month,day)<18){
+                        Toast.makeText(requireContext(),"Age should not be lesser than 18 years",Toast.LENGTH_SHORT).show()
+                    }else{
+                        binding.birthDate.text = it.toString()
+                        birthdate = it
+                    }
+                }
+            }
+
+            R.id.anniversary_date ->{
+                DatePickerBox.date(1, activity) {
+                    binding.anniversaryDate.text = it.toString()
+                    anniversaryDate = it
+
+                }
+            }
+
             R.id.register_submit_btn ->{
                 if (BlockMultipleClick.click()) return
 
@@ -311,6 +341,9 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     binding.pincode.error = getString(R.string.invalid_pin_code)
                     binding.pincode.requestFocus()
 
+                }else if (birthdate.isNullOrEmpty()){
+                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+
                 }else if (mSelectedState!!.stateId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_state), Toast.LENGTH_SHORT).show()
 
@@ -328,6 +361,14 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         }
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
+    }
 
 
     private fun setCustomerTypeName() {
@@ -813,7 +854,9 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     merchantId = "1",
                     isActive = "1",
                     customerTypeID = PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType),
-                    referrerCode = referalCodes
+                    referrerCode = referalCodes,
+                    anniversary = AppController.dateAPIFormats(anniversaryDate),
+                    dob = AppController.dateAPIFormats(birthdate)
                 ),
                 ObjCustomerOfficalInfoRegister(
                     companyName = binding.firmName.text.toString(),

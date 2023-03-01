@@ -1,5 +1,6 @@
 package com.loyaltyworks.keshavcement.ui.login.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,11 +27,14 @@ import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.model.adapter.StateAdapter
 import com.loyaltyworks.keshavcement.ui.CommonViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
+import com.loyaltyworks.keshavcement.utils.DatePickerBox
 import com.loyaltyworks.keshavcement.utils.Keyboard
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
+import java.time.LocalDate
+import java.time.Period
 
 
 class ActivateFragment : Fragment(), View.OnClickListener{
@@ -51,6 +56,9 @@ class ActivateFragment : Fragment(), View.OnClickListener{
     var aadharNo: String = ""
     var gstNo: String = ""
     var sapCode: String = ""
+
+    var anniversaryDate = ""
+    var birthdate = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,6 +99,9 @@ class ActivateFragment : Fragment(), View.OnClickListener{
 
         binding.backToLogin.setOnClickListener(this)
         binding.activateBtn.setOnClickListener(this)
+
+        binding.birthDate.setOnClickListener(this)
+        binding.anniversaryDate.setOnClickListener(this)
     }
 
     private fun initialSetup() {
@@ -181,6 +192,29 @@ class ActivateFragment : Fragment(), View.OnClickListener{
                 backButtonClicked()
             }
 
+            R.id.birth_date ->{
+                DatePickerBox.date(1, activity) {
+                    val year = Integer.parseInt(it.split("/")[2])
+                    val month = Integer.parseInt(it.split("/")[1])
+                    val day = Integer.parseInt(it.split("/")[0])
+
+                    if(getAge(year,month,day)<18){
+                        Toast.makeText(requireContext(),"Age should not be lesser than 18 years",Toast.LENGTH_SHORT).show()
+                    }else{
+                        binding.birthDate.text = it.toString()
+                        birthdate = it
+                    }
+                }
+            }
+
+            R.id.anniversary_date ->{
+                DatePickerBox.date(1, activity) {
+                    binding.anniversaryDate.text = it.toString()
+                    anniversaryDate = it
+
+                }
+            }
+
             R.id.activate_btn ->{
                 val email: String = binding.email.text.toString()
 
@@ -239,6 +273,9 @@ class ActivateFragment : Fragment(), View.OnClickListener{
                     binding.pincode.error = getString(R.string.invalid_pin_code)
                     binding.pincode.requestFocus()
 
+                }else if (birthdate.isNullOrEmpty()){
+                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+
                 }else if (_lstCustomerJson!![0].stateId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_state), Toast.LENGTH_SHORT).show()
 
@@ -254,6 +291,14 @@ class ActivateFragment : Fragment(), View.OnClickListener{
             }
 
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
     }
 
     private fun customerDataFetchApi() {
@@ -298,7 +343,9 @@ class ActivateFragment : Fragment(), View.OnClickListener{
                     email = binding.email.text.toString(),
                     rELATEDPROJECTTYPE = "KESHAV_CEMENT",
                     addressId = _lstCustomerJson!![0].addressId.toString(),
-                    aadharNumber = aadharNo
+                    aadharNumber = aadharNo,
+                    anniversary = AppController.dateAPIFormats(anniversaryDate),
+                    dob = AppController.dateAPIFormats(birthdate)
                 ),
                 ObjCustomerOfficalInfoActivate(
                     companyName = _lstCustomerOfficalInfoJson!![0].companyName,

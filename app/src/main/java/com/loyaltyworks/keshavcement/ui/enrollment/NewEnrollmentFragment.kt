@@ -1,5 +1,6 @@
 package com.loyaltyworks.keshavcement.ui.enrollment
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,9 +28,12 @@ import com.loyaltyworks.keshavcement.ui.CommonViewModel
 import com.loyaltyworks.keshavcement.ui.login.fragment.LoginRegistrationViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
+import com.loyaltyworks.keshavcement.utils.DatePickerBox
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
+import java.time.LocalDate
+import java.time.Period
 
 
 class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -53,6 +58,9 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     var talukId: String = "-1"
 
     var actorID = ""
+
+    var anniversaryDate = ""
+    var birthdate = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,6 +96,9 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
         binding.submitEnrollment.setOnClickListener(this)
 
+        binding.birthDate.setOnClickListener(this)
+        binding.anniversaryDate.setOnClickListener(this)
+
         userTypeSpinner()
         StateRequest()
 
@@ -99,6 +110,7 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             userTypeList.add( CommonSpinner(name = "Select Customer Type", id = -1))
             userTypeList.add( CommonSpinner(name = "Engineer", id = 1))
             userTypeList.add( CommonSpinner(name = "Mason", id = 2))
+            userTypeList.add( CommonSpinner(name = "Sub Dealer", id = 4))
 
         binding.customerTypeSpinner.adapter = SpinnerCommonAdapter(requireActivity(), R.layout.spinner_popup_row,userTypeList)
     }
@@ -237,7 +249,7 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     if (it != 1) {
                         enrollSubmitApi()
                     }else{
-                        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.mobile_already_exist),object:
+                        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_entered_mobile_already_exist),object:
                             AppController.SuccessCallBack{
                             override fun onOk() {
 
@@ -298,6 +310,29 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
     override fun onClick(v: View?) {
         when(v!!.id){
+            R.id.birth_date ->{
+                DatePickerBox.date(1, activity) {
+                    val year = Integer.parseInt(it.split("/")[2])
+                    val month = Integer.parseInt(it.split("/")[1])
+                    val day = Integer.parseInt(it.split("/")[0])
+
+                    if(getAge(year,month,day)<18){
+                        Toast.makeText(requireContext(),"Age should not be lesser than 18 years",Toast.LENGTH_SHORT).show()
+                    }else{
+                        binding.birthDate.text = it.toString()
+                        birthdate = it
+                    }
+                }
+            }
+
+            R.id.anniversary_date ->{
+                DatePickerBox.date(1, activity) {
+                    binding.anniversaryDate.text = it.toString()
+                    anniversaryDate = it
+
+                }
+            }
+
             R.id.submit_enrollment ->{
                 if (BlockMultipleClick.click()) return
 
@@ -324,6 +359,9 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                 }else if (!binding.pinEdt.text.toString().isNullOrBlank() && binding.pinEdt.text.toString().length < 6){
                     binding.pinEdt.error = getString(R.string.invalid_pin_code)
                     binding.pinEdt.requestFocus()
+                }else if (birthdate.isNullOrEmpty()){
+                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+
                 }else if (mSelectedState!!.stateId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_state), Toast.LENGTH_SHORT).show()
 
@@ -342,6 +380,13 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
+    }
 
     private fun checkCustomerExistancy(userName: String) {
         LoadingDialogue.showDialog(requireContext())
@@ -377,7 +422,10 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     talukId = talukId,
                     registrationSource = "3",
                     merchantId = "1",
-                    isActive = "1"
+                    isActive = "1",
+                    anniversary = AppController.dateAPIFormats(anniversaryDate),
+                    dob = AppController.dateAPIFormats(birthdate)
+
                 ),
                 ObjCustomerOfficalInfoEnrollment(
                     companyName = binding.firmNameEdt.text.toString()

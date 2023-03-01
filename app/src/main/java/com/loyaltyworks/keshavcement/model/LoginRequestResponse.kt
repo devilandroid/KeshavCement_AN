@@ -122,7 +122,11 @@ data class ObjCustomer(
     @Json(name = "RegistrationSource")
     val registrationSource: String? = null,
     @Json(name = "TalukId")
-    val talukId: String? = null
+    val talukId: String? = null,
+    @Json(name = "Anniversary")
+    val anniversary: String? = null,
+    @Json(name = "DOB")
+    val dob: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -315,7 +319,11 @@ data class ObjCustomerJsonActivate(
     @Json(name = "Zip")
     val zip: String? = null,
     @Json(name = "AadharNumber")
-    val aadharNumber: String? = null
+    val aadharNumber: String? = null,
+    @Json(name = "Anniversary")
+    val anniversary: String? = null,
+    @Json(name = "DOB")
+    val dob: String? = null
 )
 
 @JsonClass(generateAdapter = true)

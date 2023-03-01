@@ -1209,7 +1209,7 @@
                                                 android:layout_height="match_parent"
                                                 android:hint="Enter Pincode"
                                                 android:textSize="12sp"
-                                                android:imeOptions="actionNext"
+                                                android:imeOptions="actionDone"
                                                 android:inputType="number"
                                                 android:maxLength="6"
                                                 android:maxLines="1"
@@ -1217,6 +1217,111 @@
                                                 android:singleLine="true"
                                                 android:background="@android:color/transparent"
                                                 android:textColorHint="@color/grey"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Date of Birth -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Date of Birth"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="*"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/red"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical"
+                                            android:elevation="5dp">
+                                            <TextView
+                                                android:id="@+id/birth_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center_vertical"
+                                                android:paddingStart="20dp"
+                                                android:text=""
+                                                android:hint="@string/select_dob"
+                                                android:textColorHint="@color/grey"
+                                                android:fontFamily="@font/poppins_regular"
+                                                android:textSize="12sp"
+                                                android:textColor="@color/dark"/>
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <!--  Date of Anniversary -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingStart="3dp"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Date of Anniversary"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/dark"
+                                            android:textSize="12sp"/>
+                                    </LinearLayout>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="20dp"
+                                        app:cardElevation="5dp"
+                                        android:layout_margin="3dp">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:orientation="vertical"
+                                            android:elevation="5dp">
+                                            <TextView
+                                                android:id="@+id/anniversary_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center_vertical"
+                                                android:paddingStart="20dp"
+                                                android:text=""
+                                                android:hint="@string/select_anniversary_date"
+                                                android:textColorHint="@color/grey"
+                                                android:fontFamily="@font/poppins_regular"
+                                                android:textSize="12sp"
                                                 android:textColor="@color/dark"/>
                                         </LinearLayout>
                                     </androidx.cardview.widget.CardView>

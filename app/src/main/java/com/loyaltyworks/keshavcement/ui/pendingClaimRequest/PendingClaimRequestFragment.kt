@@ -208,9 +208,9 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
         lstTransactionApprovalDetails: LstTransactionApprovalDetail
     ) {
 
-        SendOtpRequest()
+        SendOtpRequest(lstTransactionApprovalDetails)
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString(),
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),lstTransactionApprovalDetails.mobile.toString(),
             "Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
@@ -230,7 +230,7 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 }
 
                 override fun resendOTP() {
-                    SendOtpRequest()
+                    SendOtpRequest(lstTransactionApprovalDetails)
                 }
             })
 
@@ -245,9 +245,9 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
         status: String,
         lstTransactionApprovalDetails: LstTransactionApprovalDetail
     ) {
-        SendOtpRequest()
+        SendOtpRequest(lstTransactionApprovalDetails)
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString(),
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),lstTransactionApprovalDetails.mobile.toString(),
             "Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
@@ -267,20 +267,20 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 }
 
                 override fun resendOTP() {
-                    SendOtpRequest()
+                    SendOtpRequest(lstTransactionApprovalDetails)
                 }
             })
 
     }
 
-    private fun SendOtpRequest() {
+    private fun SendOtpRequest(lstTransactionApprovalDetails: LstTransactionApprovalDetail) {
         loginViewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
                 merchantUserName = BuildConfig.MerchantName,
-                mobileNo = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString(),
-                userId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
-                userName = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].loyaltyId,
-                name = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].firstName.toString()
+                mobileNo = lstTransactionApprovalDetails.mobile,
+                userId = "-1",
+                userName = lstTransactionApprovalDetails.loyaltyId,
+                name = lstTransactionApprovalDetails.memberName.toString()
             )
         )
 

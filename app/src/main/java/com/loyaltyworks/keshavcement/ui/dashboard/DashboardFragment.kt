@@ -337,8 +337,8 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     (activity as DashboardActivity).binding.root.menu_membershipId.text = it.lstCustomerFeedBackJsonApi[0].loyaltyId
 
                     if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
-                        binding.createdByType.text = "( " +  it.lstCustomerFeedBackJsonApi[0].mappedCustomerType + " )"
-                        binding.createdByName.text = it.lstCustomerFeedBackJsonApi[0].mappedCustomerName
+                        binding.createdByType.text = "(" +  it.lstCustomerFeedBackJsonApi[0].mappedCustomerType + ")"
+                        binding.createdByName.text = it.lstCustomerFeedBackJsonApi[0].mappedCustomerName!!.split("~")[1]
                         /*** Support Executive Mapped ID ***/
                         PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerIdSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerId!!)
                         PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerNameSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerType!!)
