@@ -633,4 +633,14 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
         )
     }
 
+    /* City List callback*/
+    suspend fun getCityListData(cityListRequest: CityListRequest): CityListResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchCityListAsync(cityListRequest).await()
+            },
+            error = "Error City List Trigger"
+        )
+    }
+
 }

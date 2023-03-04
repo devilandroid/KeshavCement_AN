@@ -139,11 +139,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     binding.district.error = resources.getString(R.string.district_mandatory)
                     binding.district.requestFocus()
 
-                }else if (binding.taluka.text.toString().isNullOrBlank()){
+                }/*else if (binding.taluka.text.toString().isNullOrBlank()){
                     binding.taluka.error = resources.getString(R.string.taluka_mandatory)
                     binding.taluka.requestFocus()
 
-                }else{
+                }*/else{
 
                     UpdateProfile()
                 }
@@ -278,6 +278,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         binding.taluka.text = data.talukName.toString()
                     }else{
                         binding.taluka.text = ""
+                    }
+
+                    if (!data.cityName.isNullOrEmpty()){
+                        binding.city.text = data.cityName.toString()
+                    }else{
+                        binding.city.text = ""
                     }
 
                     if (!data.jdob.isNullOrEmpty()){

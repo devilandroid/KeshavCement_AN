@@ -35,6 +35,7 @@ class PendingClaimRequestAdapter(val lstTransactionApprovalDetails: List<LstTran
         val location = binding.location
         val prodName = binding.prodName
         val remarks = binding.remarks
+        val custMobile = binding.custMobile
 
         val qtyMinus = binding.qtyMinus
         val qtyPlus = binding.qtyPlus
@@ -151,6 +152,7 @@ class PendingClaimRequestAdapter(val lstTransactionApprovalDetails: List<LstTran
         holder.custType.text = data.memberType
         holder.custName.text = data.memberName
         holder.prodName.text = data.prodName
+        holder.custMobile.text = data.mobile
         holder.qtyTextview.setText(data.quantity.toString())
 
 

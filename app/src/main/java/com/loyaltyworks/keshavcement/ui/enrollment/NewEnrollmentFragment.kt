@@ -57,6 +57,10 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     var talukListAdapter: ArrayAdapter<String>? = null
     var talukId: String = "-1"
 
+    var _cityList = mutableListOf<LstCity>()
+    var cityListAdapter: ArrayAdapter<String>? = null
+    var cityId: String = "-1"
+
     var actorID = ""
 
     var anniversaryDate = ""
@@ -93,6 +97,7 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
         binding.stateSpinner.onItemSelectedListener = this
         binding.districtSpinner.onItemSelectedListener = this
         binding.talukSpinner.onItemSelectedListener = this
+        binding.citySpinner.onItemSelectedListener = this
 
         binding.submitEnrollment.setOnClickListener(this)
 
@@ -132,6 +137,15 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     )
 
                     binding.stateSpinner.adapter = StateAdapter(requireContext(),android.R.layout.simple_spinner_item,stateList)
+
+                    if (!PreferenceHelper.getStringValue(requireContext(),BuildConfig.StateID).isNullOrEmpty()){
+                        stateList.forEachIndexed { index, lstAttributesDetail ->
+                            if (lstAttributesDetail.stateId == PreferenceHelper.getStringValue(requireContext(),BuildConfig.StateID).toInt()){
+                                binding.stateSpinner.setSelection(index)
+                            }
+                        }
+                    }
+
 
                 }else{
                     stateList.add(0, State(
@@ -240,6 +254,53 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                 }
             }
         })
+
+        /*** City List Observer ***/
+        commonViewModel.cityLiveData.observe(viewLifecycleOwner, Observer {
+            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
+                if (it != null && !it.cityList.isNullOrEmpty()){
+                    val cityLists: MutableList<LstCity> = it.cityList!!.toMutableList()
+                    _cityList = cityLists
+
+                    val cityListName = ArrayList<String>()
+
+                    for (commonSpinner in cityLists) {
+                        cityListName.add(commonSpinner.cityName!!)
+                    }
+
+                    val commonSpinner = CommonSpinners()
+                    commonSpinner.name = "Select City"
+                    commonSpinner.id = -1
+                    cityListName.add(0,commonSpinner.name!!)
+
+                    val custlist1 =  LstCity()
+                    custlist1.cityName = "Select City"
+                    custlist1.cityId = -1
+                    _cityList.add(0,custlist1)
+
+                    cityListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cityListName)
+                    cityListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.citySpinner.adapter = cityListAdapter
+
+                }else {
+                    val cityListNames = ArrayList<String>()
+                    val commonSpinner = CommonSpinners()
+                    commonSpinner.name = "Select City"
+                    commonSpinner.id = -1
+                    cityListNames.add(0,commonSpinner.name!!)
+
+                    val custlist1 =  LstCity()
+                    custlist1.cityName = "Select City"
+                    custlist1.cityId = -1
+                    _cityList.add(0,custlist1)
+
+                    cityListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cityListNames)
+                    cityListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.citySpinner.adapter = cityListAdapter
+                }
+            }
+        })
+
 
         /***  Mobile Number Existancy Check  Observer ***/
         loginViewModel.mobileNumberExists.observe(viewLifecycleOwner, Observer {
@@ -368,10 +429,10 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                 }else if (districtId == "-1" /*mSelectedCity!!.cityId == -1*/){
                     Toast.makeText(requireContext(), getString(R.string.select_district), Toast.LENGTH_SHORT).show()
 
-                }else if (talukId == "-1" /*mSelectedCity!!.cityId == -1*/){
+                }/*else if (talukId == "-1" *//*mSelectedCity!!.cityId == -1*//*){
                     Toast.makeText(requireContext(), getString(R.string.select_taluk), Toast.LENGTH_SHORT).show()
 
-                }else{
+                }*/else{
                     checkCustomerExistancy(binding.mobileNumberEdt.text.toString())
                 }
 
@@ -419,6 +480,7 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     customerZip = binding.pinEdt.text.toString(),
                     customerStateId = mSelectedState!!.stateId.toString(),
                     districtId = districtId,
+                    customerCityId = cityId,
                     talukId = talukId,
                     registrationSource = "3",
                     merchantId = "1",
@@ -448,11 +510,9 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
                 if (mSelectedState!!.stateId!! > 0) {
                     /*** District Api call ***/
-                    commonViewModel.getDistrictData(
-                        DistrictListRequest(
-                            stateId = mSelectedState!!.stateId.toString()
-                        )
-                    )
+                    districtApi()
+                    /*** City Api call ***/
+                    cityApi()
 
                 }else{
                     val districtListNames = ArrayList<String>()
@@ -504,7 +564,33 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                 Log.d("bhbrfhrb","taluk ID : " + talukId)
             }
 
+            R.id.city_spinner -> {
+                cityId = _cityList[position].cityId.toString()
+                Log.d("bhbrfhrb","city ID : " + cityId)
+            }
+
         }
+    }
+
+    private fun districtApi() {
+        commonViewModel.getDistrictData(
+            DistrictListRequest(
+                stateId = mSelectedState!!.stateId.toString()
+            )
+        )
+    }
+
+    private fun cityApi() {
+        commonViewModel.getCityData(
+            CityListRequest(
+                actionType = "2",
+                isActive = "true",
+                sortColumn = "CITY_NAME",
+                sortOrder = "ASC",
+                startIndex = "1",
+                stateId = mSelectedState!!.stateId.toString()
+            )
+        )
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

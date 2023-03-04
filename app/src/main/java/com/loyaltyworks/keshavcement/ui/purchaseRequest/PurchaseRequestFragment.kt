@@ -248,7 +248,7 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
 
             R.id.product_spinner ->{
                 productId = _productList[position].attributeId.toString()
-                productCode = _productList[position].attributeContents.toString()
+                productCode = _productList[position].attributeValue.toString()
                 Log.d("bhbrfhrb","product ID : " + productId)
             }
 

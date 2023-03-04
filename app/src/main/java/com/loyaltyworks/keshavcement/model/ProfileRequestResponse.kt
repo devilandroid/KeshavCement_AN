@@ -137,7 +137,7 @@ data class LstCustomerJson(
     @Json(name = "cityId")
     val cityId: Int? = null,
     @Json(name = "cityName")
-    val cityName: Any? = null,
+    val cityName: String? = null,
     @Json(name = "company")
     val company: Any? = null,
     @Json(name = "contractFileName")

@@ -326,10 +326,15 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     }
 
                     PreferenceHelper.setDashboardDetails(requireContext(), it)
+                    /*** storing loggedIn customer StateId ***/
+                    if (it.lstCustomerFeedBackJsonApi[0].stateID != null){
+                        PreferenceHelper.setStringValue(requireContext(), BuildConfig.StateID, it.lstCustomerFeedBackJsonApi[0].stateID.toString())
+                    }
 
                     binding.custType.text = it.lstCustomerFeedBackJsonApi[0].customerType.toString()
                     binding.custName.text = it.lstCustomerFeedBackJsonApi[0].firstName
                     binding.memId.text = it.lstCustomerFeedBackJsonApi[0].loyaltyId
+
 
                     /*** setting dashboard menu data ***/
                     (activity as DashboardActivity).binding.root.menu_memberType.text = it.lstCustomerFeedBackJsonApi[0].customerType

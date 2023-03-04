@@ -51,6 +51,7 @@ android {
         buildConfigField "String", "RedeemablePointsBalance", "\"RedeemablePointsBalance\""
         buildConfigField "String", "SelectedCustomerMobile", "\"SelectedCustomerMobile\""
         buildConfigField "String", "SelectedCustomerName", "\"SelectedCustomerName\""
+        buildConfigField "String", "StateID", "\"StateID\""
     }
 
     buildTypes {

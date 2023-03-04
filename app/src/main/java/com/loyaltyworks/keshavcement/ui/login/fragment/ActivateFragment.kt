@@ -282,10 +282,10 @@ class ActivateFragment : Fragment(), View.OnClickListener{
                 }else if (_lstCustomerJson!![0].districtId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_district), Toast.LENGTH_SHORT).show()
 
-                }else if (_lstCustomerJson!![0].talukId == -1){
+                }/*else if (_lstCustomerJson!![0].talukId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_taluk), Toast.LENGTH_SHORT).show()
 
-                }else{
+                }*/else{
                     activateCustomer()
                 }
             }
@@ -339,6 +339,7 @@ class ActivateFragment : Fragment(), View.OnClickListener{
                     mobile = _lstCustomerJson!![0].mobile,
                     zip = _lstCustomerJson!![0].zip,
                     districtId = _lstCustomerJson!![0].districtId.toString(),
+                    cityId = _lstCustomerJson!![0].cityId.toString(),
                     talukId = _lstCustomerJson!![0].talukId.toString(),
                     email = binding.email.text.toString(),
                     rELATEDPROJECTTYPE = "KESHAV_CEMENT",
@@ -516,6 +517,9 @@ class ActivateFragment : Fragment(), View.OnClickListener{
 
                         if (it.lstCustomerJson[0].talukName != null)
                             binding.taluk.text = it.lstCustomerJson[0].talukName
+
+                        if (it.lstCustomerJson[0].cityName != null)
+                            binding.city.text = it.lstCustomerJson[0].cityName
 
                         if (!it.lstCustomerOfficalInfoJson.isNullOrEmpty()){
                             if (it.lstCustomerOfficalInfoJson[0].companyName != null)

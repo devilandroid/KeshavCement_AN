@@ -103,6 +103,8 @@ data class ObjCustomer(
     val customerEmail: String? = null,
     @Json(name = "CustomerMobile")
     val customerMobile: String? = null,
+    @Json(name = "CustomerCityId")
+    val customerCityId: String? = null,
     @Json(name = "CustomerStateId")
     val customerStateId: String? = null,
     @Json(name = "CustomerTypeID")

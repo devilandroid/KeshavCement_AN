@@ -260,5 +260,9 @@ interface ApiInterface {
     @POST("SaveOrGetTermAndConditions")
     fun fetchTermsConditionDataAsync(@Body termsConditionRequest: TermsConditionRequest):  Deferred<Response<TermsConditionResponse>>
 
+    // city List api call
+    @POST("GetCityDetailsMobileApp")
+    fun fetchCityListAsync(@Body cityListRequest: CityListRequest): Deferred<Response<CityListResponse>>
+
 
 }
