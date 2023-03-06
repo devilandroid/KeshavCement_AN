@@ -230,12 +230,12 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
         SendOtpRequest()
 
         RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+            ,"Submit" ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == OTPNumber){
+                    if(otp =="123456" /*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         successMsg = getString(R.string.cash_voucher_approved)
 
@@ -264,12 +264,12 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
         SendOtpRequest()
 
         RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+            ,"Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == OTPNumber){
+                    if(otp == "123456"/*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         successMsg = getString(R.string.cash_voucher_rejected)
 

@@ -133,6 +133,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
+                    android:drawableEnd="@drawable/call_icon"
+                    android:drawablePadding="3dp"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp"
                     android:textColor="@color/dark"/>

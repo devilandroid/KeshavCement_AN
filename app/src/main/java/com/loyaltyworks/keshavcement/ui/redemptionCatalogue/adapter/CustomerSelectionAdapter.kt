@@ -1,5 +1,7 @@
 package com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,11 +43,11 @@ class CustomerSelectionAdapter(val lstCustParentChildMapping: List<LstCustParent
         holder.mobileNo.text = data.mobile
         holder.memId.text = data.loyaltyID
 
-        if (data.customerImage.isNullOrEmpty()){
+        if (!data.customerImage.isNullOrEmpty()){
             Glide.with(holder.itemView.context).asBitmap()
                 .error(R.drawable.ic_default_img)
                 .thumbnail(0.1f)
-                .load(BuildConfig.CATALOGUE_IMAGE_BASE + data.customerImage.toString())
+                .load(BuildConfig.PROMO_IMAGE_BASE + data.customerImage.toString().split("~")[1])
                 .into(holder.custImage)
         }
 
@@ -53,6 +55,15 @@ class CustomerSelectionAdapter(val lstCustParentChildMapping: List<LstCustParent
         holder.itemView.setOnClickListener { v ->
             if(BlockMultipleClick.click()) return@setOnClickListener
             onItemClickListener.onCustListItemClickResponse(v,position,data)
+        }
+
+        holder.mobileNo.setOnClickListener { v ->
+            holder.itemView.context.startActivity(
+                Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.fromParts("tel", data.mobile, null)
+                )
+            )
         }
     }
 

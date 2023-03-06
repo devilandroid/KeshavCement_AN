@@ -66,6 +66,11 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
 //                status.setTextColor(Color.parseColor("#ADC000"))
             holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.color63))
 
+        } else if (rewardTransDetails.status == 1) {
+            holder.status.text = "Approved"
+            holder.status.setBackgroundResource(R.drawable.approved_bg)
+            holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.color17))
+
         } else if (rewardTransDetails.status == 2) {
             holder.status.text = "Processed"
             holder.status.setBackgroundResource(R.drawable.approved_bg)
@@ -80,6 +85,11 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
             holder.status.text = "Delivered"
             holder.status.setBackgroundResource(R.drawable.approved_bg)
             holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.color17))
+
+        }else if (rewardTransDetails.status == 5) {
+            holder.status.text = "Rejected"
+            holder.status.setBackgroundResource(R.drawable.rejected_bg)
+            holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.red))
 
         } else if (rewardTransDetails.status == 7) {
             holder.status.text = "Returned"

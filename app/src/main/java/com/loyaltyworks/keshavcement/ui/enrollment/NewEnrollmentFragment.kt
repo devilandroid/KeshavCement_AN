@@ -1,5 +1,6 @@
 package com.loyaltyworks.keshavcement.ui.enrollment
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,9 +28,12 @@ import com.loyaltyworks.keshavcement.ui.CommonViewModel
 import com.loyaltyworks.keshavcement.ui.login.fragment.LoginRegistrationViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
+import com.loyaltyworks.keshavcement.utils.DatePickerBox
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
+import java.time.LocalDate
+import java.time.Period
 
 
 class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -52,7 +57,14 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     var talukListAdapter: ArrayAdapter<String>? = null
     var talukId: String = "-1"
 
+    var _cityList = mutableListOf<LstCity>()
+    var cityListAdapter: ArrayAdapter<String>? = null
+    var cityId: String = "-1"
+
     var actorID = ""
+
+    var anniversaryDate = ""
+    var birthdate = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,8 +97,12 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
         binding.stateSpinner.onItemSelectedListener = this
         binding.districtSpinner.onItemSelectedListener = this
         binding.talukSpinner.onItemSelectedListener = this
+        binding.citySpinner.onItemSelectedListener = this
 
         binding.submitEnrollment.setOnClickListener(this)
+
+        binding.birthDate.setOnClickListener(this)
+        binding.anniversaryDate.setOnClickListener(this)
 
         userTypeSpinner()
         StateRequest()
@@ -99,6 +115,7 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             userTypeList.add( CommonSpinner(name = "Select Customer Type", id = -1))
             userTypeList.add( CommonSpinner(name = "Engineer", id = 1))
             userTypeList.add( CommonSpinner(name = "Mason", id = 2))
+            userTypeList.add( CommonSpinner(name = "Sub Dealer", id = 4))
 
         binding.customerTypeSpinner.adapter = SpinnerCommonAdapter(requireActivity(), R.layout.spinner_popup_row,userTypeList)
     }
@@ -120,6 +137,15 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     )
 
                     binding.stateSpinner.adapter = StateAdapter(requireContext(),android.R.layout.simple_spinner_item,stateList)
+
+                    if (!PreferenceHelper.getStringValue(requireContext(),BuildConfig.StateID).isNullOrEmpty()){
+                        stateList.forEachIndexed { index, lstAttributesDetail ->
+                            if (lstAttributesDetail.stateId == PreferenceHelper.getStringValue(requireContext(),BuildConfig.StateID).toInt()){
+                                binding.stateSpinner.setSelection(index)
+                            }
+                        }
+                    }
+
 
                 }else{
                     stateList.add(0, State(
@@ -229,6 +255,53 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             }
         })
 
+        /*** City List Observer ***/
+        commonViewModel.cityLiveData.observe(viewLifecycleOwner, Observer {
+            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
+                if (it != null && !it.cityList.isNullOrEmpty()){
+                    val cityLists: MutableList<LstCity> = it.cityList!!.toMutableList()
+                    _cityList = cityLists
+
+                    val cityListName = ArrayList<String>()
+
+                    for (commonSpinner in cityLists) {
+                        cityListName.add(commonSpinner.cityName!!)
+                    }
+
+                    val commonSpinner = CommonSpinners()
+                    commonSpinner.name = "Select City"
+                    commonSpinner.id = -1
+                    cityListName.add(0,commonSpinner.name!!)
+
+                    val custlist1 =  LstCity()
+                    custlist1.cityName = "Select City"
+                    custlist1.cityId = -1
+                    _cityList.add(0,custlist1)
+
+                    cityListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cityListName)
+                    cityListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.citySpinner.adapter = cityListAdapter
+
+                }else {
+                    val cityListNames = ArrayList<String>()
+                    val commonSpinner = CommonSpinners()
+                    commonSpinner.name = "Select City"
+                    commonSpinner.id = -1
+                    cityListNames.add(0,commonSpinner.name!!)
+
+                    val custlist1 =  LstCity()
+                    custlist1.cityName = "Select City"
+                    custlist1.cityId = -1
+                    _cityList.add(0,custlist1)
+
+                    cityListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cityListNames)
+                    cityListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.citySpinner.adapter = cityListAdapter
+                }
+            }
+        })
+
+
         /***  Mobile Number Existancy Check  Observer ***/
         loginViewModel.mobileNumberExists.observe(viewLifecycleOwner, Observer {
             LoadingDialogue.dismissDialog()
@@ -237,7 +310,7 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     if (it != 1) {
                         enrollSubmitApi()
                     }else{
-                        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.mobile_already_exist),object:
+                        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_entered_mobile_already_exist),object:
                             AppController.SuccessCallBack{
                             override fun onOk() {
 
@@ -298,6 +371,29 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
     override fun onClick(v: View?) {
         when(v!!.id){
+            R.id.birth_date ->{
+                DatePickerBox.date(1, activity) {
+                    val year = Integer.parseInt(it.split("/")[2])
+                    val month = Integer.parseInt(it.split("/")[1])
+                    val day = Integer.parseInt(it.split("/")[0])
+
+                    if(getAge(year,month,day)<18){
+                        Toast.makeText(requireContext(),"Age should not be lesser than 18 years",Toast.LENGTH_SHORT).show()
+                    }else{
+                        binding.birthDate.text = it.toString()
+                        birthdate = it
+                    }
+                }
+            }
+
+            R.id.anniversary_date ->{
+                DatePickerBox.date(1, activity) {
+                    binding.anniversaryDate.text = it.toString()
+                    anniversaryDate = it
+
+                }
+            }
+
             R.id.submit_enrollment ->{
                 if (BlockMultipleClick.click()) return
 
@@ -324,16 +420,19 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                 }else if (!binding.pinEdt.text.toString().isNullOrBlank() && binding.pinEdt.text.toString().length < 6){
                     binding.pinEdt.error = getString(R.string.invalid_pin_code)
                     binding.pinEdt.requestFocus()
+                }else if (birthdate.isNullOrEmpty()){
+                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+
                 }else if (mSelectedState!!.stateId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_state), Toast.LENGTH_SHORT).show()
 
                 }else if (districtId == "-1" /*mSelectedCity!!.cityId == -1*/){
                     Toast.makeText(requireContext(), getString(R.string.select_district), Toast.LENGTH_SHORT).show()
 
-                }else if (talukId == "-1" /*mSelectedCity!!.cityId == -1*/){
+                }/*else if (talukId == "-1" *//*mSelectedCity!!.cityId == -1*//*){
                     Toast.makeText(requireContext(), getString(R.string.select_taluk), Toast.LENGTH_SHORT).show()
 
-                }else{
+                }*/else{
                     checkCustomerExistancy(binding.mobileNumberEdt.text.toString())
                 }
 
@@ -342,6 +441,13 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
+    }
 
     private fun checkCustomerExistancy(userName: String) {
         LoadingDialogue.showDialog(requireContext())
@@ -374,10 +480,14 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     customerZip = binding.pinEdt.text.toString(),
                     customerStateId = mSelectedState!!.stateId.toString(),
                     districtId = districtId,
+                    customerCityId = cityId,
                     talukId = talukId,
                     registrationSource = "3",
                     merchantId = "1",
-                    isActive = "1"
+                    isActive = "1",
+                    anniversary = AppController.dateAPIFormats(anniversaryDate),
+                    dob = AppController.dateAPIFormats(birthdate)
+
                 ),
                 ObjCustomerOfficalInfoEnrollment(
                     companyName = binding.firmNameEdt.text.toString()
@@ -400,11 +510,9 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
                 if (mSelectedState!!.stateId!! > 0) {
                     /*** District Api call ***/
-                    commonViewModel.getDistrictData(
-                        DistrictListRequest(
-                            stateId = mSelectedState!!.stateId.toString()
-                        )
-                    )
+                    districtApi()
+                    /*** City Api call ***/
+                    cityApi()
 
                 }else{
                     val districtListNames = ArrayList<String>()
@@ -456,7 +564,33 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                 Log.d("bhbrfhrb","taluk ID : " + talukId)
             }
 
+            R.id.city_spinner -> {
+                cityId = _cityList[position].cityId.toString()
+                Log.d("bhbrfhrb","city ID : " + cityId)
+            }
+
         }
+    }
+
+    private fun districtApi() {
+        commonViewModel.getDistrictData(
+            DistrictListRequest(
+                stateId = mSelectedState!!.stateId.toString()
+            )
+        )
+    }
+
+    private fun cityApi() {
+        commonViewModel.getCityData(
+            CityListRequest(
+                actionType = "2",
+                isActive = "true",
+                sortColumn = "CITY_NAME",
+                sortOrder = "ASC",
+                startIndex = "1",
+                stateId = mSelectedState!!.stateId.toString()
+            )
+        )
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

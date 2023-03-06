@@ -623,4 +623,24 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
         )
     }
 
+    /* Terms Condition Request Callback*/
+    suspend fun getTCData(termsConditionRequest: TermsConditionRequest): TermsConditionResponse? {
+        return safeApiCall(
+            //await the result of deferred type
+            call = { apiInterface.fetchTermsConditionDataAsync(termsConditionRequest).await() },
+            error = "Error fetching Terms Condition Data"
+            //convert to mutable list
+        )
+    }
+
+    /* City List callback*/
+    suspend fun getCityListData(cityListRequest: CityListRequest): CityListResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchCityListAsync(cityListRequest).await()
+            },
+            error = "Error City List Trigger"
+        )
+    }
+
 }

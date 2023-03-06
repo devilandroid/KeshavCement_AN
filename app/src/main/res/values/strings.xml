@@ -100,7 +100,6 @@
     <string name="information_about_program">Information about program</string>
     <string name="call_on_following">For any questions on the Keshav Cement Program.\n Please give a miss call on the following number</string>
     <string name="give_a_missed_call_on">GIVE A MISSED CALL ON</string>
-    <string name="_8875509444">8875509444</string>
     <string name="redeemable_points">Redeemable Points</string>
     <string name="redeem_your_earned_points_in_various_ways">Redeem your Earned Points in various ways</string>
     <string name="select_redemption_type">Select Redemption Type</string>
@@ -192,7 +191,7 @@
     <string name="your_profile_update_successfully">Your profile updated successfully.</string>
     <string name="failure_to_update_your_profile">Failure to update your profile</string>
     <string name="state_mandatory">State is mandatory!</string>
-    <string name="taluka_mandatory">Talika is mandatory</string>
+    <string name="taluka_mandatory">Taluka is mandatory</string>
     <string name="district_mandatory">District is mandatory</string>
     <string name="your_profile_has_been_updated">Your profile has been updated.</string>
     <string name="please_select_name">Please select name!</string>
@@ -276,4 +275,12 @@
     <string name="rejected_the_purchase">Rejected the purchase.</string>
     <string name="cash_voucher_approved">Cash voucher approved</string>
     <string name="cash_voucher_rejected">Cash voucher rejected</string>
+    <string name="you_have_successfully_referred_to_your_friend">You have successfully referred your friends</string>
+    <string name="helpline_no">8875509444</string>
+    <string name="your_profile_image_update_successfully">Your profile image updated successfully.</string>
+    <string name="failure_to_update_your_profile_image">Failure to update your profile image</string>
+    <string name="insuffcient_quantity">Insuffcient Quantity!</string>
+    <string name="select_dob">Select Birth Date</string>
+    <string name="select_anniversary_date">Select Anniversary Date</string>
+    <string name="your_entered_mobile_already_exist">Your Entered Mobile Number is already exist, please try with new number</string>
 </resources>

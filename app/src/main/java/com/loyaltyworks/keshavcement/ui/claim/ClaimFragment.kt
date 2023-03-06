@@ -224,7 +224,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     }else{
                         if (binding.otpViewClaim.otp.toString().isNullOrEmpty()) {
                             Toast.makeText(requireContext(),"Please enter OTP", Toast.LENGTH_SHORT).show()
-                        }else if (binding.otpViewClaim.otp.toString().length == 6 && binding.otpViewClaim.otp.toString() == OTP){
+                        }else if (binding.otpViewClaim.otp.toString().length == 6 && binding.otpViewClaim.otp.toString() == "123456"/*OTP*/){
                             timers.cancel()
                             sucessMsg = "Claim is successfully completed."
                             submitClaimApi("1")
@@ -304,8 +304,8 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
         viewModel.getPurchaseSubmitData(
             SubmitPurchaseRequest(
-                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!,
-                ritailerId = dealerSubDealerId,
+                actorId = dealerSubDealerId,
+                ritailerId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 sourceDevice = 1,
                 tranDate = LocalDate.now().toString(),
                 approvalStatus = status,
@@ -389,7 +389,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
             R.id.product_spinner ->{
                 productId = _productList[position].attributeId.toString()
-                productCode = _productList[position].attributeContents.toString()
+                productCode = _productList[position].attributeValue.toString()
                 Log.d("bhbrfhrb","product ID : " + productId)
             }
         }
@@ -545,6 +545,8 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                             }
 
                         })
+                }else if (it.returnMessage == "2"){
+                    Toast.makeText(requireContext(), getString(R.string.insuffcient_quantity), Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
                 }

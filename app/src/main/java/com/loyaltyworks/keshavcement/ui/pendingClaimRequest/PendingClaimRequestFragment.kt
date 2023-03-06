@@ -208,15 +208,15 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
         lstTransactionApprovalDetails: LstTransactionApprovalDetail
     ) {
 
-        SendOtpRequest()
+        SendOtpRequest(lstTransactionApprovalDetails)
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),lstTransactionApprovalDetails.mobile.toString(),
+            "Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == OTPNumber){
+                    if(otp =="123456" /*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         successMsg = getString(R.string.approved_the_purchase)
 
@@ -230,7 +230,7 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 }
 
                 override fun resendOTP() {
-                    SendOtpRequest()
+                    SendOtpRequest(lstTransactionApprovalDetails)
                 }
             })
 
@@ -245,15 +245,15 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
         status: String,
         lstTransactionApprovalDetails: LstTransactionApprovalDetail
     ) {
-        SendOtpRequest()
+        SendOtpRequest(lstTransactionApprovalDetails)
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),lstTransactionApprovalDetails.mobile.toString(),
+            "Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == OTPNumber){
+                    if(otp == "123456"/*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         successMsg = getString(R.string.rejected_the_purchase)
 
@@ -267,20 +267,20 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 }
 
                 override fun resendOTP() {
-                    SendOtpRequest()
+                    SendOtpRequest(lstTransactionApprovalDetails)
                 }
             })
 
     }
 
-    private fun SendOtpRequest() {
+    private fun SendOtpRequest(lstTransactionApprovalDetails: LstTransactionApprovalDetail) {
         loginViewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
                 merchantUserName = BuildConfig.MerchantName,
-                mobileNo = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString(),
-                userId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
-                userName = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].loyaltyId,
-                name = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].firstName.toString()
+                mobileNo = lstTransactionApprovalDetails.mobile,
+                userId = "-1",
+                userName = lstTransactionApprovalDetails.loyaltyId,
+                name = lstTransactionApprovalDetails.memberName.toString()
             )
         )
 
@@ -338,6 +338,8 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
 
                         })
 
+                }else if (it.returnMessage == "2"){
+                    Toast.makeText(requireContext(), getString(R.string.insuffcient_quantity), Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
                 }

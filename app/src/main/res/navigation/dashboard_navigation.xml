@@ -303,4 +303,9 @@
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferDialogFragment"
         android:label=""
         tools:layout="@layout/fragment_cash_transfer_dialog" />
+    <fragment
+        android:id="@+id/termsAndConditionFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.terms.TermsAndConditionFragment"
+        android:label="@string/terms_and_conditions"
+        tools:layout="@layout/fragment_terms_and_condition"/>
 </navigation>

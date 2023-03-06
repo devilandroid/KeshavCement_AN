@@ -48,4 +48,17 @@ class CommonViewModel: BaseViewModel() {
         }
     }
 
+    /*** City List View Model  ***/
+    private val _cityLiveData = MutableLiveData<CityListResponse>()
+    val cityLiveData: LiveData<CityListResponse> = _cityLiveData
+
+    fun getCityData(cityListRequest: CityListRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _cityLiveData.postValue(apiRepository.getCityListData(cityListRequest))
+        }
+    }
+
 }

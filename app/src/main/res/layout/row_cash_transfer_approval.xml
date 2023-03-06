@@ -53,7 +53,7 @@
                     android:id="@+id/cust_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Engineer"
+                    android:text="-"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
                     android:textSize="12sp"/>
@@ -61,11 +61,21 @@
                     android:id="@+id/cust_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="Azhar Dasgupta"
+                    android:layout_marginTop="2dp"
+                    android:text="-"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
                     android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/cust_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="-"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
@@ -84,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Jharkhand"
+                    android:text="-"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/dark"
                     android:textSize="10sp"/>
@@ -119,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="XXXXXX"
+                    android:text="-"
                     android:textColor="@color/dark"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -142,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="XXXXXX"
+                    android:text="-"
                     android:textColor="@color/dark"
                     android:textSize="16sp" />
             </LinearLayout>

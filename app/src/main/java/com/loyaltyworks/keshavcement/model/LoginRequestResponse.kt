@@ -78,7 +78,7 @@ data class RegisterRequest(
     @Json(name = "ActionType")
     val actionType: String? = null,
     @Json(name = "lstIdentityInfo")
-    val lstIdentityInfo: LstIdentityInfo? = null,
+    val lstIdentityInfo: List<LstIdentityInfo>? = null,
     @Json(name = "ObjCustomer")
     val objCustomer: ObjCustomer? = null,
     @Json(name = "ObjCustomerOfficalInfo")
@@ -99,12 +99,12 @@ data class LstIdentityInfo(
 data class ObjCustomer(
     @Json(name = "Address")
     val address: String? = null,
-    @Json(name = "CustomerCityId")
-    val customerCityId: String? = null,
     @Json(name = "CustomerEmail")
     val customerEmail: String? = null,
     @Json(name = "CustomerMobile")
     val customerMobile: String? = null,
+    @Json(name = "CustomerCityId")
+    val customerCityId: String? = null,
     @Json(name = "CustomerStateId")
     val customerStateId: String? = null,
     @Json(name = "CustomerTypeID")
@@ -119,20 +119,22 @@ data class ObjCustomer(
     val isActive: String? = null,
     @Json(name = "MerchantId")
     val merchantId: String? = null,
+    @Json(name = "ReferrerCode")
+    val referrerCode: String? = null,
     @Json(name = "RegistrationSource")
     val registrationSource: String? = null,
     @Json(name = "TalukId")
     val talukId: String? = null,
-    @Json(name = "ReferrerCode")
-    var referrerCode: String? = null
+    @Json(name = "Anniversary")
+    val anniversary: String? = null,
+    @Json(name = "DOB")
+    val dob: String? = null
 )
 
 @JsonClass(generateAdapter = true)
 data class ObjCustomerOfficalInfoRegister(
     @Json(name = "CompanyName")
     val companyName: String? = null,
-    @Json(name = "SAPCode")
-    val sAPCode: String? = null,
     @Json(name = "OfficialGSTNumber")
     val officialGSTNumber: String? = null
 )
@@ -288,7 +290,7 @@ data class ActivateCustomerRequest(
     val actorId: String? = null,
     @Json(name = "ObjCustomerJson")
     val objCustomerJson: ObjCustomerJsonActivate? = null,
-    @Json(name = "ObjCustomerOfficalInfo")
+    @Json(name = "lstCustomerOfficalInfoJson")
     val objCustomerOfficalInfo: ObjCustomerOfficalInfoActivate? = null
 )
 
@@ -317,7 +319,13 @@ data class ObjCustomerJsonActivate(
     @Json(name = "TalukId")
     val talukId: String? = null,
     @Json(name = "Zip")
-    val zip: String? = null
+    val zip: String? = null,
+    @Json(name = "AadharNumber")
+    val aadharNumber: String? = null,
+    @Json(name = "Anniversary")
+    val anniversary: String? = null,
+    @Json(name = "DOB")
+    val dob: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -327,9 +335,7 @@ data class ObjCustomerOfficalInfoActivate(
     @Json(name = "GSTNumber")
     val gSTNumber: String? = null,
     @Json(name = "SapNo")
-    val sapNo: String? = null,
-    @Json(name = "AadharNumber")
-    val aadharNumber: String? = null
+    val sapNo: String? = null
 )
 
 /*** Activate Account Response ***/
@@ -341,4 +347,66 @@ data class ActivateCustomerResponse(
     val returnValue: Int? = null,
     @Json(name = "totalRecords")
     val totalRecords: Int? = null
+)
+
+/*** Terms Condition Request ***/
+@JsonClass(generateAdapter = true)
+data class TermsConditionRequest(
+    @Json(name = "ActionType")
+    var actionType: Int? = null,
+    @Json(name = "ActorId")
+    var actorId: Int? = null
+)
+
+/*** Terms Condition Response ***/
+@JsonClass(generateAdapter = true)
+data class TermsConditionResponse(
+    @Json(name = "lstTermsAndCondition")
+    var lstTermsAndCondition: List<LstTermsAndCondition>? = null,
+    @Json(name = "returnMessage")
+    var returnMessage: String? = null,
+    @Json(name = "returnValue")
+    var returnValue: Int? = null,
+    @Json(name = "totalRecords")
+    var totalRecords: Int? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class LstTermsAndCondition(
+    @Json(name = "actionType")
+    var actionType: Int? = null,
+    @Json(name = "actorId")
+    var actorId: Int? = null,
+    @Json(name = "actorRole")
+    var actorRole: Any? = null,
+    @Json(name = "color")
+    var color: String? = null,
+    @Json(name = "createDate")
+    var createDate: String? = null,
+    @Json(name = "fileName")
+    var fileName: String? = null,
+    @Json(name = "html")
+    var html: String? = null,
+    @Json(name = "isActive")
+    var isActive: Boolean? = null,
+    @Json(name = "language")
+    var language: String? = null,
+    @Json(name = "languageId")
+    var languageId: Int? = null,
+    @Json(name = "segmentId")
+    var segmentId: Int? = null,
+    @Json(name = "segmentName")
+    var segmentName: String? = null,
+    @Json(name = "segmentType")
+    var segmentType: Any? = null,
+    @Json(name = "statusName")
+    var statusName: String? = null,
+    @Json(name = "tcName")
+    var tcName: String? = null,
+    @Json(name = "termsAndConditionsId")
+    var termsAndConditionsId: Int? = null,
+    @Json(name = "token")
+    var token: Any? = null,
+    @Json(name = "wefDate")
+    var wefDate: String? = null
 )

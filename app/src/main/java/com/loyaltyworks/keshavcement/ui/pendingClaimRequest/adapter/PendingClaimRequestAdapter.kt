@@ -35,6 +35,7 @@ class PendingClaimRequestAdapter(val lstTransactionApprovalDetails: List<LstTran
         val location = binding.location
         val prodName = binding.prodName
         val remarks = binding.remarks
+        val custMobile = binding.custMobile
 
         val qtyMinus = binding.qtyMinus
         val qtyPlus = binding.qtyPlus
@@ -133,10 +134,13 @@ class PendingClaimRequestAdapter(val lstTransactionApprovalDetails: List<LstTran
         data.updatedQuantity = data.quantity!!
         holder.remarks.setText("")
 
-        Glide.with(holder.itemView.context).asBitmap()
-            .error(R.drawable.ic_default_img)
-            .load(BuildConfig.CATALOGUE_IMAGE_BASE + data.productImage)
-            .into(holder.custImage)
+        if (!data.productImage.isNullOrEmpty()){
+            Glide.with(holder.itemView.context).asBitmap()
+                .error(R.drawable.ic_default_img)
+                .load(BuildConfig.PROMO_IMAGE_BASE + data.productImage.toString().split("~")[1])
+                .into(holder.custImage)
+        }
+
 
         if (!data.tranDate.isNullOrEmpty()){
             holder.date.text = AppController.dateAPIFormat(data.tranDate.toString().split(" ")[0])
@@ -148,6 +152,7 @@ class PendingClaimRequestAdapter(val lstTransactionApprovalDetails: List<LstTran
         holder.custType.text = data.memberType
         holder.custName.text = data.memberName
         holder.prodName.text = data.prodName
+        holder.custMobile.text = data.mobile
         holder.qtyTextview.setText(data.quantity.toString())
 
 

@@ -30,6 +30,7 @@ object RedeemOTPDialog {
     fun showRedeemOTPDialog(
         context: Context,
         otpMobile: String,
+        buttonTxt: String,
         redeemOTPDialogCallBack: RedeemOTPDialogCallBack,
     ) {
 
@@ -60,9 +61,11 @@ object RedeemOTPDialog {
         val resendOtp = dialog?.findViewById<View>(R.id.resend_otp) as TextView
         val redeemBtn = dialog?.findViewById<View>(R.id.redeem_btn) as LinearLayout
         val otpTimer = dialog?.findViewById<View>(R.id.timer_dialog) as TextView
+        val button_text = dialog?.findViewById<View>(R.id.button_text) as TextView
         val closeBtn = dialog?.findViewById<View>(R.id.close_btn) as ImageView
 
         otpNumber.text = "OTP will receive at " + otpMobile
+        button_text.text = buttonTxt
 
         /*** Timer Start ***/
         if (otpTimer.text.isNotEmpty()) {

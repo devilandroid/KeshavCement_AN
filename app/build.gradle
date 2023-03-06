@@ -3,9 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'com.google.firebase.crashlytics'
-    id 'com.google.gms.google-services'
     id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -51,6 +51,7 @@ android {
         buildConfigField "String", "RedeemablePointsBalance", "\"RedeemablePointsBalance\""
         buildConfigField "String", "SelectedCustomerMobile", "\"SelectedCustomerMobile\""
         buildConfigField "String", "SelectedCustomerName", "\"SelectedCustomerName\""
+        buildConfigField "String", "StateID", "\"StateID\""
     }
 
     buildTypes {
@@ -175,16 +176,18 @@ dependencies {
     implementation 'com.github.DonMat:searchablespinner:v1.0.1'
 
 
-
+    implementation 'com.google.firebase:firebase-analytics:17.4.1'
+    implementation 'com.google.firebase:firebase-perf:20.0.6'
+    implementation 'com.google.firebase:firebase-core:19.0.0'
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.android.play:core-ktx:1.8.1'
-    implementation 'com.google.firebase:firebase-core:19.0.0'
-
-    implementation 'com.google.firebase:firebase-auth:19.1.0'
-    implementation 'com.google.firebase:firebase-perf:20.0.6'
+//    implementation 'com.google.firebase:firebase-core:19.0.0'
+//
+//    implementation 'com.google.firebase:firebase-auth:19.1.0'
+//    implementation 'com.google.firebase:firebase-perf:20.0.6'
 
     implementation 'com.google.code.gson:gson:2.8.6'
 

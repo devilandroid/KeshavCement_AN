@@ -69,7 +69,7 @@
                         android:gravity="center"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="XXXXXXX"
+                        android:text="-"
                         android:textColor="@color/dark"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -122,7 +122,7 @@
                             android:gravity="center"
                             android:layout_centerInParent="true"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="XXXXX"
+                            android:text="-"
                             android:textColor="@color/dark"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -188,7 +188,9 @@
                         android:id="@+id/mobile_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="XXXXXXXXXX"
+                        android:text="-"
+                        android:drawableEnd="@drawable/call_icon"
+                        android:drawablePadding="3dp"
                         android:fontFamily="@font/poppins_medium"
                         android:textSize="12sp"
                         android:textColor="@color/dark"/>
@@ -211,7 +213,7 @@
                         android:id="@+id/mem_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="XXXXXXXXXX"
+                        android:text="-"
                         android:fontFamily="@font/poppins_medium"
                         android:textSize="12sp"
                         android:textColor="@color/dark"/>

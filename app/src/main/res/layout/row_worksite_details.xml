@@ -112,6 +112,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:text="-"
+                        android:drawableEnd="@drawable/call_icon"
+                        android:drawablePadding="3dp"
                         android:textColor="@color/dark"
                         android:textSize="12sp" />
 
@@ -146,6 +148,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
+                        android:drawableEnd="@drawable/call_icon"
+                        android:drawablePadding="3dp"
                         android:text="-"
                         android:textColor="@color/dark"
                         android:textSize="12sp" />

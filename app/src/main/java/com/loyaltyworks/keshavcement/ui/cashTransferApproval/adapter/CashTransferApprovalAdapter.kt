@@ -32,6 +32,7 @@ class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogu
         val voucherName = binding.voucherName
         val points = binding.points
         val remarks = binding.remarks
+        val custMobile = binding.custMobile
 
         val rejectBtn = binding.rejectBtn
         val approveBtn = binding.approveBtn
@@ -77,6 +78,7 @@ class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogu
         holder.custType.text = data.membertype
         holder.custName.text = data.fullName
         holder.voucherName.text = data.productName
+        holder.custMobile.text = data.mobile
         holder.points.text = data.redemptionPoints.toString()
 
 

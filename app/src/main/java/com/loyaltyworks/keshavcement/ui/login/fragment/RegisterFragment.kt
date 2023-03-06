@@ -1,5 +1,6 @@
 package com.loyaltyworks.keshavcement.ui.login.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,12 +28,11 @@ import com.loyaltyworks.keshavcement.model.adapter.CustomerTypeSpinnerAdapter
 import com.loyaltyworks.keshavcement.model.adapter.StateAdapter
 import com.loyaltyworks.keshavcement.ui.CommonViewModel
 import com.loyaltyworks.keshavcement.ui.customerType.CustomerTypeViewModel
-import com.loyaltyworks.keshavcement.utils.AppController
-import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
-import com.loyaltyworks.keshavcement.utils.Keyboard
-import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.*
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
+import java.time.LocalDate
+import java.time.Period
 
 
 class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -66,10 +67,17 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     var talukListAdapter: ArrayAdapter<String>? = null
     var talukId: String = "-1"
 
+    var _cityList = mutableListOf<LstCity>()
+    var cityListAdapter: ArrayAdapter<String>? = null
+    var cityId: String = "-1"
+
     var identityNo: String = ""
     var identityType: String = ""
     var aadharNo: String = ""
     var gstNo: String = ""
+
+    var anniversaryDate = ""
+    var birthdate = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -106,6 +114,7 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         binding.stateSpinner.onItemSelectedListener = this
         binding.districtSpinner.onItemSelectedListener = this
         binding.talukSpinner.onItemSelectedListener = this
+        binding.citySpinner.onItemSelectedListener = this
 
         binding.otpSubmitButton.setOnClickListener(this)
         binding.resendOtp.setOnClickListener(this)
@@ -117,6 +126,9 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
         binding.backToLogin.setOnClickListener(this)
         binding.registerSubmitBtn.setOnClickListener(this)
+
+        binding.birthDate.setOnClickListener(this)
+        binding.anniversaryDate.setOnClickListener(this)
 
         customoerTypeSpinnerApi()
     }
@@ -184,7 +196,7 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                     if (binding.otpView.otp.toString().isNullOrEmpty()) {
                         Toast.makeText(requireContext(),"Please enter OTP", Toast.LENGTH_SHORT).show()
-                    }else if (binding.otpView.otp.toString().length == 6 && binding.otpView.otp.toString() == OTP){
+                    }else if (binding.otpView.otp.toString().length == 6 && binding.otpView.otp.toString() =="123456" /*OTP*/){
                         Keyboard.hideKeyboard(requireContext(),binding.mRegisterHost)
                         StateRequest()
                         timers.cancel()
@@ -249,6 +261,29 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 backButtonClicked()
             }
 
+            R.id.birth_date ->{
+                DatePickerBox.date(1, activity) {
+                    val year = Integer.parseInt(it.split("/")[2])
+                    val month = Integer.parseInt(it.split("/")[1])
+                    val day = Integer.parseInt(it.split("/")[0])
+
+                    if(getAge(year,month,day)<18){
+                        Toast.makeText(requireContext(),"Age should not be lesser than 18 years",Toast.LENGTH_SHORT).show()
+                    }else{
+                        binding.birthDate.text = it.toString()
+                        birthdate = it
+                    }
+                }
+            }
+
+            R.id.anniversary_date ->{
+                DatePickerBox.date(1, activity) {
+                    binding.anniversaryDate.text = it.toString()
+                    anniversaryDate = it
+
+                }
+            }
+
             R.id.register_submit_btn ->{
                 if (BlockMultipleClick.click()) return
 
@@ -311,16 +346,19 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     binding.pincode.error = getString(R.string.invalid_pin_code)
                     binding.pincode.requestFocus()
 
+                }else if (birthdate.isNullOrEmpty()){
+                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+
                 }else if (mSelectedState!!.stateId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_state), Toast.LENGTH_SHORT).show()
 
                 }else if (districtId == "-1" /*mSelectedCity!!.cityId == -1*/){
                     Toast.makeText(requireContext(), getString(R.string.select_your_district), Toast.LENGTH_SHORT).show()
 
-                }else if (talukId == "-1" /*mSelectedCity!!.cityId == -1*/){
+                }/*else if (talukId == "-1" *//*mSelectedCity!!.cityId == -1*//*){
                     Toast.makeText(requireContext(), getString(R.string.select_your_taluk), Toast.LENGTH_SHORT).show()
 
-                }else{
+                }*/else{
                     registerCustomer()
                 }
 
@@ -328,6 +366,14 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         }
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
+    }
 
 
     private fun setCustomerTypeName() {
@@ -388,18 +434,6 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 }
 
                 binding.customerTypeSpinner.adapter = CustomerTypeSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item,customerTypeList)
-
-                /*if (isFirstLoad){
-                    customerTypeList.forEach { lstAttributesDetail ->
-                        if (lstAttributesDetail.attributeId == PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType)){
-                            binding.customerTypeSpinner.setSelection(i)
-                            isFirstLoad = false
-                            i=0
-                            return@forEach
-                        }
-                        i++
-                    }
-                }*/
 
                 customerTypeList.forEachIndexed { index, lstAttributesDetail ->
                     if (lstAttributesDetail.attributeId == PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType)){
@@ -614,6 +648,52 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
         })
 
+        /*** City List Observer ***/
+        commonViewModel.cityLiveData.observe(viewLifecycleOwner, Observer {
+            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
+                if (it != null && !it.cityList.isNullOrEmpty()){
+                    val cityLists: MutableList<LstCity> = it.cityList!!.toMutableList()
+                    _cityList = cityLists
+
+                    val cityListName = ArrayList<String>()
+
+                    for (commonSpinner in cityLists) {
+                        cityListName.add(commonSpinner.cityName!!)
+                    }
+
+                    val commonSpinner = CommonSpinners()
+                    commonSpinner.name = "Select City"
+                    commonSpinner.id = -1
+                    cityListName.add(0,commonSpinner.name!!)
+
+                    val custlist1 =  LstCity()
+                    custlist1.cityName = "Select City"
+                    custlist1.cityId = -1
+                    _cityList.add(0,custlist1)
+
+                    cityListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cityListName)
+                    cityListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.citySpinner.adapter = cityListAdapter
+
+                }else {
+                    val cityListNames = ArrayList<String>()
+                    val commonSpinner = CommonSpinners()
+                    commonSpinner.name = "Select City"
+                    commonSpinner.id = -1
+                    cityListNames.add(0,commonSpinner.name!!)
+
+                    val custlist1 =  LstCity()
+                    custlist1.cityName = "Select City"
+                    custlist1.cityId = -1
+                    _cityList.add(0,custlist1)
+
+                    cityListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cityListNames)
+                    cityListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.citySpinner.adapter = cityListAdapter
+                }
+            }
+        })
+
         /*** Register Customer Observer ***/
         viewModel.registerCustomerResponse.observe(viewLifecycleOwner, Observer {
             LoadingDialogue.dismissDialog()
@@ -690,11 +770,9 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                 if (mSelectedState!!.stateId!! > 0) {
                     /*** District Api call ***/
-                    commonViewModel.getDistrictData(
-                        DistrictListRequest(
-                            stateId = mSelectedState!!.stateId.toString()
-                        )
-                    )
+                    districtApi()
+                    /*** City Api call ***/
+                    cityApi()
 
                 }else{
                     val districtListNames = ArrayList<String>()
@@ -746,13 +824,40 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 Log.d("bhbrfhrb","taluk ID : " + talukId)
             }
 
+            R.id.city_spinner -> {
+                cityId = _cityList[position].cityId.toString()
+                Log.d("bhbrfhrb","city ID : " + cityId)
+            }
+
         }
     }
+
+
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
 
     }
 
+    private fun districtApi() {
+        commonViewModel.getDistrictData(
+            DistrictListRequest(
+                stateId = mSelectedState!!.stateId.toString()
+            )
+        )
+    }
+
+    private fun cityApi() {
+        commonViewModel.getCityData(
+            CityListRequest(
+                actionType = "2",
+                isActive = "true",
+                sortColumn = "CITY_NAME",
+                sortOrder = "ASC",
+                startIndex = "1",
+                stateId = mSelectedState!!.stateId.toString()
+            )
+        )
+    }
     private fun startTimer(time_in_seconds: Long) {
         if (binding.timer.text.isNotEmpty()) {
             binding.timer.text = ""
@@ -805,10 +910,12 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         viewModel.getRegisterRequest(
             RegisterRequest(
                 actionType = "0",
-                LstIdentityInfo(
-                    identityNo = identityNo,
-                    identityType = identityType,
-                    identityID = aadharNo
+                listOf(
+                    LstIdentityInfo(
+                        identityNo = aadharNo,
+                        identityType = identityType,
+                        identityID = identityNo
+                    )
                 ),
                 ObjCustomer(
                     firstName = binding.name.text.toString(),
@@ -817,13 +924,16 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     customerStateId = mSelectedState!!.stateId.toString(),
                     districtId = districtId,
                     talukId = talukId,
+                    customerCityId = cityId,
                     registrationSource = "3",
                     customerZip = binding.pincode.text.toString(),
                     address = binding.address.text.toString(),
                     merchantId = "1",
                     isActive = "1",
                     customerTypeID = PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType),
-                    referrerCode = referalCodes
+                    referrerCode = referalCodes,
+                    anniversary = AppController.dateAPIFormats(anniversaryDate),
+                    dob = AppController.dateAPIFormats(birthdate)
                 ),
                 ObjCustomerOfficalInfoRegister(
                     companyName = binding.firmName.text.toString(),

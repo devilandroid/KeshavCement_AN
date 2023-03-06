@@ -256,6 +256,13 @@ interface ApiInterface {
     @POST("GetCatalogueDetails")
     fun getCashTransferApproveRejectAsync(@Body cashTransferApproveRejectRequest: CashTransferApproveRejectRequest):  Deferred<Response<CashTransferApproveRejectResponse>>
 
+    /* Terms Condition Api call */
+    @POST("SaveOrGetTermAndConditions")
+    fun fetchTermsConditionDataAsync(@Body termsConditionRequest: TermsConditionRequest):  Deferred<Response<TermsConditionResponse>>
+
+    // city List api call
+    @POST("GetCityDetailsMobileApp")
+    fun fetchCityListAsync(@Body cityListRequest: CityListRequest): Deferred<Response<CityListResponse>>
 
 
 }

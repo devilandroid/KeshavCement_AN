@@ -22,6 +22,8 @@ data class MyRedemptionRequest(
     var customerTypeID: String? = null,
     @Json(name = "SearchText")
     var searchText: String? = null,
+    @Json(name = "Domain")
+    var domain: String? = null,
     @Json(name = "ObjCatalogueDetails")
     var objCatalogueDetails: ObjCatalogueDetails? = null
 )

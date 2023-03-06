@@ -1,5 +1,6 @@
 package com.loyaltyworks.keshavcement.ui.dashboard
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.net.Uri
@@ -26,12 +27,20 @@ import com.loyaltyworks.keshavcement.databinding.FragmentDashboardBinding
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.ui.DashboardActivity
 import com.loyaltyworks.keshavcement.ui.login.LoginActivity
+import com.loyaltyworks.keshavcement.ui.profile.ProfileViewModel
+import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductCatalogueViewModel
 import com.loyaltyworks.keshavcement.ui.splashScreen.SplashScreenViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import com.loyaltyworks.keshavcement.utils.dialog.NewPasswordDialog
 import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
+import com.permissionx.guolindev.PermissionX
+import com.vmb.fileSelect.FileSelector
+import com.vmb.fileSelect.FileSelectorCallBack
+import com.vmb.fileSelect.FileSelectorData
+import com.vmb.fileSelect.FileType
 import kotlinx.android.synthetic.main.dashboard_menu.view.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 
@@ -39,13 +48,19 @@ import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 class DashboardFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var viewModel: DashboardViewModel
+    private lateinit var viewModelProductCataloge: ProductCatalogueViewModel
     private lateinit var splashScreenViewModel: SplashScreenViewModel
+    private lateinit var profileViewModel: ProfileViewModel
+
+    private var mProfileImagePath = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModelProductCataloge = ViewModelProvider(this).get(ProductCatalogueViewModel::class.java)
         splashScreenViewModel = ViewModelProvider(this).get(SplashScreenViewModel::class.java)
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding = FragmentDashboardBinding.inflate(layoutInflater)
@@ -160,6 +175,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         binding.newSale.setOnClickListener(this)                        //  Support Executive
 
         binding.dashRaiseTicket.setOnClickListener(this)                //  All except Support-Executive
+        binding.dProfileImage.setOnClickListener(this)                //  All Type
 
         /*** Change Password ***/
         if (PreferenceHelper.getBooleanValue(requireContext(),BuildConfig.ForgotPasswordClicked)){
@@ -174,7 +190,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             })
         }
 
-        callApi()
+
         getBanner()
     }
 
@@ -212,6 +228,11 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
 
+        /*** User Active/Deactive Check ***/
+        viewModelProductCataloge.getUserActiveOrNotData(UserActiveOrNotRequest(
+            PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
+        ))
+
         val packageInfo: PackageInfo = requireActivity().packageManager!!.getPackageInfo(requireActivity().packageName, 0)
         Log.d("hfjshjrf", packageInfo.versionCode.toString())
 
@@ -228,6 +249,28 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        /***  user active or not Observer ***/
+        viewModelProductCataloge.userActiveOrNotData.observe(viewLifecycleOwner, Observer {
+
+            if (it != null) {
+                if (it.isActive == false) {
+                    ClaimSuccessDialog.showClaimSuccessDialog(requireContext(),false,"Account Deactivated!",
+                        getString(R.string.your_account_has_been_deactivated),object :
+                            ClaimSuccessDialog.ClaimSuccessDialogCallBack{
+                            override fun onOk() {
+                                PreferenceHelper.clear(requireContext())
+                                startActivity(Intent(context, LoginActivity::class.java))
+                                requireActivity().finish()
+                            }
+                        })
+                }else{
+                    callApi()
+                }
+            }
+
+        })
+
 
         /*** Change Password Request ***/
         viewModel.changePasswordLiveData.observe(viewLifecycleOwner, Observer {
@@ -283,10 +326,15 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     }
 
                     PreferenceHelper.setDashboardDetails(requireContext(), it)
+                    /*** storing loggedIn customer StateId ***/
+                    if (it.lstCustomerFeedBackJsonApi[0].stateID != null){
+                        PreferenceHelper.setStringValue(requireContext(), BuildConfig.StateID, it.lstCustomerFeedBackJsonApi[0].stateID.toString())
+                    }
 
                     binding.custType.text = it.lstCustomerFeedBackJsonApi[0].customerType.toString()
                     binding.custName.text = it.lstCustomerFeedBackJsonApi[0].firstName
                     binding.memId.text = it.lstCustomerFeedBackJsonApi[0].loyaltyId
+
 
                     /*** setting dashboard menu data ***/
                     (activity as DashboardActivity).binding.root.menu_memberType.text = it.lstCustomerFeedBackJsonApi[0].customerType
@@ -294,8 +342,8 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     (activity as DashboardActivity).binding.root.menu_membershipId.text = it.lstCustomerFeedBackJsonApi[0].loyaltyId
 
                     if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
-                        binding.createdByType.text = "( " +  it.lstCustomerFeedBackJsonApi[0].mappedCustomerType + " )"
-                        binding.createdByName.text = it.lstCustomerFeedBackJsonApi[0].mappedCustomerName
+                        binding.createdByType.text = "(" +  it.lstCustomerFeedBackJsonApi[0].mappedCustomerType + ")"
+                        binding.createdByName.text = it.lstCustomerFeedBackJsonApi[0].mappedCustomerName!!.split("~")[1]
                         /*** Support Executive Mapped ID ***/
                         PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerIdSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerId!!)
                         PreferenceHelper.setStringValue(requireContext(), BuildConfig.MappedCustomerNameSE, it.lstCustomerFeedBackJsonApi[0].mappedCustomerType!!)
@@ -362,6 +410,20 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 })
 
             }
+        })
+
+        /*** Update Profile Image Observer ***/
+        profileViewModel.profileImageUpdateLiveData.observe(viewLifecycleOwner, Observer {
+            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
+                LoadingDialogue.dismissDialog()
+                if (it != null && it.returnMessage == "1"){
+                    callApi()
+                    Toast.makeText(requireContext(), resources.getString(R.string.your_profile_image_update_successfully), Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(requireContext(), resources.getString(R.string.failure_to_update_your_profile_image), Toast.LENGTH_SHORT).show()
+                }
+            }
+
         })
 
 
@@ -440,8 +502,72 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(R.id.supportFragment)
             }
 
+            R.id.d_profile_image ->{
+                LoadingDialogue.dismissDialog()
+                askPermission()
+            }
+
         }
     }
 
+
+    private fun askPermission() {
+
+        PermissionX.init(this)
+            .permissions(
+                Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+            .explainReasonBeforeRequest()
+            .onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(deniedList,
+                    "Allow permission to access the location and camera to Keshav Cement",
+                    "OK",
+                    "Cancel")
+            }
+            .onForwardToSettings { scope, deniedList ->
+                scope.showForwardToSettingsDialog(deniedList,
+                    "You need to allow necessary permissions in Settings manually",
+                    "OK",
+                    "Cancel")
+            }
+            .request { allGranted, grantedList, deniedList ->
+                if (allGranted) {
+                    FileSelector.requiredFileTypes(FileType.IMAGES).open(requireActivity(), object :
+                        FileSelectorCallBack {
+                        override fun onResponse(fileSelectorData: FileSelectorData) {
+                            mProfileImagePath = fileSelectorData.responseInBase64!!
+//                        fileExtenstion = fileSelectorData.extension!!
+
+                            Log.d("gfdhrgfi", "jf " + mProfileImagePath.toString())
+
+                            binding.dProfileImage.setImageBitmap(fileSelectorData.thumbnail)
+
+                            profileImageUpdateApi(mProfileImagePath)
+                        }
+                    })
+
+                } else {
+                    // when permission denied
+//                    findNavController().popBackStack()
+                }
+            }
+
+    }
+
+
+    private fun profileImageUpdateApi(mProfileImagePath: String) {
+
+        LoadingDialogue.showDialog(requireContext())
+        profileViewModel.setProfileImageData(
+            ProfileImageUpdateRequest(
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
+                objCustomerJson = ObjCustomerJsonss(
+                    displayImage = mProfileImagePath,
+                    loyaltyId = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].loyaltyId
+                )
+            )
+        )
+    }
 
 }

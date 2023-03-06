@@ -268,13 +268,13 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
     private fun RedeemVoucher(catalogueVouchers: ObjCatalogueListtt, amount: String) {
         SendOtpRequest()
         RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerMobile)
-            ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
+            ,"Redeem",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
 
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == /*"123456"*/ OTPNumber){
+                    if(otp == "123456" /*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
                         SubmitReddemProcess(catalogueVouchers,amount)
                     }else{

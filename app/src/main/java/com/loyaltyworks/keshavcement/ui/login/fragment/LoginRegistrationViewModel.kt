@@ -98,4 +98,17 @@ class LoginRegistrationViewModel: BaseViewModel() {
             _activateCustomerLiveData.postValue(apiRepository.activateCustomerData(activateCustomerRequest))
         }
     }
+
+    /*** Terms Condition ViewModel ***/
+    private val _termsConditionLiveData = MutableLiveData<TermsConditionResponse>()
+    val termsConditionLiveData: LiveData<TermsConditionResponse> = _termsConditionLiveData
+
+    fun getTCData(termsConditionRequest: TermsConditionRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _termsConditionLiveData.postValue(apiRepository.getTCData(termsConditionRequest))
+        }
+    }
 }
