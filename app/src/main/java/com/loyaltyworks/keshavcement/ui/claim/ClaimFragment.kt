@@ -389,7 +389,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
             R.id.product_spinner ->{
                 productId = _productList[position].attributeId.toString()
-                productCode = _productList[position].attributeValue.toString()
+                productCode = _productList[position].attributeContents.toString()
                 Log.d("bhbrfhrb","product ID : " + productId)
             }
         }
