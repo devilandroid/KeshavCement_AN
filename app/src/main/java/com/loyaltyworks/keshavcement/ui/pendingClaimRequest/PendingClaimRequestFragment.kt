@@ -245,7 +245,14 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
         status: String,
         lstTransactionApprovalDetails: LstTransactionApprovalDetail
     ) {
-        SendOtpRequest(lstTransactionApprovalDetails)
+
+        successMsg = getString(R.string.rejected_the_purchase)
+
+        /*** Call Reject Api ***/
+        approveRejectClaimApi(lstTransactionApprovalDetails.quantity!!,lstTransactionApprovalDetails.ltyTranTempID!!,
+            lstTransactionApprovalDetails.enteredRemarks,status)
+
+       /* SendOtpRequest(lstTransactionApprovalDetails)
 
         RedeemOTPDialog.showRedeemOTPDialog(requireContext(),lstTransactionApprovalDetails.mobile.toString(),
             "Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
@@ -253,11 +260,11 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp == "123456"/*OTPNumber*/){
+                    if(otp == "123456"*//*OTPNumber*//*){
                         RedeemOTPDialog.hideDialog()
                         successMsg = getString(R.string.rejected_the_purchase)
 
-                        /*** Call Reject Api ***/
+                        *//*** Call Reject Api ***//*
                         approveRejectClaimApi(lstTransactionApprovalDetails.quantity!!,lstTransactionApprovalDetails.ltyTranTempID!!,
                             lstTransactionApprovalDetails.enteredRemarks,status)
 
@@ -270,7 +277,7 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                     SendOtpRequest(lstTransactionApprovalDetails)
                 }
             })
-
+*/
     }
 
     private fun SendOtpRequest(lstTransactionApprovalDetails: LstTransactionApprovalDetail) {

@@ -241,7 +241,7 @@
             app:sliding_button_background="@drawable/oval_bg"
             app:sliding_button_height="48dp"
             app:sliding_button_icon="@drawable/right_arrow"
-            app:sliding_button_icon_tint="@android:color/white"
+            app:sliding_button_icon_tint="@color/colorPrimary"
             app:sliding_button_marginBottom="4dp"
             app:sliding_button_marginEnd="4dp"
             app:sliding_button_marginStart="4dp"

@@ -112,10 +112,17 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     private fun userTypeSpinner() {
         userTypeList.clear()
 
+        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
+            userTypeList.add( CommonSpinner(name = "Select Customer Type", id = -1))
+            userTypeList.add( CommonSpinner(name = "Engineer", id = 1))
+            userTypeList.add( CommonSpinner(name = "Mason", id = 2))
+        }else{
             userTypeList.add( CommonSpinner(name = "Select Customer Type", id = -1))
             userTypeList.add( CommonSpinner(name = "Engineer", id = 1))
             userTypeList.add( CommonSpinner(name = "Mason", id = 2))
             userTypeList.add( CommonSpinner(name = "Sub Dealer", id = 4))
+        }
+
 
         binding.customerTypeSpinner.adapter = SpinnerCommonAdapter(requireActivity(), R.layout.spinner_popup_row,userTypeList)
     }

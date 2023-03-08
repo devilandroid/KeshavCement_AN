@@ -15,6 +15,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -182,7 +183,7 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 if (binding.otpMobileNumber.text.toString().isNullOrBlank()){
                     binding.otpMobileNumber.error = getString(R.string.enter_mobile_number)
                     binding.otpMobileNumber.requestFocus()
-                }else if (binding.otpMobileNumber.text.toString().length < 10){
+                }else if (binding.otpMobileNumber.text.toString().length < 10 || !binding.otpMobileNumber.text.toString().isDigitsOnly()){
                     binding.otpMobileNumber.text.clear()
                     binding.otpMobileNumber.error = getString(R.string.enter_valid_mobile_no)
                     binding.otpMobileNumber.requestFocus()
@@ -326,14 +327,14 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     binding.aadharNumber.error = getString(R.string.enter_valid_aadhar_number)
                     binding.aadharNumber.requestFocus()
 
-                }/*else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
+                }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) &&
-                    binding.gstNumber.text.toString().isNullOrBlank()){
+                    !binding.gstNumber.text.toString().trim().isNullOrBlank() && binding.gstNumber.text.toString().trim().length < 15){
 
-                    binding.gstNumber.error = getString(R.string.enter_gst_number)
+                    binding.gstNumber.error = getString(R.string.enter_valid_gst_number)
                     binding.gstNumber.requestFocus()
 
-                }*/else if (binding.address.text.toString().isNullOrBlank()){
+                }else if (binding.address.text.toString().isNullOrBlank()){
                     binding.address.error = getString(R.string.enter_your_address)
                     binding.address.requestFocus()
 

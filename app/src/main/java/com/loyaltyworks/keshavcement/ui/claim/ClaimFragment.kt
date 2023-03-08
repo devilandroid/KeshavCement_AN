@@ -200,7 +200,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                 if(Settings.Global.getInt(requireActivity().contentResolver, Settings.Global.AUTO_TIME) == 1) {
 
                     if (userTypeId == -1){
-                        Toast.makeText(requireContext(), getString(R.string.please_select_user_type), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.please_select_customer_type), Toast.LENGTH_SHORT).show()
                         return
                     }else if (dealerSubDealerId == "-1"){
                         Toast.makeText(requireContext(), getString(R.string.please_select_name), Toast.LENGTH_SHORT).show()
@@ -252,7 +252,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
                 if(Settings.Global.getInt(requireActivity().contentResolver, Settings.Global.AUTO_TIME) == 1) {
                     if (userTypeId == -1){
-                        Toast.makeText(requireContext(), getString(R.string.please_select_user_type), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.please_select_customer_type), Toast.LENGTH_SHORT).show()
                         return
                     }else if (dealerSubDealerId == "-1"){
                         Toast.makeText(requireContext(), getString(R.string.please_select_name), Toast.LENGTH_SHORT).show()

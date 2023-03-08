@@ -19,6 +19,7 @@ import com.loyaltyworks.keshavcement.databinding.FragmentQueryChatBinding
 import com.loyaltyworks.keshavcement.model.ObjCustomerAllQueryJson
 import com.loyaltyworks.keshavcement.model.PostChatStatusRequest
 import com.loyaltyworks.keshavcement.model.QueryChatElementRequest
+import com.loyaltyworks.keshavcement.ui.DashboardActivity
 import com.loyaltyworks.keshavcement.ui.support.adapter.QueryChatAdapter
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
@@ -218,8 +219,8 @@ class QueryChatFragment : Fragment(), View.OnClickListener, QueryChatAdapter.Cha
 
         } else {
             binding.queryDetailsFld.text.clear()
-            Snackbar.make(requireActivity().findViewById(android.R.id.content), "Something went wrong",
-                Snackbar.LENGTH_LONG).show()
+//            Snackbar.make(requireActivity().findViewById(android.R.id.content), "Type something", Snackbar.LENGTH_LONG).show()
+            (activity as DashboardActivity).snackBar("Type something", R.color.red)
         }
 
     }
