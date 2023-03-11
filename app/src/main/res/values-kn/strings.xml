@@ -76,7 +76,7 @@
     <string name="swipe_to_claim">Swipe to Claim</string>
     <string name="to">To</string>
     <string name="points">Points</string>
-    <string name="qty">Qty</string>
+    <string name="qty">Quantity</string>
     <string name="credited_points">Credited Points</string>
     <string name="my_earnings_filter">My Earnings Filter</string>
     <string name="view">View</string>
@@ -285,4 +285,6 @@
     <string name="enter_valid_gst_number">Enter valid GST number</string>
     <string name="enter_query_summary">Enter query summary</string>
     <string name="please_select_customer_type">Please select customer type !</string>
+    <string name="age_should_not_be_lesser_than">Age should not be lesser than 18 years</string>
+    <string name="catalogye_type">Catalogue Type</string>
 </resources>

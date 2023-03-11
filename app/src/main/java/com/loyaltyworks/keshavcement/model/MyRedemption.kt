@@ -777,3 +777,36 @@ data class ObjCatalogueee(
     @Json(name = "voucherCardName")
     val voucherCardName: Any? = null
 )
+
+@JsonClass(generateAdapter = true)
+data class StatusSpinnerRequest(
+    @Json(name = "ActionType")
+    val actionType: Int? = null
+)
+
+
+@JsonClass(generateAdapter = true)
+data class StatusSpinnerResponse(
+    @Json(name = "actionType")
+    val actionType: Int? = null,
+    @Json(name = "lstAttributesDetails")
+    val lstAttributesDetails: List<LstAttributesDetailStatus>? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class LstAttributesDetailStatus(
+    @Json(name = "attributeContents")
+    val attributeContents: Any? = null,
+    @Json(name = "attributeCurrencyId")
+    val attributeCurrencyId: Any? = null,
+    @Json(name = "attributeId")
+    var attributeId: Int? = null,
+    @Json(name = "attributeNames")
+    val attributeNames: Any? = null,
+    @Json(name = "attributeType")
+    val attributeType: String? = null,
+    @Json(name = "attributeValue")
+    var attributeValue: String? = null,
+    @Json(name = "totalEarning")
+    val totalEarning: Int? = null
+)

@@ -366,20 +366,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedSV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:clipToPadding="false"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 tools:listitem="@layout/row_product" />
-        </androidx.core.widget.NestedScrollView>
 
         <include
             android:id="@+id/no_data_fount"

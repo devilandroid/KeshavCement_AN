@@ -76,7 +76,7 @@
     <string name="swipe_to_claim">Swipe to Claim</string>
     <string name="to">To</string>
     <string name="points">Points</string>
-    <string name="qty">Qty</string>
+    <string name="qty">Quantity</string>
     <string name="credited_points">Credited Points</string>
     <string name="my_earnings_filter">My Earnings Filter</string>
     <string name="view">View</string>
@@ -239,7 +239,7 @@
     <string name="redeem_now">Redeem Now</string>
     <string name="wishlist">Wishlist</string>
     <string name="wishlist_details">Wishlist Details</string>
-    <string name="planner_has_been_removed_successfully">Redemption Planner has been removed successfully !</string>
+    <string name="planner_has_been_removed_successfully">Wishlist has been removed successfully !</string>
     <string name="remove">Remove</string>
     <string name="wishlist_summary">Wishlist Summary</string>
     <string name="redeemable_points_as_on_today">Redeemable points as on today</string>
@@ -286,4 +286,6 @@
     <string name="enter_valid_gst_number">Enter valid GST number</string>
     <string name="enter_query_summary">Enter query summary</string>
     <string name="please_select_customer_type">Please select customer type !</string>
+    <string name="age_should_not_be_lesser_than">Age should not be lesser than 18 years</string>
+    <string name="catalogye_type">Catalogue Type</string>
 </resources>

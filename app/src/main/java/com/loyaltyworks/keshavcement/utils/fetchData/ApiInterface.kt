@@ -264,5 +264,17 @@ interface ApiInterface {
     @POST("GetCityDetailsMobileApp")
     fun fetchCityListAsync(@Body cityListRequest: CityListRequest): Deferred<Response<CityListResponse>>
 
+    /*MyRedemption Details Api call */
+    @POST("GetCatalogueDetails")
+    fun getMyRedemptionDetailsAsync(@Body myRedemptionDetailsRequest: MyRedemptionDetailsRequest?):  Deferred<Response<MyRedemptionDetailsResponse>>
+
+    /*MyRedemption Status Api call */
+    @POST("GetCustomerRedemptionHistorydetails")
+    fun fetchRedemptionStatusListAsync(@Body redemptionHistoryRequest: RedemptionHistoryRequest?):  Deferred<Response<RedemptionHistoryResponse>>
+
+    /* Redemption Status call*/
+    @POST("GetAttributeDetails")
+    fun getStatusSpinnerData(@Body statusSpinnerRequest: StatusSpinnerRequest): Deferred<Response<StatusSpinnerResponse>>
+
 
 }

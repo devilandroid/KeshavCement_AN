@@ -272,7 +272,8 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
                     val dealerSubDealerListName = ArrayList<String>()
 
                     for (commonSpinner in dealerSubDealerLists) {
-                        dealerSubDealerListName.add(commonSpinner.firstName!!)
+                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.mobile + " )")
+//                        dealerSubDealerListName.add(commonSpinner.firstName!!)
                     }
 
                     val commonSpinner = CommonSpinners()

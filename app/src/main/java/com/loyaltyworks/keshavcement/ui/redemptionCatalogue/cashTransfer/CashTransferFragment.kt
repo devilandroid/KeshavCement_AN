@@ -80,10 +80,11 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
 
 
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
-            requireActivity().toolbar.title = getString(R.string.cash_voucher)
+//            requireActivity().toolbar.title = getString(R.string.cash_voucher)
+                     /*** Page Name setting in Dashboard Activity  ***/
             categoryId = 9
         }else{
-            requireActivity().toolbar.title = getString(R.string.cash_transfer)
+//            requireActivity().toolbar.title = getString(R.string.cash_transfer)
             categoryId = 8
         }
 

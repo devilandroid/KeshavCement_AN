@@ -44,6 +44,10 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
             holder.remarks.text = data.bonusName.toString()
         }else if (data.transactionType == "Referral"){
             holder.remarks.text =  "Referral Complimentary"
+
+        }else if (data.transactionType == "Enrollment Complimentary"){
+            holder.remarks.text =  "Enrollment Complimentary"
+
         }else{
             if (data.invoiceNo.toString() == "--"){
                 holder.remarks.text =  "Reward Adjusted"

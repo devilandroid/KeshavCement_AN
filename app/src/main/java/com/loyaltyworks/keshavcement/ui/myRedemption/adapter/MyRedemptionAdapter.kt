@@ -15,8 +15,11 @@ import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 
 
-class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemReq>) : RecyclerView.Adapter<MyRedemptionAdapter.ViewHolder>() {
+class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemReq>,var onItemClickListener: OnItemDetailClickCallBack) : RecyclerView.Adapter<MyRedemptionAdapter.ViewHolder>() {
 
+    interface OnItemDetailClickCallBack {
+        fun onProductListDetailsItemClickResponse(itemView: View, rewardTransDetails: ObjCatalogueRedemReq, )
+    }
 
     override fun getItemViewType(position: Int): Int {
         return position
@@ -34,6 +37,7 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
         val productName = binding.productName
         val points = binding.points
         val quantity = binding.quantity
+        val referenceNo = binding.referenceNo
 
     }
 
@@ -53,6 +57,7 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
         holder.points.text = rewardTransDetails.redemptionPoints.toString()
         holder.quantity.text = rewardTransDetails.quantity.toString()
         holder.customerName.text = rewardTransDetails.fullName.toString()
+        holder.referenceNo.text = rewardTransDetails.redemptionRefno.toString()
 
         Glide.with(holder.itemView.context).asBitmap()
             .error(R.drawable.ic_default_img)
@@ -213,6 +218,14 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
                 holder.category.text = " / "
         } else {
             holder.category.visibility = View.GONE
+        }
+
+        if (rewardTransDetails.redemptionType!! != 3) {
+            holder.itemView.setOnClickListener { v ->
+                if (BlockMultipleClick.click()) return@setOnClickListener
+
+                onItemClickListener.onProductListDetailsItemClickResponse(v, rewardTransDetails)
+            }
         }
 
     }

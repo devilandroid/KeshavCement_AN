@@ -643,4 +643,33 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
         )
     }
 
+    /*My Redemption Details Request callback*/
+    suspend fun getRedemptionDetailData(myRedemptionDetailsRequest: MyRedemptionDetailsRequest): MyRedemptionDetailsResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getMyRedemptionDetailsAsync(myRedemptionDetailsRequest).await()
+            },
+            error = "Error MyRedemption Details Trigger"
+        )
+    }
+
+    /*My Redemption Status Request callback*/
+    suspend fun getRedemptionStatusDetailData(redemptionHistoryRequest: RedemptionHistoryRequest): RedemptionHistoryResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.fetchRedemptionStatusListAsync(redemptionHistoryRequest).await()
+            },
+            error = "Error Redemption Status Trigger"
+        )
+    }
+
+    /* Redemption Status callback*/
+    suspend fun getStatusSpinnerData(statusSpinnerRequest: StatusSpinnerRequest): StatusSpinnerResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getStatusSpinnerData(statusSpinnerRequest).await()
+            },
+            error = "Error status spinner  Trigger"
+        )
+    }
 }
