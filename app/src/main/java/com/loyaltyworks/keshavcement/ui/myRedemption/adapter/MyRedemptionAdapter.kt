@@ -29,7 +29,6 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
      class ViewHolder(binding: RowMyRedemptionsBinding, position: Int) :
         RecyclerView.ViewHolder(binding.root) {
         val date = binding.date
-        val customerName = binding.customerName
         val status = binding.status
         val prodImg = binding.prodImg
         val catalogueType = binding.catalogueType
@@ -56,8 +55,7 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
         holder.date.text = AppController.dateAPIFormat(rewardTransDetails.jRedemptionDate.toString().split(" ")[0])
         holder.points.text = rewardTransDetails.redemptionPoints.toString()
         holder.quantity.text = rewardTransDetails.quantity.toString()
-        holder.customerName.text = rewardTransDetails.fullName.toString()
-        holder.referenceNo.text = rewardTransDetails.redemptionRefno.toString()
+        holder.referenceNo.text = " " + rewardTransDetails.redemptionRefno.toString()
 
         Glide.with(holder.itemView.context).asBitmap()
             .error(R.drawable.ic_default_img)

@@ -22,6 +22,7 @@ import com.loyaltyworks.keshavcement.databinding.FragmentPendingClaimRequestBind
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.ui.login.fragment.LoginRegistrationViewModel
 import com.loyaltyworks.keshavcement.ui.pendingClaimRequest.adapter.PendingClaimRequestAdapter
+import com.loyaltyworks.keshavcement.ui.purchaseRequest.PurchaseRequestViewModel
 import com.loyaltyworks.keshavcement.utils.EndlessRecyclerViewScrollListener
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
@@ -34,6 +35,7 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
     private lateinit var binding: FragmentPendingClaimRequestBinding
     private lateinit var viewModel: PendingClaimViewModel
     private lateinit var loginViewModel: LoginRegistrationViewModel
+    private lateinit var stockViewModel: PurchaseRequestViewModel
     var page = 1
     var limit = 10
 
@@ -50,6 +52,9 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
     private lateinit var OTPNumber: String
     var successMsg: String = ""
 
+    private lateinit var clickedItemData: LstTransactionApprovalDetail
+    private lateinit var approveStatus: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,6 +62,7 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this).get(PendingClaimViewModel::class.java)
         loginViewModel = ViewModelProvider(this).get(LoginRegistrationViewModel::class.java)
+        stockViewModel = ViewModelProvider(this).get(PurchaseRequestViewModel::class.java)
         binding = FragmentPendingClaimRequestBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -207,10 +213,15 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
         status: String,
         lstTransactionApprovalDetails: LstTransactionApprovalDetail
     ) {
+        clickedItemData = lstTransactionApprovalDetails
+        approveStatus = status
+        /*** Checking Stock Availability ***/
+        checkStockStatusApi(lstTransactionApprovalDetails.updatedQuantity,lstTransactionApprovalDetails.prodCode!!)
 
-        SendOtpRequest(lstTransactionApprovalDetails)
+    }
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),lstTransactionApprovalDetails.mobile.toString(),
+    private fun approveApiCall(clickedItemData: LstTransactionApprovalDetail) {
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),getString(R.string.pending_claims),getString(R.string.enter_otp_to_complete_claim),clickedItemData.mobile.toString(),
             "Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
@@ -221,8 +232,8 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                         successMsg = getString(R.string.approved_the_purchase)
 
                         /*** Call Approve Api ***/
-                        approveRejectClaimApi(lstTransactionApprovalDetails.updatedQuantity, lstTransactionApprovalDetails.ltyTranTempID!!,
-                            lstTransactionApprovalDetails.enteredRemarks,status)
+                        approveRejectClaimApi(clickedItemData.updatedQuantity, clickedItemData.ltyTranTempID!!,
+                            clickedItemData.enteredRemarks,approveStatus)
 
                     }else{
                         Toast.makeText(requireContext(),getString(R.string.invalid_otp),Toast.LENGTH_SHORT).show()
@@ -230,13 +241,11 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 }
 
                 override fun resendOTP() {
-                    SendOtpRequest(lstTransactionApprovalDetails)
+                    SendOtpRequest(clickedItemData)
                 }
             })
 
-
     }
-
 
 
     override fun onRejectClickResponse(
@@ -280,6 +289,26 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
 */
     }
 
+
+    private fun checkStockStatusApi(updatedQuantity: Int, ltyTranTempID: String) {
+        LoadingDialogue.showDialog(requireContext())
+        stockViewModel.getCheckStockData(
+            SubmitPurchaseRequest(
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
+                ritailerId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
+                approvalStatus = "5",
+                productSaveDetailList = listOf(
+                    ProductSaveDetail(
+                        productCode = ltyTranTempID.toString(),
+                        quantity = updatedQuantity.toString()
+                    )
+                )
+
+            )
+        )
+    }
+
+
     private fun SendOtpRequest(lstTransactionApprovalDetails: LstTransactionApprovalDetail) {
         loginViewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
@@ -312,6 +341,31 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        /*** Check Stock Avalability Observer ***/
+        stockViewModel.checkStockLiveData.observe(viewLifecycleOwner, Observer {
+            LoadingDialogue.dismissDialog()
+            if (it != null && it.pointsBalance != null){
+
+                if (it.pointsBalance == 0){
+                    LoadingDialogue.dismissDialog()
+                    Toast.makeText(requireContext(), getString(R.string.insuffcient_quantity), Toast.LENGTH_SHORT).show()
+
+                }else if (it.pointsBalance == 1){
+                    SendOtpRequest(clickedItemData)
+                    approveApiCall(clickedItemData)
+
+                }else{
+                    LoadingDialogue.dismissDialog()
+                    Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+                }
+
+            }else{
+                LoadingDialogue.dismissDialog()
+                Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+            }
+        })
+
 
         /***  OTP observer ***/
         loginViewModel.saveAndGetOTPDetailsResponse.observe(viewLifecycleOwner, Observer {

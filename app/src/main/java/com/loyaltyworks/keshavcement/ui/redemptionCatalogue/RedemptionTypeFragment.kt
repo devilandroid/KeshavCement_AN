@@ -1,6 +1,7 @@
 package com.loyaltyworks.keshavcement.ui.redemptionCatalogue
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,8 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
         binding.wishlist.setOnClickListener(this)
         binding.evouchers.setOnClickListener(this)
         binding.cashtransfer.setOnClickListener(this)
+
+        Log.d("hbdfhbfhb","customer type : " + PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType))
 
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
             binding.cashTransferTxt.text = getString(R.string.cash_voucher)

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,20 +36,25 @@
                     android:textSize="10sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_weight="5"
                 android:gravity="end">
                 <TextView
-                    android:id="@+id/reference_no"
+                    android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="5dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
                     android:text="-"
-                    android:textColor="@color/dark"
+                    android:textColor="@color/black"
                     android:textSize="12sp" />
-            </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
         </LinearLayout>
 
 
@@ -63,44 +68,25 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:minHeight="30dp"
-                android:layout_marginEnd="10dp"
                 android:layout_weight="1.5"
-                android:background="@drawable/refer_edttxt_bg"
-                android:backgroundTint="@color/color11"
-                android:gravity="center_vertical"
+                android:gravity="start"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/to"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/reference_no"
                     android:textSize="12sp" />
-
                 <TextView
-                    android:id="@+id/customer_name"
+                    android:id="@+id/reference_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="-"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/dark"
+                    android:textSize="12sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:minHeight="30dp"
-                android:layout_weight="0.5"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center"
-                android:text="-"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
 
         </LinearLayout>
         
@@ -114,6 +100,7 @@
                 android:layout_width="105dp"
                 android:layout_height="105dp"
                 android:layout_gravity="center"
+                android:layout_margin="2dp"
                 app:cardCornerRadius="10dp">
 
                 <ImageView

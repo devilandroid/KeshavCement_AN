@@ -227,7 +227,7 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                                 binding.forgotUserName.text.clear()
                             }
                         })
-                    }else if (it == 4){
+                    }else if (it == 4 || it == 0){
                         LoadingDialogue.dismissDialog()
                         AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_account_is_in_pending_kindly_contact_your_administrator),object:
                             AppController.SuccessCallBack{

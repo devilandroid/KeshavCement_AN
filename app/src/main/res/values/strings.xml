@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Keshav Cement</string>
+    <string name="app_name">The Club</string>
 
     <string name="otp">OTP</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
@@ -264,7 +264,7 @@
     <string name="failed_to_save_worksite_details">Failed to create new worksite!</string>
     <string name="upload_image">Upload image</string>
     <string name="refered_successfully">Successfully referred to your friend!</string>
-    <string name="already_refered_to_this_no">This mobile number already referred</string>
+    <string name="already_refered_to_this_no">This mobile number already exist</string>
     <string name="enter_otp">Enter OTP!</string>
     <string name="address_not_found">Address not found!</string>
     <string name="cash_transfer_history_filter">Cash Transfer History Filter</string>
@@ -288,4 +288,11 @@
     <string name="please_select_customer_type">Please select customer type !</string>
     <string name="age_should_not_be_lesser_than">Age should not be lesser than 18 years</string>
     <string name="catalogye_type">Catalogue Type</string>
+    <string name="reference_no">Ref. No.</string>
+    <string name="pending_claims">Pending Claims</string>
+    <string name="enter_otp_to_complete_claim">Enter the OTP to Complete Claim</string>
+    <string name="enter_otp_to_complete_the_process">Enter OTP to complete the process</string>
+    <string name="enter_otp_to_reject">Enter OTP to reject</string>
+    <string name="redemption">Redemption</string>
+    <string name="enter_otp_to_complete_the_redemption">Enter OTP to complete the redemption process</string>
 </resources>

@@ -560,7 +560,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     LoadingDialogue.dismissDialog()
                     Toast.makeText(requireContext(), getString(R.string.insuffcient_quantity), Toast.LENGTH_SHORT).show()
 
-                }else if (it.pointsBalance > 0){
+                }else if (it.pointsBalance == 1){
                     SendOTPRequest()
 
                 }else{

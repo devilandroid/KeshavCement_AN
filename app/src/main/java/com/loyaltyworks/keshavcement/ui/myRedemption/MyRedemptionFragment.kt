@@ -47,7 +47,6 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
     private var ToDate: String =""
 
     var catalogeTypeList = mutableListOf<CommonStatusSpinner>()
-    private lateinit var mSelectedCatalogueTYpe:CommonStatusSpinner
     var statusId: Int = -1
 
     var page = 1
@@ -341,6 +340,13 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
                 binding.toDateTxt.text = ""
                 binding.fromDateTxt.hint = getString(R.string.select_from_date)
                 binding.toDateTxt.hint = getString(R.string.select_to_date)
+                binding.statusSpinner.setSelection(0)
+                binding.redeemTypeSpinner.setSelection(0)
+
+                listFull = false
+                isLoaded = false
+
+                currentList.clear()
                 callApi(1)
 
                 binding.filterLayout.visibility = View.GONE
@@ -367,6 +373,36 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
     }
 
 
+
+
+    override fun onProductListDetailsItemClickResponse(
+        itemView: View,
+        rewardTransDetails: ObjCatalogueRedemReq
+    ) {
+        currentList.clear()
+
+        val bundle = Bundle()
+        bundle.putSerializable("myRedemptionDetails", rewardTransDetails)
+        itemView.findNavController().navigate(R.id.action_myRedemptionFragment_to_myRedemptionDetailsFragment, bundle)
+    }
+
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when((parent as Spinner).id){
+            R.id.redeem_type_spinner -> {
+                statusId = (parent.getItemAtPosition(position) as CommonStatusSpinner).id!!
+                Log.d("fdsfsdf", "redeem type id : " + statusId)
+            }
+
+            R.id.status_spinner -> {
+                selectedStatusId = (parent.getItemAtPosition(position) as LstAttributesDetailStatus).attributeId.toString()
+            }
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
 
     /**This is required here for handling action bar navigate up button*/
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -399,33 +435,4 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
         requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
-    override fun onProductListDetailsItemClickResponse(
-        itemView: View,
-        rewardTransDetails: ObjCatalogueRedemReq
-    ) {
-        currentList.clear()
-
-        val bundle = Bundle()
-        bundle.putSerializable("myRedemptionDetails", rewardTransDetails)
-        itemView.findNavController().navigate(R.id.action_myRedemptionFragment_to_myRedemptionDetailsFragment, bundle)
-    }
-
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        when((parent as Spinner).id){
-            R.id.redeem_type_spinner -> {
-                mSelectedCatalogueTYpe = parent.getItemAtPosition(position) as CommonStatusSpinner
-                statusId = mSelectedCatalogueTYpe.id!!
-                Log.d("fdsfsdf", mSelectedCatalogueTYpe.productName!!)
-            }
-
-            R.id.status_spinner -> {
-                selectedStatusId = (parent.getItemAtPosition(position) as LstAttributesDetailStatus).attributeId.toString()
-            }
-        }
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-    }
 }

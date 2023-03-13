@@ -24,7 +24,6 @@
     <application
         android:name=".ApplicationClass"
         android:allowBackup="false"
-        android:configChanges="locale|orientation"
         android:fullBackupContent="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"

@@ -130,7 +130,7 @@ data class LstTransactionApprovalDetail(
     @Json(name = "pointsCredited")
     val pointsCredited: Int? = null,
     @Json(name = "prodCode")
-    val prodCode: Any? = null,
+    val prodCode: String? = null,
     @Json(name = "prodDescription")
     val prodDescription: Any? = null,
     @Json(name = "prodName")
