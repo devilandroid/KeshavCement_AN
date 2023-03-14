@@ -227,6 +227,16 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                                 binding.forgotUserName.text.clear()
                             }
                         })
+                    }else if (it == 4 || it == 0){
+                        LoadingDialogue.dismissDialog()
+                        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_account_is_in_pending_kindly_contact_your_administrator),object:
+                            AppController.SuccessCallBack{
+                            override fun onOk() {
+                                binding.userName.text.clear()
+                                binding.password.text.clear()
+                                binding.forgotUserName.text.clear()
+                            }
+                        })
                     } else {
                         LoadingDialogue.dismissDialog()
 
@@ -432,16 +442,16 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
             R.id.forgot_submit_otp ->{
                 if (binding.forgotUserName.text.toString().isNullOrEmpty()) {
                     binding.forgotUserName.requestFocus()
-                    binding.forgotUserName.error = getString(R.string.enter_mobile_number)
+                    binding.forgotUserName.error = getString(R.string.enter_mobile_number_membership_id)
                     return
                 }
 
-                if (binding.forgotUserName.text.toString().length != 10) {
+                /*if (binding.forgotUserName.text.toString().length != 10) {
                     binding.forgotUserName.text.clear()
                     binding.forgotUserName.requestFocus()
                     binding.forgotUserName.error = getString(R.string.enter_valid_mobile_no)
                     return
-                }
+                }*/
 
                 if (binding.forgotSubmitTxt.text.toString() == "Generate OTP") {
                     if (::timers.isInitialized){
@@ -528,7 +538,7 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
         LoadingDialogue.showDialog(requireContext())
         viewModel.getMobileEmailExistenceCheck(
             CustomerExistenceRequest(
-                actionType = "65",
+                actionType = "61",
                 actorId = PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType),
                 location = (Location(
                     userName = userName,

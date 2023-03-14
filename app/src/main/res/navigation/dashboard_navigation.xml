@@ -49,7 +49,11 @@
         android:id="@+id/myRedemptionFragment"
         android:name="com.loyaltyworks.keshavcement.ui.myRedemption.MyRedemptionFragment"
         android:label="@string/my_redemptions"
-        tools:layout="@layout/fragment_my_redemption" />
+        tools:layout="@layout/fragment_my_redemption" >
+        <action
+            android:id="@+id/action_myRedemptionFragment_to_myRedemptionDetailsFragment"
+            app:destination="@id/myRedemptionDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/promotionsFragment"
         android:name="com.loyaltyworks.keshavcement.ui.offersAndPromotions.PromotionsFragment"
@@ -308,4 +312,9 @@
         android:name="com.loyaltyworks.keshavcement.ui.terms.TermsAndConditionFragment"
         android:label="@string/terms_and_conditions"
         tools:layout="@layout/fragment_terms_and_condition"/>
+    <fragment
+        android:id="@+id/myRedemptionDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.myRedemption.MyRedemptionDetailsFragment"
+        android:label="@string/my_redemption"
+        tools:layout="@layout/fragment_my_redemption_details" />
 </navigation>

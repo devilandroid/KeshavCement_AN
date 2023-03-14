@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Keshav Cement</string>
+    <string name="app_name">The Club</string>
 
     <string name="otp">OTP</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
@@ -76,7 +76,7 @@
     <string name="swipe_to_claim">Swipe to Claim</string>
     <string name="to">To</string>
     <string name="points">Points</string>
-    <string name="qty">Qty</string>
+    <string name="qty">Quantity</string>
     <string name="credited_points">Credited Points</string>
     <string name="my_earnings_filter">My Earnings Filter</string>
     <string name="view">View</string>
@@ -239,7 +239,7 @@
     <string name="redeem_now">Redeem Now</string>
     <string name="wishlist">Wishlist</string>
     <string name="wishlist_details">Wishlist Details</string>
-    <string name="planner_has_been_removed_successfully">Redemption Planner has been removed successfully !</string>
+    <string name="planner_has_been_removed_successfully">Wishlist has been removed successfully !</string>
     <string name="remove">Remove</string>
     <string name="wishlist_summary">Wishlist Summary</string>
     <string name="redeemable_points_as_on_today">Redeemable points as on today</string>
@@ -264,7 +264,7 @@
     <string name="failed_to_save_worksite_details">Failed to create new worksite!</string>
     <string name="upload_image">Upload image</string>
     <string name="refered_successfully">Successfully referred to your friend!</string>
-    <string name="already_refered_to_this_no">This mobile number already referred</string>
+    <string name="already_refered_to_this_no">This mobile number already exist</string>
     <string name="enter_otp">Enter OTP!</string>
     <string name="address_not_found">Address not found!</string>
     <string name="cash_transfer_history_filter">Cash Transfer History Filter</string>
@@ -283,4 +283,16 @@
     <string name="select_dob">Select Birth Date</string>
     <string name="select_anniversary_date">Select Anniversary Date</string>
     <string name="your_entered_mobile_already_exist">Your Entered Mobile Number is already exist, please try with new number</string>
+    <string name="enter_valid_gst_number">Enter valid GST number</string>
+    <string name="enter_query_summary">Enter query summary</string>
+    <string name="please_select_customer_type">Please select customer type !</string>
+    <string name="age_should_not_be_lesser_than">Age should not be lesser than 18 years</string>
+    <string name="catalogye_type">Catalogue Type</string>
+    <string name="reference_no">Ref. No.</string>
+    <string name="pending_claims">Pending Claims</string>
+    <string name="enter_otp_to_complete_claim">Enter the OTP to Complete Claim</string>
+    <string name="enter_otp_to_complete_the_process">Enter OTP to complete the process</string>
+    <string name="enter_otp_to_reject">Enter OTP to reject</string>
+    <string name="redemption">Redemption</string>
+    <string name="enter_otp_to_complete_the_redemption">Enter OTP to complete the redemption process</string>
 </resources>

@@ -15,6 +15,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,7 @@ import com.loyaltyworks.keshavcement.model.adapter.CustomerTypeSpinnerAdapter
 import com.loyaltyworks.keshavcement.model.adapter.StateAdapter
 import com.loyaltyworks.keshavcement.ui.CommonViewModel
 import com.loyaltyworks.keshavcement.ui.customerType.CustomerTypeViewModel
+import com.loyaltyworks.keshavcement.ui.login.LoginActivity
 import com.loyaltyworks.keshavcement.utils.*
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
@@ -182,7 +184,7 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 if (binding.otpMobileNumber.text.toString().isNullOrBlank()){
                     binding.otpMobileNumber.error = getString(R.string.enter_mobile_number)
                     binding.otpMobileNumber.requestFocus()
-                }else if (binding.otpMobileNumber.text.toString().length < 10){
+                }else if (binding.otpMobileNumber.text.toString().length < 10 || !binding.otpMobileNumber.text.toString().isDigitsOnly()){
                     binding.otpMobileNumber.text.clear()
                     binding.otpMobileNumber.error = getString(R.string.enter_valid_mobile_no)
                     binding.otpMobileNumber.requestFocus()
@@ -195,7 +197,9 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 }else{
 
                     if (binding.otpView.otp.toString().isNullOrEmpty()) {
-                        Toast.makeText(requireContext(),"Please enter OTP", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(),"Please enter OTP", Toast.LENGTH_SHORT).show()
+                        Keyboard.hideKeyboard(requireContext(),binding.mRegisterHost)
+                        (activity as LoginActivity).snackBar(getString(R.string.enter_otp),R.color.red)
                     }else if (binding.otpView.otp.toString().length == 6 && binding.otpView.otp.toString() =="123456" /*OTP*/){
                         Keyboard.hideKeyboard(requireContext(),binding.mRegisterHost)
                         StateRequest()
@@ -213,7 +217,9 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                             setCustomerTypeName()
                         }
                     }else{
-                        Toast.makeText(requireContext(), getString(R.string.invalid_otp), Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), getString(R.string.invalid_otp), Toast.LENGTH_SHORT).show()
+                        Keyboard.hideKeyboard(requireContext(),binding.mRegisterHost)
+                        (activity as LoginActivity).snackBar(getString(R.string.invalid_otp),R.color.red)
                     }
 
 
@@ -250,7 +256,8 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 if (BlockMultipleClick.click()) return
 
                 if (binding.referCodeEdt.text.toString().isNullOrBlank()){
-                    Toast.makeText(requireContext(), getString(R.string.please_enter_referral_code), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.please_enter_referral_code), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.please_enter_referral_code),R.color.red)
                 }else{
                     referalCodeValidApi(binding.referCodeEdt.text.toString())
                 }
@@ -268,7 +275,8 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     val day = Integer.parseInt(it.split("/")[0])
 
                     if(getAge(year,month,day)<18){
-                        Toast.makeText(requireContext(),"Age should not be lesser than 18 years",Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(),"Age should not be lesser than 18 years",Toast.LENGTH_SHORT).show()
+                        (activity as LoginActivity).snackBar(getString(R.string.age_should_not_be_lesser_than),R.color.red)
                     }else{
                         binding.birthDate.text = it.toString()
                         birthdate = it
@@ -290,26 +298,34 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 val email: String = binding.email.text.toString()
 
                 if (binding.customerTypeName.text.toString().isNullOrBlank()){
-                    Toast.makeText(requireContext(), "Customer Type should not be empty", Toast.LENGTH_SHORT).show()
-
+//                    Toast.makeText(requireContext(), "Customer Type should not be empty", Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.customer_type_mandatory),R.color.red)
                 }else if (binding.name.text.toString().isNullOrBlank()){
-                    binding.name.error = getString(R.string.enter_your_name)
+//                    binding.name.error = getString(R.string.enter_your_name)
                     binding.name.requestFocus()
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_your_name),R.color.red)
+
 
                 }else if (binding.firmName.text.toString().isNullOrBlank()){
-                    binding.firmName.error = getString(R.string.enter_firm_name)
+//                    binding.firmName.error = getString(R.string.enter_firm_name)
                     binding.firmName.requestFocus()
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_firm_name),R.color.red)
+
 
                 }else if (!email.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    binding.email.error = requireContext().resources.getString(R.string.enter_valid_emailid)
+//                    binding.email.error = requireContext().resources.getString(R.string.enter_valid_emailid)
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_valid_emailid),R.color.red)
+                    binding.email.requestFocus()
 
                 }else if (binding.mobile.text.toString().isNullOrBlank()){
-                    binding.mobile.error = getString(R.string.enter_mobile_number)
+//                    binding.mobile.error = getString(R.string.enter_mobile_number)
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_mobile_number),R.color.red)
                     binding.mobile.requestFocus()
 
                 }else if (binding.mobile.text.toString().length < 10){
                     binding.mobile.text.clear()
-                    binding.mobile.error = getString(R.string.enter_valid_mobile_no)
+//                    binding.mobile.error = getString(R.string.enter_valid_mobile_no)
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_valid_mobile_no),R.color.red)
                     binding.mobile.requestFocus()
 
                 }/*else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
@@ -323,37 +339,45 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) &&
                     !binding.aadharNumber.text.toString().isNullOrBlank() && binding.aadharNumber.text.toString().length < 12){
 
-                    binding.aadharNumber.error = getString(R.string.enter_valid_aadhar_number)
+//                    binding.aadharNumber.error = getString(R.string.enter_valid_aadhar_number)
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_valid_aadhar_number),R.color.red)
                     binding.aadharNumber.requestFocus()
 
-                }/*else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
+                }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) &&
-                    binding.gstNumber.text.toString().isNullOrBlank()){
+                    !binding.gstNumber.text.toString().trim().isNullOrBlank() && binding.gstNumber.text.toString().trim().length < 15){
 
-                    binding.gstNumber.error = getString(R.string.enter_gst_number)
+//                    binding.gstNumber.error = getString(R.string.enter_valid_gst_number)
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_valid_gst_number),R.color.red)
                     binding.gstNumber.requestFocus()
 
-                }*/else if (binding.address.text.toString().isNullOrBlank()){
-                    binding.address.error = getString(R.string.enter_your_address)
+                }else if (binding.address.text.toString().isNullOrBlank()){
+//                    binding.address.error = getString(R.string.enter_your_address)
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_your_address),R.color.red)
                     binding.address.requestFocus()
 
                 }else if (binding.pincode.text.toString().isNullOrBlank()){
-                    binding.pincode.error = getString(R.string.enter_pin_code)
+//                    binding.pincode.error = getString(R.string.enter_pin_code)
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_pin_code),R.color.red)
                     binding.pincode.requestFocus()
 
                 }else if (!binding.pincode.text.toString().isNullOrBlank() && binding.pincode.text.toString().length < 6){
                     binding.pincode.text.clear()
-                    binding.pincode.error = getString(R.string.invalid_pin_code)
+//                    binding.pincode.error = getString(R.string.invalid_pin_code)
+                    (activity as LoginActivity).snackBar(getString(R.string.invalid_pin_code),R.color.red)
                     binding.pincode.requestFocus()
 
                 }else if (birthdate.isNullOrEmpty()){
-                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.select_dob),R.color.red)
 
                 }else if (mSelectedState!!.stateId == -1){
-                    Toast.makeText(requireContext(), getString(R.string.select_your_state), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.select_your_state), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.select_your_state),R.color.red)
 
                 }else if (districtId == "-1" /*mSelectedCity!!.cityId == -1*/){
-                    Toast.makeText(requireContext(), getString(R.string.select_your_district), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.select_your_district), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.select_your_district),R.color.red)
 
                 }/*else if (talukId == "-1" *//*mSelectedCity!!.cityId == -1*//*){
                     Toast.makeText(requireContext(), getString(R.string.select_your_taluk), Toast.LENGTH_SHORT).show()

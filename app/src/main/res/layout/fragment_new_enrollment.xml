@@ -126,7 +126,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
                                 android:fontFamily="@font/poppins_regular"
-                                android:inputType="text"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_ "
                                 android:paddingStart="15dp"
                                 android:paddingEnd="20dp"
                                 android:hint="Enter Name"

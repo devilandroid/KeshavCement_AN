@@ -200,7 +200,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                 if(Settings.Global.getInt(requireActivity().contentResolver, Settings.Global.AUTO_TIME) == 1) {
 
                     if (userTypeId == -1){
-                        Toast.makeText(requireContext(), getString(R.string.please_select_user_type), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.please_select_customer_type), Toast.LENGTH_SHORT).show()
                         return
                     }else if (dealerSubDealerId == "-1"){
                         Toast.makeText(requireContext(), getString(R.string.please_select_name), Toast.LENGTH_SHORT).show()
@@ -218,8 +218,9 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                         if (::timers.isInitialized){
                             timers.cancel()
                         }
-                        SendOTPRequest()
 
+                        /*** Checking Stock Availability ***/
+                        checkStockStatusApi()
 
                     }else{
                         if (binding.otpViewClaim.otp.toString().isNullOrEmpty()) {
@@ -252,7 +253,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
                 if(Settings.Global.getInt(requireActivity().contentResolver, Settings.Global.AUTO_TIME) == 1) {
                     if (userTypeId == -1){
-                        Toast.makeText(requireContext(), getString(R.string.please_select_user_type), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.please_select_customer_type), Toast.LENGTH_SHORT).show()
                         return
                     }else if (dealerSubDealerId == "-1"){
                         Toast.makeText(requireContext(), getString(R.string.please_select_name), Toast.LENGTH_SHORT).show()
@@ -283,6 +284,24 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
             }
         }
+    }
+
+    private fun checkStockStatusApi() {
+        LoadingDialogue.showDialog(requireContext())
+        viewModel.getCheckStockData(
+            SubmitPurchaseRequest(
+                actorId = ActorId,
+                ritailerId = ActorId,
+                approvalStatus = "5",
+                productSaveDetailList = listOf(
+                    ProductSaveDetail(
+                        productCode = productCode,
+                        quantity = binding.qtyTextview.text.toString()
+                    )
+                )
+
+            )
+        )
     }
 
     private fun SendOTPRequest() {
@@ -389,7 +408,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
             R.id.product_spinner ->{
                 productId = _productList[position].attributeId.toString()
-                productCode = _productList[position].attributeValue.toString()
+                productCode = _productList[position].attributeContents.toString()
                 Log.d("bhbrfhrb","product ID : " + productId)
             }
         }
@@ -531,6 +550,28 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                 }
             }
 
+        })
+
+        /*** Check Stock Avalability Observer ***/
+        viewModel.checkStockLiveData.observe(viewLifecycleOwner, Observer {
+            if (it != null && it.pointsBalance != null){
+
+                if (it.pointsBalance == 0){
+                    LoadingDialogue.dismissDialog()
+                    Toast.makeText(requireContext(), getString(R.string.insuffcient_quantity), Toast.LENGTH_SHORT).show()
+
+                }else if (it.pointsBalance == 1){
+                    SendOTPRequest()
+
+                }else{
+                    LoadingDialogue.dismissDialog()
+                    Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+                }
+
+            }else{
+                LoadingDialogue.dismissDialog()
+                Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+            }
         })
 
         /*** Submit Purchase Request Observer ***/

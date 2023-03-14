@@ -33,22 +33,31 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
         val data = lstRewardTransJsonDetail[position]
 
         holder.date.text =  AppController.dateAPIFormat(data.jTranDate.toString().split(" ")[0])
-        holder.creditedPoints.text = "+" + data.rewardPoints!!.toInt().toString()
+        holder.creditedPoints.text = data.rewardPoints!!.toInt().toString()
         holder.prodName.text = data.prodName
         holder.time.text = data.jTranDate.toString().split(" ")[1]
 
-        holder.customerType.text = PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].customerType
-        holder.custName.text = PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].firstName
+        if (data.loyaltyId!!.contains("~")){
+            holder.customerType.text = data.loyaltyId!!.split("~")[2]
+            holder.custName.text = data.loyaltyId!!.split("~")[1]
+        }else{
+            holder.customerType.text = PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].customerType
+            holder.custName.text = PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].firstName
+        }
 
         if (data.transactionType == "BONUS"){
             holder.remarks.text = data.bonusName.toString()
         }else if (data.transactionType == "Referral"){
             holder.remarks.text =  "Referral Complimentary"
+
+        }else if (data.transactionType == "Enrollment Complimentary"){
+            holder.remarks.text =  "Enrollment Complimentary"
+
         }else{
             if (data.invoiceNo.toString() == "--"){
                 holder.remarks.text =  "Reward Adjusted"
             }else{
-                holder.remarks.text =  data.invoiceNo.toString()
+                holder.remarks.text =  data.remarks.toString()
             }
 
         }

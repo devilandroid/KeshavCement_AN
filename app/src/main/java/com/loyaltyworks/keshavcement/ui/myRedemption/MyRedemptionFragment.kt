@@ -1,29 +1,32 @@
 package com.loyaltyworks.keshavcement.ui.myRedemption
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.AdapterView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentMyRedemptionBinding
-import com.loyaltyworks.keshavcement.model.CommonStatusSpinner
-import com.loyaltyworks.keshavcement.model.MyRedemptionRequest
-import com.loyaltyworks.keshavcement.model.ObjCatalogueDetails
-import com.loyaltyworks.keshavcement.model.ObjCatalogueRedemReq
-import com.loyaltyworks.keshavcement.ui.enrollment.EnrollmentViewModel
+import com.loyaltyworks.keshavcement.model.*
+import com.loyaltyworks.keshavcement.model.adapter.SpinnerCommonStatusAdapter
+import com.loyaltyworks.keshavcement.model.adapter.StatusSpinnerAdapter
 import com.loyaltyworks.keshavcement.ui.myRedemption.adapter.MyRedemptionAdapter
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.DatePickerBox
@@ -33,7 +36,7 @@ import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import java.util.ArrayList
 
 
-class MyRedemptionFragment : Fragment(), View.OnClickListener {
+class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapter.OnItemDetailClickCallBack, AdapterView.OnItemSelectedListener {
     private lateinit var binding: FragmentMyRedemptionBinding
     private lateinit var myRedemptionViewModel: MyRedemptionViewModel
 
@@ -44,7 +47,6 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
     private var ToDate: String =""
 
     var catalogeTypeList = mutableListOf<CommonStatusSpinner>()
-    private lateinit var mSelectedCatalogueTYpe:CommonStatusSpinner
     var statusId: Int = -1
 
     var page = 1
@@ -60,6 +62,7 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
     var mRedemptionLayoutManager: LinearLayoutManager? = null
     var redemptionAdapter: RecyclerView.Adapter<*>? = null
 
+    var statusList = mutableListOf<LstAttributesDetailStatus>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,16 +91,18 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
 
         binding.filterOpen.setOnClickListener(this)
         binding.filterClose.setOnClickListener(this)
-        binding.filterApproved.setOnClickListener(this)
-        binding.filterPending.setOnClickListener(this)
-        binding.filterRejected.setOnClickListener(this)
         binding.clearBtn.setOnClickListener(this)
         binding.filterOkBtn.setOnClickListener(this)
         binding.fromDate.setOnClickListener(this)
         binding.toDate.setOnClickListener(this)
 
+        binding.redeemTypeSpinner.onItemSelectedListener = this
+        binding.statusSpinner.onItemSelectedListener = this
 
         userID = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toInt()
+
+        catalogeTypeSpinner()
+        GetStatusSpinnerRequest()
 
         // use a linear layout manager
         mRedemptionLayoutManager = LinearLayoutManager(requireContext())
@@ -111,6 +116,32 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
 
         loadRedemptionListObserver()
         setFileterSpinners()
+    }
+
+    private fun catalogeTypeSpinner() {
+
+        catalogeTypeList.clear()
+
+        catalogeTypeList.add( CommonStatusSpinner(productName = "Select Catalogue Type", id = -1))
+        catalogeTypeList.add( CommonStatusSpinner(productName = "Catalogue", id = 1))
+        catalogeTypeList.add( CommonStatusSpinner(productName = "eVouchers", id = 4))
+        catalogeTypeList.add( CommonStatusSpinner(productName = "Dream Gift", id = 3))
+        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
+            catalogeTypeList.add( CommonStatusSpinner(productName = "Cash Voucher", id = 9))
+        }else{
+            catalogeTypeList.add( CommonStatusSpinner(productName = "Cash Transfer", id = 8))
+        }
+//        catalogeTypeList.add( CommonStatusSpinner(productName = "Bank Transfer", id = 5))
+
+        binding.redeemTypeSpinner.adapter = SpinnerCommonStatusAdapter(requireActivity(),R.layout.spinner_popup_row,catalogeTypeList)
+    }
+
+    private fun GetStatusSpinnerRequest() {
+        myRedemptionViewModel.getStatusSpinnerData(
+            StatusSpinnerRequest(
+                actionType = 138
+            )
+        )
     }
 
 
@@ -195,7 +226,7 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
 
                     if (!isLoaded) {
                         isLoaded = true
-                        redemptionAdapter = MyRedemptionAdapter(currentList)
+                        redemptionAdapter = MyRedemptionAdapter(currentList,this)
                         binding.redeemRecycler.adapter = redemptionAdapter
                     }else{
                         redemptionAdapter!!.notifyDataSetChanged()
@@ -217,6 +248,41 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
         })
     }
 
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        /*** Redemption Status Observer ***/
+        myRedemptionViewModel.statusSpinnerLiveData.observe(viewLifecycleOwner, Observer {
+
+            if(it!=null && !it.lstAttributesDetails.isNullOrEmpty()){
+                statusList.clear()
+                val lstAttributesDetail = LstAttributesDetailStatus()
+
+                lstAttributesDetail.attributeId = -1
+                lstAttributesDetail.attributeValue = "Select status"
+
+                statusList.add(0,lstAttributesDetail)
+
+                statusList.addAll(it.lstAttributesDetails!!)
+
+                binding.statusSpinner.adapter = StatusSpinnerAdapter(requireContext(),statusList)
+
+
+            }else{
+
+                val lstAttributesDetail = LstAttributesDetailStatus()
+
+                lstAttributesDetail.attributeId = -1
+                lstAttributesDetail.attributeValue = "Select status"
+
+                statusList.add(0,lstAttributesDetail)
+
+                binding.statusSpinner.adapter = StatusSpinnerAdapter(requireContext(),statusList)
+            }
+        })
+
+    }
 
 
     override fun onClick(p0: View?) {
@@ -264,58 +330,23 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
                 }
             }
 
-            R.id.filter_approved ->{
-                binding.filterApproved.setBackgroundResource(R.drawable.selected_filter)
-                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
-                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
-
-                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.dark))
-                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-
-                selectedStatusId = "4"
-            }
-
-            R.id.filter_pending ->{
-                binding.filterPending.setBackgroundResource(R.drawable.selected_filter)
-                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
-                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
-
-                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.dark))
-                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-
-                selectedStatusId = "0"
-            }
-
-            R.id.filter_rejected ->{
-                binding.filterRejected.setBackgroundResource(R.drawable.selected_filter)
-                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
-                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
-
-                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.dark))
-                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-
-                selectedStatusId = "5"
-            }
 
             R.id.clear_btn ->{
-                binding.filterRejected.setBackgroundResource(R.drawable.unselected_filter2)
-                binding.filterApproved.setBackgroundResource(R.drawable.unselected_filter2)
-                binding.filterPending.setBackgroundResource(R.drawable.unselected_filter2)
-
-                binding.filterPending.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-                binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-                binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
-
                 selectedStatusId = "-1"
+                statusId = -1
                 FromDate = ""
                 ToDate = ""
                 binding.fromDateTxt.text = ""
                 binding.toDateTxt.text = ""
                 binding.fromDateTxt.hint = getString(R.string.select_from_date)
                 binding.toDateTxt.hint = getString(R.string.select_to_date)
+                binding.statusSpinner.setSelection(0)
+                binding.redeemTypeSpinner.setSelection(0)
+
+                listFull = false
+                isLoaded = false
+
+                currentList.clear()
                 callApi(1)
 
                 binding.filterLayout.visibility = View.GONE
@@ -342,6 +373,36 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
     }
 
 
+
+
+    override fun onProductListDetailsItemClickResponse(
+        itemView: View,
+        rewardTransDetails: ObjCatalogueRedemReq
+    ) {
+        currentList.clear()
+
+        val bundle = Bundle()
+        bundle.putSerializable("myRedemptionDetails", rewardTransDetails)
+        itemView.findNavController().navigate(R.id.action_myRedemptionFragment_to_myRedemptionDetailsFragment, bundle)
+    }
+
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when((parent as Spinner).id){
+            R.id.redeem_type_spinner -> {
+                statusId = (parent.getItemAtPosition(position) as CommonStatusSpinner).id!!
+                Log.d("fdsfsdf", "redeem type id : " + statusId)
+            }
+
+            R.id.status_spinner -> {
+                selectedStatusId = (parent.getItemAtPosition(position) as LstAttributesDetailStatus).attributeId.toString()
+            }
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
 
     /**This is required here for handling action bar navigate up button*/
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -373,4 +434,5 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
+
 }

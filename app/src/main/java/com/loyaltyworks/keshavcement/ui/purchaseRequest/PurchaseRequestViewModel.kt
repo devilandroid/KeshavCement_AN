@@ -47,4 +47,16 @@ class PurchaseRequestViewModel: BaseViewModel() {
         }
     }
 
+    /*** Check Stock Request viewModel ***/
+    private val _checkStockLiveData = MutableLiveData<SubmitPurchaseResponse>()
+    val checkStockLiveData: LiveData<SubmitPurchaseResponse> = _checkStockLiveData
+
+    fun getCheckStockData(submitPurchaseRequest: SubmitPurchaseRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _checkStockLiveData.postValue(apiRepository.getPurchaseSubmitData(submitPurchaseRequest))
+        }
+    }
 }

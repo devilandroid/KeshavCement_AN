@@ -179,7 +179,11 @@ class NewTicketFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSe
                 }else if (mSelectedTopic.helpTopicId == -1) {
                     Toast.makeText(requireContext(),getString(R.string.select_topic_to_lodge_a_query), Toast.LENGTH_SHORT).show()
                     return
-                } else if (binding.queryDetails.text.isNullOrEmpty()) {
+                } else if (binding.querySummary.text.toString().trim().isNullOrEmpty()) {
+                    binding.querySummary.error = getString(R.string.enter_query_summary)
+                    binding.querySummary.requestFocus()
+                    return
+                }else if (binding.queryDetails.text.isNullOrEmpty()) {
                     binding.queryDetails.error = getString(R.string.enter_query_details)
                     binding.queryDetails.requestFocus()
                     return

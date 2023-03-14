@@ -1,6 +1,8 @@
 package com.loyaltyworks.keshavcement.ui.myPurchaseClaim.adapter
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +22,7 @@ class MyPurchaseClaimAdapter(val customerBasicInfoListJson: List<CustomerBasicIn
         val status = binding.status
         val prodName = binding.prodName
         val quantity = binding.quantity
+        val mobileNo = binding.mobileNo
 
         val approvedQuantityLayout = binding.approvedQuantityLayout
         val approvedQuantity = binding.approvedQuantity
@@ -42,6 +45,7 @@ class MyPurchaseClaimAdapter(val customerBasicInfoListJson: List<CustomerBasicIn
         holder.prodName.text = data.productName
 
         holder.customerType.text = data.customerType
+        holder.mobileNo.text = data.mobile
 
         holder.status.text = data.status
 
@@ -75,6 +79,17 @@ class MyPurchaseClaimAdapter(val customerBasicInfoListJson: List<CustomerBasicIn
             holder.remarks.text = "-"
         }
 
+        holder.mobileNo.setOnClickListener { v ->
+            if (!data.mobile.isNullOrEmpty()){
+                holder.itemView.context.startActivity(
+                    Intent(
+                        Intent.ACTION_DIAL,
+                        Uri.fromParts("tel", data.mobile, null)
+                    )
+                )
+            }
+
+        }
 
     }
 

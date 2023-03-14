@@ -229,7 +229,7 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
     ) {
         SendOtpRequest()
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),getString(R.string.cash_transfer),getString(R.string.enter_otp_to_complete_the_process),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
             ,"Submit" ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
@@ -263,7 +263,7 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
     ) {
         SendOtpRequest()
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),getString(R.string.cash_transfer),getString(R.string.enter_otp_to_reject),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
             ,"Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }

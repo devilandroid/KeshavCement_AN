@@ -205,6 +205,8 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         if (isCategoryButtonClicked){
             binding.searchLayout.visibility = View.GONE
             binding.pointsRangeLayout.visibility = View.GONE
+            binding.hightoLowLowtoHight.visibility = View.GONE
+            binding.selectedCategoryLayout.visibility = View.GONE
             binding.categoryLayout.visibility = View.VISIBLE
             binding.searchFilter.text.clear()
             binding.categoryButton.setBackgroundResource(R.drawable.selected_filter)
@@ -215,12 +217,13 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
             binding.searchLayout.visibility = View.GONE
             binding.categoryLayout.visibility = View.GONE
             binding.pointsRangeLayout.visibility = View.VISIBLE
+            binding.hightoLowLowtoHight.visibility = View.VISIBLE
             binding.searchFilter.text.clear()
             binding.pointsRangeButton.setBackgroundResource(R.drawable.selected_filter)
             binding.searchButton.setBackgroundResource(R.drawable.unselected_filter)
             binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
 
-            if (mSelectedCategory != -1){
+            if (mSelectedCategory != 100){
                 binding.selectedCategoryLayout.visibility = View.VISIBLE
                 binding.selectedCategory.text = mSelectedCategoryName
             }else{
@@ -230,6 +233,8 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
             binding.searchLayout.visibility = View.VISIBLE
             binding.categoryLayout.visibility = View.GONE
             binding.pointsRangeLayout.visibility = View.GONE
+            binding.hightoLowLowtoHight.visibility = View.GONE
+            binding.selectedCategoryLayout.visibility = View.GONE
             binding.searchFilter.text.clear()
             binding.searchButton.setBackgroundResource(R.drawable.selected_filter)
             binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
@@ -587,7 +592,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
                 binding.searchButton.setBackgroundResource(R.drawable.unselected_filter)
                 binding.categoryButton.setBackgroundResource(R.drawable.unselected_filter)
 
-                if (mSelectedCategory != -1){
+                if (mSelectedCategory != 100){
                     binding.selectedCategoryLayout.visibility = View.VISIBLE
                     binding.selectedCategory.text = mSelectedCategoryName
                 }else{

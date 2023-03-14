@@ -248,7 +248,7 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
 
             R.id.product_spinner ->{
                 productId = _productList[position].attributeId.toString()
-                productCode = _productList[position].attributeValue.toString()
+                productCode = _productList[position].attributeContents.toString()
                 Log.d("bhbrfhrb","product ID : " + productId)
             }
 
@@ -272,7 +272,8 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
                     val dealerSubDealerListName = ArrayList<String>()
 
                     for (commonSpinner in dealerSubDealerLists) {
-                        dealerSubDealerListName.add(commonSpinner.firstName!!)
+                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.mobile + " )")
+//                        dealerSubDealerListName.add(commonSpinner.firstName!!)
                     }
 
                     val commonSpinner = CommonSpinners()

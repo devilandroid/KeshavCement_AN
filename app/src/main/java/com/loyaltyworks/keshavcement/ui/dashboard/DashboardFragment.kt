@@ -94,6 +94,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.supportExecutiveLayout.visibility = View.GONE
 
             binding.pointBalanceLayout.visibility = View.VISIBLE
+            binding.tierImage.visibility = View.VISIBLE
             binding.createdByLayout.visibility = View.GONE
 
         }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
@@ -112,6 +113,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.supportExecutiveLayout.visibility = View.GONE
 
             binding.pointBalanceLayout.visibility = View.VISIBLE
+            binding.tierImage.visibility = View.VISIBLE
             binding.createdByLayout.visibility = View.GONE
 
         }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
@@ -129,6 +131,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.supportExecutiveLayout.visibility = View.GONE
 
             binding.pointBalanceLayout.visibility = View.VISIBLE
+            binding.tierImage.visibility = View.VISIBLE
             binding.createdByLayout.visibility = View.GONE
 
         }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive){
@@ -152,6 +155,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.supportExecutiveLayout.visibility = View.VISIBLE
 
             binding.pointBalanceLayout.visibility = View.GONE
+            binding.tierImage.visibility = View.GONE
             binding.createdByLayout.visibility = View.VISIBLE
 
         }
@@ -312,6 +316,8 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
                 if (!it.lstCustomerFeedBackJsonApi.isNullOrEmpty()) {
 
+                    PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType, it.lstCustomerFeedBackJsonApi[0].customerTypeId.toString())
+
                     if (it.lstCustomerFeedBackJsonApi[0].customerStatus != 1) {
                         RegisterSuccessDialog.showRegisterSuccessDialog(requireContext(),false,"",
                             "Your account has been deactivated! Kindly contact your administrator.",  object :RegisterSuccessDialog.RegisterSuccessDialogCallBack{
@@ -335,6 +341,22 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     binding.custName.text = it.lstCustomerFeedBackJsonApi[0].firstName
                     binding.memId.text = it.lstCustomerFeedBackJsonApi[0].loyaltyId
 
+                    if (!it.lstCustomerFeedBackJsonApi[0].customerGrade.isNullOrEmpty()){
+                        if (it.lstCustomerFeedBackJsonApi[0].customerGrade.equals("Bronze",true)){
+                            binding.tierImage.setImageResource(R.drawable.tier_bronze)
+                        }else if (it.lstCustomerFeedBackJsonApi[0].customerGrade.equals("Silver",true)){
+                            binding.tierImage.setImageResource(R.drawable.tier_silver)
+                        }else if (it.lstCustomerFeedBackJsonApi[0].customerGrade.equals("Platinum",true)){
+                            binding.tierImage.setImageResource(R.drawable.tier_platinum)
+                        }else if (it.lstCustomerFeedBackJsonApi[0].customerGrade.equals("Gold",true)){
+                            binding.tierImage.setImageResource(R.drawable.tier_gold)
+                        }else{
+                            binding.tierImage.setImageResource(R.drawable.ic_default_img)
+                        }
+
+                    }else{
+                        binding.tierImage.setImageResource(R.drawable.ic_error)
+                    }
 
                     /*** setting dashboard menu data ***/
                     (activity as DashboardActivity).binding.root.menu_memberType.text = it.lstCustomerFeedBackJsonApi[0].customerType

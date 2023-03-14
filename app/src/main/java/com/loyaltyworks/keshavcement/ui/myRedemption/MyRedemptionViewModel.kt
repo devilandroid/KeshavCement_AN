@@ -21,5 +21,43 @@ class MyRedemptionViewModel: BaseViewModel() {
         }
     }
 
+    /* My Redemption Details View Model */
+    private val _myRedemptionDetailsLiveData = MutableLiveData<MyRedemptionDetailsResponse>()
+    val myRedemptionDetailsLiveData: LiveData<MyRedemptionDetailsResponse> = _myRedemptionDetailsLiveData
+
+    fun getMyRedemptionDetailData(myRedemptionDetailsRequest: MyRedemptionDetailsRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _myRedemptionDetailsLiveData.postValue(apiRepository.getRedemptionDetailData(myRedemptionDetailsRequest))
+        }
+    }
+
+    /* My Redemption history View Model */
+    private val _myRedemptionStatusDetailsLiveData = MutableLiveData<RedemptionHistoryResponse>()
+    val myRedemptionStatusDetailsLiveData: LiveData<RedemptionHistoryResponse> = _myRedemptionStatusDetailsLiveData
+
+    fun getMyRedemptionStatusDetailData(redemptionHistoryRequest: RedemptionHistoryRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _myRedemptionStatusDetailsLiveData.postValue(apiRepository.getRedemptionStatusDetailData(redemptionHistoryRequest))
+        }
+    }
+
+    /*** Status List View Model ***/
+    private val _statusSpinnerLiveData = MutableLiveData<StatusSpinnerResponse>()
+    val statusSpinnerLiveData: LiveData<StatusSpinnerResponse> = _statusSpinnerLiveData
+
+    fun getStatusSpinnerData(statusSpinnerRequest: StatusSpinnerRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _statusSpinnerLiveData.postValue(apiRepository.getStatusSpinnerData(statusSpinnerRequest))
+        }
+    }
 
 }

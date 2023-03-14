@@ -113,43 +113,50 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:background="@drawable/corner_bg4"
+            android:elevation="5dp">
+
+            <Spinner
+                android:id="@+id/status_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <!-- Catalogue Type-->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/catalogye_type"
+            android:textSize="14sp"
+            android:textColor="@color/color18" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:background="@drawable/corner_bg4"
+            android:elevation="5dp">
 
-            <TextView
-                android:id="@+id/filter_approved"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:background="@drawable/unselected_filter2"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center"
-                android:text="@string/delivered"
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/filter_pending"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/unselected_filter2"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center"
-                android:text="@string/pending"
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/filter_rejected"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/unselected_filter2"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center"
-                android:text="@string/rejected"
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp" />
+            <Spinner
+                android:id="@+id/redeem_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:spinnerMode="dropdown" />
 
         </LinearLayout>
 

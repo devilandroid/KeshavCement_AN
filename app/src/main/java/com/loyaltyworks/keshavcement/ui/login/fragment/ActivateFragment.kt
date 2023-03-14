@@ -26,6 +26,7 @@ import com.loyaltyworks.keshavcement.databinding.FragmentActivateBinding
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.model.adapter.StateAdapter
 import com.loyaltyworks.keshavcement.ui.CommonViewModel
+import com.loyaltyworks.keshavcement.ui.login.LoginActivity
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.DatePickerBox
 import com.loyaltyworks.keshavcement.utils.Keyboard
@@ -219,28 +220,37 @@ class ActivateFragment : Fragment(), View.OnClickListener{
                 val email: String = binding.email.text.toString()
 
                 if (binding.customerTypeName.text.toString().isNullOrBlank()){
-                    Toast.makeText(requireContext(), getString(R.string.customer_type_mandatory), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.customer_type_mandatory), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.customer_type_mandatory),R.color.red)
 
                 }else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer &&
                     binding.memberId.text.toString().isNullOrBlank()){
-                    Toast.makeText(requireContext(), getString(R.string.member_id_mandatory), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.member_id_mandatory), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.member_id_mandatory),R.color.red)
 
                 }else if (binding.name.text.toString().isNullOrBlank()){
-                    binding.name.error = getString(R.string.enter_your_name)
+//                    binding.name.error = getString(R.string.enter_your_name)
                     binding.name.requestFocus()
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_your_name),R.color.red)
 
                 }else if (binding.firmName.text.toString().isNullOrBlank()){
 
-                    Toast.makeText(requireContext(), getString(R.string.firm_name_mandatory), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.firm_name_mandatory), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.firm_name_mandatory),R.color.red)
 
                 }else if (!email.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    binding.email.error = requireContext().resources.getString(R.string.enter_valid_emailid)
+//                    binding.email.error = requireContext().resources.getString(R.string.enter_valid_emailid)
+                    binding.email.requestFocus()
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_valid_emailid),R.color.red)
 
                 }else if (binding.mobile.text.toString().isNullOrBlank()){
-                    Toast.makeText(requireContext(), getString(R.string.mobile_number_mandatory), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.mobile_number_mandatory), Toast.LENGTH_SHORT).show()
+                    binding.mobile.requestFocus()
+                    (activity as LoginActivity).snackBar(getString(R.string.mobile_number_mandatory),R.color.red)
 
                 }else if (binding.mobile.text.toString().length < 10){
-                    Toast.makeText(requireContext(), getString(R.string.invalid_mobile_number), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.invalid_mobile_number), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.invalid_mobile_number),R.color.red)
 
                 }/*else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) &&
@@ -248,39 +258,55 @@ class ActivateFragment : Fragment(), View.OnClickListener{
 
                     Toast.makeText(requireContext(), getString(R.string.aadhar_number_mandatory), Toast.LENGTH_SHORT).show()
 
-                }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
-                            PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) &&
-                    !binding.aadharNumber.text.toString().isNullOrBlank() && binding.aadharNumber.text.toString().length < 12){
-
-                    Toast.makeText(requireContext(), getString(R.string.invalid_aadhar_number), Toast.LENGTH_SHORT).show()
-
                 }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
                     PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) &&
                     binding.gstNumber.text.toString().isNullOrBlank()){
 
                     Toast.makeText(requireContext(), getString(R.string.gst_number_mandatory), Toast.LENGTH_SHORT).show()
 
-                }*/else if (binding.address.text.toString().isNullOrBlank()){
-                    binding.address.error = getString(R.string.enter_your_address)
+                }*/else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
+                            PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) &&
+                    !binding.aadharNumber.text.toString().isNullOrBlank() && binding.aadharNumber.text.toString().length < 12){
+
+                    binding.aadharNumber.requestFocus()
+//                    Toast.makeText(requireContext(), getString(R.string.invalid_aadhar_number), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_valid_aadhar_number),R.color.red)
+
+                }else if ((PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer ||
+                            PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.SubDealer) &&
+                    !binding.gstNumber.text.toString().trim().isNullOrBlank() && binding.gstNumber.text.toString().trim().length < 15){
+
+//                    binding.gstNumber.error = getString(R.string.enter_valid_gst_number)
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_valid_gst_number),R.color.red)
+                    binding.gstNumber.requestFocus()
+
+                }else if (binding.address.text.toString().isNullOrBlank()){
+//                    binding.address.error = getString(R.string.enter_your_address)
                     binding.address.requestFocus()
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_your_address),R.color.red)
 
                 }else if (binding.pincode.text.toString().isNullOrBlank()){
-                    binding.pincode.error = getString(R.string.enter_pin_code)
+//                    binding.pincode.error = getString(R.string.enter_pin_code)
                     binding.pincode.requestFocus()
+                    (activity as LoginActivity).snackBar(getString(R.string.enter_pin_code),R.color.red)
 
                 }else if (!binding.pincode.text.toString().isNullOrBlank() && binding.pincode.text.toString().length < 6){
                     binding.pincode.text.clear()
-                    binding.pincode.error = getString(R.string.invalid_pin_code)
+//                    binding.pincode.error = getString(R.string.invalid_pin_code)
                     binding.pincode.requestFocus()
+                    (activity as LoginActivity).snackBar(getString(R.string.invalid_pin_code),R.color.red)
 
                 }else if (birthdate.isNullOrEmpty()){
-                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.select_dob), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.select_dob),R.color.red)
 
                 }else if (_lstCustomerJson!![0].stateId == -1){
-                    Toast.makeText(requireContext(), getString(R.string.select_your_state), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), getString(R.string.select_your_state), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.select_your_state),R.color.red)
 
                 }else if (_lstCustomerJson!![0].districtId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_district), Toast.LENGTH_SHORT).show()
+                    (activity as LoginActivity).snackBar(getString(R.string.select_your_district),R.color.red)
 
                 }/*else if (_lstCustomerJson!![0].talukId == -1){
                     Toast.makeText(requireContext(), getString(R.string.select_your_taluk), Toast.LENGTH_SHORT).show()

@@ -142,7 +142,7 @@ class ClaimHistoryFragment : Fragment(), View.OnClickListener {
         LoadingDialogue.showDialog(requireContext())
         viewModel.getMyPurchaseClaimListData(
             MyPurchaseClaimRequest(
-                actionType = 6,
+                actionType = 8,
                 salesPersonId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userName!!.toString(),
                 pageSize = limit,
                 startIndex = startIndex,

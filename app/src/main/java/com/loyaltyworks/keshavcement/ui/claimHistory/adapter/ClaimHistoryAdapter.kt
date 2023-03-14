@@ -32,7 +32,7 @@ class ClaimHistoryAdapter(val customerBasicInfoListJson: List<CustomerBasicInfoJ
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = customerBasicInfoListJson[position]
 
-        holder.customerName.text = data.requestTo
+        holder.customerName.text = data.salesPersonsName
         holder.quantity.text = data.quantity.toString()
         holder.prodName.text = data.productName
 
@@ -58,7 +58,7 @@ class ClaimHistoryAdapter(val customerBasicInfoListJson: List<CustomerBasicInfoJ
             holder.status.setTextColor(Color.parseColor("#02B013"))
 
         }else if (data.status.equals("Rejected",true)){
-            holder.approvedQuantityLayout.visibility = View.VISIBLE
+            holder.approvedQuantityLayout.visibility = View.GONE
             holder.status.setBackgroundResource(R.drawable.rejected_bg)
             holder.status.setTextColor(Color.parseColor("#F71111"))
 
