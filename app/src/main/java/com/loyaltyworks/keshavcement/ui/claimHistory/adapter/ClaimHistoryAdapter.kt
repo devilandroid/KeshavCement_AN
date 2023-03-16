@@ -22,6 +22,7 @@ class ClaimHistoryAdapter(val customerBasicInfoListJson: List<CustomerBasicInfoJ
         val approvedQuantity = binding.approvedQuantity
         val approvedQuantityLayout = binding.approvedQuantityLayout
         val remarks = binding.remarks
+        val invoiceNo = binding.invoiceNo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,6 +40,7 @@ class ClaimHistoryAdapter(val customerBasicInfoListJson: List<CustomerBasicInfoJ
         holder.customerType.text = data.customerType
 
         holder.status.text = data.status
+        holder.invoiceNo.text = data.invoiceNo
 
         if (data.trxnDate != null){
             holder.date.text = AppController.dateAPIFormat(data.trxnDate.split(" ")[0])
@@ -58,7 +60,8 @@ class ClaimHistoryAdapter(val customerBasicInfoListJson: List<CustomerBasicInfoJ
             holder.status.setTextColor(Color.parseColor("#02B013"))
 
         }else if (data.status.equals("Rejected",true)){
-            holder.approvedQuantityLayout.visibility = View.GONE
+            holder.approvedQuantityLayout.visibility = View.VISIBLE
+            holder.approvedQuantity.text = "0"
             holder.status.setBackgroundResource(R.drawable.rejected_bg)
             holder.status.setTextColor(Color.parseColor("#F71111"))
 

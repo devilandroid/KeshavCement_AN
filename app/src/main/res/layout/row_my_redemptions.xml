@@ -13,126 +13,143 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="10"
-            android:gravity="center_vertical"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5">
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/catalogue_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="DD/MM/YYYY"
-                    android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:gravity="left"
+                    android:layout_gravity="left"
+                    android:background="@drawable/right_bottom_corner_bg"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="XXXXXXXXXX"
+                    android:textSize="12sp"
+                    android:textColor="@color/dark"
+                    android:fontFamily="@font/poppins_medium"/>
             </LinearLayout>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="5"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
                 android:gravity="end">
                 <TextView
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
                     android:text="-"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:gravity="start"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/reference_no"
-                    android:textSize="12sp" />
-                <TextView
-                    android:id="@+id/reference_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="-"
-                    android:textColor="@color/dark"
-                    android:textSize="12sp" />
             </LinearLayout>
 
-
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="105dp"
-                android:layout_height="105dp"
-                android:layout_gravity="center"
-                android:layout_margin="2dp"
-                app:cardCornerRadius="10dp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/reference_no"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/reference_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="-"
+                        android:textColor="@color/dark"
+                        android:textSize="12sp" />
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/prod_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/claim_img"
-                    android:scaleType="fitXY"/>
-            </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="DD/MM/YYYY"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
-
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="105dp"
+                    android:layout_height="105dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp">
+
+                    <ImageView
+                        android:id="@+id/prod_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/claim_img"
+                        android:scaleType="fitXY"/>
+                </androidx.cardview.widget.CardView>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/catalogue_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="- / "
-                        android:textColor="@color/dark"
-                        android:textSize="10sp" />
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
 
                     <TextView
                         android:id="@+id/category"
@@ -142,74 +159,76 @@
                         android:text="-"
                         android:textColor="@color/dark"
                         android:textSize="10sp" />
-                </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="ABCD"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/color15"
-                    android:textSize="12sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:weightSum="2"
-                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/product_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="ABCD"
+                        android:textColor="@color/color15"
+                        android:textSize="12sp" />
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="2"
+                        android:layout_marginTop="10dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="@string/points"
-                            android:textSize="12sp" />
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/points"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="@string/points"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/points"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="-"
+                                android:textColor="@color/dark"
+                                android:textSize="16sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="-"
-                            android:textColor="@color/dark"
-                            android:textSize="16sp" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="@string/qty"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/quantity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="-"
+                                android:textColor="@color/dark"
+                                android:textSize="16sp" />
+
+
+                        </LinearLayout>
 
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="@string/qty"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/quantity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="-"
-                            android:textColor="@color/dark"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -217,10 +236,9 @@
 
 
             </LinearLayout>
-
-
-
         </LinearLayout>
+
+
 
     </LinearLayout>
 

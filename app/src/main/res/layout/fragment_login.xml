@@ -268,12 +268,23 @@
 
                 </LinearLayout>
 
+                <CheckBox
+                    android:id="@+id/tc_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/i_accept_term_cond"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="10sp"
+                    android:buttonTint="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"/>
+
                 <!-- Login Button -->
                 <LinearLayout
                     android:id="@+id/login_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
                     android:orientation="vertical"
                     android:background="@drawable/corner_bg_black"

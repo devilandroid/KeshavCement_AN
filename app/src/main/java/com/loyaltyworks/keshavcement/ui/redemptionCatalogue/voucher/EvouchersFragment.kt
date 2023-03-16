@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
 import com.loyaltyworks.keshavcement.BuildConfig
@@ -108,7 +109,7 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
 
                 }
 
-                binding.voucherRecycler.layoutManager = GridLayoutManager(context, 2)
+                binding.voucherRecycler.layoutManager = LinearLayoutManager(requireContext())
                 binding.voucherRecycler.adapter = VoucherAdapter(it, this)
                 binding.voucherRecycler.visibility = View.VISIBLE
                 binding.noDataFount.noDataFoundLayout.visibility = View.GONE
