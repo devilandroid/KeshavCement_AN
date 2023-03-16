@@ -34,6 +34,7 @@ import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.Keyboard
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
+import com.loyaltyworks.keshavcement.utils.dialog.tcDialog
 
 
 class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -56,6 +57,8 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
     private var isLoginClick:Boolean = false
     private var isForgotClick:Boolean = false
+
+    lateinit var lstTermsAndCondition: List<LstTermsAndCondition>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -121,6 +124,48 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
         binding.loginButton.setOnClickListener(this)
 
         customoerTypeSpinnerApi()
+
+        /*** select terms checkbox ***/
+        binding.tcBtn.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if (::lstTermsAndCondition.isInitialized) {
+
+                tcDialog.showTCDialog(
+                    requireContext(),
+                    "Login",
+                    lstTermsAndCondition,
+                    object : tcDialog.TCDialogueCallBack {
+                        override fun onOk() {
+                            onTCEventResponse(true)
+                        }
+
+                        override fun onCancel() {
+                            onTCEventResponse(false)
+
+                        }
+
+                    })
+            } else {
+                Toast.makeText(requireContext(), "Terms and conditions not available", Toast.LENGTH_SHORT).show()
+//                binding.tcBtn.isChecked = true
+            }
+
+        }
+
+        termsConditionApi()
+    }
+
+    private fun termsConditionApi() {
+        viewModel.getTCData(
+            TermsConditionRequest(
+                actionType = 1,
+                actorId = 2
+            )
+        )
+    }
+
+    fun onTCEventResponse(isAccepted: Boolean) {
+        binding.tcBtn.isChecked = isAccepted
     }
 
     private fun initialSetup() {
@@ -149,6 +194,13 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        /*** Terms and conditions Observer ***/
+        viewModel.termsConditionLiveData.observe(viewLifecycleOwner) {
+            if (it != null && !it.lstTermsAndCondition.isNullOrEmpty()) {
+                lstTermsAndCondition = it.lstTermsAndCondition!!
+            }
+        }
 
         /*** Customer Type Observer ***/
         commonViewModel.getCustomerTypeResponse.observe(viewLifecycleOwner, Observer {
@@ -515,11 +567,11 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     binding.password.error = getString(R.string.prompt_password)
                     binding.password.requestFocus()
                     return
-                } /*else if (!binding.tcBtn.isChecked) {
+                } else if (!binding.tcBtn.isChecked) {
                     // display snack bar
-                    snackBar(this, "Please accept terms and conditions !", R.color.colorPrimary)
+                    (activity as LoginActivity).snackBar( getString(R.string.please_accept_terms_condition), R.color.red)
                     return
-                }*/
+                }
                 else {
                     isForgotClick = false
                     LoadingDialogue.showDialog(requireContext())

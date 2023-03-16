@@ -102,25 +102,6 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
 
             } catch (e: Exception) {}
 
-
-            holder.redeem.setOnClickListener {v ->
-                if(BlockMultipleClick.click()) return@setOnClickListener
-
-                if (holder.amount.text.toString().isNotEmpty()) amount = holder.amount.text.toString()
-
-                if (redeemGiftResponses.product_type == 0)
-                    amount = objCatalogueFixedPoint!!.fixedPoints.toString()
-
-
-                onItemClickListener.onRedeemVoucherFromAdapter(v,position,redeemGiftResponse.objCatalogueList!![position], amount)
-
-            }
-
-            holder.itemView.setOnClickListener {v ->
-                if(BlockMultipleClick.click()) return@setOnClickListener
-                onItemClickListener.onDetailVoucherFromAdapter(v,position,redeemGiftResponse.objCatalogueList!![position])
-            }
-
         }
 
         holder.mSpinnerHost?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -140,18 +121,30 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
         }
 
 
+        holder.redeem.setOnClickListener {v ->
+            if(BlockMultipleClick.click()) return@setOnClickListener
 
-//        holder.redeem.setOnClickListener { v ->
-//            if (BlockMultipleClick.click()) return@setOnClickListener
-//            onItemClickListener.onRedeemVoucherFromAdapter(v,position)
-//        }
-//
-//        holder.itemView.setOnClickListener { v ->
-//            if(BlockMultipleClick.click()) return@setOnClickListener
-//            onItemClickListener.onDetailVoucherFromAdapter(v,position)
-//        }
+            if (holder.amount.text.toString().isNotEmpty()) amount = holder.amount.text.toString()
+
+            if (redeemGiftResponses.product_type == 0)
+                amount = objCatalogueFixedPoint!!.fixedPoints.toString()
+
+
+            onItemClickListener.onRedeemVoucherFromAdapter(v,position,redeemGiftResponse.objCatalogueList!![position], amount)
+
+        }
+
+        holder.itemView.setOnClickListener {v ->
+            if(BlockMultipleClick.click()) return@setOnClickListener
+            onItemClickListener.onDetailVoucherFromAdapter(v,position,redeemGiftResponse.objCatalogueList!![position])
+        }
+
+
+
     }
-
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
     override fun getItemCount(): Int {
         return redeemGiftResponse.objCatalogueList?.size!!
     }

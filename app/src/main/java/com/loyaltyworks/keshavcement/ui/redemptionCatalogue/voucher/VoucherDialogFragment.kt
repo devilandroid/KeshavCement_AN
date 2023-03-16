@@ -18,6 +18,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.model.*
+import com.loyaltyworks.keshavcement.ui.DashboardActivity
 import com.loyaltyworks.keshavcement.ui.login.fragment.LoginRegistrationViewModel
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.VoucherPointsAdapter
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
@@ -127,7 +128,11 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
             if (objCatalogueFixedPoint?.fixedPoints != null || !TextUtils.isEmpty(mng_amount_fld.text.toString())) {
 
                 if (objCatalogueList.product_type == 0) {
-                    RedeemVoucher(objCatalogueFixedPoint!!.fixedPoints.toString())
+                    if (objCatalogueFixedPoint!!.fixedPoints!! <= PreferenceHelper.getDashboardDetails(requireContext())!!.objCustomerDashboardList!![0].overAllPoints!!){
+                        RedeemVoucher(objCatalogueFixedPoint!!.fixedPoints.toString())
+                    }else{
+                        (activity as DashboardActivity).snackBar(getString(R.string.dont_have_suffiecient_redeemable_point_balance), R.color.red)
+                    }
                     return@setOnClickListener
                 }
 

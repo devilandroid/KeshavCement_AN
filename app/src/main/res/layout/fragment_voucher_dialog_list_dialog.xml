@@ -160,7 +160,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
-                    android:padding="20dp">
+                    android:padding="15dp">
 
                     <TextView
                         android:id="@+id/amount_range"
@@ -169,7 +169,7 @@
                         android:layout_marginBottom="5dp"
                         android:gravity="center_horizontal"
                         android:text="xxx"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/dark"
                         android:textSize="14sp" />
 
                     <LinearLayout

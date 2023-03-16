@@ -211,9 +211,9 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
 
         if (!rewardTransDetails.redemptionType!!.equals(3) && !rewardTransDetails.redemptionType!!.equals(4)) {
             if (rewardTransDetails.categoryName.toString() != "null")
-                holder.category.text = " / " + rewardTransDetails.categoryName.toString()
+                holder.category.text = "Category : " + rewardTransDetails.categoryName.toString()
             else
-                holder.category.text = " / "
+                holder.category.text = "Category : -"
         } else {
             holder.category.visibility = View.GONE
         }
