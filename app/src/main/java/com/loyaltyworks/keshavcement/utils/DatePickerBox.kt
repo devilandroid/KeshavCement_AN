@@ -46,6 +46,9 @@ object DatePickerBox {
         if (futureDateLock == 1)
         dpd.datePicker.maxDate = System.currentTimeMillis();
 
+        if (futureDateLock == 5)
+        dpd.datePicker.minDate = System.currentTimeMillis();
+
     }
 
     fun dateCompare(

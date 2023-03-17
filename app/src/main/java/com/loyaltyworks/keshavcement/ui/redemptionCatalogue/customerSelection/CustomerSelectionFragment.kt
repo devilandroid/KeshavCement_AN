@@ -64,8 +64,8 @@ class CustomerSelectionFragment : Fragment(), CustomerSelectionAdapter.OnItemCli
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CatalogueCustomerSelectionView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CatalogueCustomerSelectionFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_CatalogueCustomerSelectionView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_CatalogueCustomerSelectionFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 

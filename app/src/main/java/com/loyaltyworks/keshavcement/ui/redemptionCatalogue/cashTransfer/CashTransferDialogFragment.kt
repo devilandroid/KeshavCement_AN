@@ -215,7 +215,17 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
                     Toast.makeText(requireContext(), getString(R.string.your_account_has_been_deactivated), Toast.LENGTH_SHORT).show()
 
                 }
-                if (message.split("-").toTypedArray()[1].toInt() > 0)  {
+
+                if (message.contains("~")){
+                    if (message.split("~")[0] == "-1"){
+                        Toast.makeText(requireContext(), getString(R.string.you_are_not_eligible_to_redeem), Toast.LENGTH_SHORT).show()
+                    }
+                        if (::timers.isInitialized){
+                            timers.cancel()
+                        }
+                        findNavController().popBackStack()
+
+                }else if (message.split("-").toTypedArray()[1].toInt() > 0)  {
                     LoadingDialogue.dismissDialog()
                     binding.userLayout.visibility = View.GONE
                     binding.otpLayout.visibility = View.GONE
@@ -232,7 +242,6 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
             }
 
         })
-
 
     }
 

@@ -73,8 +73,8 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CashTransferView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CashTransferFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_CashVoucherView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_CashVoucherFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -151,7 +151,7 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
                 ObjCatalogueDetailss(
                     merchantId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.merchantId!!,
                     catogoryId = categoryId,
-                    catalogueType = 1,
+                    catalogueType = 9,
 //                    multipleRedIds = pointRange
                 ),
 //                searchText = src,

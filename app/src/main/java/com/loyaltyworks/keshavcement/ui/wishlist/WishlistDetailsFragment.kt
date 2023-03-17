@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentWishlistDetailsBinding
@@ -52,6 +53,13 @@ class WishlistDetailsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /** Firebase Analytics Tracker **/
+        val bundle1 = Bundle()
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_WishlistDetailsView")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_WishlistDetailsFragment")
+        //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle1)
+
 
         val bundle = this.arguments
         if (bundle != null) {

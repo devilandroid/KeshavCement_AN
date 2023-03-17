@@ -297,4 +297,5 @@
     <string name="enter_otp_to_complete_the_redemption">Enter OTP to complete the redemption process</string>
     <string name="i_accept_term_cond">I accept the Terms and Conditions</string>
     <string name="please_accept_terms_condition">Please accept terms and conditions !</string>
+    <string name="you_are_not_eligible_to_redeem">You are not eligible for this cash voucher</string>
 </resources>

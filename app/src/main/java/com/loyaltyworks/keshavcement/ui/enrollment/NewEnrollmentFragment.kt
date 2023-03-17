@@ -82,8 +82,8 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "NewEnrollmentView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "NewEnrollmentFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_NewEnrollmentView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_NewEnrollmentFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 

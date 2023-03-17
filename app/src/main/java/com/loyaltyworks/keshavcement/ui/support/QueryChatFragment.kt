@@ -58,8 +58,8 @@ class QueryChatFragment : Fragment(), View.OnClickListener, QueryChatAdapter.Cha
 
         /*** Firebase Analytics Tracker ***/
         val bundle1 = Bundle()
-        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "QueryChatView")
-        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "QueryChatFragment")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_QueryChatView")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_QueryChatFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle1)
 
