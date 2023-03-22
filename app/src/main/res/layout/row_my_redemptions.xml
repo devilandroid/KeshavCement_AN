@@ -35,7 +35,7 @@
                     android:paddingEnd="10dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:text="XXXXXXXXXX"
+                    android:text="-"
                     android:textSize="12sp"
                     android:textColor="@color/dark"
                     android:fontFamily="@font/poppins_medium"/>
@@ -202,6 +202,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/quantity_layout"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"

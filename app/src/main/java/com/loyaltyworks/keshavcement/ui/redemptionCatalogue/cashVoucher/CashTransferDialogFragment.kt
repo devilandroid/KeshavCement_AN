@@ -1,4 +1,4 @@
-package com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer
+package com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -7,7 +7,6 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,20 +24,18 @@ import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentCashTransferDialogBinding
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.model.adapter.SpinnerCommonAdapter
-import com.loyaltyworks.keshavcement.model.adapter.SpinnerCommonWhiteTextAdapter
 import com.loyaltyworks.keshavcement.ui.login.fragment.LoginRegistrationViewModel
 import com.loyaltyworks.keshavcement.ui.purchaseRequest.PurchaseRequestViewModel
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductCatalogueViewModel
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
-import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, AdapterView.OnItemSelectedListener{
+class CashTransferDialogFragment : DialogFragment() , View.OnClickListener{
     private lateinit var binding: FragmentCashTransferDialogBinding
     private lateinit var viewModel: PurchaseRequestViewModel
     private lateinit var loginViewModel: LoginRegistrationViewModel
@@ -90,101 +87,32 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
 
 
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) != BuildConfig.Dealer){
-            binding.userLayout.visibility = View.VISIBLE
-            binding.userLayoutTitle.text = getString(R.string.cash_transfer)
+
             binding.otpLayoutTitle.text = getString(R.string.cash_transfer)
+            binding.otpLayout.visibility = View.VISIBLE
+            binding.otpSentNumber.text = "OTP will receive at " + PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile
+            SendOTPRequest()
         }else{
 //            binding.userLayoutTitle.text = getString(R.string.cash_transfer)
             binding.otpLayoutTitle.text = getString(R.string.cash_voucher)
-            binding.userLayout.visibility = View.GONE
             binding.otpLayout.visibility = View.VISIBLE
             binding.otpSentNumber.text = "OTP will receive at " + PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile
             SendOTPRequest()
         }
 
-        binding.userTypeSpinner.onItemSelectedListener = this
-        binding.customerNameSpinner.onItemSelectedListener = this
-
-        binding.nextBtn.setOnClickListener(this)
         binding.redeemBtn.setOnClickListener(this)
         binding.closeBtn.setOnClickListener(this)
         binding.okBtn.setOnClickListener(this)
         binding.resendOtp.setOnClickListener(this)
 
-        userTypeSpinner()
 
     }
 
-    private fun userTypeSpinner() {
-        userTypeList.clear()
-
-        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
-            userTypeList.add( CommonSpinner(name = "Select User Type", id = -1))
-            userTypeList.add( CommonSpinner(name = "Dealer", id = 3))
-
-        }else if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Engineer ||
-            PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Mason){
-
-            userTypeList.add( CommonSpinner(name = "Select User Type", id = -1))
-            userTypeList.add( CommonSpinner(name = "Dealer", id = 3))
-            userTypeList.add( CommonSpinner(name = "Sub Dealer", id = 4))
-
-        }
-
-        binding.userTypeSpinner.adapter = SpinnerCommonAdapter(requireActivity(), R.layout.spinner_popup_row,userTypeList)
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setWidthPercent(100)
 
-        /*** Dealer Sub-Dealer List Observer ***/
-        viewModel.dealerSubDealerListLiveData.observe(viewLifecycleOwner, Observer {
-            if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
-                if (it != null && !it.lstCustParentChildMapping.isNullOrEmpty()){
-                    val dealerSubDealerLists: MutableList<LstCustParentChildMappingDealer> = it.lstCustParentChildMapping!!.toMutableList()
-                    _dealerSubDealerList = dealerSubDealerLists
-
-                    val dealerSubDealerListName = ArrayList<String>()
-
-                    for (commonSpinner in dealerSubDealerLists) {
-                        dealerSubDealerListName.add(commonSpinner.firstName!!)
-                    }
-
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select Name"
-                    commonSpinner.id = -1
-                    dealerSubDealerListName.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstCustParentChildMappingDealer()
-                    custlist1.firstName = "Select Name"
-                    custlist1.userID = -1
-                    _dealerSubDealerList.add(0,custlist1)
-
-                    dealerSubDealerListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, dealerSubDealerListName)
-                    dealerSubDealerListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.customerNameSpinner.adapter = dealerSubDealerListAdapter
-
-
-                }else{
-                    val dealerListNames = ArrayList<String>()
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select Name"
-                    commonSpinner.id = -1
-                    dealerListNames.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstCustParentChildMappingDealer()
-                    custlist1.firstName = "Select Name"
-                    custlist1.userID = -1
-                    _dealerSubDealerList.add(0,custlist1)
-
-                    dealerSubDealerListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, dealerListNames)
-                    dealerSubDealerListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.customerNameSpinner.adapter = dealerSubDealerListAdapter
-                }
-            }
-
-        })
 
         /***  OTP observer ***/
         loginViewModel.saveAndGetOTPDetailsResponse.observe(viewLifecycleOwner, Observer {
@@ -227,7 +155,6 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
 
                 }else if (message.split("-").toTypedArray()[1].toInt() > 0)  {
                     LoadingDialogue.dismissDialog()
-                    binding.userLayout.visibility = View.GONE
                     binding.otpLayout.visibility = View.GONE
                     binding.closeBtn.visibility = View.GONE
                     binding.successLayout.visibility = View.VISIBLE
@@ -255,23 +182,6 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
 
     override fun onClick(v: View?) {
         when(v!!.id){
-            R.id.next_btn ->{
-                if (BlockMultipleClick.click()) return
-
-                if (userTypeId == -1){
-                    Toast.makeText(requireContext(), getString(R.string.please_select_user_type), Toast.LENGTH_SHORT).show()
-                    return
-                }else if (dealerSubDealerId == "-1"){
-                    Toast.makeText(requireContext(), getString(R.string.please_select_name), Toast.LENGTH_SHORT).show()
-                    return
-                }else{
-                    binding.userLayout.visibility = View.GONE
-                    binding.otpLayout.visibility = View.VISIBLE
-                    binding.otpSentNumber.text = "OTP will receive at " + PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile
-                    SendOTPRequest()
-                }
-
-            }
 
             R.id.close_btn ->{
                 if (::timers.isInitialized){
@@ -323,7 +233,7 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
         catalogue.redemptionDate = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(Date())
         catalogue.redemptionId = 0
         catalogue.redemptionRefno = objCataloguee.redemptionRefno
-        catalogue.redemptionTypeId = 1
+        catalogue.redemptionTypeId = 9
         catalogue.status = 0
         catalogue.customerCartId = objCataloguee.customerCartId
         catalogue.catogoryId = objCataloguee.catogoryId
@@ -372,52 +282,6 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener, Adap
 
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        when((parent as Spinner).id){
-            R.id.user_type_spinner ->{
-                mSelecteduserType = parent.getItemAtPosition(position) as CommonSpinner
-                userTypeId = mSelecteduserType.id!!
-                Log.d("fdsfsdf", mSelecteduserType.name!!)
-
-                if (userTypeId > 0){
-                    /*** Dealer Sub-Dealer Api call ***/
-                    viewModel.getDealerSubDealerListData(
-                        DealerSubDealerListRequest(
-                            actionType = 16,
-                            actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
-                            searchText = userTypeId.toString()
-                        )
-                    )
-
-                }else{
-                    val dealerListNames = ArrayList<String>()
-                    val commonSpinner = CommonSpinners()
-                    commonSpinner.name = "Select Name"
-                    commonSpinner.id = -1
-                    dealerListNames.add(0,commonSpinner.name!!)
-
-                    val custlist1 =  LstCustParentChildMappingDealer()
-                    custlist1.firstName = "Select Name"
-                    custlist1.userID = -1
-                    _dealerSubDealerList.add(0,custlist1)
-
-                    dealerSubDealerListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, dealerListNames)
-                    dealerSubDealerListAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.customerNameSpinner.adapter = dealerSubDealerListAdapter
-                }
-            }
-
-            R.id.customer_name_spinner ->{
-                dealerSubDealerId = _dealerSubDealerList[position].loyaltyID.toString()
-                Log.d("bhbrfhrb","dealer Sub-Dealer ID : " + dealerSubDealerId)
-
-            }
-        }
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-    }
 
 
     private fun startTimer(time_in_seconds: Long) {

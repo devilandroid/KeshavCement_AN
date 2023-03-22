@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/colorAccent"
     android:weightSum="10"
-    tools:context=".ui.redemptionCatalogue.cashTransfer.CashTransferDetailsFragment">
+    tools:context=".ui.redemptionCatalogue.cashVoucher.CashVoucherDetailsFragment">
 
 
     <androidx.cardview.widget.CardView

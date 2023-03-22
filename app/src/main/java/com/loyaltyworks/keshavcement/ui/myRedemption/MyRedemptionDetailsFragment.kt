@@ -93,8 +93,8 @@ class MyRedemptionDetailsFragment : Fragment() {
             LoadingDialogue.dismissDialog()
             if (it != null && !it.objCatalogueList.isNullOrEmpty()){
 
-                if (it.objCatalogueList[0].redeemedCatalogueType.equals("Gift Voucher",true) ||
-                    it.objCatalogueList[0].redeemedCatalogueType.equals("Voucher",true)){
+                if (it.objCatalogueList[0].redeemedCatalogueType == "4" || it.objCatalogueList[0].redeemedCatalogueType == "3" ||
+                    it.objCatalogueList[0].redeemedCatalogueType == "9"){
                     binding.categoryLayout.visibility = View.GONE
                     binding.quantityLayout.visibility = View.GONE
                 }else{

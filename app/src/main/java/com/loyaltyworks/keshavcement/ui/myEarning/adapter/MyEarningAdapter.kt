@@ -53,6 +53,9 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
         }else if (data.transactionType == "Enrollment Complimentary"){
             holder.remarks.text =  "Enrollment Complimentary"
 
+        }else if (data.transactionType == "WORKSITE"){
+            holder.remarks.text =  "Worksite Program"
+
         }else{
             if (data.invoiceNo.toString() == "--"){
                 holder.remarks.text =  "Reward Adjusted"

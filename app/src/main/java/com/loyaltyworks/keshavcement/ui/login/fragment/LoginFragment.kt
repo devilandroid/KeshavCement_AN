@@ -269,7 +269,7 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                                 binding.forgotUserName.text.clear()
                             }
                         })
-                    }else if (it == 3){
+                    }else if (it == 6){
                         LoadingDialogue.dismissDialog()
                         AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.incorrect_account_type),object:
                             AppController.SuccessCallBack{
@@ -279,7 +279,7 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                                 binding.forgotUserName.text.clear()
                             }
                         })
-                    }else if (it == 4 || it == 0){
+                    }else if (it == 4 || it == 0 || it == 3){
                         LoadingDialogue.dismissDialog()
                         AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_account_is_in_pending_kindly_contact_your_administrator),object:
                             AppController.SuccessCallBack{

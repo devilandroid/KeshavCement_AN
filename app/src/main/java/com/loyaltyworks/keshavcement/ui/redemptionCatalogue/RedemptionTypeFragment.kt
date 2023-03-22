@@ -42,14 +42,17 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
         binding.products.setOnClickListener(this)
         binding.wishlist.setOnClickListener(this)
         binding.evouchers.setOnClickListener(this)
-        binding.cashtransfer.setOnClickListener(this)
+        binding.cashVoucher.setOnClickListener(this)
+        binding.cashTransfer.setOnClickListener(this)
 
         Log.d("hbdfhbfhb","customer type : " + PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType))
 
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
-            binding.cashTransferTxt.text = getString(R.string.cash_voucher)
+            binding.cashVoucher.visibility = View.VISIBLE
+            binding.cashTransfer.visibility = View.GONE
         }else{
-            binding.cashTransferTxt.text = getString(R.string.cash_transfer)
+            binding.cashVoucher.visibility = View.GONE
+            binding.cashTransfer.visibility = View.VISIBLE
         }
 
         /*** Set PointBalance & Mobile & Name to Preference ***/
@@ -138,8 +141,12 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
             }
 
-            R.id.cashtransfer -> {
-                findNavController().navigate(R.id.cashTransferFragment)
+            R.id.cashVoucher -> {
+                findNavController().navigate(R.id.cashVoucherFragment)
+            }
+
+            R.id.cashTransfer -> {
+                findNavController().navigate(R.id.cashTransfersFragment)
             }
         }
 

@@ -48,7 +48,12 @@ class WorksiteDetailsAdapter(val lstWorkSiteInfo: List<LstWorkSiteInfo>) : Recyc
         holder.engineerMobile.text = data.contactNumber1
         holder.workLevel.text = "- " + data.worklevel
 
-        holder.remarks.text = "- " + data.remarks
+        if (!data.remarks.isNullOrEmpty()){
+            holder.remarks.text = "- " + data.remarks
+        }else{
+            holder.remarks.text = "- "
+        }
+
 
         if (!data.tentativeDate.isNullOrEmpty()){
             holder.tentativeDate.text = "- " + AppController.dateAPIFormat(data.tentativeDate.toString().split(" ")[0])
@@ -59,7 +64,7 @@ class WorksiteDetailsAdapter(val lstWorkSiteInfo: List<LstWorkSiteInfo>) : Recyc
             holder.status.setBackgroundResource(R.drawable.pending_bg)
             holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.pending_yellow1))
             holder.status.text = "Pending"
-        }else if (data.verificationStatus == "Approved"){
+        }else if (data.verificationStatus == "Verified"){
             holder.status.setBackgroundResource(R.drawable.approved_bg)
             holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.green))
             holder.status.text = "Approved"

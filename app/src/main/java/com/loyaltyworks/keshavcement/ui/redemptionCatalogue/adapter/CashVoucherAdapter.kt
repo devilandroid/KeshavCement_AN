@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
-import com.loyaltyworks.keshavcement.databinding.RowCashTransferBinding
+import com.loyaltyworks.keshavcement.databinding.RowCashVoucherBinding
 import com.loyaltyworks.keshavcement.model.ObjCataloguee
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 
-class CashTransferAdapter(val objCatalogueList: List<ObjCataloguee>, var onItemClickListener: OnItemClickCallBack): RecyclerView.Adapter<CashTransferAdapter.ViewHolder>() {
+class CashVoucherAdapter(val objCatalogueList: List<ObjCataloguee>, var onItemClickListener: OnItemClickCallBack): RecyclerView.Adapter<CashVoucherAdapter.ViewHolder>() {
 
     interface OnItemClickCallBack {
         fun onListItemClickResponse(itemView: View, position: Int, objCatalogue: ObjCataloguee)
@@ -21,7 +21,7 @@ class CashTransferAdapter(val objCatalogueList: List<ObjCataloguee>, var onItemC
         fun onHoldRedeemVoucher()
     }
 
-    class ViewHolder(val binding: RowCashTransferBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: RowCashVoucherBinding): RecyclerView.ViewHolder(binding.root) {
         val redeemBtn = binding.redeemBtn
         val productImg = binding.productImg
         val prodName = binding.prodName
@@ -35,7 +35,7 @@ class CashTransferAdapter(val objCatalogueList: List<ObjCataloguee>, var onItemC
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RowCashTransferBinding.inflate(LayoutInflater.from(parent.context),parent, false)
+        val binding = RowCashVoucherBinding.inflate(LayoutInflater.from(parent.context),parent, false)
         return ViewHolder(binding)
     }
 

@@ -181,9 +181,48 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <!-- Cash Transfer/ Cash Voucher -->
+                <!-- Cash Transfer -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cashtransfer"
+                    android:id="@+id/cashTransfer"
+                    android:layout_width="150dp"
+                    android:layout_height="190dp"
+                    app:cardCornerRadius="10dp"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/color44"
+                    android:layout_marginEnd="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="125dp"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/cashvouchers"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/cash_transfer"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/dark"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Cash Voucher -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cashVoucher"
                     android:layout_width="150dp"
                     android:layout_height="190dp"
                     app:cardCornerRadius="10dp"
@@ -209,7 +248,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="@string/cash_transfer"
+                            android:text="@string/cash_voucher"
                             android:layout_margin="10dp"
                             android:textColor="@color/dark"
                             android:textSize="14sp" />

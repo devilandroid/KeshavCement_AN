@@ -24,6 +24,7 @@ import com.loyaltyworks.keshavcement.model.LstCustParentChildMappingCustList
 import com.loyaltyworks.keshavcement.ui.enrollment.EnrollmentViewModel
 import com.loyaltyworks.keshavcement.ui.enrollment.adapter.EnrollmentAdapter
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.CustomerSelectionAdapter
+import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.EndlessRecyclerViewScrollListener
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
@@ -222,6 +223,14 @@ class CustomerSelectionFragment : Fragment(), CustomerSelectionAdapter.OnItemCli
         }
 
 
+    }
+
+    override fun onHoldCustomer() {
+        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.the_account_is_not_allowed_to_redeem_contact_administrator), object : AppController.SuccessCallBack {
+            override fun onOk() {
+            }
+
+        })
     }
 
 }

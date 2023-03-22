@@ -19,6 +19,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/first_layout"
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:orientation="vertical"

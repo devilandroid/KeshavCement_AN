@@ -154,34 +154,6 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
 
                 }
 
-                R.id.cashTransferFragment,
-                R.id.cashTransferDetailsFragment, ->{
-                    if (PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.Dealer){
-                        binding.root.toolbar.title = getString(R.string.cash_voucher)
-                    }else{
-                        binding.root.toolbar.title = getString(R.string.cash_transfer)
-                    }
-
-                    isDashboard = false
-                    // make visible only is condition passes
-                    if (::notification.isInitialized)
-                        notification.isVisible = false
-
-                    if (::logout.isInitialized)
-                        logout.isVisible = false
-
-                    if (::language.isInitialized)
-                        language.isVisible = false
-
-                    binding.root.toolbar_parent.visibility = View.VISIBLE
-
-                    Objects.requireNonNull(supportActionBar)!!
-                        .setHomeAsUpIndicator(resources.getDrawable(R.drawable.ic_back_round))
-                    Objects.requireNonNull(supportActionBar)!!.setDisplayHomeAsUpEnabled(true)
-
-                    binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                }
-
                 else -> {
                     isDashboard = false
                     // make visible only is condition passes

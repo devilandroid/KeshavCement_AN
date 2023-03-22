@@ -96,13 +96,13 @@
         android:label="@string/redemption_catalogue"
         tools:layout="@layout/fragment_redemption_type" />
     <fragment
-        android:id="@+id/cashTransferFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferFragment"
-        android:label="@string/cash_transfer"
-        tools:layout="@layout/fragment_cash_transfer" >
+        android:id="@+id/cashVoucherFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher.CashVoucherFragment"
+        android:label="@string/cash_voucher"
+        tools:layout="@layout/fragment_cash_voucher" >
         <action
-            android:id="@+id/action_cashTransferFragment_to_cashTransferDetailsFragment"
-            app:destination="@id/cashTransferDetailsFragment" />
+            android:id="@+id/action_cashVoucherFragment_to_cashVoucherDetailsFragment"
+            app:destination="@id/cashVoucherDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/evouchersFragment"
@@ -190,10 +190,10 @@
         android:label="@string/my_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/cashTransferDetailsFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferDetailsFragment"
-        android:label="@string/cash_transfer"
-        tools:layout="@layout/fragment_cash_transfer_details" />
+        android:id="@+id/cashVoucherDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher.CashVoucherDetailsFragment"
+        android:label="@string/cash_voucher"
+        tools:layout="@layout/fragment_cash_voucher_details" />
     <fragment
         android:id="@+id/voucherDialogFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.voucher.VoucherDialogFragment"
@@ -304,7 +304,7 @@
     </fragment>
     <dialog
         android:id="@+id/cashTransferDialogFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferDialogFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher.CashTransferDialogFragment"
         android:label=""
         tools:layout="@layout/fragment_cash_transfer_dialog" />
     <fragment
@@ -317,4 +317,9 @@
         android:name="com.loyaltyworks.keshavcement.ui.myRedemption.MyRedemptionDetailsFragment"
         android:label="@string/my_redemption"
         tools:layout="@layout/fragment_my_redemption_details" />
+    <fragment
+        android:id="@+id/cashTransfersFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransfersFragment"
+        android:label="@string/cash_transfer"
+        tools:layout="@layout/fragment_cash_transfers" />
 </navigation>

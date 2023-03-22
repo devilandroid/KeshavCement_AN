@@ -297,4 +297,8 @@
     <string name="i_accept_term_cond">I accept the Terms and Conditions</string>
     <string name="please_accept_terms_condition">Please accept terms and conditions !</string>
     <string name="you_are_not_eligible_to_redeem">You are not eligible for this cash voucher</string>
+    <string name="select_points">Select Points</string>
+    <string name="value_in_rupees">Value in Rupees</string>
+    <string name="swipe_to_transfer">Swipe to Transfer</string>
+    <string name="the_account_is_not_allowed_to_redeem_contact_administrator">The account is not allowed to redeem. Kindly contact the administrator.</string>
 </resources>
