@@ -48,6 +48,12 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
 
         holder.voucher_name.text = redeemGiftResponses.productName
 
+        if(redeemGiftResponses.is_Redeemable == 1) {
+            holder.redeem.visibility = View.VISIBLE
+        }else{
+            holder.redeem.visibility = View.GONE
+        }
+
         if(redeemGiftResponses.product_type == 1) {
 
             holder.voucher_range.text = "INR ${redeemGiftResponses.min_points.toString()} - ${redeemGiftResponses.max_points.toString()}"
@@ -59,7 +65,7 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
                 defaultData
             )
 
-            holder.redeem.visibility = View.VISIBLE
+
 
         }else{
 

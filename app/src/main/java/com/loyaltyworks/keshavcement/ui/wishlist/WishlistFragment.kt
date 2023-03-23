@@ -150,6 +150,12 @@ class WishlistFragment : Fragment(), View.OnClickListener, WishlistAdapter.OnPla
                     binding.plannerRecylerView.visibility = View.VISIBLE
                     binding.emptyPlannerHost.visibility = View.GONE
 
+                    if (it.objCatalogueList[0].isRedeemable == 1){
+                        binding.noteText.visibility = View.GONE
+                    }else{
+                        binding.noteText.visibility = View.VISIBLE
+                    }
+
                     if (page == 1) {
                         listFull = false
                         // 1. First, clear the array of data
