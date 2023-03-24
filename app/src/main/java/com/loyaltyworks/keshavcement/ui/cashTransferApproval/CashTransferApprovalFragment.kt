@@ -43,8 +43,8 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
     var isRefresh = true
     var isLoaded = false
     var listFull = false
-    var tempCashTransferApprovalList = ArrayList<ObjCatalogueRedemReq>()
-    var currentList = ArrayList<ObjCatalogueRedemReq>()
+    var tempCashTransferApprovalList = ArrayList<LstCustomerCashTransferedDetail>()
+    var currentList = ArrayList<LstCustomerCashTransferedDetail>()
     // Store a member variable for the listener
     var scrollListener: EndlessRecyclerViewScrollListener? = null
     var mCashTransferApprovalLayoutManager: LinearLayoutManager? = null
@@ -143,39 +143,28 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
         if (page == 1)
             scrollListener!!.resetState()
 
+        viewModel.getCashTransferApprovalListData(
+            CashTransferApprovalListRequest(
+                actionType = 3,
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!,
+                startIndex = startIndex,
+                pageSize = limit,
+                searchText = srchTxt,
+                isTranHistory = "-1",
+                status = "0"
 
+            )
+        )
 
-        val  myRedemptionRequest = MyRedemptionRequest()
-
-        myRedemptionRequest.actionType = "52"
-        myRedemptionRequest.partyLoyaltyID =  PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].loyaltyId
-        myRedemptionRequest.startIndex = startIndex
-        myRedemptionRequest.noOfRows = limit
-        myRedemptionRequest.searchText = srchTxt
-//        myRedemptionRequest.customerTypeID = selectedCustTypeId
-
-        val objCatalogueDetails = ObjCatalogueDetails()
-        objCatalogueDetails.selectedStatus = "0"
-        objCatalogueDetails.catogoryId = "8"
-        objCatalogueDetails.redemptionTypeId = -1
-
-//        if (FromDate.isNotEmpty() && ToDate.isNotEmpty()){
-//            objCatalogueDetails.jFromDate = AppController.dateAPIFormats(FromDate)
-//            objCatalogueDetails.jToDate = AppController.dateAPIFormats(ToDate)
-//        }
-
-        myRedemptionRequest.objCatalogueDetails = objCatalogueDetails
-
-        myRedemptionViewModel.setMyRedemptionListingRequest(myRedemptionRequest)
     }
 
 
     private fun loadCashTransferApprovalObserver() {
         /*** Cash Transfer Approval Listing Observer ***/
-        myRedemptionViewModel.myRedemptionLiveData.observe(viewLifecycleOwner, Observer{
+        viewModel.cashTransferApprovalListLiveData.observe(viewLifecycleOwner, Observer{
             if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
                 LoadingDialogue.dismissDialog()
-                if (it != null && !it.objCatalogueRedemReqList.isNullOrEmpty()) {
+                if (it != null && !it.lstCustomerCashTransferedDetails.isNullOrEmpty()) {
                     binding.cashTransferApprovalRecycler.visibility = View.VISIBLE
                     binding.noDataFount.noDataFoundLayout.visibility = View.GONE
 
@@ -189,7 +178,7 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
                         isRefresh = false
                     }
 
-                    for (redemption in it.objCatalogueRedemReqList){
+                    for (redemption in it.lstCustomerCashTransferedDetails){
                         tempCashTransferApprovalList.add(tempCashTransferApprovalList.size,redemption)
                     }
 
@@ -219,17 +208,18 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
 
         })
 
+
     }
 
     override fun onApproveClickResponse(
         itemView: View,
         position: Int,
         status: String,
-        objCatalogueRedemReqList: ObjCatalogueRedemReq
+        objCatalogueRedemReqList: LstCustomerCashTransferedDetail
     ) {
-        SendOtpRequest()
+        SendOtpRequest(objCatalogueRedemReqList)
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),getString(R.string.cash_transfer),getString(R.string.enter_otp_to_complete_the_process),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
+        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),getString(R.string.cash_transfer),getString(R.string.enter_otp_to_complete_the_process),objCatalogueRedemReqList.customerMobile.toString()
             ,"Submit" ,object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                 override fun onOk() {
                 }
@@ -237,7 +227,7 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
                 override fun onRedeemClick(otp: String) {
                     if(otp =="123456" /*OTPNumber*/){
                         RedeemOTPDialog.hideDialog()
-                        successMsg = getString(R.string.cash_voucher_approved)
+                        successMsg = getString(R.string.cash_transfer_approved)
 
                         /*** Call Approve Api ***/
                         approveRejectApi(objCatalogueRedemReqList,status)
@@ -248,7 +238,7 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
                 }
 
                 override fun resendOTP() {
-                    SendOtpRequest()
+                    SendOtpRequest(objCatalogueRedemReqList)
                 }
             })
     }
@@ -259,61 +249,41 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
         itemView: View,
         position: Int,
         status: String,
-        objCatalogueRedemReqList: ObjCatalogueRedemReq
+        objCatalogueRedemReqList: LstCustomerCashTransferedDetail
     ) {
-        SendOtpRequest()
 
-        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),getString(R.string.cash_transfer),getString(R.string.enter_otp_to_reject),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
-            ,"Submit",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
-                override fun onOk() {
-                }
+        successMsg = getString(R.string.cash_transfer_rejected)
 
-                override fun onRedeemClick(otp: String) {
-                    if(otp == "123456"/*OTPNumber*/){
-                        RedeemOTPDialog.hideDialog()
-                        successMsg = getString(R.string.cash_voucher_rejected)
+        /*** Call Reject Api ***/
+        approveRejectApi(objCatalogueRedemReqList,status)
 
-                        /*** Call Reject Api ***/
-                        approveRejectApi(objCatalogueRedemReqList,status)
-
-                    }else{
-                        Toast.makeText(requireContext(),getString(R.string.invalid_otp), Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun resendOTP() {
-                    SendOtpRequest()
-                }
-            })
     }
 
 
-    private fun approveRejectApi(objCatalogueRedemReqList: ObjCatalogueRedemReq, status: String) {
+    private fun approveRejectApi(objCatalogueRedemReqList: LstCustomerCashTransferedDetail, status: String) {
         LoadingDialogue.showDialog(requireContext())
         viewModel.getCashTransferApproveReject(
             CashTransferApproveRejectRequest(
-                actionType = "264",
+                actionType = 4,
                 actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
-                domain = "KESHAV_CEMENT",
-                searchText = objCatalogueRedemReqList.enteredRemarks,
-                objCatalogueDetails = ObjCatalogueDetailsCashTransferApproval(
-                    memberName = objCatalogueRedemReqList.loyaltyId,
-                    status = status,
-                    redemptionId = objCatalogueRedemReqList.redemptionId
-                )
+                loyaltyId = objCatalogueRedemReqList.loyaltyId,
+                partyLoyaltyId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userName.toString(),
+                remarks = objCatalogueRedemReqList.enteredRemarks,
+                status = status,
+                cashTranId = objCatalogueRedemReqList.cashTransferId
             )
         )
 
     }
 
-    private fun SendOtpRequest() {
+    private fun SendOtpRequest(objCatalogueRedemReqList: LstCustomerCashTransferedDetail) {
         loginViewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
                 merchantUserName = BuildConfig.MerchantName,
-                mobileNo = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString(),
-                userId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
-                userName = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].loyaltyId,
-                name = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].firstName.toString()
+                mobileNo = objCatalogueRedemReqList.customerMobile,
+                userId = "-1",
+                userName = objCatalogueRedemReqList.loyaltyId,
+                name = objCatalogueRedemReqList.customerName
             )
         )
 
@@ -341,8 +311,8 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
         /*** Cash Transfer Approve/Reject Observer ***/
         viewModel.cashTransferApproveRejectLiveData.observe(viewLifecycleOwner, Observer {
             LoadingDialogue.dismissDialog()
-            if (it != null && !it.returnMessage.isNullOrEmpty()){
-                if (it.returnMessage.split("~")[0] == "1"){
+            if (it != null){
+                if (it.returnValue!! > 0){
                     ClaimSuccessDialog.showClaimSuccessDialog(requireContext(),true,"Successfully!",
                         successMsg,object :
                             ClaimSuccessDialog.ClaimSuccessDialogCallBack{

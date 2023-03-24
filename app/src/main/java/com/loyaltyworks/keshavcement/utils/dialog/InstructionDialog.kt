@@ -58,9 +58,9 @@ object InstructionDialog {
         webSetting.builtInZoomControls = false
         webSetting.javaScriptEnabled = true
         webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH)
-        val res = context.resources
-        val fontSize = res.getDimension(R.dimen.h6).toInt()
-        webSetting.defaultFontSize = fontSize as Int
+//        val res = context.resources
+//        val fontSize = res.getDimension(R.dimen.h6).toInt()
+//        webSetting.defaultFontSize = fontSize as Int
 
         _mWebview1.webViewClient = WebViewClient()
         _mWebview1.loadUrl("file:///android_asset/cash_transfer_instruction.html")

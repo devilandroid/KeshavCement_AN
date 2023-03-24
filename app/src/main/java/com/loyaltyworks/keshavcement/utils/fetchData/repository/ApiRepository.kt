@@ -613,15 +613,6 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
         )
     }
 
-    /* Cash Transfer Approve/Reject  callback*/
-    suspend fun getCashTransferApproveReject(cashTransferApproveRejectRequest: CashTransferApproveRejectRequest): CashTransferApproveRejectResponse? {
-        return safeApiCall(
-            call = {
-                apiInterface.getCashTransferApproveRejectAsync(cashTransferApproveRejectRequest).await()
-            },
-            error = "Error Cash Transfer Approve/Reject Trigger"
-        )
-    }
 
     /* Terms Condition Request Callback*/
     suspend fun getTCData(termsConditionRequest: TermsConditionRequest): TermsConditionResponse? {
@@ -672,4 +663,56 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
             error = "Error status spinner  Trigger"
         )
     }
+
+    /* CashBackPoints  callback*/
+    suspend fun getCashbackPointsListData(cashbackPointsListRequest: CashbackPointsListRequest): CashbackPointsListResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCashBackPointsAsyncData(cashbackPointsListRequest).await()
+            },
+            error = "Error CashBack Points  Trigger"
+        )
+    }
+
+    /* Cash Transfer Submit  callback*/
+    suspend fun getCashTransferSubmitData(cashTransferSubmitRequest: CashTransferSubmitRequest): CashTransferSubmitResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCashTransferAsyncData(cashTransferSubmitRequest).await()
+            },
+            error = "Error Cash transfer Submit  Trigger"
+        )
+    }
+
+    /* Cash Transfer Submit  callback*/
+    suspend fun getCashTransferApprovalListData(cashTransferApprovalListRequest: CashTransferApprovalListRequest): CashTransferApprovalListResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCashTransferApprovalListAsyncData(cashTransferApprovalListRequest).await()
+            },
+            error = "Error Cash transfer Approval List  Trigger"
+        )
+    }
+
+    /* Cash Transfer Approve/Reject  callback*/
+    suspend fun getCashTransferApproveReject(cashTransferApproveRejectRequest: CashTransferApproveRejectRequest): CashTransferApproveRejectResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCashTransferApproveRejectAsyncData(cashTransferApproveRejectRequest).await()
+            },
+            error = "Error Cash transfer Approve/Reject  Trigger"
+        )
+    }
+
+    /* Cash Transfer History List callback*/
+    suspend fun getCashTransferHistoryListData(cashTransferHistoryRequest: CashTransferHistoryRequest): CashTransferHistoryResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getCashTransferHistoryListAsyncData(cashTransferHistoryRequest).await()
+            },
+            error = "Error Cash transfer History List  Trigger"
+        )
+    }
+
+
 }

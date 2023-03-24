@@ -3,10 +3,9 @@ import com.squareup.moshi.JsonClass
 
 import com.squareup.moshi.Json
 
-
-/*** Cash Transfer Approval Listing Request ***/
+/*** Cash Transfer History List Request ***/
 @JsonClass(generateAdapter = true)
-data class CashTransferApprovalListRequest(
+data class CashTransferHistoryRequest(
     @Json(name = "ActionType")
     val actionType: Int? = null,
     @Json(name = "ActorId")
@@ -29,13 +28,13 @@ data class CashTransferApprovalListRequest(
     val todate: String? = null
 )
 
-/*** Cash Transfer Approval Listing Response ***/
+/*** Cash Transfer History List Response ***/
 @JsonClass(generateAdapter = true)
-data class CashTransferApprovalListResponse(
+data class CashTransferHistoryResponse(
     @Json(name = "lstCashTransfer")
     val lstCashTransfer: Any? = null,
     @Json(name = "lstCustomerCashTransferedDetails")
-    val lstCustomerCashTransferedDetails: List<LstCustomerCashTransferedDetail>? = null,
+    val lstCustomerCashTransferedDetails: List<LstCustomerCashTransferedDetailTransferHistory>? = null,
     @Json(name = "redeemablePointBalance")
     val redeemablePointBalance: Int? = null,
     @Json(name = "returnMessage")
@@ -45,7 +44,7 @@ data class CashTransferApprovalListResponse(
 )
 
 @JsonClass(generateAdapter = true)
-data class LstCustomerCashTransferedDetail(
+data class LstCustomerCashTransferedDetailTransferHistory(
     @Json(name = "cashTransferId")
     val cashTransferId: Int? = null,
     @Json(name = "cashTransferedStatus")
@@ -69,40 +68,5 @@ data class LstCustomerCashTransferedDetail(
     @Json(name = "remarks")
     val remarks: String? = null,
     @Json(name = "transferedPointsinAmount")
-    val transferedPointsinAmount: String? = null,
-    var enteredRemarks: String = ""
-)
-
-/*** Cash Transfer Approve/Reject Request ***/
-@JsonClass(generateAdapter = true)
-data class CashTransferApproveRejectRequest(
-    @Json(name = "ActionType")
-    val actionType: Int? = null,
-    @Json(name = "ActorId")
-    val actorId: String? = null,
-    @Json(name = "CashTranId")
-    val cashTranId: Int? = null,
-    @Json(name = "LoyaltyId")
-    val loyaltyId: String? = null,
-    @Json(name = "PartyLoyaltyId")
-    val partyLoyaltyId: String? = null,
-    @Json(name = "Remarks")
-    val remarks: String? = null,
-    @Json(name = "Status")
-    val status: String? = null
-)
-
-/*** Cash Transfer Approve/Reject Response ***/
-@JsonClass(generateAdapter = true)
-data class CashTransferApproveRejectResponse(
-    @Json(name = "lstCashTransfer")
-    val lstCashTransfer: Any? = null,
-    @Json(name = "lstCustomerCashTransferedDetails")
-    val lstCustomerCashTransferedDetails: Any? = null,
-    @Json(name = "redeemablePointBalance")
-    val redeemablePointBalance: Int? = null,
-    @Json(name = "returnMessage")
-    val returnMessage: Any? = null,
-    @Json(name = "returnValue")
-    val returnValue: Int? = null
+    val transferedPointsinAmount: Int? = null
 )

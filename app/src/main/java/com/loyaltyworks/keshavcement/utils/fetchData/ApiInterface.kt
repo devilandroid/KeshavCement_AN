@@ -252,9 +252,6 @@ interface ApiInterface {
     @POST("SaveApprovePurchaseRequestDetail")
     fun getPendingClaimApproveRejactAsync(@Body pendingClaimApproveRejectRequest: PendingClaimApproveRejectRequest):  Deferred<Response<PendingClaimApproveRejectResponse>>
 
-    /* Pending Claim Approve/Reject api call */
-    @POST("GetCatalogueDetails")
-    fun getCashTransferApproveRejectAsync(@Body cashTransferApproveRejectRequest: CashTransferApproveRejectRequest):  Deferred<Response<CashTransferApproveRejectResponse>>
 
     /* Terms Condition Api call */
     @POST("SaveOrGetTermAndConditions")
@@ -275,6 +272,26 @@ interface ApiInterface {
     /* Redemption Status call*/
     @POST("GetAttributeDetails")
     fun getStatusSpinnerData(@Body statusSpinnerRequest: StatusSpinnerRequest): Deferred<Response<StatusSpinnerResponse>>
+
+    /* CashBackPoints call*/
+    @POST("GetCashTransferDenominations")
+    fun getCashBackPointsAsyncData(@Body cashbackPointsListRequest: CashbackPointsListRequest): Deferred<Response<CashbackPointsListResponse>>
+
+    /* Cash Transfer Submit call*/
+    @POST("SaveCustomerCasTransferDEtails")
+    fun getCashTransferAsyncData(@Body cashTransferSubmitRequest: CashTransferSubmitRequest): Deferred<Response<CashTransferSubmitResponse>>
+
+    /* Cash Transfer Approval List call*/
+    @POST("GetCustomerCashTransferList")
+    fun getCashTransferApprovalListAsyncData(@Body cashTransferApprovalListRequest: CashTransferApprovalListRequest): Deferred<Response<CashTransferApprovalListResponse>>
+
+     /* Cash Transfer Approve/Reject call*/
+    @POST("CustomerCashTransferApprovalOrRejection")
+    fun getCashTransferApproveRejectAsyncData(@Body cashTransferApproveRejectRequest: CashTransferApproveRejectRequest): Deferred<Response<CashTransferApproveRejectResponse>>
+
+    /* Cash Transfer Approve/Reject call*/
+    @POST("GetCustomerCashTransferList")
+    fun getCashTransferHistoryListAsyncData(@Body cashTransferHistoryRequest: CashTransferHistoryRequest): Deferred<Response<CashTransferHistoryResponse>>
 
 
 }

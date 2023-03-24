@@ -19,7 +19,6 @@
             android:layout_weight="1"
             android:weightSum="10"
             android:gravity="center_vertical"
-            android:background="@color/color2"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
             android:orientation="horizontal">
@@ -206,14 +205,14 @@
                     android:orientation="vertical"
                     android:background="@drawable/corner_bg3">
 
-                    <pl.utkala.searchablespinner.SearchableSpinner
+                    <Spinner
                         android:id="@+id/points_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="10"
-                        android:background="@color/transparent"
-                        app:closeText="Close"
-                        app:dialogTitle="Please select product" />
+                        android:backgroundTint="@color/transparent"
+                        android:spinnerMode="dropdown" />
+
 
                     <ImageView
                         android:layout_width="20dp"
@@ -276,7 +275,7 @@
                                 android:layout_marginStart="5dp"/>
 
                             <TextView
-                                android:id="@+id/qty_textview"
+                                android:id="@+id/points_rupees"
                                 android:layout_width="95dp"
                                 android:layout_height="match_parent"
                                 android:layout_toEndOf="@+id/qty_minus"
@@ -284,8 +283,8 @@
                                 android:gravity="center"
                                 android:inputType="number"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
 
 
                         </RelativeLayout>

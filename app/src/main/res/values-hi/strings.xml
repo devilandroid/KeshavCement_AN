@@ -302,4 +302,7 @@
     <string name="swipe_to_transfer">Swipe to Transfer</string>
     <string name="the_account_is_not_allowed_to_redeem_contact_administrator">The account is not allowed to redeem. Kindly contact the administrator.</string>
     <string name="redemption_temporarily_closed">Note : Redemption is temporarily closed, we will update once we resume.</string>
+    <string name="please_select_points">Please select points</string>
+    <string name="cash_transfer_rejected">Cash transfer rejected</string>
+    <string name="cash_transfer_approved">Cash transfer approved</string>
 </resources>
