@@ -93,6 +93,11 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             actorID = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
         }
 
+        binding.mobileVerifyLayout.visibility = View.VISIBLE
+        binding.enrollLayout.visibility = View.GONE
+        binding.mobileNumberEdt.isEnabled = false
+        binding.mobileNumberEdt.isClickable = false
+
         binding.customerTypeSpinner.onItemSelectedListener = this
         binding.stateSpinner.onItemSelectedListener = this
         binding.districtSpinner.onItemSelectedListener = this
@@ -103,6 +108,7 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
         binding.birthDate.setOnClickListener(this)
         binding.anniversaryDate.setOnClickListener(this)
+        binding.verifyNumber.setOnClickListener(this)
 
         userTypeSpinner()
         StateRequest()
@@ -315,7 +321,10 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
                 if (it != null) {
                     if (it != 1) {
-                        enrollSubmitApi()
+                        binding.mobileVerifyLayout.visibility = View.GONE
+                        binding.enrollLayout.visibility = View.VISIBLE
+                        binding.mobileNumberEdt.setText(binding.mobileEdtVerify.text.toString())
+
                     }else{
                         AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_entered_mobile_already_exist),object:
                             AppController.SuccessCallBack{
@@ -378,6 +387,18 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
     override fun onClick(v: View?) {
         when(v!!.id){
+            R.id.verify_number ->{
+                if (binding.mobileEdtVerify.text.toString().trim().isNullOrEmpty()){
+                    binding.mobileEdtVerify.error = getString(R.string.enter_mobile_number)
+                    binding.mobileEdtVerify.requestFocus()
+                }else if (!binding.mobileEdtVerify.text.toString().trim().isNullOrEmpty() && binding.mobileEdtVerify.text.toString().trim().length < 10){
+                    binding.mobileEdtVerify.error = getString(R.string.enter_valid_mobile_no)
+                    binding.mobileEdtVerify.requestFocus()
+                }else{
+                    checkCustomerExistancy(binding.mobileEdtVerify.text.toString())
+                }
+            }
+
             R.id.birth_date ->{
                 DatePickerBox.date(1, activity) {
                     val year = Integer.parseInt(it.split("/")[2])
@@ -440,7 +461,8 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     Toast.makeText(requireContext(), getString(R.string.select_taluk), Toast.LENGTH_SHORT).show()
 
                 }*/else{
-                    checkCustomerExistancy(binding.mobileNumberEdt.text.toString())
+//                    checkCustomerExistancy(binding.mobileNumberEdt.text.toString())
+                    enrollSubmitApi()
                 }
 
             }
@@ -460,8 +482,8 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
         LoadingDialogue.showDialog(requireContext())
         loginViewModel.getMobileEmailExistenceCheck(
             CustomerExistenceRequest(
-                actionType = "65",
-                actorId = userTypeId.toString(),
+                actionType = "11",
+//                actorId = userTypeId.toString(),
                 location = (Location(
                     userName = userName,
                 ))

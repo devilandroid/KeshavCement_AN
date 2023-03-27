@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="@string/redeemable_points"
+                android:text="@string/total_points"
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp" />
 

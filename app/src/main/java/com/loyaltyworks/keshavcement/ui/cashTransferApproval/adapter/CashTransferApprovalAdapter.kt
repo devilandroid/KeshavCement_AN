@@ -82,7 +82,7 @@ class CashTransferApprovalAdapter(val lstCustomerCashTransferedDetails: List<Lst
         holder.location.text = data.locationName
         holder.custType.text = data.customerType
         holder.custName.text = data.customerName
-        holder.value.text = data.transferedPointsinAmount
+        holder.value.text = "₹ " + data.transferedPointsinAmount
         holder.custMobile.text = data.customerMobile
         holder.points.text = data.points.toString()
 

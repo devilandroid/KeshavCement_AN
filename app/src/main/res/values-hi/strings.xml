@@ -52,7 +52,6 @@
     <string name="work_details">Work Details</string>
     <string name="work_level">Work Level</string>
     <string name="tentative_date">Tentative date</string>
-    <string name="owner_resident_details">Owner Resident Details</string>
     <string name="owner_name">Owner Name</string>
     <string name="engineer_name">Engineer Name</string>
     <string name="create_new">Create New</string>
@@ -66,9 +65,8 @@
     <string name="next">Next</string>
     <string name="owner_details">Owner Details</string>
     <string name="owner_mobile_number">Owner Mobile Number</string>
-    <string name="owner_residential_details">Owner Residential Details</string>
     <string name="engineer_details">Engineer Details</string>
-    <string name="engineer_number">Engineer Number</string>
+    <string name="engineer_number">Engineer Mobile Number</string>
     <string name="tentative_date_of_completion">Tentative Date of Completion</string>
     <string name="user_type">User Type</string>
     <string name="select_product">Select Product</string>
@@ -305,4 +303,6 @@
     <string name="please_select_points">Please select points</string>
     <string name="cash_transfer_rejected">Cash transfer rejected</string>
     <string name="cash_transfer_approved">Cash transfer approved</string>
+    <string name="value">Value</string>
+    <string name="owner_address">Owner\'s Address</string>
 </resources>

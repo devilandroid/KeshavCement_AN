@@ -309,7 +309,7 @@ class WorksiteDetailsFragment : Fragment(), View.OnClickListener {
 
             R.id.createNew -> {
 
-                findNavController().navigate(R.id.newWorksiteFragment)
+                findNavController().navigate(R.id.action_worksiteDetailsFragment_to_newWorksiteFragment)
 
             }
         }

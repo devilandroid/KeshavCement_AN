@@ -194,7 +194,7 @@ class DreamGiftDetailsFragment : Fragment(), View.OnClickListener {
                     }else{
                         val bundle = Bundle()
                         bundle.putSerializable("DreamGift",lstDreamGift)
-                        findNavController().navigate(R.id.dreamGiftAddressFragment,bundle)
+                        findNavController().navigate(R.id.action_dreamGiftDetailsFragment_to_dreamGiftAddressFragment,bundle)
 
                     }
 

@@ -79,19 +79,19 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
                     DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
                         override fun forSelfClick() {
-                            findNavController().navigate(R.id.productFragment)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_productFragment)
                         }
 
                         override fun forOthersClick() {
                             val bundle = Bundle()
                             bundle.putSerializable("directedFrom", "ProductClick")
-                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_customerSelectionFragment,bundle)
                         }
 
                     })
 
                 }else{
-                    findNavController().navigate(R.id.productFragment)
+                    findNavController().navigate(R.id.action_redemptionTypeFragment_to_productFragment)
                 }
             }
 
@@ -102,19 +102,19 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
                     DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
                         override fun forSelfClick() {
-                            findNavController().navigate(R.id.wishlistFragment)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_wishlistFragment)
                         }
 
                         override fun forOthersClick() {
                             val bundle = Bundle()
                             bundle.putSerializable("directedFrom", "WishlistClick")
-                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_customerSelectionFragment,bundle)
                         }
 
                     })
 
                 }else{
-                    findNavController().navigate(R.id.wishlistFragment)
+                    findNavController().navigate(R.id.action_redemptionTypeFragment_to_wishlistFragment)
                 }
             }
 
@@ -124,29 +124,29 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
                     DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
                         override fun forSelfClick() {
-                            findNavController().navigate(R.id.evouchersFragment)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_evouchersFragment)
                         }
 
                         override fun forOthersClick() {
                             val bundle = Bundle()
                             bundle.putSerializable("directedFrom", "VoucherClick")
-                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_customerSelectionFragment,bundle)
                         }
 
                     })
 
                 }else{
-                    findNavController().navigate(R.id.evouchersFragment)
+                    findNavController().navigate(R.id.action_redemptionTypeFragment_to_evouchersFragment)
                 }
 
             }
 
             R.id.cashVoucher -> {
-                findNavController().navigate(R.id.cashVoucherFragment)
+                findNavController().navigate(R.id.action_redemptionTypeFragment_to_cashVoucherFragment)
             }
 
             R.id.cashTransfer -> {
-                findNavController().navigate(R.id.cashTransfersFragment)
+                findNavController().navigate(R.id.action_redemptionTypeFragment_to_cashTransfersFragment)
             }
         }
 

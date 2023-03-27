@@ -240,7 +240,7 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
         bundle.putSerializable("SelectedCustomerLoyltyID", loyaltyId)
         bundle.putSerializable("SelectedCustomerPartyLoyaltyID", partyLoyaltyID)
         bundle.putSerializable("VoucherData", CatalogueVouchers)
-        findNavController().navigate(R.id.voucherDialogFragment, bundle)
+        findNavController().navigate(R.id.action_evouchersFragment_to_voucherDialogFragment, bundle)
     }
 
     override fun onRedeemVoucherFromAdapter(itemView: View, position: Int,CatalogueVouchers: ObjCatalogueListtt, amount: String) {

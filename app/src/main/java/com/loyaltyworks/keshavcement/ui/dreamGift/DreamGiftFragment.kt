@@ -119,7 +119,7 @@ class DreamGiftFragment : Fragment() ,DreamGiftAdapter.OnGiftItemCallBack{
     override fun onRedeemCallback(lstDreamGift: LstDreamGift) {
         val bundle = Bundle()
         bundle.putSerializable("DreamGift",lstDreamGift)
-        findNavController().navigate(R.id.dreamGiftAddressFragment,bundle)
+        findNavController().navigate(R.id.action_dreamGiftFragment_to_dreamGiftAddressFragment,bundle)
     }
 
     override fun onHoldAddtoCart() {

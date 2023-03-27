@@ -137,8 +137,8 @@
                         android:id="@+id/prod_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/claim_img"
-                        android:scaleType="fitXY"/>
+                        android:padding="3dp"
+                        android:src="@drawable/claim_img"/>
                 </androidx.cardview.widget.CardView>
 
 

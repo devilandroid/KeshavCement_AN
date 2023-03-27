@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_customer_type_selection" >
         <action
             android:id="@+id/action_customerTypeSelectionFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -21,10 +25,18 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_activateFragment"
-            app:destination="@id/activateFragment" />
+            app:destination="@id/activateFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
     </fragment>
     <fragment
         android:id="@+id/activateFragment"
@@ -41,6 +53,10 @@
             app:destination="@id/activateFragment"
             app:launchSingleTop="true"
             app:popUpTo="@+id/registerFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
 </navigation>

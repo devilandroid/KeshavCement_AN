@@ -175,7 +175,6 @@ class MySupportExecutiveFragment : Fragment(), View.OnClickListener, MySupportEx
             if (BlockMultipleClick.click())return
                 currentList.clear()
             findNavController().navigate(R.id.action_mySupportExecutiveFragment_to_newSupportExecutiveFragment)
-            requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
         }
 
         }

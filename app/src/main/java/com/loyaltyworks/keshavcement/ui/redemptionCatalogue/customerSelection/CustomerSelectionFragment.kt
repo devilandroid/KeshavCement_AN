@@ -215,11 +215,11 @@ class CustomerSelectionFragment : Fragment(), CustomerSelectionAdapter.OnItemCli
         bundle.putString("SelectedCustomerLoyltyID",selectedCustomer.loyaltyID.toString())
 
         if (directedFrom == "ProductClick"){
-            findNavController().navigate(R.id.productFragment,bundle)
+            findNavController().navigate(R.id.action_customerSelectionFragment_to_productFragment,bundle)
         }else if (directedFrom == "VoucherClick"){
-            findNavController().navigate(R.id.evouchersFragment,bundle)
+            findNavController().navigate(R.id.action_customerSelectionFragment_to_evouchersFragment,bundle)
         }else if (directedFrom == "WishlistClick"){
-            findNavController().navigate(R.id.wishlistFragment,bundle)
+            findNavController().navigate(R.id.action_customerSelectionFragment_to_wishlistFragment,bundle)
         }
 
 

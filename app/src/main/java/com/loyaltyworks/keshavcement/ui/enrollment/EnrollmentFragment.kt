@@ -212,7 +212,6 @@ class EnrollmentFragment : Fragment(), View.OnClickListener {
                 if (BlockMultipleClick.click())return
                 binding.searchFilter.text.clear()
                 findNavController().navigate(R.id.action_enrollmentFragment_to_newEnrollmentFragment)
-                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
         }

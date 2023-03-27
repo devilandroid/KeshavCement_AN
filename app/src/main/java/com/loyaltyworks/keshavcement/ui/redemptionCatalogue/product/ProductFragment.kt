@@ -457,7 +457,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         bundle.putString("SelectedCustomerUserID",actorID)
         bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
         bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
-        itemView.findNavController().navigate(R.id.productDetailsFragment, bundle)
+        itemView.findNavController().navigate(R.id.action_productFragment_to_productDetailsFragment, bundle)
     }
 
     override fun onAddToCart(objCatalogue: ObjCataloguee) {

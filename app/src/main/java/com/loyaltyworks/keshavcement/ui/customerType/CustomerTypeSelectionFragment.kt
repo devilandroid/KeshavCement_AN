@@ -78,7 +78,6 @@ class CustomerTypeSelectionFragment : Fragment(), CustomerTypeAdapter.OnItemClic
     ) {
         PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType,lstAttributesDetails.attributeId.toString())
         findNavController().navigate(R.id.action_customerTypeSelectionFragment_to_loginFragment)
-        requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
     }
 
 }

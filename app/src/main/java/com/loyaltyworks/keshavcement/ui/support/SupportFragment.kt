@@ -219,7 +219,7 @@ class SupportFragment : Fragment(), SupportAdapter.OnClickCallBack, View.OnClick
 
         when(p0!!.id){
             R.id.new_ticket_ll -> {
-                findNavController().navigate(R.id.newTicketFragment)
+                findNavController().navigate(R.id.action_supportFragment_to_newTicketFragment)
 //                 HelpTopicsDialog.showDialog(requireContext(),this)
             }
         }

@@ -82,7 +82,7 @@ class AddressFragment : Fragment() {
             if( requireArguments().getSerializable("CustomerProfileData") != null){
                 _lstCustomerJson = listOf(requireArguments().getSerializable("CustomerProfileData") as LstCustomerJson)
 
-                binding.addressInfo.text = _lstCustomerJson[0].firstName + "\n" + _lstCustomerJson[0].address1 + "\n" + _lstCustomerJson[0].districtName + "\n" + _lstCustomerJson[0].stateName + "\n" + _lstCustomerJson[0].countryName + " - " + _lstCustomerJson[0].zip + "\n" + "PH - " + _lstCustomerJson[0].mobile+ "\n" + "Email - " + _lstCustomerJson[0].email
+                binding.addressInfo.text = _lstCustomerJson[0].firstName + "\n" + _lstCustomerJson[0].address1 + "\n" + _lstCustomerJson[0].districtName + "\n" + _lstCustomerJson[0].stateName + /*"\n" + _lstCustomerJson[0].countryName +*/ " - " + _lstCustomerJson[0].zip + "\n" + "PH - " + _lstCustomerJson[0].mobile+ "\n" + "Email - " + _lstCustomerJson[0].email
             }else{
                 callAddressApi()
             }
@@ -221,7 +221,7 @@ class AddressFragment : Fragment() {
                     }
                     Log.d("ebhbfhr","district name : "+ districtName)
 
-                    binding.addressInfo.text = data.firstName + "\n" + data.address1 + "\n" + districtName + "\n" + stateName + "\n" + data.countryName + " - " + data.zip + "\n" + "PH - " + data.mobile+ "\n" + "Email - " + data.email
+                    binding.addressInfo.text = data.firstName + "\n" + data.address1 + "\n" + districtName + "\n" + stateName + /*"\n" + data.countryName +*/ " - " + data.zip + "\n" + "PH - " + data.mobile+ "\n" + "Email - " + data.email
 
                 } else {
                     Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()

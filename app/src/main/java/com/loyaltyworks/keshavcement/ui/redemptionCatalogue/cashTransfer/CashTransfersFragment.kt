@@ -35,9 +35,9 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     private lateinit var purchaseViewModel: PurchaseRequestViewModel
     private lateinit var viewModel: CashTransferViewModel
 
-    var userTypeList = mutableListOf<CommonSpinner>()
-    private lateinit var mSelecteduserType: CommonSpinner
-    var userTypeId: Int = -1
+//    var userTypeList = mutableListOf<CommonSpinner>()
+//    private lateinit var mSelecteduserType: CommonSpinner
+//    var userTypeId: Int = -1
 
     var _dealerSubDealerList = mutableListOf<LstCustParentChildMappingDealer>()
     var dealerSubDealerListAdapter: ArrayAdapter<String>? = null
@@ -66,7 +66,7 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
         binding.helpInstruction.setOnClickListener(this)
 
-        binding.userTypeSpinner.onItemSelectedListener = this
+//        binding.userTypeSpinner.onItemSelectedListener = this
         binding.customerNameSpinner.onItemSelectedListener = this
         binding.pointsSpinner.onItemSelectedListener = this
 
@@ -82,18 +82,20 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             customerTypeIds = "4"
         }
 
-        userTypeSpinner()
+//        userTypeSpinner()
         cashbackPointsApi()
+        /*** Dealer Sub-Dealer Api call ***/
+        dealerSubdealerApiCall()
 
         /*** Submit Claim by Swap ***/
         binding.claimBtn.setOnStateChangeListener {
             if (it){
 
-                if (userTypeId == -1){
+                /*if (userTypeId == -1){
                     Toast.makeText(requireContext(), getString(R.string.please_select_user_type), Toast.LENGTH_SHORT).show()
                     binding.claimBtn.changeState(false,true)
                     return@setOnStateChangeListener
-                }else if (dealerSubDealerId == "-1"){
+                }else*/ if (dealerSubDealerId == "-1"){
                     Toast.makeText(requireContext(), getString(R.string.please_select_name), Toast.LENGTH_SHORT).show()
                     binding.claimBtn.changeState(false,true)
                     return@setOnStateChangeListener
@@ -143,7 +145,7 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
     }
 
-    private fun userTypeSpinner() {
+   /* private fun userTypeSpinner() {
         userTypeList.clear()
 
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
@@ -161,7 +163,7 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
         binding.userTypeSpinner.adapter = SpinnerCommonWhiteTextAdapter(requireActivity(), R.layout.spinner_popup_row,userTypeList)
     }
-
+*/
 
     override fun onClick(v: View?) {
         when(v!!.id){
@@ -274,7 +276,7 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                             ClaimSuccessDialog.ClaimSuccessDialogCallBack{
                             override fun onOk() {
                                 binding.claimBtn.changeState(false,true)
-                                userTypeSpinner()
+//                                userTypeSpinner()
                                 cashbackPointsApi()
                                 binding.pointsRupees.text = ""
                             }
@@ -294,20 +296,13 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when((parent as Spinner).id){
-            R.id.user_type_spinner ->{
+           /* R.id.user_type_spinner ->{
                 mSelecteduserType = parent.getItemAtPosition(position) as CommonSpinner
                 userTypeId = mSelecteduserType.id!!
                 Log.d("fdsfsdf", mSelecteduserType.name!!)
 
                 if (userTypeId > 0){
-                    /*** Dealer Sub-Dealer Api call ***/
-                    purchaseViewModel.getDealerSubDealerListData(
-                        DealerSubDealerListRequest(
-                            actionType = 16,
-                            actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
-                            searchText = userTypeId.toString()
-                        )
-                    )
+
 
                 }else{
                     val dealerListNames = ArrayList<String>()
@@ -326,7 +321,7 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     binding.customerNameSpinner.adapter = dealerSubDealerListAdapter
                 }
             }
-
+*/
             R.id.customer_name_spinner ->{
                 dealerSubDealerId = _dealerSubDealerList[position].userID.toString()
                 dealerSubDealerLoyltyId = _dealerSubDealerList[position].loyaltyID.toString()
@@ -345,6 +340,16 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
 
         }
+    }
+
+    private fun dealerSubdealerApiCall() {
+        purchaseViewModel.getDealerSubDealerListData(
+            DealerSubDealerListRequest(
+                actionType = 16,
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
+                searchText = "-1"
+            )
+        )
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

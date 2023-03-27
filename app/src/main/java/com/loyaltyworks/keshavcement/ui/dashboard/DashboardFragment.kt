@@ -460,68 +460,68 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         when (v!!.id) {
 
             R.id.dash_enrollment ->{
-                findNavController().navigate(R.id.enrollmentFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_enrollmentFragment)
             }
 
             R.id.dash_pending_request,
             R.id.dash_pending_claim_request ->{
-                findNavController().navigate(R.id.pendingClaimRequestFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_pendingClaimRequestFragment)
             }
 
             R.id.dash_cash_transfer_approval ->{
-                findNavController().navigate(R.id.cashTransferApprovalFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_cashTransferApprovalFragment)
             }
 
             R.id.dash_my_purchase_claim ->{
-                findNavController().navigate(R.id.myPurchaseClaimFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_myPurchaseClaimFragment)
             }
 
             R.id.dash_claim_purchase ->{
-                findNavController().navigate(R.id.purchaseRequestFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_purchaseRequestFragment)
             }
 
             R.id.dash_catalogue ->{
-                findNavController().navigate(R.id.redemptionTypeFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_redemptionTypeFragment)
             }
 
             R.id.dash_my_redemption ->{
-                findNavController().navigate(R.id.myRedemptionFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_myRedemptionFragment)
             }
 
             R.id.dash_my_earning ->{
-                findNavController().navigate(R.id.myEarningFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_myEarningFragment)
             }
 
             R.id.dash_offers ->{
-                findNavController().navigate(R.id.promotionsFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_promotionsFragment)
             }
 
             R.id.dash_worksite ->{
-                findNavController().navigate(R.id.worksiteDetailsFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_worksiteDetailsFragment)
             }
 
             R.id.dash_refer_earn ->{
-                findNavController().navigate(R.id.referFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_referFragment)
             }
 
             R.id.dash_my_activity ->{
-                findNavController().navigate(R.id.myActivityFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_myActivityFragment)
             }
 
             R.id.sale_and_earn ->{
-                findNavController().navigate(R.id.claimFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_claimFragment)
             }
 
             R.id.new_sale ->{
-                findNavController().navigate(R.id.claimFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_claimFragment)
             }
 
             R.id.dash_earn_point_claim_purchase ->{
-                findNavController().navigate(R.id.purchaseRequestFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_purchaseRequestFragment)
             }
 
             R.id.dash_raise_ticket ->{
-                findNavController().navigate(R.id.supportFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_supportFragment)
             }
 
             R.id.d_profile_image ->{

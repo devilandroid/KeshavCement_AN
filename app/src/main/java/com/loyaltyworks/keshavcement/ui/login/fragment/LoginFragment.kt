@@ -537,7 +537,6 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
             R.id.activate_now_button ->{
                 if (BlockMultipleClick.click())return
                 findNavController().navigate(R.id.action_loginFragment_to_activateFragment)
-                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
             R.id.register_btn ->{
@@ -546,7 +545,6 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     customerTypeList.clear()
                 }
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
             R.id.login_button ->{
