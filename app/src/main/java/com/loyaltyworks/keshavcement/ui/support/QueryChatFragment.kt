@@ -78,6 +78,7 @@ class QueryChatFragment : Fragment(), View.OnClickListener, QueryChatAdapter.Cha
                 helpTopicID = dataholder.helpTopicID.toString()!!
 //                binding.querySummary.text = "Ticket Details " + " : " + dataholder.querySummary!!
 
+                Log.d("evrgvf","rbfhrb : " + QueryStatus)
             }
         }
 
@@ -189,7 +190,7 @@ class QueryChatFragment : Fragment(), View.OnClickListener, QueryChatAdapter.Cha
             when (QueryStatus) {
                 "Resolved",
                 "Reopen" -> ticketId = 2
-                "Resolved-Follow up" -> ticketId = 5
+                "Resolved-Follow Up" -> ticketId = 5
                 "Closed" -> ticketId = 4
                 "Pending" -> ticketId = 1
             }

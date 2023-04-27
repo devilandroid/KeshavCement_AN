@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_weight="4"
-                android:padding="5dp"
+                android:padding="2dp"
                 android:gravity="center"
                 android:background="@drawable/group_1016"
                 android:orientation="vertical">
@@ -43,9 +43,9 @@
                     android:id="@+id/redeem_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
+                    android:text="6050"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/color45"/>
 
             </LinearLayout>
@@ -281,7 +281,6 @@
                                 android:layout_toEndOf="@+id/qty_minus"
                                 android:fontFamily="@font/poppins_semibold"
                                 android:gravity="center"
-                                android:inputType="number"
                                 android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="18sp" />

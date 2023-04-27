@@ -304,4 +304,6 @@
     <string name="cash_transfer_approved">Cash transfer approved</string>
     <string name="value">Value</string>
     <string name="owner_address">Owner\'s Address</string>
+    <string name="trade_quantity">Trade Quantity</string>
+    <string name="quantity">Quantity</string>
 </resources>

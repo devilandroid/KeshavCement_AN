@@ -193,7 +193,7 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     val dealerSubDealerListName = ArrayList<String>()
 
                     for (commonSpinner in dealerSubDealerLists) {
-                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.loyaltyID + " )")
+                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.firmName + " )")
 //                        dealerSubDealerListName.add(commonSpinner.firstName!!)
                     }
 
@@ -283,10 +283,12 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
                         })
                 }else{
+                    binding.claimBtn.changeState(false,true)
                     (activity as DashboardActivity).snackBar(getString(R.string.something_went_wrong_please_try_again_later), R.color.red)
                 }
 
             }else{
+                binding.claimBtn.changeState(false,true)
                 (activity as DashboardActivity).snackBar(getString(R.string.something_went_wrong_please_try_again_later), R.color.red)
             }
         })
@@ -334,6 +336,8 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                 selectedAmount = mSelectedCashback!!.amount!!
                 if (selectedAmount != "Select Points"){
                     binding.pointsRupees.text = mSelectedCashback!!.cashBackValue.toString()
+                }else{
+                    binding.pointsRupees.text = ""
                 }
 
             }
@@ -345,9 +349,9 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     private fun dealerSubdealerApiCall() {
         purchaseViewModel.getDealerSubDealerListData(
             DealerSubDealerListRequest(
-                actionType = 16,
-                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
-                searchText = "-1"
+                actionType = 19,
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
+//                searchText = customerTypeIds
             )
         )
     }

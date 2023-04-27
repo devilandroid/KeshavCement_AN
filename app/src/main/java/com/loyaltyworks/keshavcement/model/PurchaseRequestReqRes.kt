@@ -162,7 +162,9 @@ data class LstCustParentChildMappingDealer(
     @Json(name = "totalTransactionCount")
     val totalTransactionCount: Int? = null,
     @Json(name = "userID")
-    var userID: Int? = null
+    var userID: Int? = null,
+    @Json(name = "firmName")
+    var firmName: String? = null
 )
 
 /*** Submit Purchase Request ***/

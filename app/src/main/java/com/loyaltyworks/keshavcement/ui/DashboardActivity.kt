@@ -437,11 +437,16 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
     }
 
     override fun onLanguageSelect(language: String) {
-        (this as BaseActivity).setNewLocale(context as AppCompatActivity, language)
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-        overridePendingTransition(0, 0);
+        if (language == "en"){
+            (this as BaseActivity).setNewLocale(context as AppCompatActivity, language)
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        }else{
+            Toast.makeText(this, "This language is coming soon!", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 }

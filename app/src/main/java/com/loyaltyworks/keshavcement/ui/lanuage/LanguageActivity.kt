@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.loyaltyworks.keshavcement.R
@@ -28,10 +29,16 @@ class LanguageActivity : BaseActivity(), LanguageFragment.LanguageListener {
 
     override fun onLanguageSelect(language: String) {
         Log.d("TAG_Language", "onLanguageSelect: $language")
-        (this as BaseActivity).setNewLocaleWithoutRefresh(this as AppCompatActivity,language)
+        if (language == "en"){
+            (this as BaseActivity).setNewLocaleWithoutRefresh(this as AppCompatActivity,language)
 
-        startActivity(Intent(this, LoginActivity::class.java))
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            startActivity(Intent(this, LoginActivity::class.java))
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+        }else{
+            Toast.makeText(this, "This language is coming soon!", Toast.LENGTH_SHORT).show()
+
+        }
+
 
     }
 }

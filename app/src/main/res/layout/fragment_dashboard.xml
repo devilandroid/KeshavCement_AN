@@ -1007,7 +1007,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="6"
                     android:gravity="center"
-                    android:paddingBottom="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -1023,7 +1022,7 @@
                         android:id="@+id/dash_earn_point_claim_purchase"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         android:orientation="horizontal"
                         android:paddingStart="20dp"
                         android:paddingEnd="20dp"
@@ -1037,7 +1036,7 @@
                             android:text="Claim Purchase"
                             android:fontFamily="@font/poppins_medium"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="12sp"/>
+                            android:textSize="11sp"/>
 
                         <ImageView
                             android:layout_width="10dp"
@@ -1137,6 +1136,15 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/product_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+                android:src="@drawable/prod_view"
+                android:layout_gravity="end"/>
 
         </androidx.cardview.widget.CardView>
 

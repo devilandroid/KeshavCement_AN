@@ -1,21 +1,21 @@
 <resources>
     <string name="app_name">The Club</string>
 
-    <string name="otp">ओटीपी</string>
-    <string name="enter_mobile_number">मोबाइल नंबर दर्ज करें</string>
-    <string name="enter_valid_mobile_no">एक मान्य मोबाइल नंबर दर्ज करें</string>
-    <string name="welcome">स्वागत!</string>
-    <string name="please_select_your_user_type">कृपया केशव एप्लिकेशन के लिए अपना उपयोगकर्ता प्रकार चुनें।</string>
-    <string name="engineer">इंजीनियर</string>
-    <string name="mason">राजमिस्त्री</string>
-    <string name="dealer">डीलर</string>
-    <string name="sub_dealer">उप डीलर</string>
-    <string name="support_executive">समर्थन कार्यकारी</string>
+    <string name="otp">OTP</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="enter_valid_mobile_no">Enter a valid mobile number</string>
+    <string name="welcome">Welcome!</string>
+    <string name="please_select_your_user_type">Please select your user type to Keshav Application.</string>
+    <string name="engineer">Engineer</string>
+    <string name="mason">Mason</string>
+    <string name="dealer">Dealer</string>
+    <string name="sub_dealer">Sub Dealer</string>
+    <string name="support_executive">Support Executive</string>
     <string name="notification">Notification</string>
 
-    <string name="logout">लॉगआउट</string>
-    <string name="membership_id">मेम्बरशिप आईडी</string>
-    <string name="point_balance">प्वाइंट बैलेंस</string>
+    <string name="logout">Logout</string>
+    <string name="membership_id">Membership ID</string>
+    <string name="point_balance">Point Balance</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="claim_purchase">Claim Purchase</string>
     <string name="my_purchase_claim">My Purchase Claim</string>
@@ -106,7 +106,6 @@
     <string name="cash_transfer">Cash Transfer</string>
     <string name="total_points">Total Points</string>
     <string name="add">Add</string>
-
     <string name="sale_and_earn">Sale &amp; Earn</string>
     <string name="start_earning">Start Earning</string>
     <string name="start_selling">Start Selling</string>
@@ -120,8 +119,8 @@
     <string name="evoucher">eVouchers</string>
     <string name="query">Query</string>
     <string name="chat">Chat</string>
-    <string name="my_earnings">My Earnings</string>
-    <string name="my_redemptions">My Redemptions</string>
+    <string name="my_earnings">My Earning</string>
+    <string name="my_redemptions">My Redemption</string>
     <string name="worksite">Worksite</string>
     <string name="claim_history">Claim History</string>
     <string name="cash_transfer_history">Cash Transfer History</string>
@@ -140,7 +139,7 @@
     <string name="my_cart">My Cart</string>
     <string name="order_confirmation">Order Confirmation</string>
     <string name="edit_address">Edit Address</string>
-    <string name="something_went_wrong_please_try_again_later">कुछ गलत हो गया। कृपया बाद में पुनः प्रयास करें!</string>
+    <string name="something_went_wrong_please_try_again_later">Something went wrong. Please try again later !</string>
     <string name="mobile_already_exist">Mobile number already exist</string>
     <string name="invalid_otp">Invalid OTP</string>
     <string name="please_enter_referral_code">Please enter the referral code</string>
@@ -236,7 +235,7 @@
     <string name="redeem_now">Redeem Now</string>
     <string name="wishlist">Wishlist</string>
     <string name="wishlist_details">Wishlist Details</string>
-    <string name="planner_has_been_removed_successfully">Redemption Planner has been removed successfully !</string>
+    <string name="planner_has_been_removed_successfully">Wishlist has been removed successfully !</string>
     <string name="remove">Remove</string>
     <string name="wishlist_summary">Wishlist Summary</string>
     <string name="redeemable_points_as_on_today">Redeemable points as on today</string>
@@ -305,4 +304,6 @@
     <string name="cash_transfer_approved">Cash transfer approved</string>
     <string name="value">Value</string>
     <string name="owner_address">Owner\'s Address</string>
+    <string name="trade_quantity">Trade Quantity</string>
+    <string name="quantity">Quantity</string>
 </resources>

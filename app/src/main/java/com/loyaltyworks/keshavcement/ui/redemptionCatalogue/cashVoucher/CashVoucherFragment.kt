@@ -174,6 +174,7 @@ class CashVoucherFragment : Fragment(), View.OnClickListener, CashVoucherAdapter
                         binding.noteText.visibility = View.GONE
                     }else{
                         binding.noteText.visibility = View.VISIBLE
+                        binding.noteText.setSelected(true)
                     }
 
                     if (page == 1) {

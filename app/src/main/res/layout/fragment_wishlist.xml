@@ -12,13 +12,28 @@
         android:id="@+id/note_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:layout_margin="10dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:visibility="gone"
+        android:text="@string/redemption_temporarily_closed"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimary"/>
+
+    <!--<TextView
+        android:id="@+id/note_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
         android:visibility="gone"
         android:text="@string/redemption_temporarily_closed"
         android:fontFamily="@font/poppins_regular"
         android:textSize="14sp"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/plannerRecylerView"
@@ -63,7 +78,7 @@
             android:fontFamily="@font/poppins_regular"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="Add to Redemption Planner"
+            android:text="Add to Wishlist"
             android:textAllCaps="false"
             android:textSize="14sp"
             android:textColor="@color/dark" />

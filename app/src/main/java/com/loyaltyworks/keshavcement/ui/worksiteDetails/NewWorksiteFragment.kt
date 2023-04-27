@@ -42,6 +42,8 @@ import com.vmb.fileSelect.FileSelectorCallBack
 import com.vmb.fileSelect.FileSelectorData
 import com.vmb.fileSelect.FileType
 import kotlinx.android.synthetic.main.row_history_notification.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -67,6 +69,7 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
     var mSelectedLevel: LstAttributesDetailLevel? = null
     var selectedLevelId = -1
     var levelList = mutableListOf<LstAttributesDetailLevel>()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -101,9 +104,9 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
         binding.mapView.onResume() // needed to get the map to display immediately
 
         MapsInitializer.initialize(context)
-        binding.captureLoc.setOnClickListener {
-            getMAPLocation()
-        }
+//        binding.captureLoc.setOnClickListener {
+//            getMAPLocation()
+//        }
 
     }
 
@@ -247,7 +250,7 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
                         Log.d("gfdhrgfi", "jf " + mProfileImagePath.toString())
 
                         binding.siteImage.setImageBitmap(fileSelectorData.thumbnail)
-
+                        getMAPLocation()
                     }
                 })
             }
@@ -265,6 +268,12 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
 
                     if (!mProfileImagePath.isNullOrEmpty()){
                         if (captureLocation){
+                            if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Engineer){
+                                binding.engineerDataLayout.visibility = View.GONE
+                            }else{
+                                binding.engineerDataLayout.visibility = View.VISIBLE
+                            }
+
                             binding.siteLocationLayout.visibility = View.GONE
                             binding.userDetailsLayout.visibility = View.VISIBLE
                             binding.userDetailsProgress.setBackgroundColor(requireContext().resources.getColor(R.color.colorPrimary))
@@ -346,6 +355,19 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
     }
 
     private fun createWorksiteApi() {
+        var engineerName = ""
+        var engineerMobile = ""
+
+        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Engineer){
+            engineerName = ""
+            engineerMobile = ""
+        }else{
+            engineerName = binding.engineerName.text.toString()
+            engineerMobile = binding.engineerMobile.text.toString()
+        }
+        Log.d("bufhbrf","engineer name : " + engineerName)
+        Log.d("bufhbrf","engineer mobile : " + engineerMobile)
+
         LoadingDialogue.showDialog(requireContext())
         viewModel.getSaveWorksiteData(
             SaveWorksiteRequest(
@@ -359,8 +381,8 @@ class NewWorksiteFragment : Fragment(),Listener, View.OnClickListener, AdapterVi
                 contactNumber = binding.ownerMobile.text.toString(),
                 contactPersonName = binding.ownerName.text.toString(),
                 address = binding.ownerAddr.text.toString(),
-                contactPersonName1 = binding.engineerName.text.toString(),
-                contactNumber1 = binding.engineerMobile.text.toString(),
+                contactPersonName1 = engineerName,
+                contactNumber1 = engineerMobile,
                 worklevel = selectedLevelId,
                 tentativeDate = AppController.dateAPIFormats(tentativeDate),
                 remarks = binding.remarks.text.toString(),

@@ -112,6 +112,7 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
                     binding.noteText.visibility = View.GONE
                 }else{
                     binding.noteText.visibility = View.VISIBLE
+                    binding.noteText.setSelected(true)
                 }
 
                 binding.voucherRecycler.layoutManager = LinearLayoutManager(requireContext())

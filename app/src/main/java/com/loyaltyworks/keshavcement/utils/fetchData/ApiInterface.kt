@@ -293,5 +293,9 @@ interface ApiInterface {
     @POST("GetCustomerCashTransferList")
     fun getCashTransferHistoryListAsyncData(@Body cashTransferHistoryRequest: CashTransferHistoryRequest): Deferred<Response<CashTransferHistoryResponse>>
 
+ /* Product View List call*/
+    @POST("GetProductDetails")
+    fun getProductViewListAsyncData(@Body productViewListRequest: ProductViewListRequest): Deferred<Response<ProductViewListResponse>>
+
 
 }

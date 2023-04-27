@@ -267,8 +267,10 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
 
                     if (it.objCatalogueList[0].isRedeemable == 1){
                         binding.noteText.visibility = View.GONE
+
                     }else{
                         binding.noteText.visibility = View.VISIBLE
+                        binding.noteText.setSelected(true)
                     }
 
                     if (page == 1) {

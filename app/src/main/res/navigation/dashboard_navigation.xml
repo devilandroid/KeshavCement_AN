@@ -108,6 +108,9 @@
             app:exitAnim="@anim/nav_slide_out_left"
             app:popExitAnim="@anim/nav_slide_out_right"
             app:popEnterAnim="@anim/nav_slide_in_left"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_productViewDialogFragment"
+            app:destination="@id/productViewDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyNotificationFragment"
@@ -585,4 +588,9 @@
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransfersFragment"
         android:label="@string/cash_transfer"
         tools:layout="@layout/fragment_cash_transfers" />
+    <dialog
+        android:id="@+id/productViewDialogFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.dashboard.ProductViewDialogFragment"
+        android:label=""
+        tools:layout="@layout/fragment_product_view_dialog" />
 </navigation>

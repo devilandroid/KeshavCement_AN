@@ -714,5 +714,15 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
         )
     }
 
+    /* Product View List callback*/
+    suspend fun getProductViewData(productViewListRequest: ProductViewListRequest): ProductViewListResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getProductViewListAsyncData(productViewListRequest).await()
+            },
+            error = "Error Product View List  Trigger"
+        )
+    }
+
 
 }

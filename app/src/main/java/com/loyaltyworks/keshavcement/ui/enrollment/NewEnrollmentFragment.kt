@@ -2,6 +2,8 @@ package com.loyaltyworks.keshavcement.ui.enrollment
 
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -93,10 +95,10 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             actorID = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
         }
 
-        binding.mobileVerifyLayout.visibility = View.VISIBLE
-        binding.enrollLayout.visibility = View.GONE
-        binding.mobileNumberEdt.isEnabled = false
-        binding.mobileNumberEdt.isClickable = false
+//        binding.mobileVerifyLayout.visibility = View.VISIBLE
+//        binding.enrollLayout.visibility = View.GONE
+//        binding.mobileNumberEdt.isEnabled = false
+//        binding.mobileNumberEdt.isClickable = false
 
         binding.customerTypeSpinner.onItemSelectedListener = this
         binding.stateSpinner.onItemSelectedListener = this
@@ -108,12 +110,68 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
         binding.birthDate.setOnClickListener(this)
         binding.anniversaryDate.setOnClickListener(this)
-        binding.verifyNumber.setOnClickListener(this)
+
+        binding.mobileNumberEdt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int,
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int,
+            ) {
+
+                if (binding.mobileNumberEdt.hasFocus()){
+                    if (s.toString().trim().length == 10){
+                        checkCustomerExistancy(binding.mobileNumberEdt.text.toString())
+                    }
+                    Log.d("rbfhrbfhr","call 1")
+                }
+
+
+
+            }
+        })
+
 
         userTypeSpinner()
         StateRequest()
 
+
+        if (binding.mobileNumberEdt.text.length < 10){
+            binding.mobileNumberEdt.isEnabled = true
+            binding.mobileNumberEdt.isClickable = true
+            binding.submitEnrollment.isEnabled = false
+            binding.submitEnrollment.isClickable = false
+//            disableView(binding.contentLayout)
+            binding.blockLayout.visibility = View.VISIBLE
+        }
+
     }
+
+    /*** Disable layout ***/
+   /* private fun disableView(layout: ViewGroup) {
+        for (i in 0 until layout.childCount) {
+            val child = layout.getChildAt(i)
+            child.isEnabled = false
+            child.isClickable = false
+//            child.backgroundTintList = requireContext().resources.getColorStateList(R.color.transparent)
+            if (child is ViewGroup) disableView(child)
+        }
+    }*/
+
+    /*** Disable layout ***/
+   /* private fun enableView(layout: ViewGroup) {
+        for (i in 0 until layout.childCount) {
+            val child = layout.getChildAt(i)
+            child.isEnabled = true
+            child.isClickable = true
+            if (child is ViewGroup) enableView(child)
+        }
+    }*/
 
     private fun userTypeSpinner() {
         userTypeList.clear()
@@ -321,15 +379,27 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
                 if (it != null) {
                     if (it != 1) {
-                        binding.mobileVerifyLayout.visibility = View.GONE
-                        binding.enrollLayout.visibility = View.VISIBLE
-                        binding.mobileNumberEdt.setText(binding.mobileEdtVerify.text.toString())
-
+//                        binding.mobileVerifyLayout.visibility = View.GONE
+//                        binding.enrollLayout.visibility = View.VISIBLE
+//                        binding.mobileNumberEdt.setText(binding.mobileEdtVerify.text.toString())
+                        binding.mobileNumberEdt.isEnabled = false
+                        binding.mobileNumberEdt.isClickable = false
+                        binding.submitEnrollment.isEnabled = true
+                        binding.submitEnrollment.isClickable = true
+                        binding.blockLayout.visibility = View.GONE
+//                        enableView(binding.contentLayout)
                     }else{
                         AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_entered_mobile_already_exist),object:
                             AppController.SuccessCallBack{
                             override fun onOk() {
+                                binding.mobileNumberEdt.text.clear()
 
+                                binding.mobileNumberEdt.isEnabled = true
+                                binding.mobileNumberEdt.isClickable = true
+                                binding.submitEnrollment.isEnabled = false
+                                binding.submitEnrollment.isClickable = false
+//                                disableView(binding.contentLayout)
+                                binding.blockLayout.visibility = View.VISIBLE
                             }
                         })
                     }
@@ -387,17 +457,6 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
 
     override fun onClick(v: View?) {
         when(v!!.id){
-            R.id.verify_number ->{
-                if (binding.mobileEdtVerify.text.toString().trim().isNullOrEmpty()){
-                    binding.mobileEdtVerify.error = getString(R.string.enter_mobile_number)
-                    binding.mobileEdtVerify.requestFocus()
-                }else if (!binding.mobileEdtVerify.text.toString().trim().isNullOrEmpty() && binding.mobileEdtVerify.text.toString().trim().length < 10){
-                    binding.mobileEdtVerify.error = getString(R.string.enter_valid_mobile_no)
-                    binding.mobileEdtVerify.requestFocus()
-                }else{
-                    checkCustomerExistancy(binding.mobileEdtVerify.text.toString())
-                }
-            }
 
             R.id.birth_date ->{
                 DatePickerBox.date(1, activity) {

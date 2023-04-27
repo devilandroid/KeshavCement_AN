@@ -88,6 +88,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
             binding.startSellingLayout.visibility = View.GONE
             binding.saleAndEarnLayout.visibility = View.GONE
+            binding.productView.visibility = View.GONE
             binding.earnPointClaimPurchaseLayout.visibility = View.VISIBLE
 
             binding.helpLayout.visibility = View.VISIBLE
@@ -106,6 +107,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.dashMyActivity.visibility = View.GONE
 
             binding.saleAndEarnLayout.visibility = View.VISIBLE
+            binding.productView.visibility = View.VISIBLE
             binding.earnPointClaimPurchaseLayout.visibility = View.GONE
             binding.startSellingLayout.visibility = View.GONE
 
@@ -124,6 +126,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.dashMyActivity.visibility = View.GONE
 
             binding.saleAndEarnLayout.visibility = View.VISIBLE
+            binding.productView.visibility = View.GONE
             binding.earnPointClaimPurchaseLayout.visibility = View.GONE
             binding.startSellingLayout.visibility = View.GONE
 
@@ -177,6 +180,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         binding.dashEarnPointClaimPurchase.setOnClickListener(this)     //  Engineer & Mason
         binding.saleAndEarn.setOnClickListener(this)                    //  Dealer & Sub-Dealer
         binding.newSale.setOnClickListener(this)                        //  Support Executive
+        binding.productView.setOnClickListener(this)                    //  Dealer
 
         binding.dashRaiseTicket.setOnClickListener(this)                //  All except Support-Executive
         binding.dProfileImage.setOnClickListener(this)                //  All Type
@@ -527,6 +531,10 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             R.id.d_profile_image ->{
                 LoadingDialogue.dismissDialog()
                 askPermission()
+            }
+
+            R.id.product_view ->{
+                findNavController().navigate(R.id.action_dashboardFragment_to_productViewDialogFragment)
             }
 
         }
