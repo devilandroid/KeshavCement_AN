@@ -289,4 +289,49 @@ object AppController {
         }
         return add
     }
+
+    var commonImageZoomPopUpDialogue: Dialog? = null
+
+    fun commonImageZoomDialogue(context: Context?, imageUrl: String) {
+        commonImageZoomPopUpDialogue = null
+
+        if (commonImageZoomPopUpDialogue == null) {
+
+            commonImageZoomPopUpDialogue = Dialog(context!!, R.style.Theme_Dialog2)
+            commonImageZoomPopUpDialogue!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            commonImageZoomPopUpDialogue!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            commonImageZoomPopUpDialogue!!.setContentView(R.layout.promotion_popup)
+            val window = commonImageZoomPopUpDialogue!!.window
+            window!!.setLayout(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+            )
+            commonImageZoomPopUpDialogue!!.setCanceledOnTouchOutside(true)
+            commonImageZoomPopUpDialogue!!.setCancelable(true)
+        }
+
+        val mClose = commonImageZoomPopUpDialogue!!.findViewById<ImageView>(R.id.close_btn)
+        val mPromotionImageView = commonImageZoomPopUpDialogue!!.findViewById<ImageView>(R.id.selectedImage)
+
+        if (!imageUrl.isNullOrEmpty()){
+            Glide.with(context!!)
+                .load(imageUrl)
+                .fitCenter()
+                .error(R.drawable.ic_default_img)
+                .into(mPromotionImageView)
+        }
+
+        /*** for rotate image after open dialog ***/
+        val rotateLayout = commonImageZoomPopUpDialogue!!.findViewById<RotateLayout>(R.id.rotation_layout)
+        val newAngle: Int = rotateLayout.getAngle() + 270
+        rotateLayout.setAngle(newAngle)
+
+        mClose.setOnClickListener {
+            commonImageZoomPopUpDialogue?.dismiss()
+            commonImageZoomPopUpDialogue = null
+        }
+        commonImageZoomPopUpDialogue!!.show()
+
+    }
+
 }

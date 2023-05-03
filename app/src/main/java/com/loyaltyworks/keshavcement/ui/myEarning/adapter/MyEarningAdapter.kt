@@ -1,6 +1,7 @@
 package com.loyaltyworks.keshavcement.ui.myEarning.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyworks.keshavcement.databinding.RowMyEarningsBinding
@@ -19,6 +20,7 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
         val prodName = binding.prodName
         val creditedPoints = binding.creditedPoints
         val remarks = binding.remarks
+        val prodLayout = binding.prodLayout
 
     }
 
@@ -34,8 +36,7 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
 
         holder.date.text =  AppController.dateAPIFormat(data.jTranDate.toString().split(" ")[0])
         holder.creditedPoints.text = data.rewardPoints!!.toInt().toString()
-        holder.prodName.text = data.prodName
-        holder.time.text = data.jTranDate.toString().split(" ")[1]
+
 
         if (data.loyaltyId!!.contains("~")){
             holder.customerType.text = data.loyaltyId!!.split("~")[2]
@@ -44,6 +45,19 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
             holder.customerType.text = PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].customerType
             holder.custName.text = PreferenceHelper.getDashboardDetails(holder.itemView.context)?.lstCustomerFeedBackJsonApi!![0].firstName
         }
+
+        if (data.transactionType == "Cash Transfer"){
+            holder.time.visibility = View.GONE
+            holder.prodLayout.visibility = View.GONE
+
+        }else{
+            holder.time.visibility = View.VISIBLE
+            holder.prodLayout.visibility = View.VISIBLE
+
+            holder.time.text = data.jTranDate.toString().split(" ")[1]
+            holder.prodName.text = data.prodName
+        }
+
 
         if (data.transactionType == "BONUS"){
             holder.remarks.text = data.bonusName.toString()
@@ -55,6 +69,9 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
 
         }else if (data.transactionType == "WORKSITE"){
             holder.remarks.text =  "Worksite Program"
+
+        }else if (data.transactionType == "Cash Transfer"){
+            holder.remarks.text =  "Cash Transfer"
 
         }else{
             if (data.invoiceNo.toString() == "--"){

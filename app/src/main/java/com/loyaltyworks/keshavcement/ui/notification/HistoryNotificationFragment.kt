@@ -16,6 +16,7 @@ import com.loyaltyworks.keshavcement.model.HistoryNotificationDetailsRequest
 import com.loyaltyworks.keshavcement.model.HistoryNotificationRequest
 import com.loyaltyworks.keshavcement.model.LstPushHistoryJson
 import com.loyaltyworks.keshavcement.ui.notification.adapter.HistoryNotificationAdapter
+import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.SwipeToDeleteCallback
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
@@ -95,6 +96,10 @@ class HistoryNotificationFragment : Fragment() {
                 historyNotificationAdapter = HistoryNotificationAdapter(
                     it, object : HistoryNotificationAdapter.ItemClicked {
                         override fun itemclicks(notificationHistory: LstPushHistoryJson?) {}
+
+                        override fun imageclicks(imageurls: String) {
+                            AppController.commonImageZoomDialogue(requireContext(),imageurls)
+                        }
                     })
 
                 binding.historyRv.adapter = historyNotificationAdapter

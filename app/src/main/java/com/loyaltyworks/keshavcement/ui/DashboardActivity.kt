@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -27,6 +28,7 @@ import com.loyaltyworks.keshavcement.ui.login.LoginActivity
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.Count.Companion.setCounting
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
+import com.loyaltyworks.keshavcement.utils.dialog.RedemptionTypeDialog
 import kotlinx.android.synthetic.main.appbar_main.*
 import kotlinx.android.synthetic.main.appbar_main.view.*
 import kotlinx.android.synthetic.main.dashboard_menu.view.*
@@ -335,8 +337,22 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
             }
 
             R.id.dMyRedemptions -> {
-                navController.navigate(R.id.myRedemptionFragment)
                 binding.drawerLayout.closeDrawer(Gravity.LEFT)
+
+                if (PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.Engineer ||
+                    PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.Mason){
+                    RedemptionTypeDialog.showRedemptionTypeDialog(this,object :
+                        RedemptionTypeDialog.RedemptionTypeDialogCallBack{
+                        override fun forMyRedemptionClick() {
+                            navController.navigate(R.id.myRedemptionFragment)
+                        }
+                        override fun forCashTransferClick() {
+                            navController.navigate(R.id.cashRedemptionFragment)
+                        }
+                    })
+                }else{
+                    navController.navigate(R.id.myRedemptionFragment)
+                }
             }
 
             R.id.dMyEarning -> {

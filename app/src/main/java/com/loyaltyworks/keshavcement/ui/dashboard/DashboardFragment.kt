@@ -32,10 +32,7 @@ import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductCatal
 import com.loyaltyworks.keshavcement.ui.splashScreen.SplashScreenViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
-import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
-import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
-import com.loyaltyworks.keshavcement.utils.dialog.NewPasswordDialog
-import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
+import com.loyaltyworks.keshavcement.utils.dialog.*
 import com.permissionx.guolindev.PermissionX
 import com.vmb.fileSelect.FileSelector
 import com.vmb.fileSelect.FileSelectorCallBack
@@ -489,7 +486,25 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.dash_my_redemption ->{
-                findNavController().navigate(R.id.action_dashboardFragment_to_myRedemptionFragment)
+                if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Engineer ||
+                    PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Mason){
+
+                    RedemptionTypeDialog.showRedemptionTypeDialog(requireContext(),object :RedemptionTypeDialog.RedemptionTypeDialogCallBack{
+                        override fun forMyRedemptionClick() {
+                            findNavController().navigate(R.id.action_dashboardFragment_to_myRedemptionFragment)
+
+                        }
+
+                        override fun forCashTransferClick() {
+                            findNavController().navigate(R.id.action_dashboardFragment_to_cashRedemptionFragment)
+                        }
+
+                    })
+
+                }else{
+                    findNavController().navigate(R.id.action_dashboardFragment_to_myRedemptionFragment)
+                }
+
             }
 
             R.id.dash_my_earning ->{

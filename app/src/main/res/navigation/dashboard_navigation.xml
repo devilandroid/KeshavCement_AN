@@ -111,6 +111,13 @@
         <action
             android:id="@+id/action_dashboardFragment_to_productViewDialogFragment"
             app:destination="@id/productViewDialogFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_cashRedemptionFragment"
+            app:destination="@id/cashRedemptionFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
     </fragment>
     <fragment
         android:id="@+id/historyNotificationFragment"
@@ -593,4 +600,9 @@
         android:name="com.loyaltyworks.keshavcement.ui.dashboard.ProductViewDialogFragment"
         android:label=""
         tools:layout="@layout/fragment_product_view_dialog" />
+    <fragment
+        android:id="@+id/cashRedemptionFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.myRedemption.CashRedemptionFragment"
+        android:label="@string/my_redemption"
+        tools:layout="@layout/fragment_cash_redemption" />
 </navigation>

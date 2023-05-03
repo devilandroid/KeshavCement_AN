@@ -306,4 +306,8 @@
     <string name="owner_address">Owner\'s Address</string>
     <string name="trade_quantity">Trade Quantity</string>
     <string name="quantity">Quantity</string>
+    <string name="cash_transfer_date">Cash transfer date</string>
+    <string name="requested_to">Requested to</string>
+    <string name="cash_point">Cash point</string>
+    <string name="other_redemption">Other\nRedemptions</string>
 </resources>

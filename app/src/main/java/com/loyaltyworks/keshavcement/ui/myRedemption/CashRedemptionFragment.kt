@@ -15,7 +15,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,10 +22,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
-import com.loyaltyworks.keshavcement.databinding.FragmentMyRedemptionBinding
+import com.loyaltyworks.keshavcement.databinding.FragmentCashRedemptionBinding
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.model.adapter.SpinnerCommonStatusAdapter
 import com.loyaltyworks.keshavcement.model.adapter.StatusSpinnerAdapter
+import com.loyaltyworks.keshavcement.ui.myRedemption.adapter.CashRedemptionAdapter
 import com.loyaltyworks.keshavcement.ui.myRedemption.adapter.MyRedemptionAdapter
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.DatePickerBox
@@ -36,18 +36,16 @@ import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
 import java.util.ArrayList
 
 
-class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapter.OnItemDetailClickCallBack, AdapterView.OnItemSelectedListener {
-    private lateinit var binding: FragmentMyRedemptionBinding
+class CashRedemptionFragment : Fragment(),View.OnClickListener, AdapterView.OnItemSelectedListener {
+    private lateinit var binding: FragmentCashRedemptionBinding
     private lateinit var myRedemptionViewModel: MyRedemptionViewModel
 
     var userID: Int = -1
 
-    var selectedStatusId = "-1"
+    var statusList = mutableListOf<CommonStatusSpinner>()
+    var statusId: Int = -1
     private var FromDate: String = ""
     private var ToDate: String =""
-
-    var catalogeTypeList = mutableListOf<CommonStatusSpinner>()
-    var statusId: Int = -1
 
     var page = 1
     var limit = 10
@@ -62,32 +60,29 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
     var mRedemptionLayoutManager: LinearLayoutManager? = null
     var redemptionAdapter: RecyclerView.Adapter<*>? = null
 
-    var statusList = mutableListOf<LstAttributesDetailStatus>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         myRedemptionViewModel = ViewModelProvider(this).get(MyRedemptionViewModel::class.java)
-        binding =  FragmentMyRedemptionBinding.inflate(layoutInflater)
+        binding = FragmentCashRedemptionBinding.inflate(layoutInflater)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_MyRedemptionView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_MyRedemptionFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_CashTransferRedemptionView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_CashTransferRedemptionFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
         /**This is required here for handling action bar navigate up button*/
         setHasOptionsMenu(true)
-
         HandleOnBackPressed()
+
 
         binding.filterOpen.setOnClickListener(this)
         binding.filterClose.setOnClickListener(this)
@@ -96,54 +91,37 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
         binding.fromDate.setOnClickListener(this)
         binding.toDate.setOnClickListener(this)
 
-        binding.redeemTypeSpinner.onItemSelectedListener = this
         binding.statusSpinner.onItemSelectedListener = this
 
         userID = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toInt()
 
-        catalogeTypeSpinner()
-        GetStatusSpinnerRequest()
+        statusSpinner()
 
         // use a linear layout manager
         mRedemptionLayoutManager = LinearLayoutManager(requireContext())
         mRedemptionLayoutManager!!.isAutoMeasureEnabled = true
         mRedemptionLayoutManager!!.orientation = LinearLayoutManager.VERTICAL
-        binding.redeemRecycler.layoutManager = mRedemptionLayoutManager
-        binding.redeemRecycler.isNestedScrollingEnabled = true
-        binding.redeemRecycler.setHasFixedSize(false)
-        binding.redeemRecycler.setRecycledViewPool(RecyclerView.RecycledViewPool())
-        binding.redeemRecycler.itemAnimator = DefaultItemAnimator()
+        binding.cashRedeemRecycler.layoutManager = mRedemptionLayoutManager
+        binding.cashRedeemRecycler.isNestedScrollingEnabled = true
+        binding.cashRedeemRecycler.setHasFixedSize(false)
+        binding.cashRedeemRecycler.setRecycledViewPool(RecyclerView.RecycledViewPool())
+        binding.cashRedeemRecycler.itemAnimator = DefaultItemAnimator()
 
         loadRedemptionListObserver()
         setFileterSpinners()
     }
 
-    private fun catalogeTypeSpinner() {
+    private fun statusSpinner() {
 
-        catalogeTypeList.clear()
+        statusList.clear()
 
-        catalogeTypeList.add( CommonStatusSpinner(productName = "Select Catalogue Type", id = -1))
-        catalogeTypeList.add( CommonStatusSpinner(productName = "Catalogue", id = 1))
-        catalogeTypeList.add( CommonStatusSpinner(productName = "eVouchers", id = 4))
-        catalogeTypeList.add( CommonStatusSpinner(productName = "Dream Gift", id = 3))
-        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
-            catalogeTypeList.add( CommonStatusSpinner(productName = "Cash Voucher", id = 9))
-        }/*else{
-            catalogeTypeList.add( CommonStatusSpinner(productName = "Cash Transfer", id = 19))
-        }*/
-//        catalogeTypeList.add( CommonStatusSpinner(productName = "Bank Transfer", id = 5))
+        statusList.add( CommonStatusSpinner(productName = "Select Status", id = -1))
+        statusList.add( CommonStatusSpinner(productName = "Pending", id = 0))
+        statusList.add( CommonStatusSpinner(productName = "Approved", id = 1))
+        statusList.add( CommonStatusSpinner(productName = "Rejected", id = 2))
 
-        binding.redeemTypeSpinner.adapter = SpinnerCommonStatusAdapter(requireActivity(),R.layout.spinner_popup_row,catalogeTypeList)
+        binding.statusSpinner.adapter = SpinnerCommonStatusAdapter(requireActivity(),R.layout.spinner_popup_row,statusList)
     }
-
-    private fun GetStatusSpinnerRequest() {
-        myRedemptionViewModel.getStatusSpinnerData(
-            StatusSpinnerRequest(
-                actionType = 138
-            )
-        )
-    }
-
 
     private fun setFileterSpinners() {
         scrollListener = object : EndlessRecyclerViewScrollListener(mRedemptionLayoutManager!!) {
@@ -154,7 +132,7 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
                 callApi(page + 1)
             }
         }
-        binding.redeemRecycler.addOnScrollListener(scrollListener!!)
+        binding.cashRedeemRecycler.addOnScrollListener(scrollListener!!)
     }
 
     override fun onResume() {
@@ -179,14 +157,14 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
 
         val  myRedemptionRequest = MyRedemptionRequest()
 
-        myRedemptionRequest.actionType = "52"
+        myRedemptionRequest.actionType = "277"
         myRedemptionRequest.actorId = userID.toString()
         myRedemptionRequest.startIndex = startIndex
         myRedemptionRequest.noOfRows = limit
 
         val objCatalogueDetails = ObjCatalogueDetails()
-        objCatalogueDetails.selectedStatus = selectedStatusId
-        objCatalogueDetails.redemptionTypeId = statusId
+        objCatalogueDetails.selectedStatus = statusId.toString()
+        objCatalogueDetails.redemptionTypeId = -1
 
         if (FromDate.isNotEmpty() && ToDate.isNotEmpty()){
             objCatalogueDetails.jFromDate = AppController.dateAPIFormats(FromDate)
@@ -204,7 +182,7 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
             if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
                 LoadingDialogue.dismissDialog()
                 if (it != null && !it.objCatalogueRedemReqList.isNullOrEmpty()) {
-                    binding.redeemRecycler.visibility = View.VISIBLE
+                    binding.cashRedeemRecycler.visibility = View.VISIBLE
                     binding.noDataFount.noDataFoundLayout.visibility = View.GONE
 
                     if (page == 1) {
@@ -226,8 +204,8 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
 
                     if (!isLoaded) {
                         isLoaded = true
-                        redemptionAdapter = MyRedemptionAdapter(currentList,this)
-                        binding.redeemRecycler.adapter = redemptionAdapter
+                        redemptionAdapter = CashRedemptionAdapter(currentList)
+                        binding.cashRedeemRecycler.adapter = redemptionAdapter
                     }else{
                         redemptionAdapter!!.notifyDataSetChanged()
                     }
@@ -236,7 +214,7 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
 
                 } else {
                     if (page == 1){
-                        binding.redeemRecycler.visibility = View.GONE
+                        binding.cashRedeemRecycler.visibility = View.GONE
                         binding.noDataFount.noDataFoundLayout.visibility = View.VISIBLE
                     }else{
                         listFull = false
@@ -249,46 +227,8 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
     }
 
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        /*** Redemption Status Observer ***/
-        myRedemptionViewModel.statusSpinnerLiveData.observe(viewLifecycleOwner, Observer {
-
-            if(it!=null && !it.lstAttributesDetails.isNullOrEmpty()){
-                statusList.clear()
-                val lstAttributesDetail = LstAttributesDetailStatus()
-
-                lstAttributesDetail.attributeId = -1
-                lstAttributesDetail.attributeValue = "Select status"
-
-                statusList.add(0,lstAttributesDetail)
-
-                statusList.addAll(it.lstAttributesDetails!!)
-
-                binding.statusSpinner.adapter = StatusSpinnerAdapter(requireContext(),statusList)
-
-
-            }else{
-
-                val lstAttributesDetail = LstAttributesDetailStatus()
-
-                lstAttributesDetail.attributeId = -1
-                lstAttributesDetail.attributeValue = "Select status"
-
-                statusList.add(0,lstAttributesDetail)
-
-                binding.statusSpinner.adapter = StatusSpinnerAdapter(requireContext(),statusList)
-            }
-        })
-
-    }
-
-
-    override fun onClick(p0: View?) {
-
-        when(p0!!.id){
-
+    override fun onClick(v: View?) {
+        when(v!!.id){
             R.id.filterOpen -> {
 
                 binding.filterLayout.visibility = View.VISIBLE
@@ -332,7 +272,6 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
 
 
             R.id.clear_btn ->{
-                selectedStatusId = "-1"
                 statusId = -1
                 FromDate = ""
                 ToDate = ""
@@ -341,7 +280,6 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
                 binding.fromDateTxt.hint = getString(R.string.select_from_date)
                 binding.toDateTxt.hint = getString(R.string.select_to_date)
                 binding.statusSpinner.setSelection(0)
-                binding.redeemTypeSpinner.setSelection(0)
 
                 listFull = false
                 isLoaded = false
@@ -369,33 +307,13 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
                 binding.filterLayout.animation = AnimationUtils.loadAnimation(requireContext(),R.anim.slide_down_dialog)
             }
         }
-
     }
-
-
-
-
-    override fun onProductListDetailsItemClickResponse(
-        itemView: View,
-        rewardTransDetails: ObjCatalogueRedemReq
-    ) {
-        currentList.clear()
-
-        val bundle = Bundle()
-        bundle.putSerializable("myRedemptionDetails", rewardTransDetails)
-        itemView.findNavController().navigate(R.id.action_myRedemptionFragment_to_myRedemptionDetailsFragment, bundle)
-    }
-
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when((parent as Spinner).id){
-            R.id.redeem_type_spinner -> {
-                statusId = (parent.getItemAtPosition(position) as CommonStatusSpinner).id!!
-                Log.d("fdsfsdf", "redeem type id : " + statusId)
-            }
-
             R.id.status_spinner -> {
-                selectedStatusId = (parent.getItemAtPosition(position) as LstAttributesDetailStatus).attributeId.toString()
+                statusId = (parent.getItemAtPosition(position) as CommonStatusSpinner).id!!
+                Log.d("fdsfsdf", "status id : " + statusId)
             }
         }
     }
@@ -434,5 +352,7 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
+
+
 
 }

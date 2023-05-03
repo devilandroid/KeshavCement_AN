@@ -220,6 +220,14 @@ data class ObjCatalogueRedemReq(
     val membertype: String? = null,
     @Json(name = "districtName")
     val districtName: String? = null,
+    @Json(name = "cashTransferedTo")
+    val cashTransferedTo: String? = null,
+    @Json(name = "cashTransferedInAmount")
+    val cashTransferedInAmount: String? = null,
+    @Json(name = "cashTransferedPoints")
+    val cashTransferedPoints: String? = null,
+    @Json(name = "cashTransferedStatus")
+    val cashTransferedStatus: String? = null,
     var enteredRemarks: String = ""
 ): Serializable
 
