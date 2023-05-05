@@ -24,6 +24,7 @@ import com.loyaltyworks.keshavcement.model.LstCustParentChildMappingCustList
 import com.loyaltyworks.keshavcement.ui.enrollment.EnrollmentViewModel
 import com.loyaltyworks.keshavcement.ui.enrollment.adapter.EnrollmentAdapter
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.CustomerSelectionAdapter
+import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 import com.loyaltyworks.keshavcement.utils.EndlessRecyclerViewScrollListener
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
@@ -64,8 +65,8 @@ class CustomerSelectionFragment : Fragment(), CustomerSelectionAdapter.OnItemCli
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CatalogueCustomerSelectionView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CatalogueCustomerSelectionFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_CatalogueCustomerSelectionView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_CatalogueCustomerSelectionFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -214,14 +215,22 @@ class CustomerSelectionFragment : Fragment(), CustomerSelectionAdapter.OnItemCli
         bundle.putString("SelectedCustomerLoyltyID",selectedCustomer.loyaltyID.toString())
 
         if (directedFrom == "ProductClick"){
-            findNavController().navigate(R.id.productFragment,bundle)
+            findNavController().navigate(R.id.action_customerSelectionFragment_to_productFragment,bundle)
         }else if (directedFrom == "VoucherClick"){
-            findNavController().navigate(R.id.evouchersFragment,bundle)
+            findNavController().navigate(R.id.action_customerSelectionFragment_to_evouchersFragment,bundle)
         }else if (directedFrom == "WishlistClick"){
-            findNavController().navigate(R.id.wishlistFragment,bundle)
+            findNavController().navigate(R.id.action_customerSelectionFragment_to_wishlistFragment,bundle)
         }
 
 
+    }
+
+    override fun onHoldCustomer() {
+        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.the_account_is_not_allowed_to_redeem_contact_administrator), object : AppController.SuccessCallBack {
+            override fun onOk() {
+            }
+
+        })
     }
 
 }

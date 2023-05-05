@@ -58,8 +58,8 @@ class QueryChatFragment : Fragment(), View.OnClickListener, QueryChatAdapter.Cha
 
         /*** Firebase Analytics Tracker ***/
         val bundle1 = Bundle()
-        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "QueryChatView")
-        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "QueryChatFragment")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_QueryChatView")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_QueryChatFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle1)
 
@@ -78,6 +78,7 @@ class QueryChatFragment : Fragment(), View.OnClickListener, QueryChatAdapter.Cha
                 helpTopicID = dataholder.helpTopicID.toString()!!
 //                binding.querySummary.text = "Ticket Details " + " : " + dataholder.querySummary!!
 
+                Log.d("evrgvf","rbfhrb : " + QueryStatus)
             }
         }
 
@@ -189,7 +190,7 @@ class QueryChatFragment : Fragment(), View.OnClickListener, QueryChatAdapter.Cha
             when (QueryStatus) {
                 "Resolved",
                 "Reopen" -> ticketId = 2
-                "Resolved-Follow up" -> ticketId = 5
+                "Resolved-Follow Up" -> ticketId = 5
                 "Closed" -> ticketId = 4
                 "Pending" -> ticketId = 1
             }

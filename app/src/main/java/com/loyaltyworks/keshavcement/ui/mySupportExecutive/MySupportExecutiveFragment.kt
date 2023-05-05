@@ -58,8 +58,8 @@ class MySupportExecutiveFragment : Fragment(), View.OnClickListener, MySupportEx
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MySupportExecutiveView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "MySupportExecutiveFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_MySupportExecutiveView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_MySupportExecutiveFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -175,7 +175,6 @@ class MySupportExecutiveFragment : Fragment(), View.OnClickListener, MySupportEx
             if (BlockMultipleClick.click())return
                 currentList.clear()
             findNavController().navigate(R.id.action_mySupportExecutiveFragment_to_newSupportExecutiveFragment)
-            requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
         }
 
         }

@@ -192,6 +192,7 @@ data class ObjCatalogueListtt(
         var productImageServerPath: String? = null,
         @ColumnInfo(name = "ProductName") var productName: String? = null,
         var product_type: Int? = null,
+        var is_Redeemable: Int? = null,
         var redeemableAverageEarning: String? = null,
         var redeemableAverageEarning12: Int? = null,
         var redeemableAverageEarning6: Int? = null,

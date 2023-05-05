@@ -19,6 +19,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/first_layout"
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:orientation="vertical"
@@ -50,6 +51,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/created_date_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Created Date"
@@ -75,6 +77,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/desired_date_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Desired Date"

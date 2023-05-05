@@ -63,8 +63,8 @@ class EnrollmentFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "EnrollmentView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "EnrollmentFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_EnrollmentView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_EnrollmentFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -212,7 +212,6 @@ class EnrollmentFragment : Fragment(), View.OnClickListener {
                 if (BlockMultipleClick.click())return
                 binding.searchFilter.text.clear()
                 findNavController().navigate(R.id.action_enrollmentFragment_to_newEnrollmentFragment)
-                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
         }

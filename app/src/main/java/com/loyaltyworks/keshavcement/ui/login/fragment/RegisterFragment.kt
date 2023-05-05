@@ -97,8 +97,8 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "RegisterView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "RegisterFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_RegisterView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_RegisterFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -234,7 +234,6 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             R.id.activate_now_button ->{
                 if (BlockMultipleClick.click())return
                 findNavController().navigate(R.id.action_registerFragment_to_activateFragment)
-                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
             R.id.back_login_btn ->{

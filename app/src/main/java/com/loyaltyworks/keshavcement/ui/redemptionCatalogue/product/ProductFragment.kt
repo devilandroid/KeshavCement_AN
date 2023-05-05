@@ -85,8 +85,8 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "ProductView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "ProductFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_ProductView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_ProductFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -264,6 +264,14 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
                 if (it != null && !it.objCatalogueList.isNullOrEmpty()) {
                     binding.productRecycler.visibility = View.VISIBLE
                     binding.noDataFount.noDataFoundLayout.visibility = View.GONE
+
+                    if (it.objCatalogueList[0].isRedeemable == 1){
+                        binding.noteText.visibility = View.GONE
+
+                    }else{
+                        binding.noteText.visibility = View.VISIBLE
+                        binding.noteText.setSelected(true)
+                    }
 
                     if (page == 1) {
                         listFull = false
@@ -451,7 +459,7 @@ class ProductFragment : Fragment(), View.OnClickListener, PointRangeAdapter.OnIt
         bundle.putString("SelectedCustomerUserID",actorID)
         bundle.putString("SelectedCustomerLoyltyID",loyaltyId)
         bundle.putString("SelectedCustomerPartyLoyaltyID",partyLoyaltyID)
-        itemView.findNavController().navigate(R.id.productDetailsFragment, bundle)
+        itemView.findNavController().navigate(R.id.action_productFragment_to_productDetailsFragment, bundle)
     }
 
     override fun onAddToCart(objCatalogue: ObjCataloguee) {

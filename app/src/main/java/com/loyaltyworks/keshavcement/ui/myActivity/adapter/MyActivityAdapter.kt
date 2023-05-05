@@ -32,7 +32,7 @@ class MyActivityAdapter(val customerBasicInfoListJson: List<CustomerBasicInfoJso
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = customerBasicInfoListJson[position]
 
-        holder.customerName.text = data.requestTo
+        holder.customerName.text = data.salesPersonsName
         holder.quantity.text = data.quantity.toString()
         holder.prodName.text = data.productName
 

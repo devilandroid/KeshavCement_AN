@@ -79,8 +79,8 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MyRedemptionView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "MyRedemptionFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_MyRedemptionView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_MyRedemptionFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -128,9 +128,9 @@ class MyRedemptionFragment : Fragment(), View.OnClickListener,MyRedemptionAdapte
         catalogeTypeList.add( CommonStatusSpinner(productName = "Dream Gift", id = 3))
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
             catalogeTypeList.add( CommonStatusSpinner(productName = "Cash Voucher", id = 9))
-        }else{
-            catalogeTypeList.add( CommonStatusSpinner(productName = "Cash Transfer", id = 8))
-        }
+        }/*else{
+            catalogeTypeList.add( CommonStatusSpinner(productName = "Cash Transfer", id = 19))
+        }*/
 //        catalogeTypeList.add( CommonStatusSpinner(productName = "Bank Transfer", id = 5))
 
         binding.redeemTypeSpinner.adapter = SpinnerCommonStatusAdapter(requireActivity(),R.layout.spinner_popup_row,catalogeTypeList)

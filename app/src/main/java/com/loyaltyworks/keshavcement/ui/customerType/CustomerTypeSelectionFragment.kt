@@ -37,8 +37,8 @@ class CustomerTypeSelectionFragment : Fragment(), CustomerTypeAdapter.OnItemClic
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CustomerTypeSelectionView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CustomerTypeSelectionFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_CustomerTypeSelectionView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_CustomerTypeSelectionFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -78,7 +78,6 @@ class CustomerTypeSelectionFragment : Fragment(), CustomerTypeAdapter.OnItemClic
     ) {
         PreferenceHelper.setStringValue(requireContext(), BuildConfig.CustomerType,lstAttributesDetails.attributeId.toString())
         findNavController().navigate(R.id.action_customerTypeSelectionFragment_to_loginFragment)
-        requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
     }
 
 }

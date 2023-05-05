@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.RowCashTransferHistoryBinding
+import com.loyaltyworks.keshavcement.model.LstCustomerCashTransferedDetailTransferHistory
 import com.loyaltyworks.keshavcement.model.ObjCatalogueRedemReq
 import com.loyaltyworks.keshavcement.utils.AppController
 
-class CashTransferHistoryAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemReq>): RecyclerView.Adapter<CashTransferHistoryAdapter.ViewHolder>() {
+class CashTransferHistoryAdapter(val lstCustomerCashTransferedDetailTransferHistory: List<LstCustomerCashTransferedDetailTransferHistory>): RecyclerView.Adapter<CashTransferHistoryAdapter.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return position
@@ -31,13 +32,13 @@ class CashTransferHistoryAdapter(val objCatalogueRedemReqList: List<ObjCatalogue
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val rewardTransDetails = objCatalogueRedemReqList[position]
+        val rewardTransDetails = lstCustomerCashTransferedDetailTransferHistory[position]
 
-        holder.cashTransferName.text = rewardTransDetails.productName.toString()
-        holder.date.text = AppController.dateAPIFormat(rewardTransDetails.jRedemptionDate.toString().split(" ")[0])
-        holder.points.text = rewardTransDetails.redemptionPoints.toString()
-        holder.customerName.text = rewardTransDetails.fullName.toString()
-        holder.customerType.text = rewardTransDetails.membertype.toString()
+        holder.cashTransferName.text = "₹ " +   rewardTransDetails.transferedPointsinAmount.toString()
+        holder.date.text = AppController.dateAPIFormat(rewardTransDetails.createdDate.toString().split(" ")[0])
+        holder.points.text = rewardTransDetails.points.toString()
+        holder.customerName.text = rewardTransDetails.customerName.toString()
+        holder.customerType.text = rewardTransDetails.customerType.toString()
 
 
         if (!rewardTransDetails.remarks.isNullOrEmpty()){
@@ -46,13 +47,13 @@ class CashTransferHistoryAdapter(val objCatalogueRedemReqList: List<ObjCatalogue
             holder.remarks.text = "-"
         }
 
-        if (rewardTransDetails.status == 1) {
-            holder.status.text = "Approved"
+        if (rewardTransDetails.cashTransferedStatus.equals("Approved",true)) {
+            holder.status.text = rewardTransDetails.cashTransferedStatus
             holder.status.setBackgroundResource(R.drawable.approved_bg)
             holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.color17))
 
-        }else if (rewardTransDetails.status == 5) {
-            holder.status.text = "Rejected"
+        }else if (rewardTransDetails.cashTransferedStatus.equals("Rejected",true)) {
+            holder.status.text = rewardTransDetails.cashTransferedStatus
             holder.status.setBackgroundResource(R.drawable.rejected_bg)
             holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.red))
 
@@ -61,6 +62,6 @@ class CashTransferHistoryAdapter(val objCatalogueRedemReqList: List<ObjCatalogue
     }
 
     override fun getItemCount(): Int {
-        return objCatalogueRedemReqList.size
+        return lstCustomerCashTransferedDetailTransferHistory.size
     }
 }

@@ -17,6 +17,7 @@ class CustomerSelectionAdapter(val lstCustParentChildMapping: List<LstCustParent
 
     interface OnItemClickCallBack {
         fun onCustListItemClickResponse(itemView: View, position: Int,selectedCustomer:LstCustParentChildMappingCustList)
+        fun onHoldCustomer()
     }
 
     class ViewHolder(val binding: RowCustomerBinding): RecyclerView.ViewHolder(binding.root) {
@@ -54,7 +55,12 @@ class CustomerSelectionAdapter(val lstCustParentChildMapping: List<LstCustParent
 
         holder.itemView.setOnClickListener { v ->
             if(BlockMultipleClick.click()) return@setOnClickListener
-            onItemClickListener.onCustListItemClickResponse(v,position,data)
+            if (data.isActive == 1){
+                onItemClickListener.onCustListItemClickResponse(v,position,data)
+            }else {
+                onItemClickListener.onHoldCustomer()
+            }
+
         }
 
         holder.mobileNo.setOnClickListener { v ->

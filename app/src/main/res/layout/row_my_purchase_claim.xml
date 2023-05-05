@@ -149,7 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/order_quantity"
+                    android:text="@string/trade_quantity"
                     android:textColor="@color/color21"
                     android:textSize="12sp" />
 

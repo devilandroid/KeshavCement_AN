@@ -31,6 +31,10 @@ class DreamGiftAdapter(var lstDreamGift: List<LstDreamGift>, var onItemClickList
         val redeemBtn = binding.details
         val removeBtn = binding.removeBtn
         val percentage = binding.percentage
+        val firstLayout = binding.firstLayout
+
+        val createdDateTitle = binding.createdDateTitle
+        val desiredDateTitle = binding.desiredDateTitle
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,6 +44,21 @@ class DreamGiftAdapter(var lstDreamGift: List<LstDreamGift>, var onItemClickList
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = lstDreamGift[position]
+
+        if(position % 2 == 1)
+        {
+            holder.firstLayout.setBackgroundResource(R.drawable.group_7375)
+        }else{
+            holder.firstLayout.setBackgroundResource(R.drawable.group_7376)
+
+            holder.createdDateTitle.setTextColor(holder.itemView.context.resources.getColor(R.color.light_black))
+            holder.desiredDateTitle.setTextColor(holder.itemView.context.resources.getColor(R.color.light_black))
+
+            holder.giftName.setTextColor(holder.itemView.context.resources.getColor(R.color.dark))
+            holder.createDate.setTextColor(holder.itemView.context.resources.getColor(R.color.dark))
+            holder.desiredDate.setTextColor(holder.itemView.context.resources.getColor(R.color.dark))
+        }
+
 
         holder.giftName.text = data.dreamGiftName.toString()
         holder.pointsReq.text =  data.pointsRequired.toString()

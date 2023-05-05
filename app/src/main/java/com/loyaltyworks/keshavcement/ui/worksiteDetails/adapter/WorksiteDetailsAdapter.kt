@@ -3,12 +3,15 @@ package com.loyaltyworks.keshavcement.ui.worksiteDetails.adapter
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.RowWorksiteDetailsBinding
 import com.loyaltyworks.keshavcement.model.LstWorkSiteInfo
 import com.loyaltyworks.keshavcement.utils.AppController
+import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 
 class WorksiteDetailsAdapter(val lstWorkSiteInfo: List<LstWorkSiteInfo>) : RecyclerView.Adapter<WorksiteDetailsAdapter.ViewHolder>() {
 
@@ -28,6 +31,8 @@ class WorksiteDetailsAdapter(val lstWorkSiteInfo: List<LstWorkSiteInfo>) : Recyc
         val remarks = binding.remarks
         val ownerAddress = binding.ownerAddress
 
+        val engineerLayout = binding.engineerLayout
+
     }
 
 
@@ -39,16 +44,31 @@ class WorksiteDetailsAdapter(val lstWorkSiteInfo: List<LstWorkSiteInfo>) : Recyc
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = lstWorkSiteInfo[position]
 
-        holder.date.text = data.createdDate
+        if (PreferenceHelper.getStringValue(holder.itemView.context, BuildConfig.CustomerType) == BuildConfig.Engineer){
+            holder.engineerLayout.visibility = View.GONE
+        }else{
+            holder.engineerLayout.visibility = View.VISIBLE
+            holder.engineerName.text = data.contactPersonName1
+            holder.engineerMobile.text = data.contactNumber1
+        }
+
+//        holder.date.text = data.createdDate
+        if (!data.createdDate.isNullOrEmpty()){
+            holder.date.text = AppController.dateFormat(data.createdDate.split(" ")[0]) + " " + data.createdDate.split(" ")[1]
+        }
+
         holder.locationName.text = data.siteName
         holder.ownerName.text = data.contactPersonName
         holder.ownerMobile.text = data.contactNumber
         holder.ownerAddress.text = data.address
-        holder.engineerName.text = data.contactPersonName1
-        holder.engineerMobile.text = data.contactNumber1
         holder.workLevel.text = "- " + data.worklevel
 
-        holder.remarks.text = "- " + data.remarks
+        if (!data.remarks.isNullOrEmpty()){
+            holder.remarks.text = "- " + data.remarks
+        }else{
+            holder.remarks.text = "- "
+        }
+
 
         if (!data.tentativeDate.isNullOrEmpty()){
             holder.tentativeDate.text = "- " + AppController.dateAPIFormat(data.tentativeDate.toString().split(" ")[0])
@@ -59,7 +79,7 @@ class WorksiteDetailsAdapter(val lstWorkSiteInfo: List<LstWorkSiteInfo>) : Recyc
             holder.status.setBackgroundResource(R.drawable.pending_bg)
             holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.pending_yellow1))
             holder.status.text = "Pending"
-        }else if (data.verificationStatus == "Approved"){
+        }else if (data.verificationStatus == "Verified"){
             holder.status.setBackgroundResource(R.drawable.approved_bg)
             holder.status.setTextColor(holder.itemView.context.resources.getColor(R.color.green))
             holder.status.text = "Approved"

@@ -11,15 +11,16 @@ import com.bumptech.glide.Glide
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.RowCashTransferApprovalBinding
+import com.loyaltyworks.keshavcement.model.LstCustomerCashTransferedDetail
 import com.loyaltyworks.keshavcement.model.ObjCatalogueRedemReq
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.BlockMultipleClick
 
-class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemReq>,var onItemClickListener: OnItemClickCallBack): RecyclerView.Adapter<CashTransferApprovalAdapter.ViewHolder>() {
+class CashTransferApprovalAdapter(val lstCustomerCashTransferedDetails: List<LstCustomerCashTransferedDetail>, var onItemClickListener: OnItemClickCallBack): RecyclerView.Adapter<CashTransferApprovalAdapter.ViewHolder>() {
 
     interface OnItemClickCallBack {
-        fun onApproveClickResponse(itemView: View, position: Int, status: String, objCatalogueRedemReqList: ObjCatalogueRedemReq)
-        fun onRejectClickResponse(itemView: View, position: Int, status: String, objCatalogueRedemReqList: ObjCatalogueRedemReq)
+        fun onApproveClickResponse(itemView: View, position: Int, status: String, lstCustomerCashTransferedDetails: LstCustomerCashTransferedDetail)
+        fun onRejectClickResponse(itemView: View, position: Int, status: String, lstCustomerCashTransferedDetails: LstCustomerCashTransferedDetail)
     }
 
 
@@ -29,7 +30,7 @@ class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogu
         val custType = binding.custType
         val custName = binding.custName
         val location = binding.location
-        val voucherName = binding.voucherName
+        val value = binding.value
         val points = binding.points
         val remarks = binding.remarks
         val custMobile = binding.custMobile
@@ -43,7 +44,7 @@ class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogu
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 //                    if (remarks.hasFocus()){
-                    objCatalogueRedemReqList[pos].enteredRemarks = p0.toString()
+                    lstCustomerCashTransferedDetails[pos].enteredRemarks = p0.toString()
 //                    }
                 }
                 override fun afterTextChanged(p0: Editable?) {}
@@ -59,27 +60,31 @@ class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogu
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data = objCatalogueRedemReqList[position]
+        val data = lstCustomerCashTransferedDetails[position]
 
         holder.remarks.setText("")
 
-        Glide.with(holder.itemView.context).asBitmap()
-            .error(R.drawable.ic_default_img)
-            .load(BuildConfig.CATALOGUE_IMAGE_BASE + data.productImage)
-            .into(holder.custImage)
+        if (!data.dispalyImage.isNullOrEmpty()){
+            Glide.with(holder.itemView.context).asBitmap()
+                .error(R.drawable.ic_default_img)
+                .load(BuildConfig.PROMO_IMAGE_BASE + data.dispalyImage.toString().split("~")[1])
+                .into(holder.custImage)
 
-        if (!data.jRedemptionDate.isNullOrEmpty()){
-            holder.date.text = AppController.dateAPIFormat(data.jRedemptionDate.toString().split(" ")[0])
+        }
+
+
+        if (!data.createdDate.isNullOrEmpty()){
+            holder.date.text = AppController.dateAPIFormat(data.createdDate.toString().split(" ")[0])
         }else{
             holder.date.text = "DD/MM/YYYY"
         }
 
-        holder.location.text = data.districtName
-        holder.custType.text = data.membertype
-        holder.custName.text = data.fullName
-        holder.voucherName.text = data.productName
-        holder.custMobile.text = data.mobile
-        holder.points.text = data.redemptionPoints.toString()
+        holder.location.text = data.locationName
+        holder.custType.text = data.customerType
+        holder.custName.text = data.customerName
+        holder.value.text = "₹ " + data.transferedPointsinAmount
+        holder.custMobile.text = data.customerMobile
+        holder.points.text = data.points.toString()
 
 
         holder.approveBtn.setOnClickListener { v ->
@@ -92,7 +97,7 @@ class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogu
             if(BlockMultipleClick.click()) return@setOnClickListener
 
             if (!data.enteredRemarks.isNullOrEmpty()){
-                onItemClickListener.onRejectClickResponse(v,position,"5",data)
+                onItemClickListener.onRejectClickResponse(v,position,"-1",data)
             }else{
                 Toast.makeText(holder.itemView.context, holder.itemView.context.getString(R.string.enter_remarks), Toast.LENGTH_SHORT).show()
             }
@@ -105,6 +110,6 @@ class CashTransferApprovalAdapter(val objCatalogueRedemReqList: List<ObjCatalogu
     }
 
     override fun getItemCount(): Int {
-        return objCatalogueRedemReqList.size
+        return lstCustomerCashTransferedDetails.size
     }
 }

@@ -68,8 +68,8 @@ class WorksiteDetailsFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "WorksiteDetailsView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "WorksiteDetailsFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_WorksiteDetailsView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_WorksiteDetailsFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -309,7 +309,7 @@ class WorksiteDetailsFragment : Fragment(), View.OnClickListener {
 
             R.id.createNew -> {
 
-                findNavController().navigate(R.id.newWorksiteFragment)
+                findNavController().navigate(R.id.action_worksiteDetailsFragment_to_newWorksiteFragment)
 
             }
         }

@@ -9,7 +9,116 @@
         android:id="@+id/dashboardFragment"
         android:name="com.loyaltyworks.keshavcement.ui.dashboard.DashboardFragment"
         android:label=""
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_pendingClaimRequestFragment"
+            app:destination="@id/pendingClaimRequestFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_enrollmentFragment"
+            app:destination="@id/enrollmentFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_cashTransferApprovalFragment"
+            app:destination="@id/cashTransferApprovalFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_myPurchaseClaimFragment"
+            app:destination="@id/myPurchaseClaimFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_purchaseRequestFragment"
+            app:destination="@id/purchaseRequestFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_redemptionTypeFragment"
+            app:destination="@id/redemptionTypeFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_myRedemptionFragment"
+            app:destination="@id/myRedemptionFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_myEarningFragment"
+            app:destination="@id/myEarningFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_promotionsFragment"
+            app:destination="@id/promotionsFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_worksiteDetailsFragment"
+            app:destination="@id/worksiteDetailsFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_referFragment"
+            app:destination="@id/referFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_myActivityFragment"
+            app:destination="@id/myActivityFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_claimFragment"
+            app:destination="@id/claimFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_supportFragment"
+            app:destination="@id/supportFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_productViewDialogFragment"
+            app:destination="@id/productViewDialogFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_cashRedemptionFragment"
+            app:destination="@id/cashRedemptionFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
+    </fragment>
     <fragment
         android:id="@+id/historyNotificationFragment"
         android:name="com.loyaltyworks.keshavcement.ui.notification.HistoryNotificationFragment"
@@ -29,7 +138,15 @@
         android:id="@+id/worksiteDetailsFragment"
         android:name="com.loyaltyworks.keshavcement.ui.worksiteDetails.WorksiteDetailsFragment"
         android:label="@string/worksite_details"
-        tools:layout="@layout/fragment_worksite_details" />
+        tools:layout="@layout/fragment_worksite_details" >
+        <action
+            android:id="@+id/action_worksiteDetailsFragment_to_newWorksiteFragment"
+            app:destination="@id/newWorksiteFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+    </fragment>
     <fragment
         android:id="@+id/newWorksiteFragment"
         android:name="com.loyaltyworks.keshavcement.ui.worksiteDetails.NewWorksiteFragment"
@@ -52,7 +169,11 @@
         tools:layout="@layout/fragment_my_redemption" >
         <action
             android:id="@+id/action_myRedemptionFragment_to_myRedemptionDetailsFragment"
-            app:destination="@id/myRedemptionDetailsFragment" />
+            app:destination="@id/myRedemptionDetailsFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/promotionsFragment"
@@ -61,7 +182,11 @@
         tools:layout="@layout/fragment_promotions" >
         <action
             android:id="@+id/action_promotionsFragment_to_promotionsDetailsFragment"
-            app:destination="@id/promotionsDetailsFragment" />
+            app:destination="@id/promotionsDetailsFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/supportFragment"
@@ -70,10 +195,18 @@
         tools:layout="@layout/fragment_support" >
         <action
             android:id="@+id/action_supportFragment_to_queryChatFragment"
-            app:destination="@id/queryChatFragment" />
+            app:destination="@id/queryChatFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
         <action
             android:id="@+id/action_supportFragment_to_newTicketFragment"
-            app:destination="@id/newTicketFragment" />
+            app:destination="@id/newTicketFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/queryChatFragment"
@@ -94,21 +227,76 @@
         android:id="@+id/redemptionTypeFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.RedemptionTypeFragment"
         android:label="@string/redemption_catalogue"
-        tools:layout="@layout/fragment_redemption_type" />
-    <fragment
-        android:id="@+id/cashTransferFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferFragment"
-        android:label="@string/cash_transfer"
-        tools:layout="@layout/fragment_cash_transfer" >
+        tools:layout="@layout/fragment_redemption_type" >
         <action
-            android:id="@+id/action_cashTransferFragment_to_cashTransferDetailsFragment"
-            app:destination="@id/cashTransferDetailsFragment" />
+            android:id="@+id/action_redemptionTypeFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_redemptionTypeFragment_to_customerSelectionFragment"
+            app:destination="@id/customerSelectionFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_redemptionTypeFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_redemptionTypeFragment_to_evouchersFragment"
+            app:destination="@id/evouchersFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_redemptionTypeFragment_to_cashVoucherFragment"
+            app:destination="@id/cashVoucherFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_redemptionTypeFragment_to_cashTransfersFragment"
+            app:destination="@id/cashTransfersFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/cashVoucherFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher.CashVoucherFragment"
+        android:label="@string/cash_voucher"
+        tools:layout="@layout/fragment_cash_voucher" >
+        <action
+            android:id="@+id/action_cashVoucherFragment_to_cashVoucherDetailsFragment"
+            app:destination="@id/cashVoucherDetailsFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
     </fragment>
     <fragment
         android:id="@+id/evouchersFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.voucher.EvouchersFragment"
         android:label="@string/evoucher"
-        tools:layout="@layout/fragment_evouchers" />
+        tools:layout="@layout/fragment_evouchers" >
+        <action
+            android:id="@+id/action_evouchersFragment_to_voucherDialogFragment"
+            app:destination="@id/voucherDialogFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+    </fragment>
     <fragment
         android:id="@+id/productFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductFragment"
@@ -116,10 +304,18 @@
         tools:layout="@layout/fragment_product" >
         <action
             android:id="@+id/action_productFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
         <action
             android:id="@+id/action_productFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
+            app:destination="@id/cartFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/promotionsDetailsFragment"
@@ -148,7 +344,11 @@
         tools:layout="@layout/fragment_my_support_executive" >
         <action
             android:id="@+id/action_mySupportExecutiveFragment_to_newSupportExecutiveFragment"
-            app:destination="@id/newSupportExecutiveFragment" />
+            app:destination="@id/newSupportExecutiveFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/newSupportExecutiveFragment"
@@ -167,7 +367,11 @@
         tools:layout="@layout/fragment_enrollment" >
         <action
             android:id="@+id/action_enrollmentFragment_to_newEnrollmentFragment"
-            app:destination="@id/newEnrollmentFragment" />
+            app:destination="@id/newEnrollmentFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/newEnrollmentFragment"
@@ -190,10 +394,10 @@
         android:label="@string/my_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/cashTransferDetailsFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferDetailsFragment"
-        android:label="@string/cash_transfer"
-        tools:layout="@layout/fragment_cash_transfer_details" />
+        android:id="@+id/cashVoucherDetailsFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher.CashVoucherDetailsFragment"
+        android:label="@string/cash_voucher"
+        tools:layout="@layout/fragment_cash_voucher_details" />
     <fragment
         android:id="@+id/voucherDialogFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.voucher.VoucherDialogFragment"
@@ -203,7 +407,29 @@
         android:id="@+id/customerSelectionFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.customerSelection.CustomerSelectionFragment"
         android:label="@string/select_customer"
-        tools:layout="@layout/fragment_customer_selection" />
+        tools:layout="@layout/fragment_customer_selection" >
+        <action
+            android:id="@+id/action_customerSelectionFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_customerSelectionFragment_to_evouchersFragment"
+            app:destination="@id/evouchersFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_customerSelectionFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+    </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductDetailsFragment"
@@ -211,7 +437,11 @@
         tools:layout="@layout/fragment_product_details" >
         <action
             android:id="@+id/action_productDetailsFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
+            app:destination="@id/cartFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -220,7 +450,11 @@
         tools:layout="@layout/fragment_cart" >
         <action
             android:id="@+id/action_cartFragment_to_addressFragment"
-            app:destination="@id/addressFragment" />
+            app:destination="@id/addressFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
@@ -229,7 +463,11 @@
         tools:layout="@layout/fragment_address" >
         <action
             android:id="@+id/action_addressFragment_to_editAddressFragment"
-            app:destination="@id/editAddressFragment" />
+            app:destination="@id/editAddressFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
     </fragment>
     <fragment
         android:id="@+id/editAddressFragment"
@@ -240,7 +478,11 @@
             android:id="@+id/action_editAddressFragment_to_addressFragment"
             app:destination="@id/addressFragment"
             app:popUpTo="@id/addressFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/languageFragment2"
@@ -254,7 +496,11 @@
         tools:layout="@layout/fragment_wishlist" >
         <action
             android:id="@+id/action_wishlistFragment_to_wishlistDetailsFragment"
-            app:destination="@id/wishlistDetailsFragment" />
+            app:destination="@id/wishlistDetailsFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/wishlistDetailsFragment"
@@ -275,13 +521,32 @@
         tools:layout="@layout/fragment_dream_gift" >
         <action
             android:id="@+id/action_dreamGiftFragment_to_dreamGiftDetailsFragment"
-            app:destination="@id/dreamGiftDetailsFragment" />
+            app:destination="@id/dreamGiftDetailsFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+        <action
+            android:id="@+id/action_dreamGiftFragment_to_dreamGiftAddressFragment"
+            app:destination="@id/dreamGiftAddressFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"/>
     </fragment>
     <fragment
         android:id="@+id/dreamGiftDetailsFragment"
         android:name="com.loyaltyworks.keshavcement.ui.dreamGift.DreamGiftDetailsFragment"
         android:label="@string/dream_gift"
-        tools:layout="@layout/fragment_dream_gift_details" />
+        tools:layout="@layout/fragment_dream_gift_details" >
+        <action
+            android:id="@+id/action_dreamGiftDetailsFragment_to_dreamGiftAddressFragment"
+            app:destination="@id/dreamGiftAddressFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+    </fragment>
     <fragment
         android:id="@+id/dreamGiftAddressFragment"
         android:name="com.loyaltyworks.keshavcement.ui.dreamGift.dreamCheckout.DreamGiftAddressFragment"
@@ -289,7 +554,11 @@
         tools:layout="@layout/fragment_dream_gift_address" >
         <action
             android:id="@+id/action_dreamGiftAddressFragment_to_dreamGiftEditAddressFragment"
-            app:destination="@id/dreamGiftEditAddressFragment" />
+            app:destination="@id/dreamGiftEditAddressFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/dreamGiftEditAddressFragment"
@@ -300,11 +569,15 @@
             android:id="@+id/action_dreamGiftEditAddressFragment_to_dreamGiftAddressFragment"
             app:destination="@id/dreamGiftAddressFragment"
             app:popUpTo="@id/dreamGiftAddressFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"/>
     </fragment>
     <dialog
         android:id="@+id/cashTransferDialogFragment"
-        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransferDialogFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher.CashTransferDialogFragment"
         android:label=""
         tools:layout="@layout/fragment_cash_transfer_dialog" />
     <fragment
@@ -317,4 +590,19 @@
         android:name="com.loyaltyworks.keshavcement.ui.myRedemption.MyRedemptionDetailsFragment"
         android:label="@string/my_redemption"
         tools:layout="@layout/fragment_my_redemption_details" />
+    <fragment
+        android:id="@+id/cashTransfersFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer.CashTransfersFragment"
+        android:label="@string/cash_transfer"
+        tools:layout="@layout/fragment_cash_transfers" />
+    <dialog
+        android:id="@+id/productViewDialogFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.dashboard.ProductViewDialogFragment"
+        android:label=""
+        tools:layout="@layout/fragment_product_view_dialog" />
+    <fragment
+        android:id="@+id/cashRedemptionFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.myRedemption.CashRedemptionFragment"
+        android:label="@string/my_redemption"
+        tools:layout="@layout/fragment_cash_redemption" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer
+package com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
-import com.loyaltyworks.keshavcement.databinding.FragmentCashTransferDetailsBinding
+import com.loyaltyworks.keshavcement.databinding.FragmentCashVoucherDetailsBinding
 import com.loyaltyworks.keshavcement.model.LstCustomerJson
 import com.loyaltyworks.keshavcement.model.ObjCataloguee
 import com.loyaltyworks.keshavcement.utils.AppController
@@ -21,8 +21,8 @@ import kotlinx.android.synthetic.main.appbar_main.*
 import java.io.Serializable
 
 
-class CashTransferDetailsFragment : Fragment(), View.OnClickListener {
-    private lateinit var binding: FragmentCashTransferDetailsBinding
+class CashVoucherDetailsFragment : Fragment(), View.OnClickListener {
+    private lateinit var binding: FragmentCashVoucherDetailsBinding
 
     private lateinit var objCataloguee: ObjCataloguee
     lateinit var  _lstCustomerJson: List<LstCustomerJson>
@@ -32,7 +32,7 @@ class CashTransferDetailsFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentCashTransferDetailsBinding.inflate(layoutInflater)
+        binding = FragmentCashVoucherDetailsBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -40,8 +40,8 @@ class CashTransferDetailsFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CashTransferDetailsView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CashTransferDetailsFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_CashVoucherDetailsView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_CashVoucherDetailsFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -50,11 +50,6 @@ class CashTransferDetailsFragment : Fragment(), View.OnClickListener {
             _lstCustomerJson = arguments?.getSerializable("CustomerAddress") as List<LstCustomerJson>
         }
 
-//        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
-//            requireActivity().toolbar.title = getString(R.string.cash_voucher)
-//        }else{
-//            requireActivity().toolbar.title = getString(R.string.cash_transfer)
-//        }
 
         binding.redeemBtn.setOnClickListener(this)
 

@@ -55,8 +55,8 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "VouchersDetailsView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "VouchersDetailsFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_eVouchersDetailsView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_eVouchersDetailsFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -92,6 +92,12 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
 
         }
 
+        if (objCatalogueList.is_Redeemable == 1) {
+            mng_redeem_btn.visibility = View.VISIBLE
+        }else{
+            mng_redeem_btn.visibility = View.GONE
+        }
+
 
         if (objCatalogueList.product_type == 1) {
 
@@ -99,7 +105,7 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
             mng_amount_fld.visibility = View.VISIBLE
             mng_price_spinner.visibility = View.GONE
             mng_price_spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, defaultData)
-            mng_redeem_btn.visibility = View.VISIBLE
+
 
         }else {
 

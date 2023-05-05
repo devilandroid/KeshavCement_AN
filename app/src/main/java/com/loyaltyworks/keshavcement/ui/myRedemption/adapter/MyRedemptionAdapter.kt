@@ -36,6 +36,7 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
         val productName = binding.productName
         val points = binding.points
         val quantity = binding.quantity
+        val quantityLayout = binding.quantityLayout
         val referenceNo = binding.referenceNo
 
     }
@@ -193,18 +194,28 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
         Log.d("hgdf","hghb " + rewardTransDetails.redemptionType.toString())
         if (rewardTransDetails.redemptionType!! == 1) {
             holder.catalogueType.text =  "Catalogue"
+            holder.quantityLayout.visibility = View.VISIBLE
         }else if (rewardTransDetails.redemptionType!! == 0) {
             holder.catalogueType.text =  "Catalogue"
+            holder.quantityLayout.visibility = View.VISIBLE
         }else if (rewardTransDetails.redemptionType!! == 2) {
             holder.catalogueType.text =  "Inventory"
+            holder.quantityLayout.visibility = View.VISIBLE
         }else if (rewardTransDetails.redemptionType!! == 3) {
             holder.catalogueType.text =  "Dream Gift"
 //            holder.rowDetails.visibility = View.GONE
+            holder.quantityLayout.visibility = View.INVISIBLE
         }else if (rewardTransDetails.redemptionType!! == 4) {
             holder.catalogueType.text =  "Voucher"
-//            holder.rowDetails.visibility = View.GONE
+            holder.quantityLayout.visibility = View.VISIBLE
+            holder.quantityLayout.visibility = View.INVISIBLE
         }else if (rewardTransDetails.redemptionType!! == 5) {
             holder.catalogueType.text =  "Bank Transfer"
+            holder.quantityLayout.visibility = View.VISIBLE
+//            holder.rowDetails.visibility = View.GONE
+        }else if (rewardTransDetails.redemptionType!! == 9) {
+            holder.catalogueType.text =  "Cash Voucher"
+            holder.quantityLayout.visibility = View.INVISIBLE
 //            holder.rowDetails.visibility = View.GONE
         }
 

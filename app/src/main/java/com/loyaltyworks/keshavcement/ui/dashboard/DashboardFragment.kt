@@ -32,10 +32,7 @@ import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductCatal
 import com.loyaltyworks.keshavcement.ui.splashScreen.SplashScreenViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
-import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
-import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
-import com.loyaltyworks.keshavcement.utils.dialog.NewPasswordDialog
-import com.loyaltyworks.keshavcement.utils.dialog.RegisterSuccessDialog
+import com.loyaltyworks.keshavcement.utils.dialog.*
 import com.permissionx.guolindev.PermissionX
 import com.vmb.fileSelect.FileSelector
 import com.vmb.fileSelect.FileSelectorCallBack
@@ -72,8 +69,8 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "DashboardView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "DashboardFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_DashboardView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_DashboardFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -88,6 +85,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
             binding.startSellingLayout.visibility = View.GONE
             binding.saleAndEarnLayout.visibility = View.GONE
+            binding.productView.visibility = View.GONE
             binding.earnPointClaimPurchaseLayout.visibility = View.VISIBLE
 
             binding.helpLayout.visibility = View.VISIBLE
@@ -106,6 +104,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.dashMyActivity.visibility = View.GONE
 
             binding.saleAndEarnLayout.visibility = View.VISIBLE
+            binding.productView.visibility = View.VISIBLE
             binding.earnPointClaimPurchaseLayout.visibility = View.GONE
             binding.startSellingLayout.visibility = View.GONE
 
@@ -124,6 +123,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             binding.dashMyActivity.visibility = View.GONE
 
             binding.saleAndEarnLayout.visibility = View.VISIBLE
+            binding.productView.visibility = View.GONE
             binding.earnPointClaimPurchaseLayout.visibility = View.GONE
             binding.startSellingLayout.visibility = View.GONE
 
@@ -177,6 +177,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         binding.dashEarnPointClaimPurchase.setOnClickListener(this)     //  Engineer & Mason
         binding.saleAndEarn.setOnClickListener(this)                    //  Dealer & Sub-Dealer
         binding.newSale.setOnClickListener(this)                        //  Support Executive
+        binding.productView.setOnClickListener(this)                    //  Dealer
 
         binding.dashRaiseTicket.setOnClickListener(this)                //  All except Support-Executive
         binding.dProfileImage.setOnClickListener(this)                //  All Type
@@ -460,73 +461,95 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         when (v!!.id) {
 
             R.id.dash_enrollment ->{
-                findNavController().navigate(R.id.enrollmentFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_enrollmentFragment)
             }
 
             R.id.dash_pending_request,
             R.id.dash_pending_claim_request ->{
-                findNavController().navigate(R.id.pendingClaimRequestFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_pendingClaimRequestFragment)
             }
 
             R.id.dash_cash_transfer_approval ->{
-                findNavController().navigate(R.id.cashTransferApprovalFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_cashTransferApprovalFragment)
             }
 
             R.id.dash_my_purchase_claim ->{
-                findNavController().navigate(R.id.myPurchaseClaimFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_myPurchaseClaimFragment)
             }
 
             R.id.dash_claim_purchase ->{
-                findNavController().navigate(R.id.purchaseRequestFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_purchaseRequestFragment)
             }
 
             R.id.dash_catalogue ->{
-                findNavController().navigate(R.id.redemptionTypeFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_redemptionTypeFragment)
             }
 
             R.id.dash_my_redemption ->{
-                findNavController().navigate(R.id.myRedemptionFragment)
+                if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Engineer ||
+                    PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Mason){
+
+                    RedemptionTypeDialog.showRedemptionTypeDialog(requireContext(),object :RedemptionTypeDialog.RedemptionTypeDialogCallBack{
+                        override fun forMyRedemptionClick() {
+                            findNavController().navigate(R.id.action_dashboardFragment_to_myRedemptionFragment)
+
+                        }
+
+                        override fun forCashTransferClick() {
+                            findNavController().navigate(R.id.action_dashboardFragment_to_cashRedemptionFragment)
+                        }
+
+                    })
+
+                }else{
+                    findNavController().navigate(R.id.action_dashboardFragment_to_myRedemptionFragment)
+                }
+
             }
 
             R.id.dash_my_earning ->{
-                findNavController().navigate(R.id.myEarningFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_myEarningFragment)
             }
 
             R.id.dash_offers ->{
-                findNavController().navigate(R.id.promotionsFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_promotionsFragment)
             }
 
             R.id.dash_worksite ->{
-                findNavController().navigate(R.id.worksiteDetailsFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_worksiteDetailsFragment)
             }
 
             R.id.dash_refer_earn ->{
-                findNavController().navigate(R.id.referFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_referFragment)
             }
 
             R.id.dash_my_activity ->{
-                findNavController().navigate(R.id.myActivityFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_myActivityFragment)
             }
 
             R.id.sale_and_earn ->{
-                findNavController().navigate(R.id.claimFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_claimFragment)
             }
 
             R.id.new_sale ->{
-                findNavController().navigate(R.id.claimFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_claimFragment)
             }
 
             R.id.dash_earn_point_claim_purchase ->{
-                findNavController().navigate(R.id.purchaseRequestFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_purchaseRequestFragment)
             }
 
             R.id.dash_raise_ticket ->{
-                findNavController().navigate(R.id.supportFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_supportFragment)
             }
 
             R.id.d_profile_image ->{
                 LoadingDialogue.dismissDialog()
                 askPermission()
+            }
+
+            R.id.product_view ->{
+                findNavController().navigate(R.id.action_dashboardFragment_to_productViewDialogFragment)
             }
 
         }

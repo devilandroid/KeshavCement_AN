@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentRedemptionTypeBinding
@@ -29,20 +30,29 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /** Firebase Analytics Tracker **/
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_RedemptionTypeView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_RedemptionTypeFragment")
+        //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
         binding.redeemPoints.text = PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].redeemablePointsBalance.toString()
 
         binding.products.setOnClickListener(this)
         binding.wishlist.setOnClickListener(this)
         binding.evouchers.setOnClickListener(this)
-        binding.cashtransfer.setOnClickListener(this)
+        binding.cashVoucher.setOnClickListener(this)
+        binding.cashTransfer.setOnClickListener(this)
 
         Log.d("hbdfhbfhb","customer type : " + PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType))
 
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
-            binding.cashTransferTxt.text = getString(R.string.cash_voucher)
+            binding.cashVoucher.visibility = View.VISIBLE
+            binding.cashTransfer.visibility = View.GONE
         }else{
-            binding.cashTransferTxt.text = getString(R.string.cash_transfer)
+            binding.cashVoucher.visibility = View.GONE
+            binding.cashTransfer.visibility = View.VISIBLE
         }
 
         /*** Set PointBalance & Mobile & Name to Preference ***/
@@ -69,19 +79,19 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
                     DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
                         override fun forSelfClick() {
-                            findNavController().navigate(R.id.productFragment)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_productFragment)
                         }
 
                         override fun forOthersClick() {
                             val bundle = Bundle()
                             bundle.putSerializable("directedFrom", "ProductClick")
-                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_customerSelectionFragment,bundle)
                         }
 
                     })
 
                 }else{
-                    findNavController().navigate(R.id.productFragment)
+                    findNavController().navigate(R.id.action_redemptionTypeFragment_to_productFragment)
                 }
             }
 
@@ -92,19 +102,19 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
                     DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
                         override fun forSelfClick() {
-                            findNavController().navigate(R.id.wishlistFragment)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_wishlistFragment)
                         }
 
                         override fun forOthersClick() {
                             val bundle = Bundle()
                             bundle.putSerializable("directedFrom", "WishlistClick")
-                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_customerSelectionFragment,bundle)
                         }
 
                     })
 
                 }else{
-                    findNavController().navigate(R.id.wishlistFragment)
+                    findNavController().navigate(R.id.action_redemptionTypeFragment_to_wishlistFragment)
                 }
             }
 
@@ -114,25 +124,29 @@ class RedemptionTypeFragment : Fragment(), View.OnClickListener {
 
                     DeliveryTypeDialog.showDeliveryTypeDialog(requireContext(),object :DeliveryTypeDialog.DeliveryTypeDialogCallBack{
                         override fun forSelfClick() {
-                            findNavController().navigate(R.id.evouchersFragment)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_evouchersFragment)
                         }
 
                         override fun forOthersClick() {
                             val bundle = Bundle()
                             bundle.putSerializable("directedFrom", "VoucherClick")
-                            findNavController().navigate(R.id.customerSelectionFragment,bundle)
+                            findNavController().navigate(R.id.action_redemptionTypeFragment_to_customerSelectionFragment,bundle)
                         }
 
                     })
 
                 }else{
-                    findNavController().navigate(R.id.evouchersFragment)
+                    findNavController().navigate(R.id.action_redemptionTypeFragment_to_evouchersFragment)
                 }
 
             }
 
-            R.id.cashtransfer -> {
-                findNavController().navigate(R.id.cashTransferFragment)
+            R.id.cashVoucher -> {
+                findNavController().navigate(R.id.action_redemptionTypeFragment_to_cashVoucherFragment)
+            }
+
+            R.id.cashTransfer -> {
+                findNavController().navigate(R.id.action_redemptionTypeFragment_to_cashTransfersFragment)
             }
         }
 

@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
-                    android:background="@drawable/corner_line_bg"
+                    android:background="@drawable/border_corner_bg"
                     android:gravity="center"
                     android:weightSum="10">
 
@@ -102,8 +102,7 @@
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:padding="10dp"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_submit"
-                    app:tint="@color/colorAccent" />
+                    app:srcCompat="@drawable/ic_submit" />
 
             </LinearLayout>
 

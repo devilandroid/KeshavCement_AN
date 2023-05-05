@@ -17,6 +17,7 @@ class HistoryNotificationAdapter(var hisotryListingResponse: HistoryNotification
 
     interface ItemClicked {
         fun itemclicks(notificationHistory: LstPushHistoryJson?)
+        fun imageclicks(imageurls: String)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -92,7 +93,12 @@ class HistoryNotificationAdapter(var hisotryListingResponse: HistoryNotification
             }
         })
 
-
+        holder.NImage.setOnClickListener {
+            if (notificationHistory.imagesURL != null && !notificationHistory.imagesURL.isNullOrEmpty()){
+                var imageurls = BuildConfig.PROMO_IMAGE_BASE + notificationHistory.imagesURL
+                itemClicked.imageclicks(imageurls)
+            }
+        }
 
     }
 

@@ -20,11 +20,9 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentCashTransferHistoryBinding
-import com.loyaltyworks.keshavcement.model.MyRedemptionRequest
-import com.loyaltyworks.keshavcement.model.ObjCatalogueDetails
-import com.loyaltyworks.keshavcement.model.ObjCatalogueRedemReq
+import com.loyaltyworks.keshavcement.model.CashTransferHistoryRequest
+import com.loyaltyworks.keshavcement.model.LstCustomerCashTransferedDetailTransferHistory
 import com.loyaltyworks.keshavcement.ui.cashTransferHistory.adapter.CashTransferHistoryAdapter
-import com.loyaltyworks.keshavcement.ui.myRedemption.MyRedemptionViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.DatePickerBox
 import com.loyaltyworks.keshavcement.utils.EndlessRecyclerViewScrollListener
@@ -36,11 +34,11 @@ import java.util.ArrayList
 
 class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
     private lateinit var binding: FragmentCashTransferHistoryBinding
-    private lateinit var myRedemptionViewModel: MyRedemptionViewModel
+    private lateinit var viewModel: CashTransferHistoryViewModel
 
 
-    var selectedStatusId = "100"
-    var selectedCustTypeId = "-1"
+    var selectedStatusId = ""
+    var selectedCustTypeId = ""
     var FromDate = ""
     var ToDate = ""
 
@@ -50,8 +48,8 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
     var isRefresh = true
     var isLoaded = false
     var listFull = false
-    var tempCashTransferList = ArrayList<ObjCatalogueRedemReq>()
-    var currentList = ArrayList<ObjCatalogueRedemReq>()
+    var tempCashTransferList = ArrayList<LstCustomerCashTransferedDetailTransferHistory>()
+    var currentList = ArrayList<LstCustomerCashTransferedDetailTransferHistory>()
     // Store a member variable for the listener
     var scrollListener: EndlessRecyclerViewScrollListener? = null
     var mCashTransferLayoutManager: LinearLayoutManager? = null
@@ -62,7 +60,7 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        myRedemptionViewModel = ViewModelProvider(this).get(MyRedemptionViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CashTransferHistoryViewModel::class.java)
         binding = FragmentCashTransferHistoryBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -74,8 +72,8 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
 
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CashTransferHistoryView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CashTransferHistoryFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_CashTransferHistoryView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_CashTransferHistoryFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -146,40 +144,29 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
             scrollListener!!.resetState()
 
         LoadingDialogue.showDialog(requireContext())
-
-        val  myRedemptionRequest = MyRedemptionRequest()
-
-        myRedemptionRequest.actionType = "52"
-//        myRedemptionRequest.actorId =  PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
-        myRedemptionRequest.startIndex = startIndex
-        myRedemptionRequest.noOfRows = limit
-        myRedemptionRequest.customerTypeID = selectedCustTypeId
-        myRedemptionRequest.partyLoyaltyID = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi!![0].loyaltyId.toString()
-        myRedemptionRequest.domain = "KESHAV_CEMENT"
-
-        val objCatalogueDetails = ObjCatalogueDetails()
-        objCatalogueDetails.selectedStatus = selectedStatusId
-        objCatalogueDetails.catogoryId = "8"
-        objCatalogueDetails.redemptionTypeId = -1
-
-        if (FromDate.isNotEmpty() && ToDate.isNotEmpty()){
-            objCatalogueDetails.jFromDate = AppController.dateAPIFormats(FromDate)
-            objCatalogueDetails.jToDate = AppController.dateAPIFormats(ToDate)
-        }
-
-        myRedemptionRequest.objCatalogueDetails = objCatalogueDetails
-
-        myRedemptionViewModel.setMyRedemptionListingRequest(myRedemptionRequest)
+        viewModel.getCashTransferHistoryListData(
+            CashTransferHistoryRequest(
+                actionType = 3,
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!,
+                startIndex = startIndex,
+                pageSize = limit,
+                isTranHistory = "1",
+                status = selectedStatusId,
+                fromDate = AppController.dateAPIFormats(FromDate),
+                todate = AppController.dateAPIFormats(ToDate),
+                customerTypeId = selectedCustTypeId
+            )
+        )
     }
 
 
     private fun loadCashTransferHistoryObserver() {
 
         /*** Cash Transfer History Observer ***/
-        myRedemptionViewModel.myRedemptionLiveData.observe(viewLifecycleOwner, Observer{
+        viewModel.cashbackTransferHistoryListLiveData.observe(viewLifecycleOwner, Observer{
             if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
                 LoadingDialogue.dismissDialog()
-                if (it != null && !it.objCatalogueRedemReqList.isNullOrEmpty()) {
+                if (it != null && !it.lstCustomerCashTransferedDetails.isNullOrEmpty()) {
                     binding.cashTransferHistoryRecycler.visibility = View.VISIBLE
                     binding.noDataFount.noDataFoundLayout.visibility = View.GONE
 
@@ -193,7 +180,7 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
                         isRefresh = false
                     }
 
-                    for (redemption in it.objCatalogueRedemReqList){
+                    for (redemption in it.lstCustomerCashTransferedDetails){
                         tempCashTransferList.add(tempCashTransferList.size,redemption)
                     }
 
@@ -283,7 +270,7 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
                 binding.filterRejected.setTextColor(requireContext().resources.getColor(R.color.dark))
                 binding.filterApproved.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
 
-                selectedStatusId = "5"
+                selectedStatusId = "-1"
             }
 
             R.id.filter_engineer ->{
@@ -337,8 +324,8 @@ class CashTransferHistoryFragment : Fragment(),View.OnClickListener {
                 binding.filterEngineer.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
                 binding.filterMason.setTextColor(requireContext().resources.getColor(R.color.colorAccent))
 
-                selectedStatusId = "100"
-                selectedCustTypeId = "-1"
+                selectedStatusId = ""
+                selectedCustTypeId = ""
                 FromDate = ""
                 ToDate = ""
                 binding.fromDateTxt.text = ""

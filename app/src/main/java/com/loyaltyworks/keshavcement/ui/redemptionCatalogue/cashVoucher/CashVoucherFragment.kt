@@ -1,4 +1,4 @@
-package com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashTransfer
+package com.loyaltyworks.keshavcement.ui.redemptionCatalogue.cashVoucher
 
 import android.os.Bundle
 import android.util.Log
@@ -12,35 +12,29 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
-import com.loyaltyworks.keshavcement.databinding.FragmentCashTransferBinding
+import com.loyaltyworks.keshavcement.databinding.FragmentCashVoucherBinding
 import com.loyaltyworks.keshavcement.model.*
 import com.loyaltyworks.keshavcement.ui.login.fragment.LoginRegistrationViewModel
-import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.CashTransferAdapter
-import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.ProductAdapter
+import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.adapter.CashVoucherAdapter
 import com.loyaltyworks.keshavcement.ui.redemptionCatalogue.product.ProductCatalogueViewModel
 import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.EndlessRecyclerViewScrollListener
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.InstructionDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
-import kotlinx.android.synthetic.main.appbar_main.*
 import java.io.Serializable
-import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapter.OnItemClickCallBack {
-    private lateinit var binding: FragmentCashTransferBinding
+class CashVoucherFragment : Fragment(), View.OnClickListener, CashVoucherAdapter.OnItemClickCallBack {
+    private lateinit var binding: FragmentCashVoucherBinding
     private lateinit var viewModel: ProductCatalogueViewModel
     private lateinit var loginViewModel: LoginRegistrationViewModel
 
-    var categoryId = -1
 
     var page = 1
     var limit = 10
@@ -65,7 +59,7 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this).get(ProductCatalogueViewModel::class.java)
         loginViewModel = ViewModelProvider(this).get(LoginRegistrationViewModel::class.java)
-        binding = FragmentCashTransferBinding.inflate(layoutInflater)
+        binding = FragmentCashVoucherBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -73,20 +67,12 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "CashTransferView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "CashTransferFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_CashVoucherView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_CashVoucherFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
 
-        if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer){
-//            requireActivity().toolbar.title = getString(R.string.cash_voucher)
-                     /*** Page Name setting in Dashboard Activity  ***/
-            categoryId = 9
-        }else{
-//            requireActivity().toolbar.title = getString(R.string.cash_transfer)
-            categoryId = 8
-        }
 
         binding.redeemPoints.text = PreferenceHelper.getDashboardDetails(requireContext())?.objCustomerDashboardList!![0].redeemablePointsBalance.toString()
 
@@ -150,8 +136,8 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
                 actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 ObjCatalogueDetailss(
                     merchantId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.merchantId!!,
-                    catogoryId = categoryId,
-                    catalogueType = 1,
+                    catogoryId = 9,
+                    catalogueType = 9,
 //                    multipleRedIds = pointRange
                 ),
 //                searchText = src,
@@ -184,6 +170,13 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
                     binding.cashTransferRecycler.visibility = View.VISIBLE
                     binding.noDataFount.noDataFoundLayout.visibility = View.GONE
 
+                    if (it.objCatalogueList[0].isRedeemable == 1){
+                        binding.noteText.visibility = View.GONE
+                    }else{
+                        binding.noteText.visibility = View.VISIBLE
+                        binding.noteText.setSelected(true)
+                    }
+
                     if (page == 1) {
                         listFull = false
                         // 1. First, clear the array of data
@@ -203,7 +196,7 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
                     if (!isLoaded) {
                         isLoaded = true
 
-                        productAdapter = CashTransferAdapter(currentList, this)
+                        productAdapter = CashVoucherAdapter(currentList, this)
                         binding.cashTransferRecycler.adapter = productAdapter
                     }else{
                         productAdapter!!.notifyDataSetChanged()
@@ -265,7 +258,7 @@ class CashTransferFragment : Fragment(), View.OnClickListener, CashTransferAdapt
         val bundle = Bundle()
         bundle.putSerializable("CashVoucherData", objCatalogue)
         bundle.putSerializable("CustomerAddress", _lstCustomerJson as Serializable)
-        findNavController().navigate(R.id.action_cashTransferFragment_to_cashTransferDetailsFragment, bundle)
+        findNavController().navigate(R.id.action_cashVoucherFragment_to_cashVoucherDetailsFragment, bundle)
     }
 
     override fun onRedeemBtnClickResponse(itemView: View, position: Int, objCatalogue: ObjCataloguee) {

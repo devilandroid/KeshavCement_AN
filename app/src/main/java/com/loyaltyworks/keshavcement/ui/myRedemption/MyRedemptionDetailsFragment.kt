@@ -48,8 +48,8 @@ class MyRedemptionDetailsFragment : Fragment() {
 
         /*** Firebase Analytics Tracker ***/
         val bundle1 = Bundle()
-        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MyRedemptionDetailsView")
-        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "MyRedemptionDetailsFragment")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_MyRedemptionDetailsView")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_MyRedemptionDetailsFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle1)
 
@@ -93,8 +93,8 @@ class MyRedemptionDetailsFragment : Fragment() {
             LoadingDialogue.dismissDialog()
             if (it != null && !it.objCatalogueList.isNullOrEmpty()){
 
-                if (it.objCatalogueList[0].redeemedCatalogueType.equals("Gift Voucher",true) ||
-                    it.objCatalogueList[0].redeemedCatalogueType.equals("Voucher",true)){
+                if (it.objCatalogueList[0].redeemedCatalogueType == "4" || it.objCatalogueList[0].redeemedCatalogueType == "3" ||
+                    it.objCatalogueList[0].redeemedCatalogueType == "9"){
                     binding.categoryLayout.visibility = View.GONE
                     binding.quantityLayout.visibility = View.GONE
                 }else{

@@ -185,6 +185,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edit_profile_bg"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -263,6 +264,8 @@
                     android:elevation="5dp"
                     android:maxLines="1"
                     android:singleLine="true"
+                    android:maxLength="15"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp" />
 
@@ -301,7 +304,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/owner_residential_details"
+                    android:text="@string/owner_address"
                     android:textSize="12sp" />
 
                 <EditText
@@ -325,6 +328,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/engineer_data_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -368,6 +372,8 @@
                     android:backgroundTint="@color/white"
                     android:maxLines="1"
                     android:singleLine="true"
+                    android:maxLength="15"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
                     android:elevation="5dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp" />

@@ -56,8 +56,8 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "VouchersView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "VouchersFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_eVouchersView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_eVouchersFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -107,6 +107,12 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
                         vouchers.objCatalogueFixedPoints = it.objCatalogueFixedPoints!!.filter { it.productCode == vouchers.productCode }
                     }
 
+                }
+                if (it.objCatalogueList!![0].is_Redeemable == 1 ){
+                    binding.noteText.visibility = View.GONE
+                }else{
+                    binding.noteText.visibility = View.VISIBLE
+                    binding.noteText.setSelected(true)
                 }
 
                 binding.voucherRecycler.layoutManager = LinearLayoutManager(requireContext())
@@ -235,7 +241,7 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
         bundle.putSerializable("SelectedCustomerLoyltyID", loyaltyId)
         bundle.putSerializable("SelectedCustomerPartyLoyaltyID", partyLoyaltyID)
         bundle.putSerializable("VoucherData", CatalogueVouchers)
-        findNavController().navigate(R.id.voucherDialogFragment, bundle)
+        findNavController().navigate(R.id.action_evouchersFragment_to_voucherDialogFragment, bundle)
     }
 
     override fun onRedeemVoucherFromAdapter(itemView: View, position: Int,CatalogueVouchers: ObjCatalogueListtt, amount: String) {

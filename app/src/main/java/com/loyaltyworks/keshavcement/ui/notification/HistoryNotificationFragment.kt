@@ -16,6 +16,7 @@ import com.loyaltyworks.keshavcement.model.HistoryNotificationDetailsRequest
 import com.loyaltyworks.keshavcement.model.HistoryNotificationRequest
 import com.loyaltyworks.keshavcement.model.LstPushHistoryJson
 import com.loyaltyworks.keshavcement.ui.notification.adapter.HistoryNotificationAdapter
+import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.SwipeToDeleteCallback
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
@@ -69,6 +70,14 @@ class HistoryNotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /** Firebase Analytics Tracker **/
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_HistoryNotificationView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_HistoryNotificationFragment")
+        //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+
+
         binding.noDataFount.noDataFoundLayout.visibility = View.GONE
         binding.historyRv.visibility = View.VISIBLE
 
@@ -87,6 +96,10 @@ class HistoryNotificationFragment : Fragment() {
                 historyNotificationAdapter = HistoryNotificationAdapter(
                     it, object : HistoryNotificationAdapter.ItemClicked {
                         override fun itemclicks(notificationHistory: LstPushHistoryJson?) {}
+
+                        override fun imageclicks(imageurls: String) {
+                            AppController.commonImageZoomDialogue(requireContext(),imageurls)
+                        }
                     })
 
                 binding.historyRv.adapter = historyNotificationAdapter

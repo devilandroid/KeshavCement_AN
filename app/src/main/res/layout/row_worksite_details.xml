@@ -121,6 +121,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/engineer_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -271,7 +272,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/owner_resident_details"
+                    android:text="@string/owner_address"
                     android:textSize="12sp" />
 
                 <TextView

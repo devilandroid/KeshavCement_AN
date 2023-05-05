@@ -39,8 +39,8 @@ class TermsAndConditionFragment : Fragment() {
 
         /*** Firebase Analytics Tracker ***/
         val bundle1 = Bundle()
-        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "TermsConditionView")
-        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "TermsConditionFragment")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_TermsConditionView")
+        bundle1.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_TermsConditionFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle1)
 

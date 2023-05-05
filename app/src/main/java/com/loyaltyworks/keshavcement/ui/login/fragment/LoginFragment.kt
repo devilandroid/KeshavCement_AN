@@ -75,8 +75,8 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "LoginView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "LoginFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_LoginView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_LoginFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
@@ -269,7 +269,7 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                                 binding.forgotUserName.text.clear()
                             }
                         })
-                    }else if (it == 3){
+                    }else if (it == 6){
                         LoadingDialogue.dismissDialog()
                         AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.incorrect_account_type),object:
                             AppController.SuccessCallBack{
@@ -279,7 +279,7 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                                 binding.forgotUserName.text.clear()
                             }
                         })
-                    }else if (it == 4 || it == 0){
+                    }else if (it == 4 || it == 0 || it == 3){
                         LoadingDialogue.dismissDialog()
                         AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_account_is_in_pending_kindly_contact_your_administrator),object:
                             AppController.SuccessCallBack{
@@ -537,7 +537,6 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
             R.id.activate_now_button ->{
                 if (BlockMultipleClick.click())return
                 findNavController().navigate(R.id.action_loginFragment_to_activateFragment)
-                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
             R.id.register_btn ->{
@@ -546,7 +545,6 @@ class LoginFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     customerTypeList.clear()
                 }
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
             R.id.login_button ->{

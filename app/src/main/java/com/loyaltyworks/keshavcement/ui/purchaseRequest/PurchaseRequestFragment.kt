@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.loyaltyworks.keshavcement.BuildConfig
 import com.loyaltyworks.keshavcement.R
 import com.loyaltyworks.keshavcement.databinding.FragmentPurchaseRequestBinding
@@ -34,9 +35,9 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
     private lateinit var binding: FragmentPurchaseRequestBinding
     private lateinit var viewModel: PurchaseRequestViewModel
 
-    var userTypeList = mutableListOf<CommonSpinner>()
-    private lateinit var mSelecteduserType:CommonSpinner
-    var userTypeId: Int = -1
+//    var userTypeList = mutableListOf<CommonSpinner>()
+//    private lateinit var mSelecteduserType:CommonSpinner
+//    var userTypeId: Int = -1
 
     var _dealerSubDealerList = mutableListOf<LstCustParentChildMappingDealer>()
     var dealerSubDealerListAdapter: ArrayAdapter<String>? = null
@@ -61,15 +62,23 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /** Firebase Analytics Tracker **/
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_PurchaseRequestView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_PurchaseRequestFragment")
+        //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
-        binding.custTypeSpinner.onItemSelectedListener = this
+//        binding.custTypeSpinner.onItemSelectedListener = this
         binding.dealerSpinner.onItemSelectedListener = this
         binding.productSpinner.onItemSelectedListener = this
 
         binding.qtyPlus.setOnClickListener(this)
         binding.qtyMinus.setOnClickListener(this)
 
-        userTypeSpinner()
+//        userTypeSpinner()
+        /*** Dealer Sub-Dealer Api call ***/
+        dealerSubdealerApiCall()
 
         binding.qtyTextview.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -97,11 +106,11 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
         binding.claimBtn.setOnStateChangeListener {
             if (it){
 
-                if (userTypeId == -1){
+               /* if (userTypeId == -1){
                     Toast.makeText(requireContext(), getString(R.string.please_select_user_type), Toast.LENGTH_SHORT).show()
                     binding.claimBtn.changeState(false,true)
                     return@setOnStateChangeListener
-                }else if (dealerSubDealerId == "-1"){
+                }else*/ if (dealerSubDealerId == "-1"){
                     Toast.makeText(requireContext(), getString(R.string.please_select_name), Toast.LENGTH_SHORT).show()
                     binding.claimBtn.changeState(false,true)
                     return@setOnStateChangeListener
@@ -164,7 +173,7 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
         )
     }
 
-    private fun userTypeSpinner() {
+   /* private fun userTypeSpinner() {
 
         userTypeList.clear()
         if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
@@ -178,17 +187,17 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
 
 
         binding.custTypeSpinner.adapter = SpinnerCommonWhiteTextAdapter(requireActivity(), R.layout.spinner_popup_row,userTypeList)
-    }
+    }*/
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when((parent as Spinner).id){
-            R.id.cust_type_spinner -> {
+           /* R.id.cust_type_spinner -> {
                 mSelecteduserType = parent.getItemAtPosition(position) as CommonSpinner
                 userTypeId = mSelecteduserType.id!!
                 Log.d("fdsfsdf", mSelecteduserType.name!!)
 
                 if (userTypeId > 0){
-                    /*** Dealer Sub-Dealer Api call ***/
+                 //    Dealer Sub-Dealer Api call
                     viewModel.getDealerSubDealerListData(
                         DealerSubDealerListRequest(
                             actionType = 16,
@@ -214,7 +223,7 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
                     binding.dealerSpinner.adapter = dealerSubDealerListAdapter
                 }
 
-            }
+            }*/
 
             R.id.dealer_spinner ->{
                 dealerSubDealerId = _dealerSubDealerList[position].userID.toString()
@@ -259,6 +268,16 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
+    private fun dealerSubdealerApiCall() {
+        viewModel.getDealerSubDealerListData(
+            DealerSubDealerListRequest(
+                actionType = 19,
+                actorId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString()
+//                searchText = customerType
+            )
+        )
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -272,7 +291,7 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
                     val dealerSubDealerListName = ArrayList<String>()
 
                     for (commonSpinner in dealerSubDealerLists) {
-                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.mobile + " )")
+                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.firmName + " )")
 //                        dealerSubDealerListName.add(commonSpinner.firstName!!)
                     }
 
@@ -371,7 +390,8 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
                                 binding.claimBtn.changeState(false,true)
 
                                 binding.qtyTextview.text.clear()
-                                userTypeSpinner()
+//                                userTypeSpinner()
+                                dealerSubdealerApiCall()
                             }
 
                         })

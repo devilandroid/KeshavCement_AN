@@ -46,4 +46,16 @@ class DashboardViewModel: BaseViewModel() {
         }
     }
 
+    /*** Product View List viewModel ***/
+    private val _prodViewListLiveData = MutableLiveData<ProductViewListResponse>()
+    val prodViewListLiveData: LiveData<ProductViewListResponse> = _prodViewListLiveData
+
+    fun getProductViewData(productViewListRequest: ProductViewListRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+            //post the value inside live data
+            _prodViewListLiveData.postValue(apiRepository.getProductViewData(productViewListRequest))
+        }
+    }
+
 }

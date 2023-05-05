@@ -70,8 +70,8 @@ class MyPurchaseClaimFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         /** Firebase Analytics Tracker **/
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MyPurchaseClaimView")
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "MyPurchaseClaimFragment")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "AD_CUS_MyPurchaseClaimView")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AD_CUS_MyPurchaseClaimFragment")
         //  bundle.putString(MyAppAnalyticsConstants.Param.TOPIC, topic)
         FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
