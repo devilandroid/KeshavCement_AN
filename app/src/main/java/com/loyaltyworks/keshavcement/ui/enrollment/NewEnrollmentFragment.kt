@@ -378,16 +378,30 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             LoadingDialogue.dismissDialog()
             if (viewLifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED) {
                 if (it != null) {
-                    if (it != 1) {
-//                        binding.mobileVerifyLayout.visibility = View.GONE
-//                        binding.enrollLayout.visibility = View.VISIBLE
-//                        binding.mobileNumberEdt.setText(binding.mobileEdtVerify.text.toString())
+                    if(it==0){
                         binding.mobileNumberEdt.isEnabled = false
                         binding.mobileNumberEdt.isClickable = false
                         binding.submitEnrollment.isEnabled = true
                         binding.submitEnrollment.isClickable = true
                         binding.blockLayout.visibility = View.GONE
-//                        enableView(binding.contentLayout)
+                    }else if(PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Dealer && (it== 1 || it == 2 || it == 4)){
+                        showMappingConfirmationDialog()
+                    }else if(PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer && (it== 1 || it == 2 )){
+                        showMappingConfirmationDialog()
+                    }else if(PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive && (it== 1 || it == 2 || it == 4)){
+                        showMappingConfirmationDialog()
+                    }else if(PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SupportExecutive && it == -1){
+                        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.cant_map),object:
+                            AppController.SuccessCallBack{
+                            override fun onOk() {
+                                binding.mobileNumberEdt.text.clear()
+                                binding.mobileNumberEdt.isEnabled = true
+                                binding.mobileNumberEdt.isClickable = true
+                                binding.submitEnrollment.isEnabled = false
+                                binding.submitEnrollment.isClickable = false
+                                binding.blockLayout.visibility = View.VISIBLE
+                            }
+                        })
                     }else{
                         AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.your_entered_mobile_already_exist),object:
                             AppController.SuccessCallBack{
@@ -402,6 +416,7 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                                 binding.blockLayout.visibility = View.VISIBLE
                             }
                         })
+
                     }
                 }else{
                     Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
@@ -430,6 +445,61 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                 }
             }else{
                 Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        /*** Mapping Observer ***/
+        viewModel.mappingLiveData.observe(viewLifecycleOwner, Observer {
+            LoadingDialogue.dismissDialog()
+            if (it != null && !it.returnMessage.isNullOrEmpty()){
+                if (it.returnMessage.toString().contentEquals("1")){
+
+                    AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.map_success),object:
+                        AppController.SuccessCallBack{
+                        override fun onOk() {
+
+                            findNavController().popBackStack()
+
+                        }
+                    })
+
+                }else if(it.returnMessage.toString().contentEquals("2")){
+
+                    AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.already_mapped),object:
+                        AppController.SuccessCallBack{
+                        override fun onOk() {
+                            binding.mobileNumberEdt.text.clear()
+
+                            binding.mobileNumberEdt.isEnabled = true
+                            binding.mobileNumberEdt.isClickable = true
+                            binding.submitEnrollment.isEnabled = false
+                            binding.submitEnrollment.isClickable = false
+                            binding.blockLayout.visibility = View.VISIBLE
+                        }
+                    })
+
+                }else{
+                    Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+            }
+        })
+
+
+
+    }
+
+    private fun showMappingConfirmationDialog(){
+        AppController.showSuccessPopUpDialog(requireContext(),getString(R.string.do_you_want_to_map),object:
+            AppController.SuccessCallBack{
+            override fun onOk() {
+                LoadingDialogue.showDialog(requireContext())
+                viewModel.getMappingData(MappingRequest(
+                    actionType = "8",
+                    actorId = actorID,
+                    mobileNumber = binding.mobileNumberEdt.text.toString()
+                ))
             }
         })
     }
@@ -541,8 +611,8 @@ class NewEnrollmentFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
         LoadingDialogue.showDialog(requireContext())
         loginViewModel.getMobileEmailExistenceCheck(
             CustomerExistenceRequest(
-                actionType = "11",
-//                actorId = userTypeId.toString(),
+                actionType = "70",
+                actorId = actorID,
                 location = (Location(
                     userName = userName,
                 ))

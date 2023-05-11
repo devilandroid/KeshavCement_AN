@@ -313,4 +313,8 @@
     <string name="claim_id">Claim ID</string>
     <string name="reject">Reject</string>
     <string name="approv">Approve</string>
+    <string name="do_you_want_to_map">Do you want to map?</string>
+    <string name="map_success">Mapped successfully!</string>
+    <string name="already_mapped">Already mapped!</string>
+    <string name="cant_map">Can not be mapped!</string>
 </resources>

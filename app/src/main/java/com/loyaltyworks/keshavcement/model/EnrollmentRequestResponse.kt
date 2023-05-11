@@ -202,3 +202,25 @@ data class EnrollmentResponse(
     @Json(name = "totalRecords")
     val totalRecords: Int? = null
 )
+
+/*** Mapping Request ***/
+@JsonClass(generateAdapter = true)
+data class MappingRequest(
+    @Json(name = "ActionType")
+    val actionType: String? = null,
+    @Json(name = "ActorId")
+    val actorId: String? = null,
+    @Json(name = "MobileNumber")
+    val mobileNumber: String? = null
+)
+
+/*** Mapping Response ***/
+@JsonClass(generateAdapter = true)
+data class MappingResponse(
+    @Json(name = "returnMessage")
+    val returnMessage: String? = null,
+    @Json(name = "returnValue")
+    val returnValue: Int? = null,
+    @Json(name = "totalRecords")
+    val totalRecords: Int? = null
+)

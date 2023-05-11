@@ -183,10 +183,20 @@ object AppController {
         dialog?.show()
 
         val ok = dialog?.findViewById<View>(R.id.text_ok) as LinearLayout
+        val cancel = dialog?.findViewById<View>(R.id.text_cancel) as LinearLayout
         val textDialog = dialog?.findViewById<View>(R.id.textDialog) as TextView
         textDialog.text = msgText
         ok.setOnClickListener {
             SuccessCallBack.onOk()
+            dialog?.dismiss()
+            dialog = null
+        }
+
+        if(msgText.contentEquals(context.getString(R.string.do_you_want_to_map))){
+            cancel.visibility = View.VISIBLE
+        }
+
+        cancel.setOnClickListener{
             dialog?.dismiss()
             dialog = null
         }

@@ -33,4 +33,17 @@ class EnrollmentViewModel: BaseViewModel() {
             _enrollmentLiveData.postValue(apiRepository.getEnrollmentData(enrollmentRequest))
         }
     }
+
+    /*** Mapping submission viewModel ***/
+    private val _mappingLiveData = MutableLiveData<MappingResponse>()
+    val mappingLiveData: LiveData<MappingResponse> = _mappingLiveData
+
+    fun getMappingData(mappingRequest: MappingRequest) {
+        ///launch the coroutine scope
+        scope.launch {
+
+            //post the value inside live data
+            _mappingLiveData.postValue(apiRepository.getMappingSubmissionData(mappingRequest))
+        }
+    }
 }

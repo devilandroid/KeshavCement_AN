@@ -371,6 +371,17 @@ class ApiRepository(private val apiInterface: ApiInterface) : BaseRepository() {
         )
     }
 
+    /* Mapping Submission  callback*/
+    suspend fun getMappingSubmissionData(mappingRequest: MappingRequest): MappingResponse? {
+        return safeApiCall(
+            call = {
+                apiInterface.getMappingAsync(mappingRequest).await()
+            },
+            error = "Error Mapping submission Trigger"
+        )
+    }
+
+
     /* Enrollment  callback*/
     suspend fun getEnrollmentData(enrollmentRequest: EnrollmentRequest): EnrollmentResponse? {
         return safeApiCall(
