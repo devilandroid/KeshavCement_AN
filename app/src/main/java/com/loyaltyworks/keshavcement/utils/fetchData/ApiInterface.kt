@@ -160,6 +160,10 @@ interface ApiInterface {
     @POST("SaveCustomerRegistrationDetailsMobileApp")
     fun getEnrollmentAsync(@Body enrollmentRequest: EnrollmentRequest):  Deferred<Response<EnrollmentResponse>>
 
+    /* Mapping api call */
+    @POST("SaveParentAndChildMapping")
+    fun getMappingAsync(@Body mappingRequest: MappingRequest):  Deferred<Response<MappingResponse>>
+
     /*  User Active Or Not api call*/
     @POST("UserActiveOrInActive")
     fun getUserActivityOrNot(@Body userActiveOrNotRequest: UserActiveOrNotRequest): Deferred<Response<UserActiveOrNotResponse>>
