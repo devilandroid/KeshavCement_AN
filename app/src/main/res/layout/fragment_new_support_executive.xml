@@ -57,6 +57,7 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="20dp"
                     android:hint="Enter Name"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_ "
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="@color/colorAccent"

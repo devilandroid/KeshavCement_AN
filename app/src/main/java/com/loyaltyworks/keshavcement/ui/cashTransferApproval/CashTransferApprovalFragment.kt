@@ -283,7 +283,8 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
                 mobileNo = objCatalogueRedemReqList.customerMobile,
                 userId = "-1",
                 userName = objCatalogueRedemReqList.loyaltyId,
-                name = objCatalogueRedemReqList.customerName
+                name = objCatalogueRedemReqList.customerName,
+                oTPType = "OTPForRewardCardsENCashAuthorization"
             )
         )
 

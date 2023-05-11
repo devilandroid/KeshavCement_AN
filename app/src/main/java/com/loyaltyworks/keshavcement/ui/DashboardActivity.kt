@@ -340,7 +340,8 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, LanguageFragment
                 binding.drawerLayout.closeDrawer(Gravity.LEFT)
 
                 if (PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.Engineer ||
-                    PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.Mason){
+                    PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.Mason ||
+                    PreferenceHelper.getStringValue(this, BuildConfig.CustomerType) == BuildConfig.SubDealer){
                     RedemptionTypeDialog.showRedemptionTypeDialog(this,object :
                         RedemptionTypeDialog.RedemptionTypeDialogCallBack{
                         override fun forMyRedemptionClick() {

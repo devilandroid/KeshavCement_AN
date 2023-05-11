@@ -186,19 +186,34 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="@string/value"
-                    android:textSize="12sp"
-                    android:textColor="@color/color16"/>
+                    android:textSize="18sp"
+                    android:textColor="@color/green"/>
 
-                <TextView
-                    android:id="@+id/value"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="-"
-                    android:textColor="@color/dark"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="₹"
+                        android:textColor="@color/dark"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="-"
+                        android:textColor="@color/dark"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
 
 
             </LinearLayout>

@@ -80,6 +80,7 @@
         android:layout_alignParentEnd="true"
         android:orientation="horizontal"
         android:background="@drawable/corner_bg4"
+        android:backgroundTint="@color/color34"
         android:gravity="center_vertical">
 
         <ImageView

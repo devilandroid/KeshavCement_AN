@@ -310,4 +310,7 @@
     <string name="requested_to">Requested to</string>
     <string name="cash_point">Cash point</string>
     <string name="other_redemption">Other\nRedemptions</string>
+    <string name="claim_id">Claim ID</string>
+    <string name="reject">Reject</string>
+    <string name="approv">Approve</string>
 </resources>

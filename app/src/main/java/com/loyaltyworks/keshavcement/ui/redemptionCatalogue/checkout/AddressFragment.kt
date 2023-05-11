@@ -399,7 +399,8 @@ class AddressFragment : Fragment() {
                 mobileNo = PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerMobile),
                 userId = actorID,
                 userName = loyaltyId,
-                name = PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerName)
+                name = PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerName),
+                oTPType = "OTPForRewardCardsENCashAuthorization"
             )
         )
 

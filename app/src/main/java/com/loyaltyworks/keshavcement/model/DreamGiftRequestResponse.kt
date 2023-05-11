@@ -180,7 +180,15 @@ data class LstDreamGifts(
     @Json(name = "totRow")
     val totRow: Int? = null,
     @Json(name = "is_DreamGiftRedeemable")
-    val is_DreamGiftRedeemable: Int? = null
+    val is_DreamGiftRedeemable: Int? = null,
+    @Json(name = "pointsRequiredPerMonth")
+    val pointsRequiredPerMonth: String? = null,
+    @Json(name = "monthsRequiredToAchieve")
+    val monthsRequiredToAchieve: String? = null,
+    @Json(name = "pointsRequiredPerDay")
+    val pointsRequiredPerDay: String? = null,
+    @Json(name = "daysRequiredToAchieve")
+    val daysRequiredToAchieve: String? = null
 )
 
  /*  Dream Gift Remove Request  */

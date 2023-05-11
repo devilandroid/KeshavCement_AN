@@ -15,6 +15,7 @@ import com.loyaltyworks.keshavcement.databinding.FragmentDreamGiftDetailsBinding
 import com.loyaltyworks.keshavcement.model.DreamGiftDetailRequest
 import com.loyaltyworks.keshavcement.model.DreamGiftRemoveRequest
 import com.loyaltyworks.keshavcement.model.LstDreamGift
+import com.loyaltyworks.keshavcement.utils.AppController
 import com.loyaltyworks.keshavcement.utils.PreferenceHelper
 import com.loyaltyworks.keshavcement.utils.dialog.ClaimSuccessDialog
 import com.loyaltyworks.keshavcement.utils.dialog.LoadingDialogue
@@ -137,12 +138,17 @@ class DreamGiftDetailsFragment : Fragment(), View.OnClickListener {
                 binding.createdDate.text = it.lstDreamGift[0].jCreatedDate.toString().split(" ")[0]
                 binding.desiredDate.text =  it.lstDreamGift[0].jDesiredDate.toString().split(" ")[0]
                 binding.pointsReqTv.text = it.lstDreamGift[0].pointsRequired.toString()
-                binding.avergaePointOne.text = it.lstDreamGift[0].avgEarningPoints.toString()
-                binding.avergaePointTwo.text = it.lstDreamGift[0].earlyExpectedPoints.toString()
-                binding.avergaePointThree.text = it.lstDreamGift[0].lateExpectedPoints.toString()
-                binding.PossibelDateOne.text = it.lstDreamGift[0].expectedDate.toString()
-                binding.PossibelDateTwo.text = it.lstDreamGift[0].earlyExpectedDate.toString()
-                binding.PossibelDateThree.text = it.lstDreamGift[0].lateExpectedDate.toString()
+
+                binding.pointsRequiredPerMonth.text = it.lstDreamGift[0].pointsRequiredPerMonth.toString()
+                binding.monthsRequiredToAchieve.text = it.lstDreamGift[0].monthsRequiredToAchieve.toString()
+                if (it.lstDreamGift[0].jDesiredDate != null)
+                    binding.jDesiredDate.text = AppController.dateAPIFormat(it.lstDreamGift[0].jDesiredDate.toString().split(" ")[0])
+
+                binding.pointsRequiredPerDay.text = it.lstDreamGift[0].pointsRequiredPerDay.toString()
+                binding.daysRequiredToAchieve.text = it.lstDreamGift[0].daysRequiredToAchieve.toString()
+                if (it.lstDreamGift[0].jDesiredDate != null)
+                    binding.jDesiredDate2.text = AppController.dateAPIFormat(it.lstDreamGift[0].jDesiredDate.toString().split(" ")[0])
+
 
             }else{
                 Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
