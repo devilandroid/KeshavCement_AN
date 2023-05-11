@@ -291,8 +291,11 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
                     val dealerSubDealerListName = ArrayList<String>()
 
                     for (commonSpinner in dealerSubDealerLists) {
-                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.firmName + " )")
-//                        dealerSubDealerListName.add(commonSpinner.firstName!!)
+                        if (!commonSpinner.firmName.isNullOrEmpty()){
+                            dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.firmName + " )")
+                        }else{
+                            dealerSubDealerListName.add(commonSpinner.firstName!!)
+                        }
                     }
 
                     val commonSpinner = CommonSpinners()

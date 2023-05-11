@@ -316,7 +316,8 @@ class PendingClaimRequestFragment : Fragment(), PendingClaimRequestAdapter.OnIte
                 mobileNo = lstTransactionApprovalDetails.mobile,
                 userId = "-1",
                 userName = lstTransactionApprovalDetails.loyaltyId,
-                name = lstTransactionApprovalDetails.memberName.toString()
+                name = lstTransactionApprovalDetails.memberName.toString(),
+                oTPType = "OTPForRewardCardsENCashAuthorization"
             )
         )
 

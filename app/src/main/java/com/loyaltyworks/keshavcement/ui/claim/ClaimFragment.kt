@@ -311,7 +311,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                 userName = "",
                 userId = "-1",
                 mobileNo = selectedCustomerMobile,
-                oTPType = "Enrollment"
+                oTPType = "OTPForRewardCardsENCashAuthorization"
             )
         )
 
@@ -465,7 +465,11 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     val dealerSubDealerListName = ArrayList<String>()
 
                     for (commonSpinner in dealerSubDealerLists) {
-                        dealerSubDealerListName.add(commonSpinner.firstName!!)
+                        if (!commonSpinner.firmName.isNullOrEmpty()){
+                            dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.firmName + " )")
+                        }else{
+                            dealerSubDealerListName.add(commonSpinner.firstName!!)
+                        }
                     }
 
                     val commonSpinner = CommonSpinners()

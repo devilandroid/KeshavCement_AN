@@ -276,7 +276,8 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener{
                 mobileNo = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile,
                 userId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 userName = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].loyaltyId,
-                name = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].firstName
+                name = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].firstName,
+                oTPType = "OTPForRewardCardsENCashAuthorization"
             )
         )
 

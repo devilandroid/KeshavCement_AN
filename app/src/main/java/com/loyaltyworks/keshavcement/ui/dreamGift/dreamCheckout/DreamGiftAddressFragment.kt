@@ -139,7 +139,7 @@ class DreamGiftAddressFragment : Fragment() {
                     }else{
 
                         SendOtpRequest()
-                        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),getString(R.string.redemption),getString(R.string.enter_otp_to_complete_the_redemption),PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerMobile)
+                        RedeemOTPDialog.showRedeemOTPDialog(requireContext(),getString(R.string.redemption),getString(R.string.enter_otp_to_complete_the_redemption),PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString()
                             ,"Redeem",object : RedeemOTPDialog.RedeemOTPDialogCallBack{
                                 override fun onOk() {
                                     binding.redeemSwapBtn.changeState(false,true)
@@ -361,10 +361,11 @@ class DreamGiftAddressFragment : Fragment() {
         viewModel.setOTPRequest(
             SaveAndGetOTPDetailsRequest(
                 merchantUserName = BuildConfig.MerchantName,
-                mobileNo = PreferenceHelper.getStringValue(requireContext(), BuildConfig.SelectedCustomerMobile),
+                mobileNo = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].customerMobile.toString(),
                 userId = PreferenceHelper.getLoginDetails(requireContext())?.userList!![0]!!.userId!!.toString(),
                 userName = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].loyaltyId,
-                name = PreferenceHelper.getStringValue(requireContext(), BuildConfig.SelectedCustomerName)
+                name = PreferenceHelper.getDashboardDetails(requireContext())!!.lstCustomerFeedBackJsonApi!![0].firstName.toString(),
+                oTPType = "OTPForRewardCardsENCashAuthorization"
             )
         )
 

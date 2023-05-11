@@ -193,7 +193,12 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                     val dealerSubDealerListName = ArrayList<String>()
 
                     for (commonSpinner in dealerSubDealerLists) {
-                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.firmName + " )")
+                        if (!commonSpinner.firmName.isNullOrEmpty()){
+                            dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.firmName + " )")
+                        }else{
+                            dealerSubDealerListName.add(commonSpinner.firstName!!)
+                        }
+//                        dealerSubDealerListName.add(commonSpinner.firstName!! + " ( " + commonSpinner.firmName + " )")
 //                        dealerSubDealerListName.add(commonSpinner.firstName!!)
                     }
 
@@ -277,6 +282,7 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
                             override fun onOk() {
                                 binding.claimBtn.changeState(false,true)
 //                                userTypeSpinner()
+                                dealerSubdealerApiCall()
                                 cashbackPointsApi()
                                 binding.pointsRupees.text = ""
                             }

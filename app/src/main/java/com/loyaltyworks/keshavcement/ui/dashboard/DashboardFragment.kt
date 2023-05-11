@@ -487,7 +487,8 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
             R.id.dash_my_redemption ->{
                 if (PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Engineer ||
-                    PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Mason){
+                    PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.Mason ||
+                    PreferenceHelper.getStringValue(requireContext(), BuildConfig.CustomerType) == BuildConfig.SubDealer){
 
                     RedemptionTypeDialog.showRedemptionTypeDialog(requireContext(),object :RedemptionTypeDialog.RedemptionTypeDialogCallBack{
                         override fun forMyRedemptionClick() {
