@@ -166,7 +166,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     customerId = _lstCustomerJson!![0].customerId.toString(),
                     firstName = binding.nameEdt.text.toString(),
                     mobile = _lstCustomerJson!![0].mobile,
-                    zip = _lstCustomerJson!![0].zip,
+                    zip = binding.pincodeEdt.text.toString(),
                     districtId = _lstCustomerJson!![0].districtId.toString(),
                     talukId = _lstCustomerJson!![0].talukId.toString(),
                     email = binding.emailEdt.text.toString(),

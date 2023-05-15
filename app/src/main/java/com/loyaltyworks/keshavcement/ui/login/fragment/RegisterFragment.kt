@@ -918,7 +918,7 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Engineer ||
             PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Mason) {
             identityNo = "2"
-            identityType = "4"
+            identityType = "2"
             aadharNo = binding.aadharNumber.text.toString()
 
         } else if (PreferenceHelper.getStringValue(requireContext(),BuildConfig.CustomerType) == BuildConfig.Dealer) {

@@ -342,6 +342,7 @@ class EvouchersFragment : Fragment(), VoucherAdapter.voucherListAdpaterCallback 
                 ActionType = "51",
                 ActorId = actorID,
                 CountryID = catalogueVouchers.countryID.toString(),
+                DealerLoyaltyId = partyLoyaltyID,
                 MerchantId = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi?.get(0)?.merchantId.toString(),
                 ReceiverEmail = "",
                 ReceiverName = PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerName),
