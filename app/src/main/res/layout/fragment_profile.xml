@@ -347,6 +347,7 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="text"
                                 android:maxLines="1"
+                                android:maxLength="15"
                                 android:singleLine="true"
                                 android:background="@android:color/transparent"
                                 android:textColorHint="@color/grey"

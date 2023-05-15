@@ -317,4 +317,5 @@
     <string name="map_success">Mapped successfully!</string>
     <string name="already_mapped">Already mapped!</string>
     <string name="cant_map">Can not be mapped!</string>
+    <string name="please_choose_correct_product">Please choose correct Product (or) Contact your dealer</string>
 </resources>

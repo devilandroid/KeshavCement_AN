@@ -251,6 +251,7 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
                 ActionType = "51",
                 ActorId = actorID,
                 CountryID = objCatalogueList.countryID.toString(),
+                DealerLoyaltyId = partyLoyaltyID,
                 MerchantId = PreferenceHelper.getDashboardDetails(requireContext())?.lstCustomerFeedBackJsonApi?.get(0)?.merchantId.toString(),
                 ReceiverEmail ="",
                 ReceiverName = PreferenceHelper.getStringValue(requireContext(),BuildConfig.SelectedCustomerName),

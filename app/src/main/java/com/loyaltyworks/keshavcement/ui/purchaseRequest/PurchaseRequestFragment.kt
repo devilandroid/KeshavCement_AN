@@ -129,7 +129,8 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
                 }else{
                     if(Settings.Global.getInt(requireActivity().contentResolver, Settings.Global.AUTO_TIME) == 1)
                     {
-                        submitClaimApi()
+                        checkStockStatusApi()
+
                     }else {
                         // Disabed
                         Log.d("jhryfgry","changed")
@@ -150,6 +151,24 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
             }
         }
 
+    }
+
+    private fun checkStockStatusApi() {
+        LoadingDialogue.showDialog(requireContext())
+        viewModel.getCheckStockData(
+            SubmitPurchaseRequest(
+                actorId = dealerSubDealerId,
+                ritailerId = dealerSubDealerId,
+                approvalStatus = "5",
+                productSaveDetailList = listOf(
+                    ProductSaveDetail(
+                        productCode = productCode,
+                        quantity = binding.qtyTextview.text.toString()
+                    )
+                )
+
+            )
+        )
     }
 
     @SuppressLint("NewApi")
@@ -380,6 +399,31 @@ class PurchaseRequestFragment : Fragment(), AdapterView.OnItemSelectedListener, 
                 }
             }
 
+        })
+
+        /*** Check Stock Avalability Observer ***/
+        viewModel.checkStockLiveData.observe(viewLifecycleOwner, Observer {
+            if (it != null && it.pointsBalance != null){
+
+                if (it.pointsBalance == 0){
+                    LoadingDialogue.dismissDialog()
+                    Toast.makeText(requireContext(), getString(R.string.please_choose_correct_product), Toast.LENGTH_SHORT).show()
+                    binding.claimBtn.changeState(false,true)
+
+                }else if (it.pointsBalance == 1){
+                    submitClaimApi()
+
+                }else{
+                    LoadingDialogue.dismissDialog()
+                    Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+                    binding.claimBtn.changeState(false,true)
+                }
+
+            }else{
+                LoadingDialogue.dismissDialog()
+                Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again_later), Toast.LENGTH_SHORT).show()
+                binding.claimBtn.changeState(false,true)
+            }
         })
 
         /*** Submit Purchase Request Observer ***/

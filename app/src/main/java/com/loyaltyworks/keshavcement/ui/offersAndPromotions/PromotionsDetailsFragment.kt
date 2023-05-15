@@ -65,6 +65,7 @@ class PromotionsDetailsFragment : Fragment() {
             if(it!=null && !it.lstPromotionJsonList.isNullOrEmpty()){
                 binding.promTxtTitle.text = it.lstPromotionJsonList[0].promotionName.toString()
                 binding.promTxtDesc.text = it.lstPromotionJsonList[0].proShortDesc.toString()
+                binding.promLongDesc.loadDataWithBaseURL(null,it.lstPromotionJsonList[0].proLongDesc.toString(),null,"text/html", "UTF-8")
 
                 Glide.with(this)
                     .load(BuildConfig.PROMO_IMAGE_BASE + it.lstPromotionJsonList[0].proImage.toString())

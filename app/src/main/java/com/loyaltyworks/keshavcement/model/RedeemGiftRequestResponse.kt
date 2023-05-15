@@ -222,6 +222,7 @@ data class ObjCatalogueListtt(
 data class RedeemGiftVoucherRequest(
         var ActionType: String? = null,
         var ActorId: String? = null,
+        var DealerLoyaltyId: String? = null,
         var CountryCode: String? = null,
         var CountryID: String? = null,
         var MerchantId: String? = null,
