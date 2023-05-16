@@ -307,7 +307,7 @@
                     android:id="@+id/forgot_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="7dp"
                     android:layout_gravity="center_horizontal"
                     android:orientation="vertical">
                     <TextView
@@ -324,7 +324,7 @@
                     android:id="@+id/register_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="1dp"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
                     <TextView
@@ -381,7 +381,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mobile No / Membership ID"
+                        android:text="Mobile No"
                         android:fontFamily="@font/poppins_medium"
                         android:textSize="12sp"
                         android:textColor="@color/colorAccent"/>
@@ -402,7 +402,7 @@
                                 android:id="@+id/forgot_user_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:hint="Mobile No / Membership ID"
+                                android:hint="Enter registered mobile no"
                                 android:textSize="16sp"
                                 android:imeOptions="actionNext"
                                 android:inputType="textAutoCorrect"

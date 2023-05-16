@@ -225,7 +225,7 @@ class CashTransferApprovalFragment : Fragment(), CashTransferApprovalAdapter.OnI
                 }
 
                 override fun onRedeemClick(otp: String) {
-                    if(otp =="123456" /*OTPNumber*/){
+                    if(otp == OTPNumber){
                         RedeemOTPDialog.hideDialog()
                         successMsg = getString(R.string.cash_transfer_approved)
 

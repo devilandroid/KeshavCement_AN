@@ -242,7 +242,7 @@ class CashVoucherFragment : Fragment(), View.OnClickListener, CashVoucherAdapter
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.help_instruction ->{
-                InstructionDialog.showInstructionDialog(requireContext(),object : InstructionDialog.InstructionDialogCallBack{
+                InstructionDialog.showInstructionDialog(requireContext(),"Dealer",object : InstructionDialog.InstructionDialogCallBack{
                     override fun onOk() {
 
                     }

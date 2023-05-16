@@ -51,10 +51,10 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
             holder.prodLayout.visibility = View.GONE
 
         }else{
-            holder.time.visibility = View.VISIBLE
+            holder.time.visibility = View.GONE
             holder.prodLayout.visibility = View.VISIBLE
 
-            holder.time.text = data.jTranDate.toString().split(" ")[1]
+//            holder.time.text = data.jTranDate.toString().split(" ")[1]
             holder.prodName.text = data.prodName
         }
 
@@ -75,7 +75,7 @@ class MyEarningAdapter(var lstRewardTransJsonDetail: List<LstRewardTransJsonDeta
 
         }else{
             if (data.invoiceNo.toString() == "--"){
-                holder.remarks.text =  "Reward Adjusted"
+                holder.remarks.text =  "Reward Adjustment Credit"
             }else{
                 holder.remarks.text =  data.remarks.toString()
             }

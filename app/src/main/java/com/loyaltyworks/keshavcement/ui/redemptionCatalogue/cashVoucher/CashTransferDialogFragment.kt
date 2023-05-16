@@ -209,9 +209,9 @@ class CashTransferDialogFragment : DialogFragment() , View.OnClickListener{
 
                 if (binding.otpViewCash.otp.isNullOrEmpty()){
                     Toast.makeText(requireContext(),getString(R.string.enter_otp),Toast.LENGTH_SHORT).show()
-                }else if (binding.otpViewCash.otp != "123456"/*OTPNumber*/){
+                }else if (binding.otpViewCash.otp != OTPNumber){
                     Toast.makeText(requireContext(),getString(R.string.invalid_otp),Toast.LENGTH_SHORT).show()
-                }else if (binding.otpViewCash.otp == "123456"/*OTPNumber*/){
+                }else if (binding.otpViewCash.otp == OTPNumber){
                     redeemProcess()
                 }
             }

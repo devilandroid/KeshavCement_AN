@@ -146,7 +146,7 @@ class DreamGiftAddressFragment : Fragment() {
                                 }
 
                                 override fun onRedeemClick(otp: String) {
-                                    if(otp == "123456" /*OTPNumber*/){
+                                    if(otp == OTPNumber){
                                         RedeemOTPDialog.hideDialog()
                                         SubmitReddemProcess()
                                     }else{

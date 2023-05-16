@@ -200,7 +200,7 @@ class RegisterFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 //                        Toast.makeText(requireContext(),"Please enter OTP", Toast.LENGTH_SHORT).show()
                         Keyboard.hideKeyboard(requireContext(),binding.mRegisterHost)
                         (activity as LoginActivity).snackBar(getString(R.string.enter_otp),R.color.red)
-                    }else if (binding.otpView.otp.toString().length == 6 && binding.otpView.otp.toString() =="123456" /*OTP*/){
+                    }else if (binding.otpView.otp.toString().length == 6 && binding.otpView.otp.toString() == OTP){
                         Keyboard.hideKeyboard(requireContext(),binding.mRegisterHost)
                         StateRequest()
                         timers.cancel()

@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/h4"
                 android:gravity="center"
-                android:text="Update is available for Keshav Cement"
+                android:text="Update is available for Keshav Club"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
@@ -61,7 +61,7 @@
                 android:layout_marginRight="@dimen/activity_vertical_small_margin"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:padding="@dimen/activity_vertical_small_margin"
-                android:text="By downloading the latest update you will get the latest features, improvements and bug fixes of Keshav Cement App"
+                android:text="By downloading the latest update you will get the latest features, improvements and bug fixes of Keshav Club App"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="14sp" />

@@ -25,6 +25,7 @@ object InstructionDialog {
 
     fun showInstructionDialog(
         context: Context,
+        type: String,
         instructionDialogCallBack: InstructionDialogCallBack,
     ) {
 
@@ -63,7 +64,11 @@ object InstructionDialog {
 //        webSetting.defaultFontSize = fontSize as Int
 
         _mWebview1.webViewClient = WebViewClient()
-        _mWebview1.loadUrl("file:///android_asset/cash_transfer_instruction.html")
+        if (type == "Dealer"){
+            _mWebview1.loadUrl("file:///android_asset/cash_voucher_instruction.html")
+        }else{
+            _mWebview1.loadUrl("file:///android_asset/cash_transfer_instruction.html")
+        }
 
 
         ok.setOnClickListener {

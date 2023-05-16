@@ -225,7 +225,7 @@ class ClaimFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelect
                     }else{
                         if (binding.otpViewClaim.otp.toString().isNullOrEmpty()) {
                             Toast.makeText(requireContext(),"Please enter OTP", Toast.LENGTH_SHORT).show()
-                        }else if (binding.otpViewClaim.otp.toString().length == 6 && binding.otpViewClaim.otp.toString() == "123456"/*OTP*/){
+                        }else if (binding.otpViewClaim.otp.toString().length == 6 && binding.otpViewClaim.otp.toString() == OTP){
                             timers.cancel()
                             sucessMsg = "Claim is successfully completed."
                             submitClaimApi("1")

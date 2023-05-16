@@ -25,14 +25,25 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // Demo URL
-        buildConfigField "String", "BaseUrl", "\"https://keshavdemoserv.loyltwo3ks.com/Mobile/\""
-        buildConfigField("String", "PROMO_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/\"")
-        buildConfigField("String", "PROFILE_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/UploadFiles/CustomerImage/\"")
-        buildConfigField("String", "CATALOGUE_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/UploadFiles/CatalogueImages/\"")
+//        buildConfigField "String", "BaseUrl", "\"https://keshavdemoserv.loyltwo3ks.com/Mobile/\""
+//        buildConfigField("String", "PROMO_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/\"")
+//        buildConfigField("String", "PROFILE_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/UploadFiles/CustomerImage/\"")
+//        buildConfigField("String", "CATALOGUE_IMAGE_BASE", "\"https://keshavcmtdemo.loyltwo3ks.com/UploadFiles/CatalogueImages/\"")
+//
+//        buildConfigField("String", "token_url", "\"https://keshavdemoserv.loyltwo3ks.com/token\"")
+//        buildConfigField("String", "token_request", "\"grant_type=password&UserName=keshavDemoUser&Password=ke\$#avCE#En#\"")
+//        buildConfigField "String", "MerchantName", "\"KeshavCementDemo\""
 
-        buildConfigField("String", "token_url", "\"https://keshavdemoserv.loyltwo3ks.com/token\"")
-        buildConfigField("String", "token_request", "\"grant_type=password&UserName=keshavDemoUser&Password=ke\$#avCE#En#\"")
-        buildConfigField "String", "MerchantName", "\"KeshavCementDemo\""
+        // Live URL
+        buildConfigField "String", "BaseUrl", "\"https://keshavliveserv.loyltwo3ks.com/Mobile/\""
+        buildConfigField("String", "PROMO_IMAGE_BASE", "\"https://keshavclub.in/\"")
+        buildConfigField("String", "PROFILE_IMAGE_BASE", "\"https://keshavclub.in/UploadFiles/CustomerImage/\"")
+        buildConfigField("String", "CATALOGUE_IMAGE_BASE", "\"https://keshavclub.in/UploadFiles/CatalogueImages/\"")
+
+        buildConfigField("String", "token_url", "\"https://keshavliveserv.loyltwo3ks.com/token\"")
+        buildConfigField("String", "token_request", "\"grant_type=password&UserName=keshavLiveUser&Password=keL\$#avCE#En#\"")
+        buildConfigField "String", "MerchantName", "\"KeshavCementLive\""
+
 
         /** Constant File **/
         buildConfigField "String", "PLAY_STORE_LINK", "\"https://play.google.com/store/apps/details?id=com.loyaltyworks.keshavcement&hl=en\""

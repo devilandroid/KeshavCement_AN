@@ -168,7 +168,7 @@ class CashTransfersFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.help_instruction ->{
-                InstructionDialog.showInstructionDialog(requireContext(),object : InstructionDialog.InstructionDialogCallBack{
+                InstructionDialog.showInstructionDialog(requireContext(),"Influencer",object : InstructionDialog.InstructionDialogCallBack{
                     override fun onOk() {
 
                     }
