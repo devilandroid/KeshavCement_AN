@@ -43,7 +43,7 @@
                     android:id="@+id/redeem_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6050"
+                    android:text="-"
                     android:fontFamily="@font/poppins_semibold"
                     android:textSize="14sp"
                     android:textColor="@color/color45"/>

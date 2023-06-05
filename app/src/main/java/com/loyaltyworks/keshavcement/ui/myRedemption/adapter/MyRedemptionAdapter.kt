@@ -58,10 +58,17 @@ class MyRedemptionAdapter(val objCatalogueRedemReqList: List<ObjCatalogueRedemRe
         holder.quantity.text = rewardTransDetails.quantity.toString()
         holder.referenceNo.text = " " + rewardTransDetails.redemptionRefno.toString()
 
+        var imgName:String = ""
+        if (rewardTransDetails.redemptionType!! == 4) {
+            imgName = rewardTransDetails.productImage.toString()
+        }else{
+            imgName = BuildConfig.CATALOGUE_IMAGE_BASE + rewardTransDetails.productImage.toString()
+        }
+
         Glide.with(holder.itemView.context).asBitmap()
             .error(R.drawable.ic_default_img)
             .thumbnail(0.1f)
-            .load(BuildConfig.CATALOGUE_IMAGE_BASE + rewardTransDetails.productImage.toString())
+            .load(imgName)
             .into(holder.prodImg)
 
         if (rewardTransDetails.status!! == 0) {

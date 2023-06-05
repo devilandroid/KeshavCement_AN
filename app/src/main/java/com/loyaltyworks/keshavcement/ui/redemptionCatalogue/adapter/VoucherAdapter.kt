@@ -22,6 +22,7 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
     var defaultData = arrayOf("0")
     var objCatalogueFixedPoint: ObjCatalogueFixedPoint? = null
     var amount = "0"
+    var pointitem :ObjCatalogueFixedPoint? = null
 
     interface voucherListAdpaterCallback {
         fun onDetailVoucherFromAdapter(itemView: View, position: Int,CatalogueVouchers: ObjCatalogueListtt)
@@ -33,6 +34,7 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
 
         val amount = binding.amount
         val mSpinnerHost = binding.mngPriceSpinner
+        val spinnerLayout = binding.spinnerLayout
         val voucher_range = binding.voucherRange
         val voucher_name = binding.voucherName
         val voucher_image = binding.voucherImage
@@ -59,6 +61,7 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
             holder.voucher_range.text = "INR ${redeemGiftResponses.min_points.toString()} - ${redeemGiftResponses.max_points.toString()}"
             holder.amount.visibility = View.VISIBLE
             holder.mSpinnerHost.visibility = View.GONE
+            holder.spinnerLayout.visibility = View.GONE
             holder.mSpinnerHost.adapter = ArrayAdapter(
                 holder.itemView.context,
                 android.R.layout.simple_spinner_item,
@@ -90,6 +93,7 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
                 defaultData
             )
 
+            holder.spinnerLayout.visibility = View.VISIBLE
             holder.mSpinnerHost.visibility = View.VISIBLE
         }
 
@@ -132,10 +136,14 @@ class VoucherAdapter(var redeemGiftResponse: RedeemGiftResponse, var onItemClick
 
             if (holder.amount.text.toString().isNotEmpty()) amount = holder.amount.text.toString()
 
-            if (redeemGiftResponses.product_type == 0)
-                amount = objCatalogueFixedPoint!!.fixedPoints.toString()
+            if (redeemGiftResponses.product_type == 0){
+                pointitem = holder.mSpinnerHost.selectedItem as ObjCatalogueFixedPoint
+//                amount = objCatalogueFixedPoint!!.fixedPoints.toString()
+                amount = pointitem!!.fixedPoints.toString()
+            }
 
 
+            Log.d("nfhbrfhb","brhbrf : " + amount)
             onItemClickListener.onRedeemVoucherFromAdapter(v,position,redeemGiftResponse.objCatalogueList!![position], amount)
 
         }

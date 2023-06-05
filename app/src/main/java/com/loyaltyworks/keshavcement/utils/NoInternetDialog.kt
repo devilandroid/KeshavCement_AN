@@ -14,7 +14,7 @@ object NoInternetDialog {
     private var dialog:Dialog ?= null
 
     fun showDialog(context: Context) {
-        if(dialog != null) return
+//        if(dialog != null) return
 
         dialog = Dialog(context, R.style.Theme_NoInternetDialog)
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)

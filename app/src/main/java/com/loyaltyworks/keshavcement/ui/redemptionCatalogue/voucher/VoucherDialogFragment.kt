@@ -104,6 +104,7 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
             amount_range.text = "Redeemable Range ${objCatalogueList.min_points.toString()} - ${objCatalogueList.max_points.toString()}"
             mng_amount_fld.visibility = View.VISIBLE
             mng_price_spinner.visibility = View.GONE
+            spinner_layouts.visibility = View.GONE
             mng_price_spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, defaultData)
 
 
@@ -117,6 +118,7 @@ class VoucherDialogFragment : BottomSheetDialogFragment() {
                 mng_price_spinner.adapter = VoucherPointsAdapter(requireContext(), objCatalogueList.objCatalogueFixedPoints!!)
             } else mng_price_spinner.adapter = ArrayAdapter(requireContext(), R.layout.spinner_row_small_size, defaultData)
 
+            spinner_layouts.visibility = View.VISIBLE
             mng_price_spinner.visibility = View.VISIBLE
 
         }

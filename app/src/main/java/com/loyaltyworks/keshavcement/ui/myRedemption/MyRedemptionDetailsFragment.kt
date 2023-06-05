@@ -118,10 +118,16 @@ class MyRedemptionDetailsFragment : Fragment() {
 //                binding.detailsProdCode.text = getString(R.string.product_code) + it.objCatalogueList[0].productCode.toString()
 //                binding.detailsDeliveryType.text = getString(R.string.delivery_type) + it.objCatalogueList[0].deliveryType.toString()
 
+                var imgName:String = ""
+
+                if (it.objCatalogueList[0].redeemedCatalogueType == "4"){
+                    imgName = it.objCatalogueList[0].productImage.toString()
+                }else{
+                    imgName = BuildConfig.CATALOGUE_IMAGE_BASE + it.objCatalogueList[0].productImage.toString()
+                }
+
                 Glide.with(this)
-                    .load(
-                        BuildConfig.CATALOGUE_IMAGE_BASE + it.objCatalogueList[0].productImage.toString()
-                    )
+                    .load(imgName)
                     .placeholder(R.drawable.ic_default_img)
                     .fitCenter()
                     .into(binding.productImage)
