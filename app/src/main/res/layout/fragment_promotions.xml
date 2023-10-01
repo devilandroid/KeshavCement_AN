@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.offersAndPromotions.PromotionsFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/promotionsRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:clipToPadding="false"
+        android:visibility="visible"
+        android:background="@color/colorPrimaryDark"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/row_promotions" />
+
+    <include
+        android:id="@+id/no_data_fount"
+        layout="@layout/no_data_found_animation_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+
+</LinearLayout>

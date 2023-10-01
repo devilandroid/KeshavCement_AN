@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "118953973425",
+    "project_id": "keshavjyoticement",
+    "storage_bucket": "keshavjyoticement.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118953973425:android:ce8295553b252a9c33b490",
+        "android_client_info": {
+          "package_name": "com.loyaltyworks.keshavcement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118953973425-ns4bbln834ndg18cie7ndpsk035pm0a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB87CaPrswBCNcgH1DPw0mm7i4VklRCD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118953973425-ns4bbln834ndg18cie7ndpsk035pm0a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

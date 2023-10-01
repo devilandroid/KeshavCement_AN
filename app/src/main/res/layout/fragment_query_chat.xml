@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/chat_list_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="visible"
+            android:weightSum="10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/query_summary">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/query_chat_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+            <TextView
+                android:id="@+id/chatlist_closet_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/black"
+                android:gravity="center_horizontal"
+                android:padding="11dp"
+                android:text="Closed"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:visibility="gone"
+                android:weightSum="10" />
+
+            <LinearLayout
+                android:id="@+id/edittext_block_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:background="@drawable/border_corner_bg"
+                    android:gravity="center"
+                    android:weightSum="10">
+
+
+                    <EditText
+                        android:id="@+id/query_details_fld"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/write_query_details"
+                        android:textColorHint="@color/color13"
+                        android:minHeight="50dp"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_regular"/>
+
+                    <ImageButton
+                        android:id="@+id/imageAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:background="#00ffffff"
+                        android:rotation="-140"
+                        app:srcCompat="@drawable/ic_attachment"
+                        app:tint="@color/colorAccent" />
+
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/send_query_btn"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_submit" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ChatImageOpen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color13"
+            android:visibility="gone">
+
+
+            <ImageView
+                android:id="@+id/chatImges"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_default_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/closeImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cancel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

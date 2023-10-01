@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.wishlist.WishlistFragment">
+
+    <TextView
+        android:id="@+id/note_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:layout_margin="10dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:visibility="gone"
+        android:text="@string/redemption_temporarily_closed"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimary"/>
+
+    <!--<TextView
+        android:id="@+id/note_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/redemption_temporarily_closed"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimary"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/plannerRecylerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/row_wishlist"
+        android:visibility="visible" />
+
+
+
+    <LinearLayout
+        android:id="@+id/empty_planner_host"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/planner_error_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addPlanner_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/product_corner_bg_dark"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="Add to Wishlist"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textColor="@color/dark" />
+
+    </LinearLayout>
+
+</LinearLayout>

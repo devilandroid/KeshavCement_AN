@@ -1,0 +1,1240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorAccent"
+    tools:context=".ui.dashboard.DashboardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:weightSum="10"
+            android:orientation="vertical"
+            android:background="@drawable/bottom_corner_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4.5"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp">
+                    <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/image_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:iss_auto_cycle="true"
+                        app:iss_period="1000"
+                        app:iss_title_background="@color/transparent"
+                        app:iss_delay="0"/>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:background="@drawable/group_1010">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:gravity="center">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/d_profile_image"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:background="@drawable/ic_persons2" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7.5"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="10"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:id="@+id/cust_type"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/cust_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="16sp"
+                                    android:singleLine="true"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:textColor="@color/colorAccent"/>
+                            </LinearLayout>
+
+
+                            <ImageView
+                                android:id="@+id/tier_image"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ic_error"/>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/membership_id"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/mem_id"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:textColor="@color/colorAccent"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="6"
+
+                                android:orientation="vertical">
+
+                               <!-- Point Balance Layout (for all except Support Executive ) -->
+                                <LinearLayout
+                                    android:id="@+id/point_balance_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Point Balance"
+                                        android:textSize="12sp"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textColor="@color/colorAccent"/>
+
+                                    <TextView
+                                        android:id="@+id/point_balance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="-"
+                                        android:textSize="14sp"
+                                        android:drawableStart="@drawable/ic_coin"
+                                        android:drawablePadding="5dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:textColor="@color/colorAccent"/>
+                                </LinearLayout>
+
+                                <!-- Created BY Layout (only for Support Executive ) -->
+                                <LinearLayout
+                                    android:id="@+id/created_by_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Created By"
+                                        android:textSize="12sp"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textColor="@color/colorAccent"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="end"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:id="@+id/createdBy_type"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="-"
+                                            android:textSize="12sp"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:textColor="@color/colorAccent"/>
+
+                                        <TextView
+                                            android:id="@+id/createdBy_name"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="3dp"
+                                            android:text="-"
+                                            android:textSize="12sp"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:textColor="@color/colorAccent"/>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:weightSum="10"
+            android:paddingTop="60dp"
+            android:orientation="vertical"
+            android:background="@color/colorAccent">
+
+            <!-- Tab Layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5.5"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="@color/colorAccent">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none"
+                        android:visibility="visible">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:gravity="center_vertical">
+
+                            <!--  Enrollment (for Dealer & Sub-Dealer & Support-Executive) -->
+                            <LinearLayout
+                                android:id="@+id/dash_enrollment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/enrollment"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Enrollment"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  Pending Claim Request (for Dealer & Sub-Dealer) -->
+                            <LinearLayout
+                                android:id="@+id/dash_pending_claim_request"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/my_purchase_claim"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Pending Claim\nRequest"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  Cash Transfer Approval (for Dealer & Sub-Dealer) -->
+                            <LinearLayout
+                                android:id="@+id/dash_cash_transfer_approval"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/cash_transfer"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Cash Transfer\nApproval"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  Claim Purchase (for Sub-Dealer) -->
+                            <LinearLayout
+                                android:id="@+id/dash_claim_purchase"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/my_purchase_claim"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Purchase\nRequest"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                          <!--  My Purchase Claim (for Engineer & Mason)-->
+                            <LinearLayout
+                                android:id="@+id/dash_my_purchase_claim"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/my_purchase_claim"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="My Purchase\nClaim"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  Redemption Catalogue (for All except Support-Executive)-->
+                            <LinearLayout
+                                android:id="@+id/dash_catalogue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/redemption_catalogue"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Redemption\nCatalogue"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  My Redemption (for All except Support-Executive)-->
+                            <LinearLayout
+                                android:id="@+id/dash_my_redemption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/my_redemption"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="My\nRedemption"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  My Earning (for All except Support-Executive)-->
+                            <LinearLayout
+                                android:id="@+id/dash_my_earning"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/my_earning"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="My\nEarning"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  Offers and promotions (for All except Support-Executive)-->
+                            <LinearLayout
+                                android:id="@+id/dash_offers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/offers_and_promotions"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Offers and\nPromotions"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  Worksite Details (for Engineer & Mason)-->
+                            <LinearLayout
+                                android:id="@+id/dash_worksite"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/worksite_details"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Worksite\nDetails"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  Refer and Earn (for Engineer & Mason)-->
+                            <LinearLayout
+                                android:id="@+id/dash_refer_earn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/refer_and_earn"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Refer and\nEarn"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  Pending Request (for Support-Executive)-->
+                            <LinearLayout
+                                android:id="@+id/dash_pending_request"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/worksite_details"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Pending Request"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <!--  My Activity (for Support-Executive)-->
+                            <LinearLayout
+                                android:id="@+id/dash_my_activity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:weightSum="10"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="7"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/worksite_details"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="3"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="My Activity"
+                                        android:fontFamily="@font/poppins_regular"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/dark"/>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+          <!-- Help Layout-->
+            <LinearLayout
+                android:id="@+id/help_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4.5"
+                android:visibility="visible"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/color9">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="10"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/group_1012"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ask Help ?"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:textColor="@color/dark"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Raise a ticket our team will connect you soon"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:textColor="@color/dark"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:gravity="center">
+
+                            <LinearLayout
+                                android:id="@+id/dash_raise_ticket"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:orientation="horizontal"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:background="@drawable/corner_bg_black">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Raise a Ticket"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="12sp"/>
+
+                                <ImageView
+                                    android:layout_width="10dp"
+                                    android:layout_height="10dp"
+                                    android:layout_marginStart="7dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:src="@drawable/ic_arrow_right"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <!-- Support Executive Layout-->
+            <LinearLayout
+                android:id="@+id/support_executive_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4.5"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/group_1996"
+                    android:scaleType="fitXY"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+  <!--  Claim Purchase Layout for Engineer & Mason-->
+    <LinearLayout
+        android:id="@+id/earn_point_claim_purchase_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:layout_centerInParent="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/color8">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/group_1011"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Earn Points \n When Purchase"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="14sp"
+                        android:textColor="@color/dark"/>
+
+                    <LinearLayout
+                        android:id="@+id/dash_earn_point_claim_purchase"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:background="@drawable/corner_bg_black">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Claim Purchase"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="11sp"/>
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginStart="7dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <!--  Sale & Earn Layout for Dealer & Sub-Dealer-->
+    <LinearLayout
+        android:id="@+id/sale_and_earn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/color8">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/group_1011"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/sale_and_earn"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="14sp"
+                        android:textColor="@color/dark"/>
+
+                    <LinearLayout
+                        android:id="@+id/sale_and_earn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:background="@drawable/corner_bg_black">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/start_earning"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp"/>
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginStart="7dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/product_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+                android:src="@drawable/prod_view"
+                android:layout_gravity="end"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <!--  Start Selling Layout for Support Executive-->
+    <LinearLayout
+        android:id="@+id/start_selling_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/color8">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/group_1011"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/start_selling"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="14sp"
+                        android:textColor="@color/dark"/>
+
+                    <LinearLayout
+                        android:id="@+id/new_sale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:background="@drawable/corner_bg_black">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/click_here"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp"/>
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginStart="7dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</RelativeLayout>

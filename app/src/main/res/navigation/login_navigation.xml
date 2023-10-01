@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_navigation"
+    app:startDestination="@id/customerTypeSelectionFragment">
+
+    <fragment
+        android:id="@+id/customerTypeSelectionFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.customerType.CustomerTypeSelectionFragment"
+        android:label=""
+        tools:layout="@layout/fragment_customer_type_selection" >
+        <action
+            android:id="@+id/action_customerTypeSelectionFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.login.fragment.LoginFragment"
+        android:label=""
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_activateFragment"
+            app:destination="@id/activateFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left"  />
+    </fragment>
+    <fragment
+        android:id="@+id/activateFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.login.fragment.ActivateFragment"
+        android:label=""
+        tools:layout="@layout/fragment_activate" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.loyaltyworks.keshavcement.ui.login.fragment.RegisterFragment"
+        android:label=""
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_activateFragment"
+            app:destination="@id/activateFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/registerFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/nav_slide_in_right"
+            app:exitAnim="@anim/nav_slide_out_left"
+            app:popExitAnim="@anim/nav_slide_out_right"
+            app:popEnterAnim="@anim/nav_slide_in_left" />
+    </fragment>
+</navigation>

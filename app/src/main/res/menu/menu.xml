@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_logout_support"
+        android:title="Notification"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/language"
+        android:icon="@drawable/language_convert"
+        android:title="language"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/ic_menu_notification"
+        android:title="Notification"
+        app:showAsAction="always"/>
+
+
+
+</menu>
